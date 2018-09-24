@@ -6,15 +6,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import org.junit.jupiter.api.BeforeAll;
+//import org.junit.jupiter.api.Disabled;
 //import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.pmw.tinylog.Logger;
-
+	
 import com.rummikub.Tile;
 
-
-
-//@Tag("TileTest")
 class TileTest {
 	
 	private static Tile tile1;
@@ -36,7 +34,7 @@ class TileTest {
 		assertTrue(outContent.toString().contains("red"));
 		assertTrue(outContent.toString().contains("1"));
 	}
-
+	
 	@Test
 	void randomTest()
 	{
