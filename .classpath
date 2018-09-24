@@ -13,15 +13,26 @@
 	</classpathentry>
 	<classpathentry kind="src" output="target/test-classes" path="src/test/java">
 		<attributes>
+<<<<<<< HEAD
 			<attribute name="optional" value="true"/>
 			<attribute name="maven.pomderived" value="true"/>
 			<attribute name="test" value="true"/>
+=======
+			<attribute name="test" value="true"/>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+>>>>>>> master
 		</attributes>
 	</classpathentry>
 	<classpathentry excluding="**" kind="src" output="target/test-classes" path="src/test/resources">
 		<attributes>
+<<<<<<< HEAD
 			<attribute name="maven.pomderived" value="true"/>
 			<attribute name="test" value="true"/>
+=======
+			<attribute name="test" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+>>>>>>> master
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6">
