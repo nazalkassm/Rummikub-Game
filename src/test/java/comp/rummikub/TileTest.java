@@ -1,5 +1,6 @@
 package comp.rummikub;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.ByteArrayOutputStream;
@@ -29,11 +30,17 @@ class TileTest {
 	}
 	
 	@Test
-	void testPrint() 
+	void printTest() 
 	{		
 		tile1.print();
 		assertTrue(outContent.toString().contains("red"));
 		assertTrue(outContent.toString().contains("1"));
 	}
 
+	@Test
+	void randomTest()
+	{
+		assertEquals(1,1);
+	}
+	
 }
