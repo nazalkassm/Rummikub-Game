@@ -5,9 +5,14 @@ import java.util.ArrayList;
 //To be implemented TODO
 public class Stock 
 {
-	private ArrayList<Tile> stock = new ArrayList<>(104);
+	private int stockL;
+	private ArrayList<Tile> stock = new ArrayList<>(stockL);
 	
-	public Stock() {};
+	public Stock(int sL) 
+	{
+		this.stockL = sL;
+	};
+	
 	public Stock (Stock stockCopy) 
 	{
 		//copy the stock given. TODO
@@ -33,5 +38,10 @@ public class Stock
 	public void createStock() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public Object dealTile() {
+		// TODO Auto-generated method stub
+		return null;
 	};
 }

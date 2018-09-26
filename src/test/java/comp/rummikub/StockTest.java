@@ -49,6 +49,7 @@ class StockTest {
 	{
 		stock1.createStock();
 		assertThat(stock1.getStock().isEmpty(), is(false));
+		assertThat(stock1.getLength(),is(104));
 	}
 
 	@Test
@@ -62,7 +63,7 @@ class StockTest {
 		  
 		  if (stockIsStillTheSame)
 		  {
-		        //stock2.shuffle();
+		        stock2.shuffle();
 		        assertFalse(stock1.equals(stock2));
 		  }
 		  
@@ -88,16 +89,17 @@ class StockTest {
 		int stockSizeBeforeDealing = stock1.getStock().size();
 		player1.fillRack(stock1.dealRack());
 		assertThat(player1.getRack(),is(notNullValue()));
-		assertThat(stockSizeBeforeDealing-14,is(player1.getRack().getSize()));
+		assertThat(stockSizeBeforeDealing-14,is(stock1.getStock().size()));
 	}
 	
 	@Test
 	void dealTileTest()
 	{
-		//int playerCardN = player1.playerHand.size;
-		//player1.dealTile();
-		//assertThat(playerCardN,++player1.playerHand.size);
-		//assertThat(stock1.size,is(103));
+		int stockSizeBeforeDealing = stock1.getStock().size();
+		int playerTileN = player1.getRack().getSize();
+		player1.getTile(stock1.dealTile());
+		assertThat(player1.getRack().getSize(),is(playerTileN+1));
+		assertThat(stock1.getStock().size(),is(stockSizeBeforeDealing-1));
 	}
 	
 	

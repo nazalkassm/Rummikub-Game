@@ -30,5 +30,10 @@ public class Player
 		// TODO Auto-generated method stub
 		
 	}
+
+	public void getTile(Object object) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }
