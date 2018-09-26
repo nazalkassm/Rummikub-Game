@@ -1,6 +1,6 @@
 package com.rummikub;
 
-public class Tile 
+public class Tile implements Comparable <Tile>
 {
 	//Variable
 	
@@ -28,11 +28,19 @@ public class Tile
 
 	// Getter and Setter
 	
-	public String getColour() {
+	public String getColour() 
+	{
 		return colour;
 	}
 	
-	public void setColour(String colour) {
+	public void setColour(String colour) 
+	{
 		this.colour = colour;
+	}
+
+	@Override
+	public int compareTo(Tile arg0) 
+	{
+		return 0;
 	}	
 }
