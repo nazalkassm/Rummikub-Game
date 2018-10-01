@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Stock 
 {
 	private int stockL;
-	private ArrayList<Tile> stock = new ArrayList<>(stockL);
+	private ArrayList<Tile> stock = new ArrayList<Tile>(stockL);
 	
 	public Stock(int sL) 
 	{
