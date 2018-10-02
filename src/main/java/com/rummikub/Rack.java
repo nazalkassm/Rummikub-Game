@@ -12,5 +12,11 @@ public class Rack
 		// TODO Auto-generated method stub
 		return rack.size();
 	}
+	
+	public ArrayList<Tile> getRackArray()
+	{
+		return rack;
+		
+	}
 
 }

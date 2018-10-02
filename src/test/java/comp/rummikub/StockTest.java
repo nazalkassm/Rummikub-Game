@@ -2,7 +2,7 @@ package comp.rummikub;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.hamcrest.Matcher;
+//import org.hamcrest.Matcher;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -88,7 +88,7 @@ class StockTest {
 	{
 		int stockSizeBeforeDealing = stock1.getStock().size();
 		player1.fillRack(stock1.dealRack());
-		assertThat(player1.getRack(),is(notNullValue()));
+		assertThat(player1.getPlayerRack(),is(notNullValue()));
 		assertThat(stockSizeBeforeDealing-14,is(stock1.getStock().size()));
 	}
 	
@@ -96,9 +96,9 @@ class StockTest {
 	void dealTileTest()
 	{
 		int stockSizeBeforeDealing = stock1.getStock().size();
-		int playerTileN = player1.getRack().getSize();
+		int playerTileN = player1.getPlayerRack().getSize();
 		player1.getTile(stock1.dealTile());
-		assertThat(player1.getRack().getSize(),is(playerTileN+1));
+		assertThat(player1.getPlayerRack().getSize(),is(playerTileN+1));
 		assertThat(stock1.getStock().size(),is(stockSizeBeforeDealing-1));
 	}
 	

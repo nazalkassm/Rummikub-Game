@@ -1,10 +1,10 @@
 package com.rummikub;
 
-import com.rummikub.Tile;
+//import com.rummikub.*;
 
 public class Player 
 {
-	private Rack rack;
+	private Rack playerRack;
 	
 	public Player()
 	{
@@ -16,19 +16,19 @@ public class Player
 		this.setRack(r);
 	}
 
-	public Rack getRack() 
+	public Rack getPlayerRack() 
 	{
-		return rack;
+		return playerRack;
 	}
 
 	public void setRack(Rack rack) 
 	{
-		this.rack = rack;
+		this.playerRack = rack;
 	}
 
-	public void fillRack(Object object) {
+	public void fillRack(Object object) 
+	{
 		// TODO Auto-generated method stub
-		
 	}
 
 	public void getTile(Object object) {
