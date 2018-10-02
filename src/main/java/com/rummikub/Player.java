@@ -5,6 +5,7 @@ package com.rummikub;
 public class Player 
 {
 	private Rack playerRack;
+	protected Strategy strategy;
 	
 	public Player()
 	{
@@ -35,5 +36,22 @@ public class Player
 		// TODO Auto-generated method stub
 		
 	}
+
+	public Strategy getStrategy() {
+		return strategy;
+	}
+
+	public void setStrategy(Strategy strategy) {
+		this.strategy = strategy;
+	}
 	
+	public void useStrategy()
+	{
+		play();
+	}
+	
+	protected void play()
+	{
+		this.strategy.play();
+	}
 }

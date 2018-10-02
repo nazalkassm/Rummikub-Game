@@ -1,5 +1,7 @@
 package comp.rummikub;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -20,8 +22,13 @@ class PlayerTest {
 	private static Player player2;
 	private static Player player3;
 	private static Player player4;
-	private static Player newPlayer; // This object is to test a newly created player.
-
+	private Player newPlayer; // This object is to test a newly created player in every test.
+	private PlayerMock myPlayerMock;
+	private static Strategy s1;
+	private static Strategy s2;
+	private static Strategy s3;
+	private static Strategy s4;
+	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception 
 	{
@@ -29,6 +36,10 @@ class PlayerTest {
 		player2 = new Player();
 		player3 = new Player();
 		player4 = new Player();
+		s1 = new Strategy1();
+		s2 = new Strategy2();
+		s3 = new Strategy3();
+		s4 = new Strategy4();
 	}
 
 	@AfterAll
@@ -44,6 +55,7 @@ class PlayerTest {
 	void setUp() throws Exception 
 	{
 		newPlayer = new Player();
+		myPlayerMock= new PlayerMock();
 	}
 
 	@AfterEach
@@ -60,10 +72,17 @@ class PlayerTest {
 	} 
 	
 	@Test
-	void player()
+	void playerGetTileTest()
 	{
-		
+		newPlayer.getTile(stock.dealTile());
+		assertThat(newPlayer.getPlayerRack().getRackArray(),hasSize(1));
 	}
 	
-
+	@Test
+	void playerUseStrategyTest() // This test uses a mock player class that inherets from player. It makes sure that a player's strategy calls it's play() method and confirms it using a boolean.
+	{
+		myPlayerMock.setStrategy(s1);
+		myPlayerMock.useStrategy();
+		assertTrue(myPlayerMock.isUseStrategyCalled());
+	}
 }

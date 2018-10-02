@@ -8,7 +8,8 @@ public class Rack
 {
 	private ArrayList<Tile> rack = new ArrayList<Tile>();
 
-	public int getSize() {
+	public int getSize() 
+	{
 		// TODO Auto-generated method stub
 		return rack.size();
 	}
