@@ -15,9 +15,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 	
 import com.rummikub.Tile;
 
-import junit.framework.TestCase;
-
-class TileTest extends TestCase{
+class TileTest {
 	//hi
 	private static Tile tile1;
 	private static Tile tile2;
