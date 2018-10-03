@@ -1,11 +1,11 @@
-package comp.rummikub;
+package com.rummikub;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.*;
@@ -18,19 +18,19 @@ import com.rummikub.*;
 class PlayerTest {
 	
 	private Stock stock;
-	private static Player player1;
-	private static Player player2;
-	private static Player player3;
-	private static Player player4;
-	private Player newPlayer; // This object is to test a newly created player in every test.
+	private Player player1;
+	private Player player2;
+	private Player player3;
+	private Player player4;
 	private PlayerMock myPlayerMock;
-	private static Strategy s1;
-	private static Strategy s2;
-	private static Strategy s3;
-	private static Strategy s4;
+	private Player newPlayer; // This object is to test a newly created player in every test.
+	private Strategy s1;
+	private Strategy s2;
+	private Strategy s3;
+	private Strategy s4;
 	
 	@BeforeAll
-	static void setUpBeforeClass() throws Exception 
+	void setUpClass() throws Exception 
 	{
 		player1 = new Player(); //These objects are going to be used in all the tests. We need to keep track of their state.
 		player2 = new Player();
@@ -43,7 +43,7 @@ class PlayerTest {
 	}
 
 	@AfterAll
-	static void tearDownAfterClass() throws Exception 
+	void tearDownClass() throws Exception 
 	{
 		player1 = new Player();
 		player2 = new Player();
@@ -52,14 +52,14 @@ class PlayerTest {
 	}
 
 	@BeforeEach
-	void setUp() throws Exception 
+	protected void setUpMethod() throws Exception 
 	{
 		newPlayer = new Player();
-		myPlayerMock= new PlayerMock();
+		myPlayerMock = new PlayerMock();
 	}
 
 	@AfterEach
-	void tearDown() throws Exception 
+	protected void tearDownMethod() throws Exception 
 	{
 		newPlayer = null;
 	}
