@@ -15,7 +15,9 @@ import static org.hamcrest.Matchers.*;
 
 import com.rummikub.*;
 
-class PlayerTest {
+import junit.framework.TestCase;
+
+class PlayerTest extends TestCase{
 	
 	private Stock stock;
 	private Player player1;

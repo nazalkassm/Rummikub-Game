@@ -13,9 +13,11 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.CoreMatchers.*;
 import com.rummikub.*;
 
+import junit.framework.TestCase;
 
 
-class StockTest {
+
+class StockTest extends TestCase{
 	
 	private Stock stock1;
 	private Stock stock2 = new Stock(stock1);
