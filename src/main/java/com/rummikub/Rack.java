@@ -20,4 +20,35 @@ public class Rack
 		
 	}
 
+	public void addTile(String string, int i) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void drawTile() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public Object sorted() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object hasMeld() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object sumMeld() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object hasThirty() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 }

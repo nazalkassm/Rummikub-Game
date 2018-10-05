@@ -3,23 +3,55 @@ package com.rummikub;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.api.Test;
 
 public class RackTest {
 
-	@BeforeEach
-	public void init() {
-		
-	}
+	static Rack hand;
+	static Rack hand2;
+	static Rack hand3;
+	Rack handTest;
 	
-	/*
-	 * creates a new hand
-	 * tests whether hand initially has x many tiles
-	 * Rack.Rack() should create a hand with 14 tiles
-	 */
+	@BeforeAll
+	static void setUpBeforeClass() throws Exception 
+	{
+		hand = new Rack();
+		hand2 = new Rack();
+		hand3 = new Rack();
+		hand.addTile("G", 10);
+		hand.addTile("B", 4);
+		hand.addTile("B", 9);
+		
+		hand2.addTile("G", 4);
+		hand2.addTile("G", 5);
+		hand2.addTile("G", 6);
+		
+		hand3.addTile("G", 10);
+		hand3.addTile("R", 10);
+		hand3.addTile("O", 10);
+	}
+
+	@AfterAll
+	static void tearDownAfterClass() throws Exception 
+	{
+		hand = null;
+		hand2 = null;
+		hand3 = null;
+	}
+
+	@BeforeEach
+	void setUp() throws Exception 
+	{
+		handTest = new Rack();
+	}
+
+	@AfterEach
+	void tearDown() throws Exception 
+	{
+		handTest = null;
+	}
 	@Test
-	public void checkRack() {
-		Rack hand = new Rack();
+	public void checkRack() 
+	{
 		assertEquals(14, hand.getSize());
 	}
 	
@@ -30,7 +62,6 @@ public class RackTest {
 	 */
 	@Test
 	public void checkSort() {
-		Rack hand = new Rack();
 		assertEquals(true, hand.sorted());
 		
 		hand.drawTile();
@@ -45,7 +76,7 @@ public class RackTest {
 	 */
 	@Test
 	public void checkRackSize() {
-		Rack hand = new Rack();
+
 		assertEquals(14, hand.getSize());
 		
 		hand.drawTile();
@@ -60,21 +91,7 @@ public class RackTest {
 	 */
 	@Test
 	public void checkValidMeld() {
-		Rack hand = new Rack("hi");
-		Rack hand2 = new Rack("hi");
-		Rack hand3 = new Rack("hi");
 		
-		hand.addTile("G", 10);
-		hand.addTile("B", 4);
-		hand.addTile("B", 9);
-		
-		hand2.addTile("G", 4);
-		hand2.addTile("G", 5);
-		hand2.addTile("G", 6);
-		
-		hand3.addTile("G", 10);
-		hand3.addTile("R", 10);
-		hand3.addTile("O", 10);
 		
 		assertEquals(false , hand.hasMeld());
 		assertEquals(true , hand2.hasMeld());
@@ -87,21 +104,6 @@ public class RackTest {
 	 */
 	@Test
 	public void checkMeldSum() {
-		Rack hand = new Rack("hi");
-		Rack hand2 = new Rack("hi");
-		Rack hand3 = new Rack("hi");
-		
-		hand.addTile("G", 10);
-		hand.addTile("B", 4);
-		hand.addTile("B", 9);
-		
-		hand2.addTile("G", 4);
-		hand2.addTile("G", 5);
-		hand2.addTile("G", 6);
-		
-		hand3.addTile("G", 10);
-		hand3.addTile("R", 10);
-		hand3.addTile("O", 10);
 		
 		assertEquals(-1 , hand.sumMeld());
 		assertEquals(15 , hand2.sumMeld());
@@ -113,21 +115,6 @@ public class RackTest {
 	 */
 	@Test
 	public void checkInitialThirty() {
-		Rack hand = new Rack("hi");
-		Rack hand2 = new Rack("hi");
-		Rack hand3 = new Rack("hi");
-		
-		hand.addTile("G", 10);
-		hand.addTile("B", 4);
-		hand.addTile("B", 9);
-		
-		hand2.addTile("G", 4);
-		hand2.addTile("G", 5);
-		hand2.addTile("G", 6);
-		
-		hand3.addTile("G", 10);
-		hand3.addTile("R", 10);
-		hand3.addTile("O", 10);
 		
 		assertEquals(false , hand.hasThirty());
 		assertEquals(false , hand2.hasThirty());
