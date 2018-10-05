@@ -87,6 +87,10 @@ public class RackTest {
 	 */
 	@Test
 	public void checkMeldSum() {
+		Rack hand = new Rack("hi");
+		Rack hand2 = new Rack("hi");
+		Rack hand3 = new Rack("hi");
+		
 		hand.addTile("G", 10);
 		hand.addTile("B", 4);
 		hand.addTile("B", 9);
