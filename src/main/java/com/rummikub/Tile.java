@@ -9,7 +9,10 @@ public class Tile implements Comparable <Tile>
 	
 	//Constructor
 	
-	public Tile() {};
+	public Tile(Ranks rank, Colors color) {
+		
+		
+	};
 	
 	public Tile(int n, String c) 
 	{
