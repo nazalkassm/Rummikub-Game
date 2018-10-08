@@ -13,8 +13,6 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.*;
 
-import com.rummikub.*;
-
 class PlayerTest {
 	
 	private Stock stock;

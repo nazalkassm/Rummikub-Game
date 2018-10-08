@@ -1,12 +1,13 @@
 package com.rummikub;
 
 import java.util.ArrayList;
+import java.util.List;
 
 //To be implemented TODO
 public class Stock 
 {
 	private int stockL;
-	private ArrayList<Tile> stock = new ArrayList<Tile>(stockL);
+	private List<Tile> stock = new ArrayList<Tile>(stockL);
 	
 	public Stock(int sL) 
 	{
@@ -29,7 +30,7 @@ public class Stock
 		// TODO Auto-generated method stub
 		return null;
 	}
-	public ArrayList<Tile> getStock() {
+	public List<Tile> getStock() {
 		return stock;
 	}
 	public void setStock(ArrayList<Tile> stock) {

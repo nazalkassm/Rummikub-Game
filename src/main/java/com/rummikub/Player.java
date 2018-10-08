@@ -32,9 +32,17 @@ public class Player
 		// TODO Auto-generated method stub
 	}
 
+	public void printRack() {
+		//System.out.print(playerRack.toString());
+	}
+	
 	public void getTile(Object object) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public Meld createMeld(Tile...tiles) {
+		return null;
 	}
 
 	public Strategy getStrategy() {

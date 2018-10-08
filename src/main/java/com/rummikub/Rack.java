@@ -1,12 +1,13 @@
 package com.rummikub;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.rummikub.Tile;
 
 public class Rack 
 {
-	private ArrayList<Tile> rack = new ArrayList<Tile>();
+	private List<Tile> rack = new ArrayList<Tile>();
 
 	public int getSize() 
 	{
@@ -14,7 +15,7 @@ public class Rack
 		return rack.size();
 	}
 	
-	public ArrayList<Tile> getRackArray()
+	public List<Tile> getRackArray()
 	{
 		return rack;
 		
@@ -49,6 +50,10 @@ public class Rack
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
+	@Override
+	public String toString() {
+		return null;
+	}
 
 }
