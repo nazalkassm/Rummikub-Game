@@ -20,7 +20,6 @@ class TileTest {
 	private static Tile tile2;
 	private static Tile tile3;
 	private static Tile tile4;
-	private static ByteArrayOutputStream outContent; 
 	
 	@BeforeAll
 	static void setUpAll() throws Exception {
@@ -29,8 +28,7 @@ class TileTest {
 		tile2 = new Tile("1", "R");
 		tile3 = new Tile("1", "B");
 		tile4 = new Tile("12", "R");
-		outContent= new ByteArrayOutputStream();
-		System.setOut(new PrintStream(outContent));
+		
 	}
 	
 	@Test
@@ -45,6 +43,32 @@ class TileTest {
 		//3. Compare same tile
 		assertThat(false, is(tile1.equals(tile3)));
 		assertThat(true, is(tile1.equals(tile2)));
+		//4. Compare less than 
+		//1R is less then 12R
+    assertThat(-1, is(tile1.compareTo(tile4)));
+    //5. Compare greater than 
+    //12R is greater then 1R
+    assertThat(1, is(tile4.compareTo(tile1)));
+    //6. Compare equal to 
+    //1R is equal to 1B
+    assertThat(0, is(tile1.compareTo(tile3)));
+	}
+	
+	@Test
+	void runTest() {
+		//Compare if a tile is a run
+		//ex: 4R is a run on both 5R and 3R
+		Tile tile4R = new Tile("4", "R");
+		Tile tile5R = new Tile("5", "R");
+		Tile tile3R = new Tile("3", "R");
+		Tile tile2R = new Tile("2", "R");
+		//4R is a run on both 5R and 3R
+		assertThat(true, is(tile4R.isRunOn(tile5R)));
+		assertThat(true, is(tile4R.isRunOn(tile3R)));
+		//4R is not a run on 2R
+		assertThat(false, is(tile4R.isRunOn(tile2R)));
+		//2R is not a run on 1B because of different colors
+		assertThat(false, is(tile2R.isRunOn(tile3)));
 	}
 	
 	@Test
