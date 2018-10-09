@@ -2,8 +2,6 @@ package com.rummikub;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.pmw.tinylog.Logger;
@@ -39,7 +37,7 @@ class ColorsTest {
 		assertThat("O", is(color1.getSymbol()));
 		assertThat("R", is(color2.getSymbol()));
 		assertThat("G", is(color3.getSymbol()));
-		assertThat("B", is(color3.getSymbol()));
+		assertThat("B", is(color4.getSymbol()));
 	}
 
 }

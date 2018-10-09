@@ -18,60 +18,60 @@ public class MeldTest {
 		
 		// Testing invalid melds
 		List<Tile> tiles = new ArrayList<Tile>();
-		tiles.add(new Tile(5, "orange"));
-		tiles.add(new Tile(4, "red"));
-		tiles.add(new Tile(5, "green"));
+		tiles.add(new Tile("5", "O"));
+		tiles.add(new Tile("4", "R"));
+		tiles.add(new Tile("5", "G"));
 		assertEquals(Meld.MeldType.INVALID, Meld.checkMeldType(tiles));
 		
 		tiles.clear();
-		tiles.add(new Tile(4, "orange"));
-		tiles.add(new Tile(5, "red"));
-		tiles.add(new Tile(6, "red"));
+		tiles.add(new Tile("4", "O"));
+		tiles.add(new Tile("5", "R"));
+		tiles.add(new Tile("6", "R"));
 		assertEquals(Meld.MeldType.INVALID, Meld.checkMeldType(tiles));
 		
 		tiles.clear();
-		tiles.add(new Tile(3, "red"));
-		tiles.add(new Tile(5, "red"));
-		tiles.add(new Tile(6, "red"));
+		tiles.add(new Tile("3", "R"));
+		tiles.add(new Tile("5", "R"));
+		tiles.add(new Tile("6", "R"));
 		assertEquals(Meld.MeldType.INVALID, Meld.checkMeldType(tiles));
 		
 		
 		// testing set melds
 		tiles.clear();
-		tiles.add(new Tile(5, "orange"));
-		tiles.add(new Tile(5, "red"));
-		tiles.add(new Tile(5, "green"));
+		tiles.add(new Tile("5", "O"));
+		tiles.add(new Tile("5", "R"));
+		tiles.add(new Tile("5", "G"));
 		assertEquals(Meld.MeldType.SET, Meld.checkMeldType(tiles));
 		
 		tiles.clear();
-		tiles.add(new Tile(6, "orange"));
-		tiles.add(new Tile(6, "red"));
-		tiles.add(new Tile(6, "green"));
-		tiles.add(new Tile(6, "blue"));
+		tiles.add(new Tile("6", "O"));
+		tiles.add(new Tile("6", "R"));
+		tiles.add(new Tile("6", "G"));
+		tiles.add(new Tile("6", "B"));
 		assertEquals(Meld.MeldType.SET, Meld.checkMeldType(tiles));
 		
 		
 		// testing run melds
 		tiles.clear();
-		tiles.add(new Tile(4, "red"));
-		tiles.add(new Tile(5, "red"));
-		tiles.add(new Tile(6, "red"));
+		tiles.add(new Tile("4", "R"));
+		tiles.add(new Tile("5", "R"));
+		tiles.add(new Tile("6", "R"));
 		assertEquals(Meld.MeldType.RUN, Meld.checkMeldType(tiles));
 		
 		tiles.clear();
-		tiles.add(new Tile(1, "orange"));
-		tiles.add(new Tile(2, "orange"));
-		tiles.add(new Tile(3, "orange"));
-		tiles.add(new Tile(4, "orange"));
-		tiles.add(new Tile(5, "orange"));
-		tiles.add(new Tile(6, "orange"));
-		tiles.add(new Tile(7, "orange"));
-		tiles.add(new Tile(8, "orange"));
-		tiles.add(new Tile(9, "orange"));
-		tiles.add(new Tile(10, "orange"));
-		tiles.add(new Tile(11, "orange"));
-		tiles.add(new Tile(12, "orange"));
-		tiles.add(new Tile(13, "orange"));
+		tiles.add(new Tile("1", "O"));
+		tiles.add(new Tile("2", "O"));
+		tiles.add(new Tile("3", "O"));
+		tiles.add(new Tile("4", "O"));
+		tiles.add(new Tile("5", "O"));
+		tiles.add(new Tile("6", "O"));
+		tiles.add(new Tile("7", "O"));
+		tiles.add(new Tile("8", "O"));
+		tiles.add(new Tile("9", "O"));
+		tiles.add(new Tile("10", "O"));
+		tiles.add(new Tile("11", "O"));
+		tiles.add(new Tile("12", "O"));
+		tiles.add(new Tile("13", "O"));
 		assertEquals(Meld.MeldType.RUN, Meld.checkMeldType(tiles));
 		
 	}

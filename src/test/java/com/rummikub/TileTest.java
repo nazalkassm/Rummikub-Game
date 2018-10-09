@@ -1,6 +1,5 @@
 package com.rummikub;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.ByteArrayOutputStream;
@@ -26,21 +25,12 @@ class TileTest {
 	@BeforeAll
 	static void setUpAll() throws Exception {
 		Logger.info("setUpAll");
-		tile1 = new Tile(1,"red");
-		tile2 = new Tile(1,"red");
-		tile3 = new Tile(1,"blue");
-		tile4 = new Tile(12,"red");
+		tile1 = new Tile("1", "R");
+		tile2 = new Tile("1", "R");
+		tile3 = new Tile("1", "B");
+		tile4 = new Tile("12", "R");
 		outContent= new ByteArrayOutputStream();
 		System.setOut(new PrintStream(outContent));
-	}
-	
-	@Test
-	void printTests() {		
-		//Ensure that the tile prints are printing the correct value and symbol
-		tile1.print(); 
-		assertTrue(outContent.toString().equals("1R"));
-		tile3.print();
-		assertTrue(outContent.toString().equals("1B"));
 	}
 	
 	@Test
@@ -53,8 +43,8 @@ class TileTest {
 		assertThat(true, is(tile1.isSameColor(tile2)));
 		assertThat(false, is(tile2.isSameColor(tile3)));
 		//3. Compare same tile
-		assertThat(false, is(tile1.equalTo(tile3)));
-		assertThat(true, is(tile1.equalTo(tile2)));
+		assertThat(false, is(tile1.equals(tile3)));
+		assertThat(true, is(tile1.equals(tile2)));
 	}
 	
 	@Test
