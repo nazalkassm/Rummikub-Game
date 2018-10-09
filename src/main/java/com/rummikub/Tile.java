@@ -1,6 +1,6 @@
 package com.rummikub;
 
-public class Tile {
+public class Tile implements Comparable<Tile> {
 	
 	/**The rank and color of the tile */
 	private Ranks rank;
@@ -21,15 +21,15 @@ public class Tile {
 		return this.rank.getSymbol() + this.color.getSymbol();
 	}
 	
-	public Boolean isSameRank(Tile tile) {
+	public boolean isSameRank(Tile tile) {
 		return this.rank == tile.rank;
 	}
 
-	public Boolean isSameColor(Tile tile) {
+	public boolean isSameColor(Tile tile) {
 		return this.color == tile.color;
 	}
 	
-	public Boolean equals(Tile tile) {
+	public boolean equals(Tile tile) {
 		return isSameRank(tile) && isSameColor(tile);
 	}
 	
@@ -44,5 +44,19 @@ public class Tile {
 
 	public int getValue() {
 		return this.rank.getValue();
+	}
+	
+	@Override
+	public int compareTo(Tile tile) {
+		return Integer.compare(this.getValue(), tile.getValue());
+	}
+
+	public boolean isRunOn(Tile tile) {
+		//If the colors are different return false
+		if (this.color != tile.color) {
+			return false;
+		}
+		//Otherwise return true if the values are either +1 or -1
+		return (this.getValue() == (tile.getValue() - 1) || this.getValue() == (tile.getValue() + 1));
 	}
 }
