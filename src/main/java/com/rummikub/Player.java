@@ -7,9 +7,16 @@ public class Player
 	private Rack playerRack;
 	protected Strategy strategy;
 	
-	public Player()
+	public Player(Stock stock)
 	{
-		
+		playerRack = new Rack();
+		for(int i = 0; i < 14; i++) {
+			playerRack.addTile(stock.dealTile());
+		}
+	}
+	
+	public Player() {
+		playerRack = new Rack();
 	}
 	
 	public Player(Rack r)
