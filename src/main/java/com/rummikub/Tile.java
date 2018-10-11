@@ -19,7 +19,7 @@ public class Tile implements Comparable<Tile> {
 	
 	@Override
 	public String toString() { 
-		return this.rank.getSymbol() + this.color.getSymbol();
+		return this.color.getSymbol() + this.rank.getSymbol();
 	}
 	
 	public boolean isSameRank(Tile tile) {
