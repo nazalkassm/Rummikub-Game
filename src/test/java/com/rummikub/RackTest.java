@@ -50,7 +50,7 @@ public class RackTest {
 		handTest = null;
 	}
 	@Test
-	public void checkRack() 
+	public void rackTest() 
 	{
 		assertEquals(14, hand.getSize());
 	}
@@ -61,7 +61,7 @@ public class RackTest {
 	 * Rack.drawTile() should call sort each time a new tile is drawn from Stock
 	 */
 	@Test
-	public void checkSort() {
+	public void sortTest() {
 		assertEquals(true, hand.sorted());
 		
 		hand.drawTile();
@@ -75,7 +75,7 @@ public class RackTest {
 	 * each time draw is called, size of rack should increment by 1
 	 */
 	@Test
-	public void checkRackSize() {
+	public void rackSizeTest() {
 
 		assertEquals(14, hand.getSize());
 		
@@ -90,7 +90,7 @@ public class RackTest {
 	 * takes a dummy constructor and adds tiles manually
 	 */
 	@Test
-	public void checkValidMeld() {
+	public void validMeldTest() {
 		
 		
 		assertEquals(false , hand.hasMeld());
@@ -103,7 +103,7 @@ public class RackTest {
 	 * returns -1 if hand does not have a valid meld
 	 */
 	@Test
-	public void checkMeldSum() {
+	public void meldSumTest() {
 		
 		assertEquals(-1 , hand.sumMeld());
 		assertEquals(15 , hand2.sumMeld());
@@ -114,7 +114,7 @@ public class RackTest {
 	 * tests whether current hand has a valid meld with initial 30 value
 	 */
 	@Test
-	public void checkInitialThirty() {
+	public void initialThirtyTest() {
 		
 		assertEquals(false , hand.hasThirty());
 		assertEquals(false , hand2.hasThirty());

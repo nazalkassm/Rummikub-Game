@@ -13,7 +13,8 @@ class RanksTest {
 	private static Ranks rank3;
 	
 	@BeforeAll
-	static void setUpAll() throws Exception {
+	static void setUpAll() throws Exception 
+	{
 		Logger.info("setUpAll");
 		rank1 = Ranks.ONE;
 		rank2 = Ranks.SEVEN;
@@ -21,7 +22,7 @@ class RanksTest {
 	}
 	
 	@Test
-	void creationTests() {
+	void creationTest() {
 		//Test the creation of enums through symbol
 		//"7" indicates the rank of 7 
 		assertThat(Ranks.SEVEN, is(Ranks.getRankFromSymbol("7")));
@@ -31,7 +32,7 @@ class RanksTest {
 	}
 	
 	@Test
-	void valueTests() {
+	void valueTest() {
 		//Compare the values of ranks
 		assertThat(1, is(rank1.getValue()));
 		assertThat(7, is(rank2.getValue()));
@@ -39,7 +40,7 @@ class RanksTest {
 	}
 
 	@Test
-	void symbolTests() {
+	void symbolTest() {
 		//Compare the symbols of ranks
 		assertThat("1", is(rank1.getSymbol()));
 		assertThat("7", is(rank2.getSymbol()));

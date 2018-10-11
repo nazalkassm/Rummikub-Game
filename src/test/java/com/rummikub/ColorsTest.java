@@ -23,7 +23,7 @@ class ColorsTest {
 	}
 	
 	@Test
-	void creationTests() {
+	void creationTest() {
 		//Test the creation of enums through symbol
 		//"R" indicates the Color of red 
 		assertThat(color2, is(Colors.getColorFromSymbol("R")));
@@ -32,7 +32,7 @@ class ColorsTest {
 	}
 	
 	@Test
-	void symbolTests() {
+	void symbolTest() {
 		//Compare the symbols of Colors
 		assertThat("O", is(color1.getSymbol()));
 		assertThat("R", is(color2.getSymbol()));

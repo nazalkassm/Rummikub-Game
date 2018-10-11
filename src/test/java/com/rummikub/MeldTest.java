@@ -13,11 +13,24 @@ import org.junit.jupiter.api.Test;
 
 public class MeldTest {
 
+	private static List<Tile> tiles;
+	
+	@BeforeAll
+	static void setUpAll() throws Exception 
+	{
+	tiles = new ArrayList<Tile>();
+	}
+	
+	@AfterAll
+	static void tearDownAfterClass() throws Exception
+	{
+	tiles = null;
+	}
+	
 	@Test
-	public void testCheckMeldType() {		
-		
+	public void checkMeldTypeTest() {			
 		// Testing invalid melds
-		List<Tile> tiles = new ArrayList<Tile>();
+		
 		tiles.add(new Tile("5", "O"));
 		tiles.add(new Tile("4", "R"));
 		tiles.add(new Tile("5", "G"));
