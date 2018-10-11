@@ -8,36 +8,38 @@ import com.rummikub.Tile;
 
 public class Rack 
 {
-	private List<Tile> rack = new ArrayList<Tile>();
+	private List<Tile> tileList = new ArrayList<Tile>();
 	boolean isSorted = false;
 
 	public int getSize() 
 	{
 		// TODO Auto-generated method stub
-		return rack.size();
+		return tileList.size();
 	}
 	
 	public List<Tile> getRackArray()
 	{
-		return rack;	
+		return tileList;	
 	}
 
 	public void addTile(Tile tile) {
 		// TODO Auto-generated method stub
-		rack.add(tile);	
+		tileList.add(tile);	
+		isSorted = false;
 	}
 
 	public Tile takeTile(Stock stock) {
 		// TODO Auto-generated method stub
 		Tile draw = stock.dealTile();
-		this.rack.add(draw);
+		this.tileList.add(draw);
+		isSorted = false;
 		return draw;
 		
 	}
 
 	public void sortRack() {
 		// TODO Auto-generated method stub
-		Collections.sort(rack);
+		Collections.sort(tileList);
 		isSorted = true;
 	}
 	
@@ -65,7 +67,11 @@ public class Rack
 	
 	@Override
 	public String toString() {
-		return null;
+		String a = "";
+		for(Tile s: this.tileList) {
+			a += s.toString() + " ";
+		}
+		return a;
 	}
 
 }

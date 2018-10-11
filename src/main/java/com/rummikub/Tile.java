@@ -17,6 +17,7 @@ public class Tile implements Comparable<Tile> {
 		this(Ranks.getRankFromSymbol(rankSymbol), Colors.getColorFromSymbol(colorSymbol));
 	}
 	
+	@Override
 	public String toString() { 
 		return this.rank.getSymbol() + this.color.getSymbol();
 	}
