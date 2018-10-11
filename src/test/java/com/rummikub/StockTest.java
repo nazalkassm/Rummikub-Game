@@ -17,14 +17,15 @@ import com.rummikub.*;
 
 class StockTest {
 	
-	private Stock stock1;
+	private static Stock stock1;
 	private Stock stock2 = new Stock(stock1);
 	private Player player1;
+	private Rack rack1;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception 
 	{
-		
+		stock1 = new Stock(104);
 	}
 
 	@AfterAll

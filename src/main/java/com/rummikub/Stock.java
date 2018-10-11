@@ -1,44 +1,68 @@
 package com.rummikub;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-//To be implemented TODO
 public class Stock 
 {
-	private int stockL;
-	private List<Tile> stock = new ArrayList<Tile>(stockL);
+	int stockS;
+	ArrayList<Tile> stockArray = new ArrayList<>(stockS);;
 	
-	public Stock(int sL) 
+	public Stock() 
 	{
-		this.stockL = sL;
-	};
+		this(Constants.STOCK_SIZE);
+	}
+	
+	public Stock(int sS) 
+	{
+		this.stockS = sS;
+	}
 	
 	public Stock (Stock stockCopy) 
 	{
-		//copy the stock given. TODO
+		this.stockS = stockCopy.stockS;
+		this.stockArray.addAll(stockCopy.getStock());
 	}
+	
 	public void shuffle() 
 	{
-		// TODO Auto-generated method stub
+		Collections.shuffle(this.stockArray);
 	}
-	public int getLength() {
-		// TODO Auto-generated method stub
-		return stock.toArray().length;
+	
+	public int getLength() 
+	{
+		return stockArray.size();
 	}
-	public Object dealRack() {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public ArrayList<Tile> dealRack() 
+	{
+		ArrayList<Tile> returnList = new ArrayList<>();
+		int fromCurrentLength = this.getLength();
+		int toCurrentMinusRS = this.getLength()- Constants.RACK_SIZE;
+		for(int index = fromCurrentLength; index<toCurrentMinusRS; index--)
+		{
+			returnList.add(stockArray.get(index));
+		}
+		return returnList;
 	}
-	public List<Tile> getStock() {
-		return stock;
+	
+	public ArrayList<Tile> getStock() {
+		return this.stockArray;
 	}
 	public void setStock(ArrayList<Tile> stock) {
-		this.stock = stock;
+		this.stockArray = stock;
 	}
-	public void createStock() {
-		// TODO Auto-generated method stub
-		
+	public void createStock() 
+	{
+		for(Ranks r: Ranks.values())
+		{
+			for(Colors c:Colors.values())
+			{
+				stockArray.add(new Tile(r,c));
+				stockArray.add(new Tile(r,c));
+			}
+		}
 	}
 
 	public Object dealTile() {
