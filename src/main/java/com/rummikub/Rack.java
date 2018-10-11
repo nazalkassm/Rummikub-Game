@@ -56,8 +56,9 @@ public class Rack
 		return null;
 	}
 
-	public void sumMeld() {
+	public int sumMeld() {
 		// TODO Auto-generated method stub
+		return -1;
 	}
 
 	public boolean hasThirty() {
