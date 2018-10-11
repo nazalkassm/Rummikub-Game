@@ -19,17 +19,17 @@ public class RackTest {
 		hand = new Rack();
 		hand2 = new Rack();
 		hand3 = new Rack();
-		hand.addTile(new Tile("10", "G"));
-		hand.addTile(new Tile("4", "B"));
-		hand.addTile(new Tile("9", "B"));
+		hand.addTile(new Tile("G", "2"));
+		hand.addTile(new Tile("B", "4"));
+		hand.addTile(new Tile("B", "9"));
 		
-		hand2.addTile(new Tile("4", "G")); //G4
-		hand2.addTile(new Tile("5", "G")); //G5
-		hand2.addTile(new Tile("6", "G")); //G6
+		hand2.addTile(new Tile("G", "6")); //G4
+		hand2.addTile(new Tile("G", "5")); //G5
+		hand2.addTile(new Tile("G", "4")); //G6
 		
-		hand3.addTile(new Tile("10", "G")); //G10
-		hand3.addTile(new Tile("10", "R")); //R10
-		hand3.addTile(new Tile("10", "O")); //O10
+		hand3.addTile(new Tile("G", "10")); //G10
+		hand3.addTile(new Tile("R", "10")); //R10
+		hand3.addTile(new Tile("O", "10")); //O10
 	}
 
 	@AfterAll
@@ -66,8 +66,9 @@ public class RackTest {
 	 */
 	@Test
 	public void sortTest() {
-		assertEquals(false, hand.isSorted); //check if initially sorted
+		//assertEquals(false, hand.isSorted); //check if initially sorted
 		hand.sortRack();
+		System.out.println(hand);
 		assertEquals(true, hand.isSorted); //check after sorting 
 		
 		hand.takeTile(stock);
@@ -97,6 +98,28 @@ public class RackTest {
 	 */
 	@Test
 	public void validMeldTest() {
+		
+		
+		assertEquals(false , hand.hasMeld());
+		assertEquals(true , hand2.hasMeld());
+		assertEquals(true , hand3.hasMeld());
+	}
+	
+	/*
+	 * tests whether there exists a valid meld
+	 * takes a dummy constructor and adds tiles manually
+	 */
+	@Test
+	public void runsMeldTest() {
+		
+		hand.sortRack();
+		hand2.sortRack();
+		hand3.sortRack();
+		
+		System.out.println(Rack.getTilesByColorsAndValues(hand.getRackArray()).toString());
+		System.out.println(Rack.getTilesByColorsAndValues(hand2.getRackArray()).toString());
+		System.out.println(Rack.getTilesByColorsAndValues(hand3.getRackArray()).toString());
+		
 		
 		
 		assertEquals(false , hand.hasMeld());

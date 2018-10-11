@@ -7,19 +7,19 @@ public class Tile implements Comparable<Tile> {
 	private Colors color;
 	
 	//Constructor
-	public Tile(Ranks rank, Colors color) {
+	public Tile(Colors color, Ranks rank) {
 		this.rank = rank;
 		this.color = color;
 	};
 	
-	public Tile(String rankSymbol, String colorSymbol) {
+	public Tile(String colorSymbol, String rankSymbol) {
 		//Get the rank and color associated with the symbols and call the constructor 
-		this(Ranks.getRankFromSymbol(rankSymbol), Colors.getColorFromSymbol(colorSymbol));
+		this(Colors.getColorFromSymbol(colorSymbol), Ranks.getRankFromSymbol(rankSymbol));
 	}
 	
 	@Override
 	public String toString() { 
-		return this.rank.getSymbol() + this.color.getSymbol();
+		return this.color.getSymbol() + this.rank.getSymbol();
 	}
 	
 	public boolean isSameRank(Tile tile) {

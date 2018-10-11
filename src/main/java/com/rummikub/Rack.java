@@ -3,6 +3,8 @@ package com.rummikub;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import com.rummikub.Tile;
 
@@ -26,6 +28,7 @@ public class Rack
 		// TODO Auto-generated method stub
 		tileList.add(tile);	
 		isSorted = false;
+		//sortRack();
 	}
 
 	public Tile takeTile(Stock stock) {
@@ -44,10 +47,19 @@ public class Rack
 	}
 	
 	public void getRunMelds() {
+		int count = 0;
+		
+		
+		
 		
 	}
+	
+	public static Map<Colors, List<Tile>> getTilesByColorsAndValues(List<Tile> tileList) {
+	    return tileList.stream()
+	                    .collect(Collectors.groupingBy(Tile::getColour));
+	}
 
-	public void getAlikeMelds() {
+	public void getSetMelds() {
 		
 	}
 	
