@@ -1,6 +1,7 @@
 package com.rummikub;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.rummikub.Tile;
@@ -8,6 +9,7 @@ import com.rummikub.Tile;
 public class Rack 
 {
 	private List<Tile> rack = new ArrayList<Tile>();
+	boolean isSorted = false;
 
 	public int getSize() 
 	{
@@ -17,23 +19,26 @@ public class Rack
 	
 	public List<Tile> getRackArray()
 	{
-		return rack;
+		return rack;	
+	}
+
+	public void addTile(Tile tile) {
+		// TODO Auto-generated method stub
+		rack.add(tile);	
+	}
+
+	public Tile takeTile(Stock stock) {
+		// TODO Auto-generated method stub
+		Tile draw = stock.dealTile();
+		this.rack.add(draw);
+		return draw;
 		
 	}
 
-	public void addTile(String string, int i) {
+	public void sortRack() {
 		// TODO Auto-generated method stub
-		
-	}
-
-	public void drawTile() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public Object sorted() {
-		// TODO Auto-generated method stub
-		return null;
+		Collections.sort(rack);
+		isSorted = true;
 	}
 
 	public Object hasMeld() {
@@ -41,9 +46,8 @@ public class Rack
 		return null;
 	}
 
-	public Object sumMeld() {
+	public void sumMeld() {
 		// TODO Auto-generated method stub
-		return null;
 	}
 
 	public Object hasThirty() {

@@ -64,9 +64,9 @@ public class Stock
 			}
 		}
 	}
-
-	public Object dealTile() {
+	
+	public Tile dealTile() {
 		// TODO Auto-generated method stub
-		return null;
+		return stockArray.remove(0);
 	};
 }
