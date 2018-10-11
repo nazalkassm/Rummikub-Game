@@ -40,7 +40,15 @@ public class Rack
 		Collections.sort(rack);
 		isSorted = true;
 	}
+	
+	public void getRunMelds() {
+		
+	}
 
+	public void getAlikeMelds() {
+		
+	}
+	
 	public Object hasMeld() {
 		// TODO Auto-generated method stub
 		return null;
@@ -50,9 +58,9 @@ public class Rack
 		// TODO Auto-generated method stub
 	}
 
-	public Object hasThirty() {
+	public boolean hasThirty() {
 		// TODO Auto-generated method stub
-		return null;
+		return false;
 	}
 	
 	@Override

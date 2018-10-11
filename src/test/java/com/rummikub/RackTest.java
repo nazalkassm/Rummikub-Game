@@ -1,6 +1,6 @@
 package com.rummikub;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.*;
 
@@ -9,25 +9,27 @@ public class RackTest {
 	static Rack hand;
 	static Rack hand2;
 	static Rack hand3;
+	static Stock stock;
 	Rack handTest;
 	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception 
 	{
+		
 		hand = new Rack();
 		hand2 = new Rack();
 		hand3 = new Rack();
-		hand.addTile("G", 10);
-		hand.addTile("B", 4);
-		hand.addTile("B", 9);
+		hand.addTile(new Tile("10", "G"));
+		hand.addTile(new Tile("4", "B"));
+		hand.addTile(new Tile("9", "B"));
 		
-		hand2.addTile("G", 4);
-		hand2.addTile("G", 5);
-		hand2.addTile("G", 6);
+		hand2.addTile(new Tile("4", "G")); //G4
+		hand2.addTile(new Tile("5", "G")); //G5
+		hand2.addTile(new Tile("6", "G")); //G6
 		
-		hand3.addTile("G", 10);
-		hand3.addTile("R", 10);
-		hand3.addTile("O", 10);
+		hand3.addTile(new Tile("10", "G")); //G10
+		hand3.addTile(new Tile("10", "R")); //R10
+		hand3.addTile(new Tile("10", "O")); //O10
 	}
 
 	@AfterAll
@@ -36,11 +38,13 @@ public class RackTest {
 		hand = null;
 		hand2 = null;
 		hand3 = null;
+		stock = null;
 	}
 
 	@BeforeEach
 	void setUp() throws Exception 
 	{
+		stock = new Stock();
 		handTest = new Rack();
 	}
 
@@ -62,12 +66,14 @@ public class RackTest {
 	 */
 	@Test
 	public void sortTest() {
-		assertEquals(true, hand.sorted());
+		assertEquals(false, hand.isSorted); //check if initially sorted
+		hand.sortRack();
+		assertEquals(true, hand.isSorted); //check after sorting 
 		
-		hand.drawTile();
-		hand.drawTile();
+		hand.takeTile(stock);
+		hand.takeTile(stock);
 		
-		assertEquals(true, hand.sorted());		
+		assertEquals(true, hand.isSorted);		
 	}
 	
 	/*
@@ -79,8 +85,8 @@ public class RackTest {
 
 		assertEquals(14, hand.getSize());
 		
-		hand.drawTile();
-		hand.drawTile();
+		hand.takeTile(stock);
+		hand.takeTile(stock);
 		
 		assertEquals(16, hand.getSize());
 	}
