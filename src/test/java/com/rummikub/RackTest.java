@@ -2,6 +2,9 @@ package com.rummikub;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.*;
 
 public class RackTest {
@@ -111,14 +114,28 @@ public class RackTest {
 	 */
 	@Test
 	public void runsMeldTest() {
-		
 		hand.sortRack();
 		hand2.sortRack();
 		hand3.sortRack();
 		
-		System.out.println(Rack.getTilesByColorsAndValues(hand.getRackArray()).toString());
-		System.out.println(Rack.getTilesByColorsAndValues(hand2.getRackArray()).toString());
-		System.out.println(Rack.getTilesByColorsAndValues(hand3.getRackArray()).toString());
+		ArrayList<List<Tile>> lst1 = Rack.convertMaptoArrayList(Rack.getTilesByColorsAndValues(hand.getRackArray()));
+		ArrayList<List<Tile>> lst2 = Rack.convertMaptoArrayList(Rack.getTilesByColorsAndValues(hand2.getRackArray()));
+		ArrayList<List<Tile>> lst3 = Rack.convertMaptoArrayList(Rack.getTilesByColorsAndValues(hand3.getRackArray()));
+		
+		System.out.println(lst1.toString());
+		System.out.println(lst2.toString());
+		System.out.println(lst3.toString());
+		
+		
+		ArrayList<ArrayList<Tile>> a = hand.getRunMelds();
+		ArrayList<ArrayList<Tile>> b = hand.getRunMelds();
+		ArrayList<ArrayList<Tile>> c = hand.getRunMelds();
+		
+	
+		System.out.println(a.toString());
+		System.out.println(b.toString());
+		System.out.println(c.toString());
+		
 		
 		
 		
