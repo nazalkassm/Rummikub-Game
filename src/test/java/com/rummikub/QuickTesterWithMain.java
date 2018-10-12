@@ -10,7 +10,7 @@ public class QuickTesterWithMain
 {
 	public static void main(String[] args) 
 	{
-		Tile tile1 = new Tile(Colors.BLUE, Ranks.ONE);
+		Tile tile1 = new Tile(Ranks.ONE, Colors.BLUE);
 		Stock stock = new Stock();
 		System.out.println("stock1 length is : " + stock.getLength());
 		stock.stockArray.add(tile1);

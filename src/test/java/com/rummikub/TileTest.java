@@ -21,10 +21,10 @@ class TileTest {
 	static void setUpAll() throws Exception 
 	{
 		Logger.info("setUpAll");
-		tile1 = new Tile("1", "R");
-		tile2 = new Tile("1", "R");
-		tile3 = new Tile("1", "B");
-		tile4 = new Tile("12", "R");
+		tile1 = new Tile("R", "1");
+		tile2 = new Tile("R", "1");
+		tile3 = new Tile("B", "1");
+		tile4 = new Tile("R", "12");
 		
 	}
 	
@@ -55,10 +55,10 @@ class TileTest {
 	void runTest() {
 		//Compare if a tile is a run
 		//ex: 4R is a run on both 5R and 3R
-		Tile tile4R = new Tile("4", "R");
-		Tile tile5R = new Tile("5", "R");
-		Tile tile3R = new Tile("3", "R");
-		Tile tile2R = new Tile("2", "R");
+		Tile tile4R = new Tile("R", "4");
+		Tile tile5R = new Tile("R", "5");
+		Tile tile3R = new Tile("R", "3");
+		Tile tile2R = new Tile("R", "2");
 		//4R is a run on both 5R and 3R
 		assertThat(true, is(tile4R.isRunOn(tile5R)));
 		assertThat(true, is(tile4R.isRunOn(tile3R)));

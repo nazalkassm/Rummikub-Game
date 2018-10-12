@@ -59,8 +59,8 @@ public class Stock
 		{
 			for(Colors c:Colors.values())
 			{
-				stockArray.add(new Tile(c, r));
-				stockArray.add(new Tile(c, r));
+				stockArray.add(new Tile(r, c));
+				stockArray.add(new Tile(r, c));
 			}
 		}
 	}

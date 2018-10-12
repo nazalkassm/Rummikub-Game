@@ -22,7 +22,7 @@ public class RackTest {
 		hand = new Rack();
 		hand2 = new Rack();
 		hand3 = new Rack();
-		hand.addTile(new Tile("G", "2"));
+		hand.addTile(new Tile("G","2"));
 		hand.addTile(new Tile("B", "4"));
 		hand.addTile(new Tile("B", "9"));
 		
@@ -113,31 +113,28 @@ public class RackTest {
 	 * takes a dummy constructor and adds tiles manually
 	 */
 	@Test
-	public void runsMeldTest() {
+	public void meldRunTest() {
 		hand.sortRack();
+	//	hand.getRunMelds();
+		
+		hand2.sortRack();
+	//	hand2.getRunMelds();
+		hand2.addTile(new Tile("R", "9")); //G4
+		hand2.addTile(new Tile("G", "10")); //G5
+		hand2.addTile(new Tile("G", "11")); //G6
+		hand2.addTile(new Tile("G", "12")); //G6
+		hand2.addTile(new Tile("R", "9")); //G4
+		hand2.addTile(new Tile("R", "10")); //G5
+		hand2.addTile(new Tile("R", "11")); //G6
+		hand2.addTile(new Tile("R", "12")); //G6
 		hand2.sortRack();
 		hand3.sortRack();
-		
-		ArrayList<List<Tile>> lst1 = Rack.convertMaptoArrayList(Rack.getTilesByColorsAndValues(hand.getRackArray()));
-		ArrayList<List<Tile>> lst2 = Rack.convertMaptoArrayList(Rack.getTilesByColorsAndValues(hand2.getRackArray()));
-		ArrayList<List<Tile>> lst3 = Rack.convertMaptoArrayList(Rack.getTilesByColorsAndValues(hand3.getRackArray()));
-		
-		System.out.println(lst1.toString());
-		System.out.println(lst2.toString());
-		System.out.println(lst3.toString());
-		
-		
-		ArrayList<ArrayList<Tile>> a = hand.getRunMelds();
-		ArrayList<ArrayList<Tile>> b = hand.getRunMelds();
-		ArrayList<ArrayList<Tile>> c = hand.getRunMelds();
-		
-	
-		System.out.println(a.toString());
-		System.out.println(b.toString());
-		System.out.println(c.toString());
-		
-		
-		
+		//hand3.getRunMelds();
+		System.out.println(hand2.getRackArray().toString());
+
+		System.out.println(hand.getRunMelds().toString());
+		System.out.println(hand2.getRunMelds().toString());
+		System.out.println(hand3.getRunMelds().toString());
 		
 		assertEquals(false , hand.hasMeld());
 		assertEquals(true , hand2.hasMeld());
