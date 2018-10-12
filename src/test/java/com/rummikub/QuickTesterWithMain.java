@@ -14,7 +14,6 @@ public class QuickTesterWithMain
 	{
 		Tile tile1 = new Tile(Colors.BLUE, Ranks.ONE);
 		Stock stock = new Stock();
-		stock.createStock();
 		Player player1 = new Player("naz");
 		player1.fillRack(stock);
 		Logger.info(stock.getLength());

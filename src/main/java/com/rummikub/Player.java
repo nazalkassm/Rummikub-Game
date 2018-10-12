@@ -57,7 +57,8 @@ public class Player
 		this.strategy.play();
 	}
 
-	public String getName() {
+	public String getName() 
+	{
 		return name;
 	}
 }
