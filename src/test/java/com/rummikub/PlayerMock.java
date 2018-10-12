@@ -6,9 +6,14 @@ import com.rummikub.Strategy;
 public class PlayerMock extends Player
 {
 
+	public PlayerMock(String gName) 
+	{
+		super(gName);
+	}
+
 	private boolean useStrategyCalled = false;
 	
-
+	
 	@Override
 	public void useStrategy() {
 		this.useStrategyCalled = true;

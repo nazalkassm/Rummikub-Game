@@ -30,10 +30,10 @@ class PlayerTest {
 	@BeforeAll
 	void setUpClass() throws Exception 
 	{
-		player1 = new Player(); //These objects are going to be used in all the tests. We need to keep track of their state.
-		player2 = new Player();
-		player3 = new Player();
-		player4 = new Player();
+		player1 = new Player("p1"); //These objects are going to be used in all the tests. We need to keep track of their state.
+		player2 = new Player("p2");
+		player3 = new Player("p3");
+		player4 = new Player("p4");
 		s1 = new Strategy1();
 		s2 = new Strategy2();
 		s3 = new Strategy3();
@@ -43,17 +43,17 @@ class PlayerTest {
 	@AfterAll
 	void tearDownClass() throws Exception 
 	{
-		player1 = new Player();
-		player2 = new Player();
-		player3 = new Player();
-		player4 = new Player();
+		player1 = null;
+		player2 = null;
+		player3 = null;
+		player4 = null;
 	}
 
 	@BeforeEach
 	protected void setUpMethod() throws Exception 
 	{
-		newPlayer = new Player();
-		myPlayerMock = new PlayerMock();
+		newPlayer = new Player("pTester");
+		myPlayerMock = new PlayerMock("mockPlayer");
 	}
 
 	@AfterEach
@@ -65,14 +65,14 @@ class PlayerTest {
 	@Test
 	void playerFillRackTest() 
 	{
-		player1.fillRack(stock.dealRack());
+		//player1.fillRack(stock.deal14Tiles());
 		assertThat(player1.getPlayerRack().getRackArray(), hasSize(14));
 	} 
 	
 	@Test
 	void playerGetTileTest()
 	{
-		newPlayer.getTile(stock.dealTile());
+		newPlayer.getTile(stock);
 		assertThat(newPlayer.getPlayerRack().getRackArray(),hasSize(1));
 	}
 	

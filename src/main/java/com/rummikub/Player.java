@@ -1,28 +1,14 @@
 package com.rummikub;
 
-//import com.rummikub.*;
-
 public class Player 
 {
-	private Rack playerRack;
+	private String name;
+	private Rack playerRack = new Rack();
 	protected Strategy strategy;
 	
-	public Player(Stock stock)
+	public Player(String gName)
 	{
-		playerRack = new Rack();
-		for(int i = 0; i < 14; i++) 
-		{
-			playerRack.addTile(stock.dealTile());
-		}
-	}
-	
-	public Player() {
-		playerRack = new Rack();
-	}
-	
-	public Player(Rack r)
-	{
-		this.setRack(r);
+		this.name = gName;
 	}
 
 	public Rack getPlayerRack() 
@@ -30,34 +16,34 @@ public class Player
 		return playerRack;
 	}
 
-	public void setRack(Rack rack) 
+	public void fillRack(Stock stock) 
 	{
-		this.playerRack = rack;
+		this.playerRack.setRackArray(stock.deal14Tiles());
 	}
 
-	public void fillRack(Object object) 
+	public void printRack() 
 	{
-		// TODO Auto-generated method stub
-	}
-
-	public void printRack() {
-		//System.out.print(playerRack.toString());
+		System.out.println("Player " + this.name + " Rack is :");
+		System.out.print(playerRack.toString());
 	}
 	
-	public void getTile(Object object) {
-		// TODO Auto-generated method stub
-		
+	public void getTile(Stock stock) 
+	{
+		this.playerRack.addTile(stock.dealTile());
 	}
 	
-	public Meld createMeld(Tile...tiles) {
+	public Meld createMeld(Tile...tiles) 
+	{
 		return null;
 	}
 
-	public Strategy getStrategy() {
+	public Strategy getStrategy() 
+	{
 		return strategy;
 	}
 
-	public void setStrategy(Strategy strategy) {
+	public void setStrategy(Strategy strategy) 
+	{
 		this.strategy = strategy;
 	}
 	
@@ -69,5 +55,9 @@ public class Player
 	protected void play()
 	{
 		this.strategy.play();
+	}
+
+	public String getName() {
+		return name;
 	}
 }

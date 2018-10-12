@@ -25,6 +25,14 @@ public class Rack
 	{
 		return tileList;	
 	}
+	
+	public void setRackArray(ArrayList<Tile> rackList)
+	{
+		for(int i = 0; i < Constants.RACK_SIZE; i++)
+		{
+			tileList.add(rackList.get(i));
+		}
+	}
 
 	public void addTile(Tile tile) {
 		// TODO Auto-generated method stub

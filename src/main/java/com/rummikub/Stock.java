@@ -35,17 +35,14 @@ public class Stock
 		return stockArray.size();
 	}
 	
-	public ArrayList<Tile> dealRack() 
+	public ArrayList<Tile> deal14Tiles() 
 	{
-		ArrayList<Tile> returnList = new ArrayList<>();
-		int fromCurrentLength = this.getLength();
-		int toCurrentMinusRS = this.getLength()- Constants.RACK_SIZE;
-		for(int index = fromCurrentLength; index<toCurrentMinusRS; index--)
+		ArrayList<Tile> returnList = new ArrayList<>(14);
+		for(int i = 0; i < Constants.RACK_SIZE;i++)
 		{
-			returnList.add(stockArray.get(index));
-			stockArray.remove(index);
-			stockArray.trimToSize();
+			returnList.add(this.stockArray.remove(i));
 		}
+		stockArray.trimToSize();
 		return returnList;
 	}
 	
@@ -70,6 +67,9 @@ public class Stock
 	
 	public Tile dealTile() 
 	{
-		return stockArray.remove(0);
+		Tile returnTile;
+		returnTile = stockArray.remove(0);
+		stockArray.trimToSize();
+		return returnTile;
 	};
 }
