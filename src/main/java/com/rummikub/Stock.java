@@ -22,7 +22,7 @@ public class Stock
 	public Stock (Stock stockCopy) 
 	{
 		this.stockS = stockCopy.stockS;
-		this.stockArray.addAll(stockCopy.getStock());
+		this.stockArray.addAll(stockCopy.getStockArray());
 	}
 	
 	public void shuffle() 
@@ -43,11 +43,13 @@ public class Stock
 		for(int index = fromCurrentLength; index<toCurrentMinusRS; index--)
 		{
 			returnList.add(stockArray.get(index));
+			stockArray.remove(index);
+			stockArray.trimToSize();
 		}
 		return returnList;
 	}
 	
-	public ArrayList<Tile> getStock() {
+	public ArrayList<Tile> getStockArray() {
 		return this.stockArray;
 	}
 	public void setStock(ArrayList<Tile> stock) {
@@ -55,18 +57,19 @@ public class Stock
 	}
 	public void createStock() 
 	{
-		for(Ranks r: Ranks.values())
+		for(Colors c: Colors.values())
 		{
-			for(Colors c:Colors.values())
+			for(Ranks r:Ranks.values())
 			{
-				stockArray.add(new Tile(r, c));
-				stockArray.add(new Tile(r, c));
+				stockArray.add(new Tile(c, r));
+				stockArray.add(new Tile(c, r));
 			}
 		}
+		this.shuffle();
 	}
 	
-	public Tile dealTile() {
-		// TODO Auto-generated method stub
+	public Tile dealTile() 
+	{
 		return stockArray.remove(0);
 	};
 }

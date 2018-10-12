@@ -13,10 +13,11 @@ public class Rack
 {
 	private List<Tile> tileList = new ArrayList<Tile>();
 	boolean isSorted = false;
+	
+	public Rack() {};
 
 	public int getSize() 
 	{
-		// TODO Auto-generated method stub
 		return tileList.size();
 	}
 	

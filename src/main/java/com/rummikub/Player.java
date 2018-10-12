@@ -10,7 +10,8 @@ public class Player
 	public Player(Stock stock)
 	{
 		playerRack = new Rack();
-		for(int i = 0; i < 14; i++) {
+		for(int i = 0; i < 14; i++) 
+		{
 			playerRack.addTile(stock.dealTile());
 		}
 	}
