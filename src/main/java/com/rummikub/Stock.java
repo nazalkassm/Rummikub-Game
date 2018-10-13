@@ -5,7 +5,7 @@ import java.util.Collections;
 
 /**
  * This class is meant to model a stock in a tile rummy game. 
- * A stock is equivalent to a deck in a card game but instead holds tiles that are numbered from 1 to 13 and colored Red,Blue,Orange and Green.
+ * A stock is equivalent to a deck in a card game but instead holds tiles that are numbered from 1 to 13 and coloured Red,Blue,Orange and Green.
  * All non-getter methods have been tested in StockTtest Junit class.
  * @author Carleton University Team 25
  * @see ArrayList
@@ -20,8 +20,8 @@ public class Stock
 	private ArrayList<Tile> stockArray = new ArrayList<>(stockS);;
 	
 	/**
-	 *Supresses default constructor, ensuring non-instantiability.
-	 *A stock is only a stock if it lives with tiles. Therefore, the constructing a stock is STOCK_SIZE by defualt.
+	 *Suppresses default constructor, ensuring non-instantiability.
+	 *A stock is only a stock if it lives with tiles. Therefore, the constructing a stock is STOCK_SIZE by default.
 	*/
 	public Stock() 
 	{
@@ -77,7 +77,7 @@ public class Stock
 	
 	public void createStock() 
 	{
-		for(Colors c: Colors.values())
+		for(Colours c: Colours.values())
 		{
 			for(Ranks r:Ranks.values())
 			{

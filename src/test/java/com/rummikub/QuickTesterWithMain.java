@@ -12,7 +12,7 @@ public class QuickTesterWithMain
 {
 	public static void main(String[] args) 
 	{
-		Tile tile1 = new Tile(Colors.BLUE, Ranks.ONE);
+		Tile tile1 = new Tile(Colours.BLUE, Ranks.ONE);
 		Stock stock = new Stock();
 		Player player1 = new Player("naz");
 		player1.fillRack(stock);

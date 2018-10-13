@@ -35,8 +35,8 @@ class TileTest {
 		assertThat(false, is(tile1.isSameRank(tile4)));
 		assertThat(true, is(tile1.isSameRank(tile2)));
 		//2. Compare same color
-		assertThat(true, is(tile1.isSameColor(tile2)));
-		assertThat(false, is(tile2.isSameColor(tile3)));
+		assertThat(true, is(tile1.isSameColour(tile2)));
+		assertThat(false, is(tile2.isSameColour(tile3)));
 		//3. Compare same tile
 		assertThat(false, is(tile1.equals(tile3)));
 		assertThat(true, is(tile1.equals(tile2)));

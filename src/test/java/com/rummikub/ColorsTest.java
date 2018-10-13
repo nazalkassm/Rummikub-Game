@@ -8,27 +8,27 @@ import org.pmw.tinylog.Logger;
 
 class ColorsTest {
 
-	private static Colors color1;
-	private static Colors color2;
-	private static Colors color3;
-	private static Colors color4;
+	private static Colours color1;
+	private static Colours color2;
+	private static Colours color3;
+	private static Colours color4;
 	
 	@BeforeAll
 	static void setUpAll() throws Exception {
 		Logger.info("setUpAll");
-		color1 = Colors.ORANGE;
-		color2 = Colors.RED;
-		color3 = Colors.GREEN;
-		color4 = Colors.BLUE;
+		color1 = Colours.ORANGE;
+		color2 = Colours.RED;
+		color3 = Colours.GREEN;
+		color4 = Colours.BLUE;
 	}
 	
 	@Test
 	void creationTest() {
 		//Test the creation of enums through symbol
 		//"R" indicates the Color of red 
-		assertThat(color2, is(Colors.getColorFromSymbol("R")));
+		assertThat(color2, is(Colours.getColourFromSymbol("R")));
 		//"B" indicates the Color of blue
-		assertThat(color4, is(Colors.getColorFromSymbol("B")));	
+		assertThat(color4, is(Colours.getColourFromSymbol("B")));	
 	}
 	
 	@Test

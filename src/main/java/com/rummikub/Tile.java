@@ -2,41 +2,41 @@ package com.rummikub;
 
 public class Tile implements Comparable<Tile> {
 	
-	/**The rank and color of the tile */
+	/**The rank and colour of the tile */
 	private Ranks rank;
-	private Colors color;
+	private Colours colour;
 	
 	//Constructor
-	public Tile(Colors color, Ranks rank) {
+	public Tile(Colours colour, Ranks rank) {
 		this.rank = rank;
-		this.color = color;
+		this.colour = colour;
 	};
 	
-	public Tile(String colorSymbol, String rankSymbol) {
-		//Get the rank and color associated with the symbols and call the constructor 
-		this(Colors.getColorFromSymbol(colorSymbol), Ranks.getRankFromSymbol(rankSymbol));
+	public Tile(String colourSymbol, String rankSymbol) {
+		//Get the rank and colour associated with the symbols and call the constructor 
+		this(Colours.getColourFromSymbol(colourSymbol), Ranks.getRankFromSymbol(rankSymbol));
 	}
 	
 	@Override
 	public String toString() { 
-		return this.color.getSymbol() + this.rank.getSymbol();
+		return this.colour.getSymbol() + this.rank.getSymbol();
 	}
 	
 	public boolean isSameRank(Tile tile) {
 		return this.rank == tile.rank;
 	}
 
-	public boolean isSameColor(Tile tile) {
-		return this.color == tile.color;
+	public boolean isSameColour(Tile tile) {
+		return this.colour == tile.colour;
 	}
 	
 	public boolean equals(Tile tile) {
-		return isSameRank(tile) && isSameColor(tile);
+		return isSameRank(tile) && isSameColour(tile);
 	}
 	
 	//Getters and Setters
-	public Colors getColour() {
-		return this.color;
+	public Colours getColour() {
+		return this.colour;
 	}
 	
 	public Ranks getRank() {
@@ -49,8 +49,8 @@ public class Tile implements Comparable<Tile> {
 	
 	@Override
 	public int compareTo(Tile tile) {
-		//if colors don't match just return -1
-		if (tile.color != this.color) {
+		//if colours don't match just return -1
+		if (tile.colour != this.colour) {
 			return -1;	
 		}
 		
@@ -58,8 +58,8 @@ public class Tile implements Comparable<Tile> {
 	}
 
 	public boolean isRunOn(Tile tile) {
-		//If the colors are different return false
-		if (this.color != tile.color) {
+		//If the colours are different return false
+		if (this.colour != tile.colour) {
 			return false;
 		}
 		//Otherwise return true if the values are either +1 or -1
