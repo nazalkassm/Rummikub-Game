@@ -71,7 +71,7 @@ public class RackTest {
 	public void sortTest() {
 		//assertEquals(false, hand.isSorted); //check if initially sorted
 		hand.sortRack();
-		System.out.println(hand);
+		//System.out.println(hand);
 		assertEquals(true, hand.isSorted); //check after sorting 
 		
 		hand.takeTile(stock);
@@ -109,7 +109,7 @@ public class RackTest {
 	}
 	
 	/*
-	 * tests whether there exists a valid meld
+	 * tests whether there exists a valid run meld
 	 * takes a dummy constructor and adds tiles manually
 	 */
 	@Test
@@ -139,6 +139,19 @@ public class RackTest {
 		assertEquals(false , hand.hasMeld());
 		assertEquals(true , hand2.hasMeld());
 		assertEquals(true , hand3.hasMeld());
+	}
+	
+	/*
+	 * tests whether there exists a valid run meld
+	 * takes a dummy constructor and adds tiles manually
+	 */
+	@Test
+	public void meldSetTest() {
+		hand3.addTile(new Tile("G", "10"));
+		hand3.addTile(new Tile("O", "10"));
+		
+		hand3.sortRack();
+		System.out.println(hand3.getSetMelds().toString());
 	}
 	
 	/*

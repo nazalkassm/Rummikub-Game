@@ -2,9 +2,11 @@ package com.rummikub;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.rummikub.Tile;
@@ -81,16 +83,43 @@ public class Rack
 		return meldList;
 	}
 
-	public void getSetMelds() {
-	       int count = 0;
-	        ArrayList<List<Tile>> newTileList = new ArrayList<List<Tile>>();
-	        newTileList = convertMaptoArrayList(getTilesByColorsAndValues(tileList));
-	        
-	        ArrayList<ArrayList<Tile>> meldList = new ArrayList<ArrayList<Tile>>();
-	        
-	        for(List<Tile> lst: newTileList) {
-	        	
-	        }
+	/*
+	 * finding set-type melds in the rack
+	 * first gets rid of duplicate objects (so if there are two R5's)
+	 * then compares them to other colours and returns a list of same values
+	 */
+	public ArrayList<ArrayList<Tile>> getSetMelds() {
+		int count = 0;
+		List<Tile> meldSet = new ArrayList<Tile>();
+		ArrayList<ArrayList<Tile>> meldList = new ArrayList<ArrayList<Tile>>();
+		
+		//gets rid of duplicate objects
+		List<Tile> tileList2 = new ArrayList<Tile>();
+		Set<Tile> hs = new HashSet<Tile>();
+		hs.addAll(tileList);
+		tileList2.addAll(hs);
+		
+		for (int i = 0; i < tileList2.size() - 1; i++) {
+			for(int j = i+1; j < tileList2.size(); j++) {
+				if((tileList2.get(i).getColour() != tileList2.get(j).getColour()) && 
+						(tileList2.get(i).getRank() == tileList2.get(j).getRank())){
+					if (count == 0) {
+						count = 2;
+						meldSet.add(tileList2.get(i));
+						meldSet.add(tileList2.get(j));
+					} else {
+						count++;
+						meldSet.add(tileList2.get(j));
+					}
+				}
+			}
+			if(count >= 3) {
+				meldList.add(new ArrayList<Tile>(meldSet));		
+			}
+			meldSet.clear();
+			count = 0;
+		}
+		return meldList;
 	}
 	
 	public Object hasMeld() {
@@ -120,6 +149,13 @@ public class Rack
 	    return tileList.stream()
 	                    .collect(Collectors.groupingBy(Tile::getColour));
 	}
+	/*
+	 * sorted by values
+	 */
+	public static Map<Ranks, List<Tile>> getTilesByValues(List<Tile> tileList) {
+	    return tileList.stream()
+	                    .collect(Collectors.groupingBy(Tile::getRank));
+	}
 	
 	/*
 	 * converts the map from getTilesByColorsAndValues() to an ArrayList<List<Tile>>
@@ -127,7 +163,7 @@ public class Rack
 	 */
 	public static ArrayList<List<Tile>> convertMaptoArrayList(Map<Colours, List<Tile>> map){
 		ArrayList<List<Tile>> list = new ArrayList<List<Tile>>();
-		for(Entry<Colours, List<Tile>> m: map.entrySet()) {
+		for(Map.Entry<Colours, List<Tile>> m: map.entrySet()) {
 			list.add(m.getValue());
 		}
 		return list;
