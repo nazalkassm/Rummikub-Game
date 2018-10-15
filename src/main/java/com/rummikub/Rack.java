@@ -101,15 +101,16 @@ public class Rack
 		
 		for (int i = 0; i < tileList2.size() - 1; i++) {
 			for(int j = i+1; j < tileList2.size(); j++) {
-				if((tileList2.get(i).getColour() != tileList2.get(j).getColour()) && 
-						(tileList2.get(i).getRank() == tileList2.get(j).getRank())){
+					Tile tile1 = tileList2.get(i);
+					Tile tile2 = tileList2.get(j);
+				if(!tile1.isSameColour(tile2) && tile1.isSameRank(tile2)) {
 					if (count == 0) {
 						count = 2;
-						meldSet.add(tileList2.get(i));
-						meldSet.add(tileList2.get(j));
+						meldSet.add(tile1);
+						meldSet.add(tile2);
 					} else {
 						count++;
-						meldSet.add(tileList2.get(j));
+						meldSet.add(tile2);
 					}
 				}
 			}
