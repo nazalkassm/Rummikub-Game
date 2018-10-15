@@ -34,7 +34,8 @@ public class Meld {
 	
 	static public MeldType checkMeldType(List<Tile> newTiles) {
 		MeldType newMeldType = MeldType.INVALID;
-		 Map<Colours, List<Tile>> tilesByColour = newTiles.stream().collect(Collectors.groupingBy(Tile::getColour));
+		 Map<Colours, List<Tile>> tilesByColour = newTiles.stream()
+				 .collect(Collectors.groupingBy(Tile::getColour));
 		
 		 // a meld is a set iff: 
 		 // - There is only one tile per colour

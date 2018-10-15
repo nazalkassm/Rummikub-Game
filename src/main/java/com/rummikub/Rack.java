@@ -58,7 +58,6 @@ public class Rack
 	
 	public  ArrayList<ArrayList<Tile>> getRunMelds() {
 		int count = 0;
-		List<Tile> tileMList = new ArrayList<Tile>();
 		ArrayList<ArrayList<Tile>> meldList = new ArrayList<ArrayList<Tile>>();
 		boolean isRunOn = false;
 		for (int i = 1; i <= tileList.size() ; i++) {
@@ -83,11 +82,20 @@ public class Rack
 	}
 
 	public void getSetMelds() {
-		
+	       int count = 0;
+	        ArrayList<List<Tile>> newTileList = new ArrayList<List<Tile>>();
+	        newTileList = convertMaptoArrayList(getTilesByColorsAndValues(tileList));
+	        
+	        ArrayList<ArrayList<Tile>> meldList = new ArrayList<ArrayList<Tile>>();
+	        
+	        for(List<Tile> lst: newTileList) {
+	        	
+	        }
 	}
 	
 	public Object hasMeld() {
 		// TODO Auto-generated method stub
+		//this should be moved to table class
 		return null;
 	}
 
@@ -100,6 +108,31 @@ public class Rack
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	
+	/*
+	 * converts the tileList (the rack) to a map of tiles sorted by colours
+	 * calling sortTiles() before this will ensure sort as well
+     * returns a map though, needs to be converted into a List of a List
+     * Source: https://stackoverflow.com/questions/52660914/searching-through-specific-attributes-of-an-arraylist-of-objects
+	 */
+	public static Map<Colours, List<Tile>> getTilesByColorsAndValues(List<Tile> tileList) {
+	    return tileList.stream()
+	                    .collect(Collectors.groupingBy(Tile::getColour));
+	}
+	
+	/*
+	 * converts the map from getTilesByColorsAndValues() to an ArrayList<List<Tile>>
+	 * and returns that list
+	 */
+	public static ArrayList<List<Tile>> convertMaptoArrayList(Map<Colours, List<Tile>> map){
+		ArrayList<List<Tile>> list = new ArrayList<List<Tile>>();
+		for(Entry<Colours, List<Tile>> m: map.entrySet()) {
+			list.add(m.getValue());
+		}
+		return list;
+	}
+	
 	
 	@Override
 	public String toString() {
