@@ -24,6 +24,10 @@ public class Meld {
 		this.meldType = checkMeldType(this.tiles);
 	}
 	
+	public List<Tile> getMeld() {
+		return tiles;
+	}
+	
 	public void addTile(Tile tile) {
 		tiles.add(tile);
 	}

@@ -129,9 +129,13 @@ public class Rack
 		return null;
 	}
 
-	public int sumMeld() {
+	public int sumMeld(Meld list) {
 		// TODO Auto-generated method stub
-		return -1;
+		int sum = 0;
+		for(int i = 0; i < list.getMeld().size(); i++) {
+			sum += list.getMeld().get(i).getValue();
+		}
+		return sum;
 	}
 
 	public boolean hasThirty() {
