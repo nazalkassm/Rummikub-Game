@@ -1,2 +1,2 @@
-2018-10-12 12:27:17 [main] com.rummikub.StockTest.shuffleTest()
-INFO: The number of same are : 2
+2018-10-22 17:27:48 [main] com.rummikub.TileTest.setUpAll()
+INFO: setUpAll

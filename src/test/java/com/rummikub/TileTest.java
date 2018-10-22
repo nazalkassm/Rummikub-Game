@@ -48,7 +48,7 @@ class TileTest {
     assertThat(1, is(tile4.compareTo(tile1)));
     //6. Compare equal to 
     //1R is equal to 1B
-    assertThat(0, is(tile1.compareTo(tile3)));
+    assertThat(0, is(tile1.compareTo(tile2)));
 	}
 	
 	@Test
