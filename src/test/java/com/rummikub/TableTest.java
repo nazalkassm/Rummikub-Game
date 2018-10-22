@@ -7,7 +7,7 @@ public class TableTest {
 	
 	@BeforeAll
 	public void init() {
-		
+		Table table = new Table();
 	}
 
 }

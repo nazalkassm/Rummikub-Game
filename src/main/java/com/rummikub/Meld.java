@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 public class Meld {
@@ -34,6 +35,39 @@ public class Meld {
 	
 	public List<Tile> getTiles() {
 		return tiles;
+	}
+	
+	/*
+	 * finds the sum of the meld
+	 */
+	public int sumMeld(Meld list) {
+		// TODO Auto-generated method stub
+		int sum = 0;
+		for(int i = 0; i < list.getMeld().size(); i++) {
+			sum += list.getMeld().get(i).getValue();
+		}
+		return sum;
+	}
+	
+	/*
+	 * takes an array of melds
+	 * adds sum of each meld into a list
+	 * finds the max of that list
+	 * and returns the index where that max element is
+	 * because sum of each meld will be stored in the same index as its corresponding meld in the list of melds
+	 */
+	public int getMaxIndex(ArrayList<Meld> list) {
+		List<Integer> sums = new ArrayList<Integer>();
+		for(Meld m: list) {
+			sums.add(m.sumMeld(m));
+		}
+		
+		Integer max = sums
+				.stream()
+				.mapToInt(v -> v)
+				.max().orElseThrow(NoSuchElementException::new);
+		
+		return sums.indexOf(max);
 	}
 	
 	static public MeldType checkMeldType(List<Tile> newTiles) {
