@@ -3,11 +3,21 @@ package com.rummikub;
 public class Player 
 {
 	private String name;
-	private Rack playerRack = new Rack();
+	private Rack playerRack;
 	protected PlayerBehaviour playerBehaviour;
 	
-	public Player(String gName)
+	
+	public Player(Stock stock,  String gName)
 	{
+		playerRack = new Rack();
+		this.name = gName;
+		for(int i = 0; i < 14; i++) {
+			playerRack.addTile(stock.dealTile());
+		}
+	}
+	
+	public Player(String gName) {
+		playerRack = new Rack();
 		this.name = gName;
 	}
 
