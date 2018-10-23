@@ -155,7 +155,6 @@ public class RackTest {
 		hand3.addTile(new Tile("B", "12"));
 		hand3.addTile(new Tile("O", "12"));
 		hand3.addTile(new Tile("B", "12"));
-		hand3.addTile(new Tile("O", "12"));
 	
 		
 		hand3.sortRack();
@@ -170,15 +169,11 @@ public class RackTest {
 	 */
 	@Test
 	public void meldTest() {
-		hand3.addTile(new Tile("R", "9")); //R9
-		hand3.addTile(new Tile("G", "10")); //G10
-		hand3.addTile(new Tile("G", "11")); //G11
-		hand3.addTile(new Tile("G", "12")); //G12
 		
 		hand3.sortRack();
-		System.out.println("WOOOOO");
+		System.out.println("Meld Test Sorted");
 		System.out.println(hand3.toString());
-		System.out.println("WEEEEE");
+		System.out.println("All melds");
 		System.out.println(hand3.getMelds().toString());
 	}
 	

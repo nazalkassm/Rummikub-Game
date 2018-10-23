@@ -1,74 +1,108 @@
 package com.rummikub;
 
-public class Player 
-{
+public class Player {
+	/** Name of player */
 	private String name;
-	private Rack playerRack;
-	protected PlayerBehaviour playerBehaviour;
 	
+	/** Player's rack */	
+	private Rack rack;
 	
-	public Player(Stock stock,  String gName)
-	{
-		playerRack = new Rack();
-		this.name = gName;
-		for(int i = 0; i < 14; i++) {
-			playerRack.addTile(stock.dealTile());
+	/** Boolean to hold if this player can play on melds that on the table */
+  public boolean canPlayOnExistingMelds; 
+	
+	/** The behaviour of the player */
+	protected Behaviour behaviour;
+	
+	/**
+	 * Constructor of Player 
+	 * 
+	 * @param stock = The stock that we use to get the initial rack from
+	 * @param name = The name of player
+	 * @param behaviour = The behaviour the player uses 
+	 * 
+	 * Setting behaviour: Player(stock, "p1", new Strategy0());
+	 */
+	public Player(Stock stock, String name, Behaviour behaviour) {
+		//Init the default attributes
+		this.rack = new Rack();
+		this.name = name;
+		this.behaviour = behaviour; 
+		this.canPlayOnExistingMelds = false;
+		
+		//For the size of rack size (14), take a tile from stock
+		for (int i = 0; i < Constants.RACK_SIZE; i++) {
+			this.rack.takeTile(stock);
 		}
 	}
 	
-	public Player(String gName) {
-		playerRack = new Rack();
-		this.name = gName;
-	}
-
-	public Rack getPlayerRack() 
-	{
-		return playerRack;
-	}
-
-	public void fillRack(Stock stock) 
-	{
-		this.playerRack.setRackArray(stock.deal14Tiles());
-	}
-
-	public void printRack() 
-	{
-		System.out.println("Player " + this.name + " Rack is :");
-		System.out.print(playerRack.toString());
+	/**
+	 * Constructor of Player 
+	 * 
+	 * @param name = The name of player
+	 */
+	public Player(String name) {
+		rack = new Rack();
+		this.name = name;
 	}
 	
-	public void getTile(Stock stock) 
-	{
-		this.playerRack.addTile(stock.dealTile());
-	}
-	
-	public Meld createMeld(Tile...tiles) 
-	{
-		return null;
-	}
-
-	public PlayerBehaviour getStrategy() 
-	{
-		return playerBehaviour;
+	/**
+	 * Constructor of Player 
+	 * 
+	 * @param name = The name of player
+	 * @param behaviour = The behaviour of the player
+	 */
+	public Player(String name, Behaviour behaviour) {
+		rack = new Rack();
+		this.behaviour = behaviour;
+		this.name = name;
 	}
 
-	public void setPlayerBehaviour(PlayerBehaviour pB) 
-	{
-		this.playerBehaviour = pB;
+	/**
+	 * Returns the player rack
+	 * @return Rack = The player's rack
+	 */
+	public Rack getPlayerRack() {
+		return this.rack;
 	}
 	
-	public void useStrategy()
-	{
-		play();
-	}
-	
-	protected void play()
-	{
-		this.playerBehaviour.play();
-	}
-
-	public String getName() 
-	{
+	/**
+	 * Return the player's name
+	 * @return String = The name of the player
+	 */
+	public String getName() {
 		return name;
 	}
+	
+	/**
+	 * Fills the rack with 14 tiles 
+	 * @param stock = The stock from which to take 14 tiles
+	 */
+	 /*
+	public void fillRack(Stock stock) {
+		this.rack.setRackArray(stock.deal14Tiles());
+	}*/
+
+	/**
+	 * Print the rack of the player
+	 */
+	public void printRack() {
+		System.out.print(rack.toString());
+	}
+	
+	/**
+	 * Adds to the player's rack from the stock  
+	 * @param stock = The stock from which to take a tile
+	 */
+	public void getTileFromStock(Stock stock) {
+		this.rack.takeTile(stock);
+	}
+	
+	/**
+	 * Plays the player's turn on a table 
+	 * @param table = The table on which to play
+	 */
+	public void play(Table table) {
+		this.behaviour.play(canPlayOnExistingMelds, rack, table);
+	}
+	
 }

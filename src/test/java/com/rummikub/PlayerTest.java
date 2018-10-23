@@ -22,10 +22,10 @@ class PlayerTest {
 	private Player player4;
 	private PlayerMock myPlayerMock;
 	private Player newPlayer; // This object is to test a newly created player in every test.
-	private PlayerBehaviour s1;
-	private PlayerBehaviour s2;
-	private PlayerBehaviour s3;
-	private PlayerBehaviour s4;
+	private Behaviour s1;
+	private Behaviour s2;
+	private Behaviour s3;
+	private Behaviour s4;
 	
 	@BeforeAll
 	void setUpClass() throws Exception 

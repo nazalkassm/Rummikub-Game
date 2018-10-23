@@ -50,8 +50,9 @@ public class Tile implements Comparable<Tile> {
 	@Override
 	public int compareTo(Tile tile) {
 		//if colours don't match just return -1
-		if (tile.colour != this.colour) {
-			return -1;	
+		int compareValue;
+		if ((compareValue = tile.colour.compareTo(this.colour)) != 0) {
+			return compareValue;	
 		}
 		
 		return Integer.compare(this.getValue(), tile.getValue());

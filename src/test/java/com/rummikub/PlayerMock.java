@@ -1,7 +1,7 @@
 package com.rummikub;
 
 import com.rummikub.Player;
-import com.rummikub.PlayerBehaviour;
+import com.rummikub.Behaviour;
 
 public class PlayerMock extends Player
 {

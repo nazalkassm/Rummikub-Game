@@ -77,7 +77,9 @@ public class Rack
 					count++;
 				}
 				isRunOn = true;
-				
+				if (count >= 3) {
+				//	meldList.add(new ArrayList<Tile>(tileList.subList(i - count, i)));	
+				}
 			} else {
 				
 				if (count >= 3) {
