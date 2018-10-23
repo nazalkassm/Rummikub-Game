@@ -58,9 +58,16 @@ public class Rack
 		isSorted = true;
 	}
 	
-	public  ArrayList<ArrayList<Tile>> getRunMelds() {
+	public List<ArrayList<Tile>> getMelds() {
+		List<ArrayList<Tile>> meldList = new ArrayList<ArrayList<Tile>>();
+		meldList.addAll(this.getRunMelds());
+		meldList.addAll(this.getSetMelds());
+		return meldList;
+	}
+	
+	public  List<ArrayList<Tile>> getRunMelds() {
 		int count = 0;
-		ArrayList<ArrayList<Tile>> meldList = new ArrayList<ArrayList<Tile>>();
+		List<ArrayList<Tile>> meldList = new ArrayList<ArrayList<Tile>>();
 		boolean isRunOn = false;
 		for (int i = 1; i <= tileList.size() ; i++) {
 			if (i < tileList.size() && (isRunOn = tileList.get(i).isRunOn(tileList.get(i-1)))) {
@@ -88,39 +95,51 @@ public class Rack
 	 * first gets rid of duplicate objects (so if there are two R5's)
 	 * then compares them to other colours and returns a list of same values
 	 */
-	public ArrayList<ArrayList<Tile>> getSetMelds() {
-		int count = 0;
-		List<Tile> meldSet = new ArrayList<Tile>();
-		ArrayList<ArrayList<Tile>> meldList = new ArrayList<ArrayList<Tile>>();
+	public List<ArrayList<Tile>> getSetMelds() {
+	  //Initialize array list of 13, with 2 lists each of tiles
+		List<ArrayList<ArrayList<Tile>>> collectedSets = new ArrayList<ArrayList<ArrayList<Tile>>>();
+		for (int i = 0; i < 13; ++i ) {
+		  ArrayList<ArrayList<Tile>> secondLevelArrayList = new ArrayList<ArrayList<Tile>>();
+		  collectedSets.add(secondLevelArrayList);
+		  for (int j = 0; j < 2; ++j ) {
+		    secondLevelArrayList.add(new ArrayList<Tile>());
+		  }
+		}
+		//Loop over all the tiles 
+		for (int i = 0; i < tileList.size(); i++) {
+			Tile currTile = tileList.get(i);
+			//We use the value -1 as the respective index in the collectedSets
+			//Ex: If currTile is O4, then we would use collectedSets[3] to store all 4's
+			int index = currTile.getValue() - 1;
+			boolean containColor = false;
+			//Check if the current tile's color is already in the first list
+			for (Tile tile : collectedSets.get(index).get(0)) {
+        if (tile.isSameColour(currTile)) {
+        	containColor = true;
+        }
+			}
+			
+			//If the color is in the first list then add it to the second list 
+			if (containColor) {
+				collectedSets.get(index).get(1).add(currTile);
+			} 
+			//Otherwise we add it to the first list
+			else {
+				collectedSets.get(index).get(0).add(currTile);
+			}
+		}
 		
-		//gets rid of duplicate objects
-		List<Tile> tileList2 = new ArrayList<Tile>();
-		Set<Tile> hs = new HashSet<Tile>();
-		hs.addAll(tileList);
-		tileList2.addAll(hs);
-		
-		for (int i = 0; i < tileList2.size() - 1; i++) {
-			for(int j = i+1; j < tileList2.size(); j++) {
-					Tile tile1 = tileList2.get(i);
-					Tile tile2 = tileList2.get(j);
-				if(!tile1.isSameColour(tile2) && tile1.isSameRank(tile2)) {
-					if (count == 0) {
-						count = 2;
-						meldSet.add(tile1);
-						meldSet.add(tile2);
-					} else {
-						count++;
-						meldSet.add(tile2);
-					}
+		List<ArrayList<Tile>> setList = new ArrayList<ArrayList<Tile>>();
+		//Loop over all the collected sets and add all of size => 3 to setList 
+		for (int i = 0; i < 13; i++) {
+			for (int j = 0; j < 2; j++) {
+				if (collectedSets.get(i).get(j).size() >=3 ) {
+					setList.add(collectedSets.get(i).get(j));
 				}
 			}
-			if(count >= 3) {
-				meldList.add(new ArrayList<Tile>(meldSet));		
-			}
-			meldSet.clear();
-			count = 0;
 		}
-		return meldList;
+		
+		return setList;
 	}
 	
 	public Object hasMeld() {
