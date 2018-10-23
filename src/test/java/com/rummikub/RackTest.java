@@ -149,9 +149,37 @@ public class RackTest {
 	public void meldSetTest() {
 		hand3.addTile(new Tile("G", "10"));
 		hand3.addTile(new Tile("O", "10"));
+		hand3.addTile(new Tile("B", "10"));
+		hand3.addTile(new Tile("R", "10"));
+		hand3.addTile(new Tile("R", "12"));
+		hand3.addTile(new Tile("B", "12"));
+		hand3.addTile(new Tile("O", "12"));
+		hand3.addTile(new Tile("B", "12"));
+		hand3.addTile(new Tile("O", "12"));
+	
 		
 		hand3.sortRack();
-		System.out.println(hand3.getSetMelds().toString());
+		System.out.println("WOOOOO");
+		System.out.println(hand3.toString());
+		System.out.println("WEEEEEk");
+		System.out.println(hand3.getMelds().toString());
+	}
+	
+	/*
+	 * Tests all the meld possibilities for melds 
+	 */
+	@Test
+	public void meldTest() {
+		hand3.addTile(new Tile("R", "9")); //R9
+		hand3.addTile(new Tile("G", "10")); //G10
+		hand3.addTile(new Tile("G", "11")); //G11
+		hand3.addTile(new Tile("G", "12")); //G12
+		
+		hand3.sortRack();
+		System.out.println("WOOOOO");
+		System.out.println(hand3.toString());
+		System.out.println("WEEEEE");
+		System.out.println(hand3.getMelds().toString());
 	}
 	
 	/*
@@ -161,9 +189,9 @@ public class RackTest {
 	@Test
 	public void meldSumTest() {
 		
-		assertEquals(-1 , hand.sumMeld());
+		/*assertEquals(-1 , hand.sumMeld());
 		assertEquals(15 , hand2.sumMeld());
-		assertEquals(30, hand3.sumMeld());
+		assertEquals(30, hand3.sumMeld());*/
 	}
 	
 	/*
