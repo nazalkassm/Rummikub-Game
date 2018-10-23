@@ -22,10 +22,10 @@ class PlayerTest {
 	private Player player4;
 	private PlayerMock myPlayerMock;
 	private Player newPlayer; // This object is to test a newly created player in every test.
-	private Strategy s1;
-	private Strategy s2;
-	private Strategy s3;
-	private Strategy s4;
+	private PlayerBehaviour s1;
+	private PlayerBehaviour s2;
+	private PlayerBehaviour s3;
+	private PlayerBehaviour s4;
 	
 	@BeforeAll
 	void setUpClass() throws Exception 
@@ -79,7 +79,7 @@ class PlayerTest {
 	@Test
 	void playerUseStrategyTest() // This test uses a mock player class that inherets from player. It makes sure that a player's strategy calls it's play() method and confirms it using a boolean.
 	{
-		myPlayerMock.setStrategy(s1);
+		myPlayerMock.setPlayerBehaviour(s1);
 		myPlayerMock.useStrategy();
 		assertTrue(myPlayerMock.isUseStrategyCalled());
 	}

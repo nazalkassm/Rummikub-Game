@@ -1,12 +1,7 @@
 package com.rummikub;
 
-public class Strategy1 implements Strategy 
+public class Strategy1 implements PlayerBehaviour 
 {
-	@Override
-	public void setStrategy(Strategy s) {
-		// TODO Auto-generated method stub
-
-	}
 
 	@Override
 	public void play() {

@@ -4,7 +4,7 @@ public class Player
 {
 	private String name;
 	private Rack playerRack = new Rack();
-	protected Strategy strategy;
+	protected PlayerBehaviour playerBehaviour;
 	
 	public Player(String gName)
 	{
@@ -37,14 +37,14 @@ public class Player
 		return null;
 	}
 
-	public Strategy getStrategy() 
+	public PlayerBehaviour getStrategy() 
 	{
-		return strategy;
+		return playerBehaviour;
 	}
 
-	public void setStrategy(Strategy strategy) 
+	public void setPlayerBehaviour(PlayerBehaviour pB) 
 	{
-		this.strategy = strategy;
+		this.playerBehaviour = pB;
 	}
 	
 	public void useStrategy()
@@ -54,7 +54,7 @@ public class Player
 	
 	protected void play()
 	{
-		this.strategy.play();
+		this.playerBehaviour.play();
 	}
 
 	public String getName() 

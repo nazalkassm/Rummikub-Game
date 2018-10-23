@@ -152,4 +152,14 @@ public class MeldTest {
 		tiles.add(new Tile("O", "13"));
 		assertEquals(true, Meld.checkSequence(tiles));
 	}
+	
+	@Test
+	public void sumMeldTest() {
+		
+	}
+	
+	@Test
+	public void getMaxIndexTest() {
+		
+	}
 }
