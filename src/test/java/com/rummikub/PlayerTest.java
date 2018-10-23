@@ -34,10 +34,10 @@ class PlayerTest {
 		player2 = new Player("p2");
 		player3 = new Player("p3");
 		player4 = new Player("p4");
-		s1 = new Strategy1();
-		s2 = new Strategy2();
-		s3 = new Strategy3();
-		s4 = new Strategy4();
+		s1 = new Strategy0();
+		s2 = new Strategy1();
+		s3 = new Strategy2();
+		s4 = new Strategy3();
 	}
 
 	@AfterAll

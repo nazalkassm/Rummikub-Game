@@ -1,8 +1,8 @@
 package com.rummikub;
 
-public class HumanPlayer extends Player {
+public class HumanStrategy0 extends Player {
 
-	public HumanPlayer(String gName) {
+	public HumanStrategy0(String gName) {
 		super(gName);
 		// TODO Auto-generated constructor stub
 	}
