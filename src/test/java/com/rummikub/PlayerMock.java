@@ -14,7 +14,7 @@ public class PlayerMock extends Player
 	private boolean useStrategyCalled = false;
 	
 	
-	@Override
+	/*@Override
 	public void useStrategy() {
 		this.useStrategyCalled = true;
 		super.useStrategy();
@@ -22,5 +22,5 @@ public class PlayerMock extends Player
 
 	public boolean isUseStrategyCalled() {
 		return useStrategyCalled;
-	}
+	}*/
 }

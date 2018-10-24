@@ -72,15 +72,8 @@ class PlayerTest {
 	@Test
 	void playerGetTileTest()
 	{
-		newPlayer.getTile(stock);
+		newPlayer.getTileFromStock(stock);
 		assertThat(newPlayer.getPlayerRack().getRackArray(),hasSize(1));
 	}
-	
-	@Test
-	void playerUseStrategyTest() // This test uses a mock player class that inherets from player. It makes sure that a player's strategy calls it's play() method and confirms it using a boolean.
-	{
-		myPlayerMock.setPlayerBehaviour(s1);
-		myPlayerMock.useStrategy();
-		assertTrue(myPlayerMock.isUseStrategyCalled());
-	}
+
 }

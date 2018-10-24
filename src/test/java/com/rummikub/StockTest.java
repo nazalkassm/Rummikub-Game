@@ -80,14 +80,6 @@ class StockTest {
 		  Logger.info("The number of same are : " + sameTiles);
 	}
 	
-	@Test
-	void deal14TilesTest()
-	{
-		int stockSizeBeforeDealing = stock1.getLength();
-		player1.fillRack(stock1);
-		assertThat(player1.getPlayerRack().getRackArray(),is(notNullValue()));
-		assertThat(stockSizeBeforeDealing-14,is(stock1.getLength()));
-	}
 	
 	@Test
 	void dealTileTest()
@@ -95,7 +87,7 @@ class StockTest {
 		int stockSize = stock1.getLength();
 		int playerRackSize = player1.getPlayerRack().getSize();
 		int ONE_TILE = 1;
-		player1.getTile(stock1);
+		player1.getTileFromStock(stock1);
 		assertThat(player1.getPlayerRack().getSize(),is(playerRackSize + ONE_TILE));
 		assertThat(stock1.getLength(),is(stockSize - ONE_TILE));
 	}
