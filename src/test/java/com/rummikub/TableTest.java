@@ -1,42 +1,96 @@
 package com.rummikub;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.List;
+
 import org.junit.jupiter.api.*;
 
 public class TableTest {
 	
+	private static Table table;
+	private static Meld m1 = new Meld(new Tile("B","2"),new Tile("B", "3"),new Tile("B", "4"));
+	private static Meld m2 = new Meld(new Tile("G", "6"),new Tile("G", "5"),new Tile("G", "4"));
+	private static Meld m3 = new Meld(new Tile("G", "10"),new Tile("R", "10"),new Tile("O", "10"));
+	private static Player player1 = new Player("p1"); 
+	private static Player player2 = new Player("p2");
+	private static Player player3 = new Player("p3");
+	private static Player player4 = new Player("p4");		
+	
 	@BeforeAll
-	public void init() {
-		Table table = new Table();
+	static void setUpClass() throws Exception {
 		
-		Tile t1 = new Tile("B","2");
-		Tile t2 = new Tile("B", "3");
-		Tile t3 = new Tile("B", "4");
-		
-		Tile t4 = new Tile("G", "6"); //G4
-		Tile t5 = new Tile("G", "5"); //G5
-		Tile t6 = new Tile("G", "4"); //G6
-		
-		Tile t7 = new Tile("G", "10"); //G10
-		Tile t8 = new Tile("R", "10"); //R10
-		Tile t9 = new Tile("O", "10"); //O10
-		
-		Meld m1 = new Meld(t1,t2,t3);
-		Meld m2 = new Meld(t4,t5,t6);
-		Meld m3 = new Meld(t7,t8,t9);
-		
-		table.addMeld(m1);
-		table.addMeld(m2);
-		table.addMeld(m3);
+		//Create the new player
+		table = new Table(new Stock(), player1, player2, player3, player4);
+		//Add 3 melds to table
+		table.addMeldToTable(m1);
+		table.addMeldToTable(m2);
+		table.addMeldToTable(m3);
 	}
 	
 	@Test
-	public void tableSizeTest() {
-		assertEquals(3, table.getSize());
-		
-		Meld m1 = new Meld(t1,t2,t3);
+	public void initTurnTest() {
+		//Init turn will return true if the turns are decided by highest tile number
+		assertEquals(true, table.initPlayersTurn());
 	}
 	
-  //Need test for getting least amount of cards that a player has on the table
+	@Test
+	public void tableMeldCountTest() {
+		//We added 3 melds so this should be 3
+		assertEquals(3, table.getMeldCount());
+		
+		Meld m1 = new Meld(new Tile("B","2"),  new Tile("B", "3"), new Tile("B", "4"));
+		table.addMeldToTable(m1);
+		
+		//After adding 1 more meld to the table, ensure the new count is 4
+		assertEquals(4, table.getMeldCount());
+	}
 	
+	@Test
+	public void getAllTilesOnTable() {
+		Stock stockTest = new Stock();
+		//Create the new table
+		Table tableTileTest = new Table(stockTest, player1, player2, player3, player4);
+		//Add 2 melds to table
+		tableTileTest.addMeldToTable(m1);
+		tableTileTest.addMeldToTable(m2);
+		
+    List<Tile> tileList = tableTileTest.getAllTilesOnTable(); 
+    Tile[] tilesToHave = {new Tile("B", "2"), new Tile("B", "3"), new Tile("B", "4"),
+    											new Tile("G", "6"), new Tile("G", "5"), new Tile("G", "4")};
+    
+    //We assert that we have all the required tiles 
+    for (Tile tileToCheck : tilesToHave) {
+    	assertEquals(true, tileList.contains(tileToCheck));
+    }
+    
+	}
+	
+	@Test
+	public void getMeldTest() {
+		Stock stockTest = new Stock();
+		//Create the new table
+		Table tableTileTest = new Table(stockTest, player1, player2, player3, player4);
+		//Add 2 melds to table
+		tableTileTest.addMeldToTable(m1);
+		tableTileTest.addMeldToTable(m2);
+	
+	  //Get the meld of an undefined index:
+		assertEquals(null, tableTileTest.getMeld(8));
+		//Get the first meld in the table which should be the m1 as that was added first
+		assertEquals(m1, table.getMeld(0));
+	}
+	
+	@Test
+	public void getPlayerCountTest() {
+		Stock stockTest = new Stock();
+		//Create the new table
+		Table tableTileTest = new Table(stockTest, player1, player2, player3, player4);
+	  //We had 4 players so make sure 4 player count
+		assertEquals(4, tableTileTest.getPlayerCount());
+		//Make a new table with 6 players
+		tableTileTest = new Table(stockTest, player1, player1, player1, player2, player3, player4);
+    //Assert that now the player count is 6	  
+	  assertEquals(6, tableTileTest.getPlayerCount());
+	}
 }
