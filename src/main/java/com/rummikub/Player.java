@@ -1,5 +1,8 @@
 package com.rummikub;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Player {
 	/** Name of player */
 	private String name;
@@ -103,6 +106,20 @@ public class Player {
 	 */
 	public void play(Table table) {
 		this.behaviour.play(canPlayOnExistingMelds, rack, table);
+	}
+
+	/**
+	 * Plays the player's turn on a table 
+	 * @param table = The table on which to play
+	 */
+	public boolean canPlayAllTiles(Table table) {
+		if (this.canPlayOnExistingMelds) {
+			List<ArrayList<Tile>> tableTiles = table.getAllTiles();
+			
+			
+		} else {
+			
+		}
 	}
 	
 }
