@@ -2,6 +2,7 @@ package com.rummikub;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.*;
@@ -56,8 +57,11 @@ public class TableTest {
 		tableTileTest.addMeldToTable(m2);
 		
     List<Tile> tileList = tableTileTest.getAllTilesOnTable(); 
-    Tile[] tilesToHave = {new Tile("B", "2"), new Tile("B", "3"), new Tile("B", "4"),
-    											new Tile("G", "6"), new Tile("G", "5"), new Tile("G", "4")};
+    //To hold the tiles that we should have 
+    List<Tile> tilesToHave = new ArrayList<Tile>();
+    //Add the m1 and m2 melds to it 
+    tilesToHave.addAll(m1.getTiles());
+    tilesToHave.addAll(m2.getTiles());
     
     //We assert that we have all the required tiles 
     for (Tile tileToCheck : tilesToHave) {
