@@ -56,7 +56,7 @@ public class Meld {
 	 * and returns the index where that max element is
 	 * because sum of each meld will be stored in the same index as its corresponding meld in the list of melds
 	 */
-	public int getMaxIndex(ArrayList<Meld> list) {
+	public int getMaxIndex(List<Meld> list) {
 		List<Integer> sums = new ArrayList<Integer>();
 		for(Meld m: list) {
 			sums.add(m.sumMeld(m));
@@ -68,6 +68,90 @@ public class Meld {
 				.max().orElseThrow(NoSuchElementException::new);
 		
 		return sums.indexOf(max);
+	}
+	
+	public static List<ArrayList<Tile>> getMelds(List<Tile> tileList) {
+		List<ArrayList<Tile>> meldList = new ArrayList<ArrayList<Tile>>();
+		meldList.addAll(getRunMelds(tileList));
+		meldList.addAll(getSetMelds(tileList));
+		return meldList;
+	}
+	
+	public  static List<ArrayList<Tile>> getRunMelds(List<Tile> tileList) {
+		int count = 0;
+		List<ArrayList<Tile>> meldList = new ArrayList<ArrayList<Tile>>();
+		boolean isRunOn = false;
+		for (int i = 1; i <= tileList.size() ; i++) {
+			if (i < tileList.size() && (isRunOn = tileList.get(i).isRunOn(tileList.get(i-1)))) {
+				if (count == 0) {
+					count = 2;
+				} else {
+					count++;
+				}
+				isRunOn = true;
+				
+			} else {
+				
+				if (count >= 3) {
+					meldList.add(new ArrayList<Tile>(tileList.subList(i - count, i)));	
+				}
+				isRunOn = false;
+				count = 0;
+			}
+		}
+		return meldList;
+	}
+
+	/*
+	 * finding set-type melds in the rack
+	 * first gets rid of duplicate objects (so if there are two R5's)
+	 * then compares them to other colours and returns a list of same values
+	 */
+	public static List<ArrayList<Tile>> getSetMelds(List<Tile> tileList) {
+	  //Initialize array list of 13, with 2 lists each of tiles
+		List<ArrayList<ArrayList<Tile>>> collectedSets = new ArrayList<ArrayList<ArrayList<Tile>>>();
+		for (int i = 0; i < 13; ++i ) {
+		  ArrayList<ArrayList<Tile>> secondLevelArrayList = new ArrayList<ArrayList<Tile>>();
+		  collectedSets.add(secondLevelArrayList);
+		  for (int j = 0; j < 2; ++j ) {
+		    secondLevelArrayList.add(new ArrayList<Tile>());
+		  }
+		}
+		//Loop over all the tiles 
+		for (int i = 0; i < tileList.size(); i++) {
+			Tile currTile = tileList.get(i);
+			//We use the value -1 as the respective index in the collectedSets
+			//Ex: If currTile is O4, then we would use collectedSets[3] to store all 4's
+			int index = currTile.getValue() - 1;
+			boolean containColor = false;
+			//Check if the current tile's color is already in the first list
+			for (Tile tile : collectedSets.get(index).get(0)) {
+        if (tile.isSameColour(currTile)) {
+        	containColor = true;
+        }
+			}
+			
+			//If the color is in the first list then add it to the second list 
+			if (containColor) {
+				collectedSets.get(index).get(1).add(currTile);
+			} 
+			//Otherwise we add it to the first list
+			else {
+				collectedSets.get(index).get(0).add(currTile);
+			}
+		}
+		
+		List<ArrayList<Tile>> setList = new ArrayList<ArrayList<Tile>>();
+		//Loop over all the collected sets and add all of size => 3 to setList 
+		for (int i = 0; i < 13; i++) {
+			for (int j = 0; j < 2; j++) {
+				if (collectedSets.get(i).get(j).size() >=3 ) {
+					setList.add(collectedSets.get(i).get(j));
+				}
+			}
+		}
+		
+		return setList;
 	}
 	
 	static public MeldType checkMeldType(List<Tile> newTiles) {

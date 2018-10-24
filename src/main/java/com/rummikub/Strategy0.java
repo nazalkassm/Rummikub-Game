@@ -7,6 +7,7 @@ public class Strategy0 implements Behaviour
 	public void play(boolean canPlayOnTableMelds, Rack playerRack, Table table) {
 		// TODO Auto-generated method stub
 		
+		
 	}
 	
 }
