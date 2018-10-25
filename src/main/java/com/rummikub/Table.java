@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class Table implements Subject{
+public class Table implements Subject {
 	/** Players is indexed such that the int is the turn of the player */
   HashMap<Integer, Player> players = new HashMap<Integer, Player>();
   
@@ -19,10 +19,40 @@ public class Table implements Subject{
 	private Stock stock;
 	private int currentPlayerTurn = -1;
 	
+	/**
+	 * This constructor is used for ease of testing
+	 * @param stock = The stock with which to play
+	 * @param players = The players involved in this game
+	 */
 	Table(Stock stock, Player...players) {
 		this.stock = stock;
 		//Add all the players passed to the player collection
 		int counter = 0;
+		for (Player player : players) {
+			//By default all players are at 0
+			this.players.put(counter, player);
+			counter++;
+		}
+	}
+	
+	/**
+	 * Construct the table with just a stock so that the players can be added later
+	 * Note: We need to do this in order for observer pattern to work (Table needs to exist first before players)
+	 * @param stock = The stock with which to play 
+	 */
+	Table(Stock stock) {
+		this.stock = stock;
+	}
+	
+	/**
+	 * Add an N amount of players to this table
+	 * @param Players...players = Any amount of players to be added to the table 
+	 */
+	public void addPlayers(Player...players) {
+		
+		//Since the game might already have players, we will start the counter the player count + 1
+		int counter = this.getPlayerCount() + 1;
+		//Add all the players passed to the player collection
 		for (Player player : players) {
 			//By default all players are at 0
 			this.players.put(counter, player);
@@ -64,7 +94,7 @@ public class Table implements Subject{
 		}
 		
 		//Set current player turn to 1
-		this.currentPlayerTurn = 1;
+		this.currentPlayerTurn = 0;
 		return true;
 	}
 	
@@ -133,13 +163,36 @@ public class Table implements Subject{
 	 * @return Null = If player's turn has not been initialised
 	 */
 	public Player getCurrentPlayer() {
+		//After every player turn we update observers
+		this.notifyObservers();
+			
 		if (this.currentPlayerTurn == -1) {
 			return null;
 		}
 		
 		return this.players.get(this.currentPlayerTurn); 	
 	}
-
+	
+	/**
+	 * Get the player who's turn it is next
+	 * @return Player = The player who's turn it is next 
+	 * @return Null = If player's turn has not been initialised
+	 */
+	public Player getNextPlayerTurn() {
+		//After every player turn we update observers
+		this.notifyObservers();
+		
+		if (this.currentPlayerTurn == -1) {
+			return null;
+		}
+		
+		if (this.currentPlayerTurn == this.getPlayerCount()) {
+			this.currentPlayerTurn = 0;
+		}
+		this.currentPlayerTurn++;
+		return this.players.get(this.currentPlayerTurn); 	
+	}
+	
 	@Override
 	public void registerObserver(Observer O) {
 		this.observers.add(O);
