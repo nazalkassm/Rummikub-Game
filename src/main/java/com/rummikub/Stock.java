@@ -77,6 +77,9 @@ public class Stock
 	
 	public void createStock() 
 	{
+		//Clear the previous stock if there was one
+		stockArray.clear();
+		
 		for(Colours c: Colours.values())
 		{
 			for(Ranks r:Ranks.values())

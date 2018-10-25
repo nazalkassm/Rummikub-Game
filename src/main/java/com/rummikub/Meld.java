@@ -196,4 +196,12 @@ public class Meld {
 		}
 		return check;
 	}
+
+	/**
+	 * @return the meldType
+	 */
+	public MeldType getMeldType() {
+		return meldType;
+	}
+
 }

@@ -104,8 +104,8 @@ public class Player {
 	 * Plays the player's turn on a table 
 	 * @param table = The table on which to play
 	 */
-	public void play(Table table) {
-		this.behaviour.play(canPlayOnExistingMelds, rack, table);
+	public void play() {
+		this.behaviour.play();
 	}
 
 	/**
@@ -114,12 +114,14 @@ public class Player {
 	 */
 	public boolean canPlayAllTiles(Table table) {
 		if (this.canPlayOnExistingMelds) {
-			List<ArrayList<Tile>> tableTiles = table.getAllTiles();
+			List<Tile> tableTiles = table.getAllTilesOnTable();
 			
 			
 		} else {
 			
 		}
+		return canPlayOnExistingMelds;
 	}
+
 	
 }

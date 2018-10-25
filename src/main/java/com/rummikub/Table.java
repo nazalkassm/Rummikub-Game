@@ -6,10 +6,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class Table {
-	/** players is indexed such that the int is the turn of the player */
+public class Table implements Subject{
+	/** Players is indexed such that the int is the turn of the player */
   HashMap<Integer, Player> players = new HashMap<Integer, Player>();
+  
+  /** Holds the melds on the table */
 	private List<Meld> melds = new ArrayList<Meld>();
+	
+  /** All the observers for the table */
+  private List<Observer> observers = new ArrayList<Observer>();
+
 	private Stock stock;
 	private int currentPlayerTurn = -1;
 	
@@ -132,5 +138,27 @@ public class Table {
 		}
 		
 		return this.players.get(this.currentPlayerTurn); 	
+	}
+
+	@Override
+	public void registerObserver(Observer O) {
+		this.observers.add(O);
+	}
+
+	@Override
+	public void removeObserver(Observer O) {
+		//If we have observers to remove, we can try and remove it 
+		if (!this.observers.isEmpty()) {
+			this.observers.remove(O);
+		}
+	}
+
+	@Override
+	public void notifyObservers() {
+		//Construct the table Info here
+		TableInfo tableState = new TableInfo();
+		for (Observer observer : observers) {
+      observer.update(tableState);
+   }
 	}
 }
