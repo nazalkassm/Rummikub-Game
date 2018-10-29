@@ -13,11 +13,14 @@ public enum Colours {
 		this.colourSymbol = colourSymbol;
 	}
 	
-	public static Colours getColourFromSymbol(String symbol) {
+	public static Colours getColourFromSymbol(String symbol) 
+	{
 		//Loop over all ranks and...
-		for (Colours colour : Colours.values()) {
+		for (Colours colour : Colours.values()) 
+		{
 			//If the symbols match for this colour... 
-			if (colour.colourSymbol.equals(symbol)) { 
+			if (colour.colourSymbol.equals(symbol)) 
+			{ 
 				//colour is the Colour associated with the symbol
 				return colour;
 			}

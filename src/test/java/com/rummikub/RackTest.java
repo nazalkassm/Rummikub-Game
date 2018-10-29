@@ -18,7 +18,6 @@ public class RackTest {
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception 
 	{
-		
 		hand = new Rack();
 		hand2 = new Rack();
 		hand3 = new Rack();

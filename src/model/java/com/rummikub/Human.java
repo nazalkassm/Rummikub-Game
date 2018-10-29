@@ -1,8 +1,7 @@
 package com.rummikub;
 
-public class Human extends Player {
-
-
+public class Human extends Player 
+{
 	/**
 	 * Constructor of Human 
 	 * 
@@ -15,5 +14,4 @@ public class Human extends Player {
 	public Human(Stock stock, String name, Behaviour behaviour) {
 		super(stock, name, behaviour);
 	}
-
 }

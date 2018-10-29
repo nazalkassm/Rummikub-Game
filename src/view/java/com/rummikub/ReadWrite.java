@@ -1,6 +1,6 @@
 package com.rummikub;
 
-public class GameLogic 
+public class ReadWrite 
 {
 
 }

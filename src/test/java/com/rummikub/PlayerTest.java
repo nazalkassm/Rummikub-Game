@@ -1,27 +1,29 @@
 package com.rummikub;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-
 import static org.hamcrest.MatcherAssert.*;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.*;
 
-class PlayerTest {
-	
+class PlayerTest 
+{
 	private Stock stock;
+	
+	//These players are going to be used for all the tests. 
+	//We need to keep track of their state.
 	private Player player1;
 	private Player player2;
 	private Player player3;
 	private Player player4;
+	
+	// This object is to test a newly created player for every test.
+	private Player newPlayer; 
 	private PlayerMock myPlayerMock;
-	private Player newPlayer; // This object is to test a newly created player in every test.
+	
+	//Behaviors to assign for each player they are only created once.
 	private Behaviour s1;
 	private Behaviour s2;
 	private Behaviour s3;
@@ -30,14 +32,14 @@ class PlayerTest {
 	@BeforeAll
 	void setUpClass() throws Exception 
 	{
-		player1 = new Player("p1"); //These objects are going to be used in all the tests. We need to keep track of their state.
+		player1 = new Player("p1"); 
 		player2 = new Player("p2");
 		player3 = new Player("p3");
 		player4 = new Player("p4");
-		s1 = new Strategy0();
-		s2 = new Strategy1();
-		s3 = new Strategy2();
-		s4 = new Strategy3();
+		s1 = new Strategy0(null);
+		s2 = new Strategy1(null);
+		s3 = new Strategy2(null);
+		s4 = new Strategy3(null);
 	}
 
 	@AfterAll
@@ -47,6 +49,10 @@ class PlayerTest {
 		player2 = null;
 		player3 = null;
 		player4 = null;
+		s1 = null;
+		s2 = null;
+		s3 = null;
+		s4 = null;
 	}
 
 	@BeforeEach
@@ -60,12 +66,12 @@ class PlayerTest {
 	protected void tearDownMethod() throws Exception 
 	{
 		newPlayer = null;
+		myPlayerMock = null;
 	}
 	
 	@Test
-	void playerFillRackTest() 
+	void playerRackTest() 
 	{
-		//player1.fillRack(stock.deal14Tiles());
 		assertThat(player1.getPlayerRack().getRackArray(), hasSize(14));
 	} 
 	

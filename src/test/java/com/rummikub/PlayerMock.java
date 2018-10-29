@@ -5,22 +5,22 @@ import com.rummikub.Behaviour;
 
 public class PlayerMock extends Player
 {
-
 	public PlayerMock(String gName) 
 	{
 		super(gName);
 	}
-
+	
 	private boolean useStrategyCalled = false;
 	
-	
-	/*@Override
-	public void useStrategy() {
+	@Override
+	public void play() 
+	{
 		this.useStrategyCalled = true;
-		super.useStrategy();
-	  }
+		super.play();
+	}
 
-	public boolean isUseStrategyCalled() {
+	public boolean isUseStrategyCalled() 
+	{
 		return useStrategyCalled;
-	}*/
+	}
 }

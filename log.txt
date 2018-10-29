@@ -1,2 +1,4 @@
-2018-10-22 17:27:48 [main] com.rummikub.TileTest.setUpAll()
-INFO: setUpAll
+2018-10-28 14:30:43 [main] com.rummikub.QuickTesterWithMain.main()
+INFO: 104
+2018-10-28 14:30:43 [main] com.rummikub.QuickTesterWithMain.main()
+INFO: [B7, B13, B1, O2, R1, O7, O2, R6, R8, G2, B1, R9, O13, G3, G4, O11, B10, G1, O9, R2, R13, O12, O8, R10, G7, R11, G12, O4, B7, G1, G7, G3, R5, R11, B12, R4, R6, B3, B2, B4, G10, R9, O4, B3, B6, B13, O10, R1, G12, G5, R7, O12, R5, R3, G9, O9, O8, B5, O1, G8, G6, B8, B11, O5, R4, O13, G8, O11, B10, B9, G6, B12, B5, R2, R7, R10, G2, B4, B9, O5, G9, R12, B2, O6, G11, B8, O10, B6, G4, G13, O1, G10, O3, R8, R13, G13, B11, O3, R3, O7, O6, G11, G5, R12]
