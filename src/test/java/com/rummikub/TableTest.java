@@ -24,9 +24,9 @@ public class TableTest {
 		//Create the new player
 		table = new Table(new Stock(), player1, player2, player3, player4);
 		//Add 3 melds to table
-		table.addMeldToTable(m1);
-		table.addMeldToTable(m2);
-		table.addMeldToTable(m3);
+		assertTrue(table.addMeldToTable(m1));
+		assertTrue(table.addMeldToTable(m2));
+		assertTrue(table.addMeldToTable(m3));
 	}
 	
 	@Test
@@ -40,8 +40,7 @@ public class TableTest {
 		//We added 3 melds so this should be 3
 		assertEquals(3, table.getMeldCount());
 		
-		Meld m1 = new Meld(new Tile("B","2"),  new Tile("B", "3"), new Tile("B", "4"));
-		table.addMeldToTable(m1);
+		assertTrue(table.addMeldToTable(m1));
 		
 		//After adding 1 more meld to the table, ensure the new count is 4
 		assertEquals(4, table.getMeldCount());
@@ -53,8 +52,8 @@ public class TableTest {
 		//Create the new table
 		Table tableTileTest = new Table(stockTest, player1, player2, player3, player4);
 		//Add 2 melds to table
-		tableTileTest.addMeldToTable(m1);
-		tableTileTest.addMeldToTable(m2);
+		assertTrue(tableTileTest.addMeldToTable(m1));
+		assertTrue(tableTileTest.addMeldToTable(m2));
 		
     List<Tile> tileList = tableTileTest.getAllTilesOnTable(); 
     //To hold the tiles that we should have 
@@ -76,8 +75,8 @@ public class TableTest {
 		//Create the new table
 		Table tableTileTest = new Table(stockTest, player1, player2, player3, player4);
 		//Add 2 melds to table
-		tableTileTest.addMeldToTable(m1);
-		tableTileTest.addMeldToTable(m2);
+		assertTrue(tableTileTest.addMeldToTable(m1));
+		assertTrue(tableTileTest.addMeldToTable(m2));
 	
 	  //Get the meld of an undefined index:
 		assertEquals(null, tableTileTest.getMeld(8));
