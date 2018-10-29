@@ -8,7 +8,7 @@ public class Print
 	 * @param message
 	 * @since version 2
 	 */
-	public void print(String... message) 
+	public static void print(String... message) 
 	{
 		for (String s : message) 
 		{
@@ -22,7 +22,7 @@ public class Print
 	 * @param message
 	 * @since version 2
 	 */
-	public void println(String... message) 
+	public static void println(String... message) 
 	{
 		for(String s : message)
 		{
@@ -33,5 +33,10 @@ public class Print
 	public void printIntroduction() 
 	{
 		println("Hello","Welcome to TileRummy","The rules are :","bla bla bla bla bla");
+	}
+
+	public void printEnding() 
+	{
+		print("That's all folks!");
 	}
 }

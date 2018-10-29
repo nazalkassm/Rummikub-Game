@@ -15,7 +15,7 @@ import java.io.InputStreamReader;
 // TO BE DONE VALIDATION OF INPUTS.
 public class Prompt 
 {
-	private BufferedReader bi;
+	private static BufferedReader bi;
 	private static boolean initialized = false;
 	
 	
@@ -23,7 +23,7 @@ public class Prompt
 	 * Purpose:  Initialize the bufferReader. A reader should only be
 	 * 		opened and closed once per execution.
 	 */
-	public void init() 
+	public static void init() 
 	{
 		if (!initialized) 
 		{
@@ -44,7 +44,7 @@ public class Prompt
 	 * We are never going to prompt for an input without printing a message first.
 	 * @throws IOException 
 	 */
-	public String promptInput(String message) throws IOException 
+	public static String promptInput(String message) throws IOException 
 	{
 		if (!initialized) 
 		{
@@ -60,13 +60,19 @@ public class Prompt
 	 */
 	public void promptEnterKey()
 	{
-		System.out.println("Press \"ENTER\" to continue...");
-		try {
-			bi.readLine();
-		} 
-		catch (IOException e) 
+		if (!initialized) 
 		{
-			System.exit(0);
+			init();
 		}
+		
+		System.out.println("Press \"ENTER\" to continue...");
+			
+			try {
+				bi.readLine();
+			} 
+			catch (IOException e) 
+			{
+				System.exit(0);
+			}	
 	}
 }

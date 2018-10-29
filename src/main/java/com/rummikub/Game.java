@@ -14,30 +14,32 @@ public class Game
 	//Data Structure Variables
 	ArrayList<Player> players = new ArrayList<>();
 	
+	
 	//My data Variables
-	ViewLogic view = new ViewLogic();
+	Print printer = new Print(); // Some methods are static and other are not in this class.
+	Prompt prompter = new Prompt(); // Some methods are static and other are not in this class.
 	Stock stock = new Stock();
 	Table table = new Table(stock);
 	
 	//Start game
-	view.printer.printIntroduction();
-	pName = view.prompter.promptInput("Enter your name: ");
+	printer.printIntroduction();
+	prompter.promptEnterKey();
+	pName = Prompt.promptInput("Enter your name: ");
 	
 	players.add(new Player(stock,pName,new Strategy0(table)));
 	players.add(new Player(stock,"Computer 1",new Strategy1(table)));
 	players.add(new Player(stock,"Computer 2",new Strategy2(table)));
 	players.add(new Player(stock,"Computer 3",new Strategy3(table)));
 	
-	while(gameRunning)
+	do
 	{
-		//human turn
+		players.get(0).play();
 		
-		//c1 turn
-		//c2 turn
-		//c3 turn
-	}
+		
+		gameRunning = false;
+	}while(gameRunning);
 	
-	
+	printer.printEnding();
 	
 	
 	
