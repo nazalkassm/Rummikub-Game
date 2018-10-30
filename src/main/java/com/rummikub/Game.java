@@ -31,23 +31,36 @@ public class Game
 	players.add(new Player(stock,"Computer 2",new Strategy2(table)));
 	players.add(new Player(stock,"Computer 3",new Strategy3(table)));
 	
-	do
+	for (Player player: players) 
 	{
-		meldsPlayed = players.get(0).play();
+		table.addPlayers(player);
+    }
+	
+	table.initPlayersTurn();
+	
+	do // Very very ugly code looking to fix later
+	{
+		Player currentPlayer = table.getNextPlayerTurn();
 		
+		while(meldsPlayed != null) // There has to be a better way than creating a while loop for each player.
+		{
+		meldsPlayed = currentPlayer.play();
 		
-		gameRunning = false;
-	}while(gameRunning);
+			for(Meld m: meldsPlayed)
+			{
+				table.addMeldToTable(m);
+			}
+			
+        table.notifyObservers();
+		}
+		
+		if (currentPlayer.getPlayerRack().getSize() == 0) 
+		{
+            gameRunning = false;
+        }
+		gameRunning = false; // only for testing
+	}
+	while(gameRunning);
 	
 	printer.printEnding(); // we can maybe give it a winner so that it can print it.
-	
-	
-	
-	
-	
-	
-	
-	
-	}
-	
 }
