@@ -59,8 +59,9 @@ public class Game
             gameRunning = false;
         }
 		gameRunning = false; // only for testing
-	}
-	while(gameRunning);
+	}	while(gameRunning);
 	
 	printer.printEnding(); // we can maybe give it a winner so that it can print it.
+	
+	}
 }
