@@ -1,6 +1,8 @@
 package com.rummikub;
 
+import java.util.ArrayList;
+
 public interface Behaviour 
 {
-	public void play();
+	public ArrayList<Meld> play();
 }

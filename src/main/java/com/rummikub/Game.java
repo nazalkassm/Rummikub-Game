@@ -13,7 +13,7 @@ public class Game
 	
 	//Data Structure Variables
 	ArrayList<Player> players = new ArrayList<>();
-	
+	ArrayList<Meld> meldsPlayed = new ArrayList<>();
 	
 	//My data Variables
 	Print printer = new Print(); // Some methods are static and other are not in this class.
@@ -33,13 +33,13 @@ public class Game
 	
 	do
 	{
-		players.get(0).play();
+		meldsPlayed = players.get(0).play();
 		
 		
 		gameRunning = false;
 	}while(gameRunning);
 	
-	printer.printEnding();
+	printer.printEnding(); // we can maybe give it a winner so that it can print it.
 	
 	
 	

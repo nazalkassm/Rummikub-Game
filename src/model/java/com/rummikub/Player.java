@@ -85,10 +85,11 @@ public class Player {
 	/**
 	 * Plays the player's turn on a table 
 	 * @param table = The table on which to play
+	 * @return 
 	 */
-	public void play() 
+	public ArrayList<Meld> play() 
 	{
-		this.behaviour.play();
+		return this.behaviour.play();
 	}
 
 	/**

@@ -1,5 +1,7 @@
 package com.rummikub;
 
+import java.util.ArrayList;
+
 public class Strategy2 implements Behaviour, Observer {
 	private TableInfo tableInfo = new TableInfo(); 
 	
@@ -8,10 +10,9 @@ public class Strategy2 implements Behaviour, Observer {
 	}
 	
 	@Override
-	public void play() {
-		// TODO Auto-generated method stub
-		
-		
+	public ArrayList<Meld> play() 
+	{
+		return null;	
 	}
 
 	@Override
