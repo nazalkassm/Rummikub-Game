@@ -14,8 +14,7 @@ public class Strategy0 implements Behaviour, Observer
 	@Override
 	public ArrayList<Meld> play() 
 	{
-		return null;
-		
+		return null;	
 	}
 
 	@Override

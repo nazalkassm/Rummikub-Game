@@ -1,6 +1,9 @@
 package com.rummikub;
 
 import com.rummikub.Player;
+
+import java.util.ArrayList;
+
 import com.rummikub.Behaviour;
 
 public class PlayerMock extends Player
@@ -13,10 +16,10 @@ public class PlayerMock extends Player
 	private boolean useStrategyCalled = false;
 	
 	@Override
-	public void play() 
+	public ArrayList<Meld> play() 
 	{
 		this.useStrategyCalled = true;
-		super.play();
+		return super.play();
 	}
 
 	public boolean isUseStrategyCalled() 
