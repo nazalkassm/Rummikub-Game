@@ -74,7 +74,7 @@ public class Player {
 	 */
 	public ArrayList<Meld> play() throws IOException 
 	{
-		return this.behaviour.useStrategy(this.rack);
+		return this.behaviour.useStrategy();
 	}
 
 	/**
