@@ -10,7 +10,7 @@ public class Strategy2 implements StragetyBehaviour {
 	}
 	
 	@Override
-	public ArrayList<Meld> useStrategy(Rack rack) 
+	public ArrayList<Meld> useStrategy() 
 	{
 		return null;	
 	}

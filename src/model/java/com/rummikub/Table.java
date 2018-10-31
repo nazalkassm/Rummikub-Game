@@ -227,8 +227,7 @@ public class Table implements Subject {
 	public void notifyObservers() {
 		int lowestHandCount = this.lowestTableHandCount();
 		//Construct the table Info here
-		TableInfo tableState = new TableInfo(lowestHandCount, this.melds);
-		this.players.get(1).getPlayerRack().getSize();
+		TableInfo tableState = new TableInfo(lowestHandCount, this.melds, this.getCurrentPlayer().getPlayerRack());
 		for (Observer observer : observers) {
       observer.update(tableState);
    }

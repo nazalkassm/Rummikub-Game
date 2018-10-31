@@ -1,2 +1,2 @@
-2018-10-31 18:03:19 [main] com.rummikub.Game.start()
-DEBUG: naz
+2018-10-31 18:31:03 [main] com.rummikub.TileTest.setUpAll()
+INFO: setUpAll

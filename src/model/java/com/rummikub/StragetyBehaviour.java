@@ -5,5 +5,5 @@ import java.util.ArrayList;
 
 public interface StragetyBehaviour extends Observer
 {
-	public ArrayList<Meld> useStrategy(Rack rack) throws IOException;
+	public ArrayList<Meld> useStrategy() throws IOException;
 }
