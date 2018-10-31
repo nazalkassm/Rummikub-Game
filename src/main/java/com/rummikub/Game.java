@@ -28,6 +28,7 @@ public class Game
 		printer.printIntroduction();
 		prompter.promptEnterKey();
 		pName = Prompt.promptInput("Enter your name: ");
+		Logger.debug(pName);
 		
 		players.add(new Player(stock,pName,new Strategy0(table)));
 		players.add(new Player(stock,"Computer 1",new Strategy1(table)));
