@@ -54,17 +54,15 @@ public class Player {
 	 * Fills the rack with 14 tiles 
 	 * @param stock = The stock from which to take 14 tiles
 	 */
-	 /*
 	public void fillRack(Stock stock) {
 		this.rack.setRackArray(stock.deal14Tiles());
-	}*/
+	}
 
 	/**
 	 * Adds to the player's rack from the stock  
 	 * @param stock = The stock from which to take a tile
 	 */
-	public void getTileFromStock(Stock stock) 
-	{
+	public void getTileFromStock(Stock stock) {
 		this.rack.takeTile(stock);
 	}
 	

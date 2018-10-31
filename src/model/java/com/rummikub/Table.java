@@ -57,6 +57,7 @@ public class Table implements Subject {
 			//By default all players are at 0
 			this.players.put(counter, player);
 			player.playerJoinTable(this);
+			player.fillRack(this.stock);
 			counter++;
 		}
 	}
