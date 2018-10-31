@@ -81,5 +81,12 @@ class PlayerTest
 		newPlayer.getTileFromStock(stock);
 		assertThat(newPlayer.getPlayerRack().getRackArray(),hasSize(1));
 	}
+	
+	void isHumanTest() {
+		//Player with strategies 0 are humans (since input required)
+		Player human = new Player("some Name", new Strategy0()));
+		
+		assertEquals(true,human.isHuman());
+	} 
 
 }
