@@ -15,13 +15,15 @@ public class RackTest {
 	static Stock stock;
 	Rack handTest;
 	
+	
 	@BeforeAll
-	static void setUpBeforeClass() throws Exception 
-	{
+	public static void setup() {
 		hand = new Rack();
 		hand2 = new Rack();
 		hand3 = new Rack();
-		hand.addTile(new Tile("G","2"));
+		stock = new Stock();
+		
+		hand.addTile(new Tile("G","5"));
 		hand.addTile(new Tile("B", "4"));
 		hand.addTile(new Tile("B", "9"));
 		
@@ -33,7 +35,8 @@ public class RackTest {
 		hand3.addTile(new Tile("R", "10")); //R10
 		hand3.addTile(new Tile("O", "10")); //O10
 	}
-
+	
+	
 	@AfterAll
 	static void tearDownAfterClass() throws Exception 
 	{
@@ -58,7 +61,7 @@ public class RackTest {
 	@Test
 	public void rackTest() 
 	{
-		assertEquals(14, hand.getSize());
+		assertEquals(3, hand.getSize());
 	}
 	
 	/*
@@ -68,15 +71,29 @@ public class RackTest {
 	 */
 	@Test
 	public void sortTest() {
-		//assertEquals(false, hand.isSorted); //check if initially sorted
+
+		System.out.println("Sorting Test");
+		
+		hand2.sortRack();
+ 
+		assertEquals("G4", hand2.getRackArray().get(0).toString());
+		assertEquals("G5", hand2.getRackArray().get(1).toString());
+		assertEquals("G6", hand2.getRackArray().get(2).toString());
+		
+		
+		hand.addTile(new Tile("R", "9")); //G4
+		hand.addTile(new Tile("G", "10")); //G5
+		hand.addTile(new Tile("G", "11")); //G6
+		hand.addTile(new Tile("G", "12")); //G6
+		hand.addTile(new Tile("R", "9")); //G4
+		hand.addTile(new Tile("R", "10")); //G5
+		hand.addTile(new Tile("R", "11")); //G6
+		hand.addTile(new Tile("R", "12")); //G6
+		
+		System.out.println(hand.toString());
 		hand.sortRack();
-		//System.out.println(hand);
-		assertEquals(true, hand.isSorted); //check after sorting 
+		assertEquals("G5 G10 G11 G12 B4 B9 R9 R9 R10 R11 R12 " , hand.toString());
 		
-		hand.takeTile(stock);
-		hand.takeTile(stock);
-		
-		assertEquals(true, hand.isSorted);		
 	}
 	
 	/*
@@ -86,25 +103,13 @@ public class RackTest {
 	@Test
 	public void rackSizeTest() {
 
-		assertEquals(14, hand.getSize());
+		//size is different from intial decleration due to adding elements to it in differnt tests
+		assertEquals(11, hand.getSize());
 		
 		hand.takeTile(stock);
 		hand.takeTile(stock);
 		
-		assertEquals(16, hand.getSize());
-	}
-	
-	/*
-	 * tests whether there exists a valid meld
-	 * takes a dummy constructor and adds tiles manually
-	 */
-	@Test
-	public void validMeldTest() {
-		
-		
-		assertEquals(false , hand.hasMeld());
-		assertEquals(true , hand2.hasMeld());
-		assertEquals(true , hand3.hasMeld());
+		assertEquals(13, hand.getSize());
 	}
 	
 	/*
@@ -113,11 +118,7 @@ public class RackTest {
 	 */
 	@Test
 	public void meldRunTest() {
-		hand.sortRack();
-	//	hand.getRunMelds();
-		
-		hand2.sortRack();
-	//	hand2.getRunMelds();
+
 		hand2.addTile(new Tile("R", "9")); //G4
 		hand2.addTile(new Tile("G", "10")); //G5
 		hand2.addTile(new Tile("G", "11")); //G6
@@ -127,17 +128,12 @@ public class RackTest {
 		hand2.addTile(new Tile("R", "11")); //G6
 		hand2.addTile(new Tile("R", "12")); //G6
 		hand2.sortRack();
-		hand3.sortRack();
-		//hand3.getRunMelds();
-		System.out.println(hand2.getRackArray().toString());
-
-		System.out.println(hand.getRunMelds().toString());
-		System.out.println(hand2.getRunMelds().toString());
-		System.out.println(hand3.getRunMelds().toString());
 		
-		assertEquals(false , hand.hasMeld());
-		assertEquals(true , hand2.hasMeld());
-		assertEquals(true , hand3.hasMeld());
+		System.out.println("Meld Runs Test");
+		System.out.println(hand2.toString());
+		
+		assertEquals("[[G4, G5, G6], [G10, G11, G12], [R9, R10, R11, R12]]", 
+				hand2.getMelds().toString());
 	}
 	
 	/*
@@ -154,13 +150,13 @@ public class RackTest {
 		hand3.addTile(new Tile("B", "12"));
 		hand3.addTile(new Tile("O", "12"));
 		hand3.addTile(new Tile("B", "12"));
-	
-		
 		hand3.sortRack();
-		System.out.println("WOOOOO");
+		
+		System.out.println("Meld Sets Test");
 		System.out.println(hand3.toString());
-		System.out.println("WEEEEEk");
-		System.out.println(hand3.getMelds().toString());
+		
+		assertEquals("[[G10, B10, R10, O10], [G10, R10, O10], [B12, R12, O12]]", 
+				hand3.getMelds().toString());
 	}
 	
 	/*
@@ -168,35 +164,49 @@ public class RackTest {
 	 */
 	@Test
 	public void meldTest() {
+		hand3 = new Rack();
+		
+		hand3.addTile(new Tile("B", "8"));
+		hand3.addTile(new Tile("G", "8"));
+		hand3.addTile(new Tile("R", "8"));
+		hand3.addTile(new Tile("G", "9"));
+		hand3.addTile(new Tile("G", "10"));
+		hand3.addTile(new Tile("R", "6"));
+		hand3.addTile(new Tile("R", "7"));
+		hand3.addTile(new Tile("B", "10"));
+		hand3.addTile(new Tile("O", "10"));
+		hand3.addTile(new Tile("O", "8"));
+		
 		
 		hand3.sortRack();
-		System.out.println("Meld Test Sorted");
+		System.out.println("Full Meld Test");
 		System.out.println(hand3.toString());
 		System.out.println("All melds");
 		System.out.println(hand3.getMelds().toString());
+		
+		assertEquals("[[G8, G9, G10], [R6, R7, R8], [G8, B8, R8, O8], [G10, B10, O10]]", 
+				hand3.getMelds().toString());
 	}
 	
 	/*
 	 * tests the sum of melds
 	 * returns -1 if hand does not have a valid meld
 	 */
-	@Test
+	/*@Test
 	public void meldSumTest() {
 		
 		/*assertEquals(-1 , hand.sumMeld());
 		assertEquals(15 , hand2.sumMeld());
-		assertEquals(30, hand3.sumMeld());*/
+		assertEquals(30, hand3.sumMeld());
 	}
 	
 	/*
 	 * tests whether current hand has a valid meld with initial 30 value
 	 */
-	@Test
+	/*@Test
 	public void initialThirtyTest() {
 		
-		assertEquals(false , hand.hasThirty());
-		assertEquals(false , hand2.hasThirty());
-		assertEquals(true , hand3.hasThirty());
-	}
+		
+	}*/
 }
 
