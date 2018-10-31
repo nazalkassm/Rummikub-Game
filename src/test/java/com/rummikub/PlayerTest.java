@@ -36,10 +36,10 @@ class PlayerTest
 		player2 = new Player("p2");
 		player3 = new Player("p3");
 		player4 = new Player("p4");
-		s1 = new Strategy0(null);
-		s2 = new Strategy1(null);
-		s3 = new Strategy2(null);
-		s4 = new Strategy3(null);
+		s1 = new Strategy0();
+		s2 = new Strategy1();
+		s3 = new Strategy2();
+		s4 = new Strategy3();
 	}
 
 	@AfterAll
@@ -84,9 +84,9 @@ class PlayerTest
 	
 	void isHumanTest() {
 		//Player with strategies 0 are humans (since input required)
-		Player human = new Player("some Name", new Strategy0()));
+		Player human = new Player("some Name", new Strategy0());
 		
-		assertEquals(true,human.isHuman());
+		assertThat(true, is(human.isHuman()));
 	} 
 
 }

@@ -5,8 +5,8 @@ import java.util.ArrayList;
 public class Strategy1 implements StragetyBehaviour, Observer {
 	private TableInfo tableInfo = new TableInfo(); 
 	
-	Strategy1(Subject subject) {
-		subject.registerObserver(this);
+	Strategy1() {
+		//subject.registerObserver(this);
 	}
 	
 	@Override

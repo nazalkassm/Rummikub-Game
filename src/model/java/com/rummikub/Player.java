@@ -58,8 +58,7 @@ public class Player {
 	 * @param name = The name of player
 	 * @param behaviour = The behaviour of the player
 	 */
-	public Player(String name, StragetyBehaviour behaviour) 
-	{
+	public Player(String name, StragetyBehaviour behaviour) {
 		rack = new Rack();
 		this.behaviour = behaviour;
 		this.name = name;
@@ -133,5 +132,13 @@ public class Player {
 	public String getName() 
 	{
 		return name;
+	}
+	
+  /**
+   * Returns if current player is human (uses strategy0 as the indicator)
+   * @return True if the player is human, false otherwise
+   */
+	public boolean isHuman() {
+		return this.behaviour instanceof Strategy0;
 	}
 }

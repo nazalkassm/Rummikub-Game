@@ -7,9 +7,8 @@ public class Strategy0 implements StragetyBehaviour, Observer
 {
 	private TableInfo tableInfo = new TableInfo(); 
 	
-	Strategy0(Subject subject) 
-	{
-		subject.registerObserver(this);
+	Strategy0() {
+		//subject.registerObserver(this);
 	}
 	
 	@Override

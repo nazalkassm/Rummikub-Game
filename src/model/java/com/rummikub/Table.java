@@ -65,7 +65,14 @@ public class Table implements Subject {
 	 * @return Boolean = True if in sorted order by tile value, false otherwise 
 	 */
 	public boolean initPlayersTurn() {
-		this.stock.createStock();
+		
+		for (int i = 0; i < this.getPlayerCount(); i++) {
+		  //Put the player back into the players with tile value as key
+			Player currPlayer = players.remove(i);
+			if (currPlayer instanceof )
+		}
+		
+		/*this.stock.createStock();
 		//For each player we will get the tile
 		//We will temporarily set the key as the value of the tile
 		for (int i = 0; i < this.getPlayerCount(); i++) {
@@ -94,7 +101,7 @@ public class Table implements Subject {
 		}
 		
 		//Set current player turn to 1
-		this.currentPlayerTurn = 0;
+		this.currentPlayerTurn = 0;*/
 		return true;
 	}
 	
