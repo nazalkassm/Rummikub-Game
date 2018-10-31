@@ -2,7 +2,7 @@ package com.rummikub;
 
 import java.util.ArrayList;
 
-public class Strategy3 implements StragetyBehaviour , Observer {
+public class Strategy3 implements StragetyBehaviour {
 	private TableInfo tableInfo = new TableInfo(); 
 	
 	Strategy3() 
@@ -20,6 +20,11 @@ public class Strategy3 implements StragetyBehaviour , Observer {
 	public void update(TableInfo tableInfo) 
 	{
 		this.tableInfo = tableInfo;		
+	}
+	
+	@Override
+	public void setSubject(Subject subject) {
+		subject.registerObserver(this);
 	}
 
 }

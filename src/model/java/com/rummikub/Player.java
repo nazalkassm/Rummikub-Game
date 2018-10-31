@@ -12,7 +12,7 @@ public class Player {
 	private Rack rack;
 	
 	/** Boolean to hold if this player can play on melds that on the table */
-    public boolean canPlayOnExistingMelds; 
+  public boolean canPlayOnExistingMelds; 
 	
 	/** The behaviour of the player */
 	protected StragetyBehaviour behaviour;
@@ -62,6 +62,14 @@ public class Player {
 		rack = new Rack();
 		this.behaviour = behaviour;
 		this.name = name;
+	}
+	
+	/**
+	 * Adds the player to the table
+	 * @param table = The table to join
+	 */
+	public void playerJoinTable(Subject table) {
+		this.behaviour.setSubject(table);
 	}
 
 	/**

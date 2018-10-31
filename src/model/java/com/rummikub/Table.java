@@ -50,27 +50,33 @@ public class Table implements Subject {
 	 */
 	public void addPlayers(Player...players) {
 		
-		//Since the game might already have players, we will start the counter the player count + 1
-		int counter = this.getPlayerCount() + 1;
+		//Since the game might already have players, we will start the counter the player count
+		int counter = this.getPlayerCount() ;
 		//Add all the players passed to the player collection
 		for (Player player : players) {
 			//By default all players are at 0
 			this.players.put(counter, player);
+			player.playerJoinTable(this);
 			counter++;
 		}
 	}
 	
 	/**
-	 * Initialize all the player's turn using the stock
+	 * Initialize all the player's turn using the human as first turn
 	 * @return Boolean = True if in sorted order by tile value, false otherwise 
 	 */
 	public boolean initPlayersTurn() {
-		
-		for (int i = 0; i < this.getPlayerCount(); i++) {
-		  //Put the player back into the players with tile value as key
-			Player currPlayer = players.remove(i);
-			if (currPlayer instanceof )
+		int turnNum = 2;
+		HashMap<Integer, Player> newPlayerTurns = new HashMap<Integer, Player>();
+		for (Map.Entry<Integer, Player> entry : players.entrySet()) {			
+			if (entry.getValue().isHuman()) {
+				newPlayerTurns.put(1, entry.getValue());
+			} else {
+				newPlayerTurns.put(turnNum, entry.getValue());
+			}
+			turnNum++;
 		}
+		this.players = newPlayerTurns;
 		
 		/*this.stock.createStock();
 		//For each player we will get the tile
@@ -198,6 +204,7 @@ public class Table implements Subject {
 		if (this.currentPlayerTurn == this.getPlayerCount()) {
 			this.currentPlayerTurn = 0;
 		}
+		
 		this.currentPlayerTurn++;
 		return this.players.get(this.currentPlayerTurn); 	
 	}

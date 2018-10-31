@@ -3,13 +3,12 @@ package com.rummikub;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Strategy0 implements StragetyBehaviour, Observer 
+public class Strategy0 implements StragetyBehaviour 
 {
 	private TableInfo tableInfo = new TableInfo(); 
 	
-	Strategy0() {
-		//subject.registerObserver(this);
-	}
+	Strategy0() {	}
+	
 	
 	@Override
 	public ArrayList<Meld> useStrategy(Rack rack) throws IOException 
@@ -26,5 +25,11 @@ public class Strategy0 implements StragetyBehaviour, Observer
 	public void update(TableInfo tableInfo) 
 	{
 		this.tableInfo = tableInfo;		
+	}
+
+
+	@Override
+	public void setSubject(Subject subject) {
+		subject.registerObserver(this);
 	}
 }
