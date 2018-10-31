@@ -106,9 +106,9 @@ public class Table implements Subject {
 		  //We've assigned the player turn number for this player, so decrement
 		  turnNumber--;
 		}
-		
+		*/
 		//Set current player turn to 1
-		this.currentPlayerTurn = 0;*/
+		this.currentPlayerTurn = 0;
 		return true;
 	}
 	
@@ -227,8 +227,15 @@ public class Table implements Subject {
 	public void notifyObservers() {
 		//Construct the table Info here
 		TableInfo tableState = new TableInfo();
+		int lowestHandCount = this.lowestTableHandCount();
+		this.players.get(1).getPlayerRack().getSize();
 		for (Observer observer : observers) {
       observer.update(tableState);
    }
+	}
+
+	private int lowestTableHandCount() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }
