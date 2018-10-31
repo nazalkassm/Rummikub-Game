@@ -91,8 +91,10 @@ public class TableTest {
 		Table tableTileTest = new Table(stockTest, player1, player2, player3, player4);
 	  //We had 4 players so make sure 4 player count
 		assertEquals(4, tableTileTest.getPlayerCount());
-		//Make a new table with 6 players
-		tableTileTest = new Table(stockTest, player1, player1, player1, player2, player3, player4);
+		//Add 2 new players
+		Player player6 = new Player("p1"); 
+		Player player7 = new Player("p2"); 
+		table.addPlayers(player6, player7);
     //Assert that now the player count is 6	  
 	  assertEquals(6, tableTileTest.getPlayerCount());
 	}
