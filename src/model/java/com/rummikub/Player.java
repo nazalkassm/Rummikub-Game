@@ -17,29 +17,7 @@ public class Player {
 	/** The behaviour of the player */
 	protected StragetyBehaviour behaviour;
 	
-	/**
-	 * Constructor of Player 
-	 * 
-	 * @param stock = The stock that we use to get the initial rack from
-	 * @param name = The name of player
-	 * @param behaviour = The behaviour the player uses 
-	 * 
-	 * Setting behaviour: Player(stock, "p1", new Strategy0());
-	 */
-	public Player(Stock stock, String name, StragetyBehaviour behaviour) 
-	{
-		//Init the default attributes
-		this.rack = new Rack();
-		this.name = name;
-		this.behaviour = behaviour; 
-		this.canPlayOnExistingMelds = false;
-		
-		//For the size of rack size (14), take a tile from stock
-		for (int i = 0; i < Constants.RACK_SIZE; i++) 
-		{
-			this.rack.takeTile(stock);
-		}
-	}
+
 	
 	/**
 	 * Constructor of Player 

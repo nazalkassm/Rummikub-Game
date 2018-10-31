@@ -30,10 +30,10 @@ public class Game
 		pName = Prompt.promptInput("Enter your name: ");
 		Logger.debug(pName);
 		
-		players.add(new Player(stock,pName,new Strategy0(table)));
-		players.add(new Player(stock,"Computer 1",new Strategy1(table)));
-		players.add(new Player(stock,"Computer 2",new Strategy2(table)));
-		players.add(new Player(stock,"Computer 3",new Strategy3(table)));
+		players.add(new Player(pName,new Strategy0()));
+		players.add(new Player("Computer 1",new Strategy1()));
+		players.add(new Player("Computer 2",new Strategy2()));
+		players.add(new Player("Computer 3",new Strategy3()));
 		
 		for (Player player: players) 
 		{
