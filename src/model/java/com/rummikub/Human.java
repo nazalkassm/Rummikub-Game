@@ -11,7 +11,7 @@ public class Human extends Player
 	 * 
 	 * Setting behaviour: Player(stock, "p1", new Strategy0());
 	 */
-	public Human(Stock stock, String name, Behaviour behaviour) {
+	public Human(Stock stock, String name, StragetyBehaviour behaviour) {
 		super(stock, name, behaviour);
 	}
 }

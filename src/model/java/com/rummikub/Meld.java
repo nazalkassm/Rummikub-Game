@@ -8,8 +8,10 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
-public class Meld {
-	public enum MeldType {
+public class Meld 
+{
+	public enum MeldType 
+	{
 		SET,
 		RUN,
 		INVALID

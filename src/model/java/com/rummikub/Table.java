@@ -61,7 +61,7 @@ public class Table implements Subject {
 	}
 	
 	/**
-	 * Initialise all the player's turn using the stock
+	 * Initialize all the player's turn using the stock
 	 * @return Boolean = True if in sorted order by tile value, false otherwise 
 	 */
 	public boolean initPlayersTurn() {

@@ -11,7 +11,7 @@ public class AI extends Player {
 	 * 
 	 * Setting behaviour: Player(stock, "p1", new Strategy0());
 	 */
-	public AI(Stock stock, String name, Behaviour behaviour) {
+	public AI(Stock stock, String name, StragetyBehaviour behaviour) {
 		super(stock, name, behaviour);
 	}
 

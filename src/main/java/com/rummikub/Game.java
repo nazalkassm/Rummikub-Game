@@ -3,10 +3,10 @@ package com.rummikub;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import org.pmw.tinylog.Logger;
+
 public class Game
 {
-	public static void main(String[] args) throws IOException 
-	{
 	//Primitive Variables
 	boolean gameRunning = true;
 	String pName = "";
@@ -21,45 +21,46 @@ public class Game
 	Stock stock = new Stock();
 	Table table = new Table(stock);
 	
-	//Start game
-	printer.printIntroduction();
-	prompter.promptEnterKey();
-	pName = Prompt.promptInput("Enter your name: ");
 	
-	players.add(new Player(stock,pName,new Strategy0(table)));
-	players.add(new Player(stock,"Computer 1",new Strategy1(table)));
-	players.add(new Player(stock,"Computer 2",new Strategy2(table)));
-	players.add(new Player(stock,"Computer 3",new Strategy3(table)));
-	
-	for (Player player: players) 
+	public void start() throws IOException
 	{
-		table.addPlayers(player);
-    }
-	
-	table.initPlayersTurn();
-	
-	do // Very very ugly code looking to fix later
-	{
-		Player currentPlayer = table.getNextPlayerTurn();
+		//Start game
+		printer.printIntroduction();
+		prompter.promptEnterKey();
+		pName = Prompt.promptInput("Enter your name: ");
 		
-		while(meldsPlayed != null) // There has to be a better way than creating a while loop for each player.
+		players.add(new Player(stock,pName,new Strategy0(table)));
+		players.add(new Player(stock,"Computer 1",new Strategy1(table)));
+		players.add(new Player(stock,"Computer 2",new Strategy2(table)));
+		players.add(new Player(stock,"Computer 3",new Strategy3(table)));
+		
+		for (Player player: players) 
 		{
-		meldsPlayed = currentPlayer.play();
+			table.addPlayers(player);
+	    }
 		
+		table.initPlayersTurn();
+		
+		do 
+		{
+			Player currentPlayer = players.get(0); // hard coded for now. Until @shiraj fixes the initPlayer function in table.
+			Logger.info(currentPlayer.getName()); //log to file
+			meldsPlayed = currentPlayer.play();
+			
 			for(Meld m: meldsPlayed)
 			{
 				table.addMeldToTable(m);
 			}
+				
+			table.notifyObservers();
 			
-        table.notifyObservers();
-		}
-		
-		if (currentPlayer.getPlayerRack().getSize() == 0) 
-		{
-            gameRunning = false;
-        }
-		gameRunning = false; // only for testing
-	}	while(gameRunning);
+			if (currentPlayer.getPlayerRack().getSize() == 0) 
+			{
+				gameRunning = false;
+		    }
+			gameRunning = false; // only for testing
+			
+	}while(gameRunning );
 	
 	printer.printEnding(); // we can maybe give it a winner so that it can print it.
 	

@@ -1,8 +1,9 @@
 package com.rummikub;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
-public class Strategy0 implements Behaviour, Observer 
+public class Strategy0 implements StragetyBehaviour, Observer 
 {
 	private TableInfo tableInfo = new TableInfo(); 
 	
@@ -12,10 +13,12 @@ public class Strategy0 implements Behaviour, Observer
 	}
 	
 	@Override
-	public ArrayList<Meld> play() 
+	public ArrayList<Meld> useStrategy(Rack rack) throws IOException 
 	{
-		
-		
+		rack.sortRack();
+		Print.print("Human Turn :");
+		Print.printRacktoUser(rack);
+		String choice = Prompt.promptInput("Enter the melds you want to play:");
 		
 		return null;
 	}

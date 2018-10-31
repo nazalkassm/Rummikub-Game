@@ -2,7 +2,7 @@ package com.rummikub;
 
 import java.util.ArrayList;
 
-public class Strategy2 implements Behaviour, Observer {
+public class Strategy2 implements StragetyBehaviour, Observer {
 	private TableInfo tableInfo = new TableInfo(); 
 	
 	Strategy2(Subject subject) {
@@ -10,7 +10,7 @@ public class Strategy2 implements Behaviour, Observer {
 	}
 	
 	@Override
-	public ArrayList<Meld> play() 
+	public ArrayList<Meld> useStrategy(Rack rack) 
 	{
 		return null;	
 	}

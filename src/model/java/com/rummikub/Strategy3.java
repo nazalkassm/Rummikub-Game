@@ -2,15 +2,16 @@ package com.rummikub;
 
 import java.util.ArrayList;
 
-public class Strategy3 implements Behaviour , Observer {
+public class Strategy3 implements StragetyBehaviour , Observer {
 	private TableInfo tableInfo = new TableInfo(); 
 	
-	Strategy3(Subject subject) {
+	Strategy3(Subject subject) 
+	{
 		subject.registerObserver(this);
 	}
 	
 	@Override
-	public ArrayList<Meld> play() 
+	public ArrayList<Meld> useStrategy(Rack rack) 
 	{
 		return null;
 	}

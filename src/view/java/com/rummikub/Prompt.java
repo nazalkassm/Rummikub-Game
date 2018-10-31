@@ -44,13 +44,13 @@ public class Prompt
 	 * We are never going to prompt for an input without printing a message first.
 	 * @throws IOException 
 	 */
-	public static String promptInput(String message) throws IOException 
+	public static String promptInput(String... message) throws IOException 
 	{
 		if (!initialized) 
 		{
 			init();
 		}
-		System.out.println(message);
+		Print.println(message);
 		
 		return bi.readLine();
 	}

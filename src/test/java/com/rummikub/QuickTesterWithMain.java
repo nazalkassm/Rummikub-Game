@@ -18,5 +18,15 @@ public class QuickTesterWithMain
 		//player1.fillRack(stock);
 		Logger.info(stock.getLength());
 		Logger.info(stock.getStockArray());
+		TableList tl = new TableList(3, "ID", "String 1", "String 2").sortBy(0).withUnicode(true);
+		// from a list
+		//yourListOrWhatever.forEach(element -> tl.addRow(element.getID(), element.getS1(), element.getS2()));
+		// or manually
+		tl.addRow("Hi", "I am", "Bob");
+
+		tl.print();
+		TableList t2 = new TableList(2, "human","0").sortBy(0).withUnicode(true);
+		t2.addRow("Rack","1");
+		t2.print();
 	}
 }

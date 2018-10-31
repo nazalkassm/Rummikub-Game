@@ -1,5 +1,6 @@
 package com.rummikub;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +15,7 @@ public class Player {
     public boolean canPlayOnExistingMelds; 
 	
 	/** The behaviour of the player */
-	protected Behaviour behaviour;
+	protected StragetyBehaviour behaviour;
 	
 	/**
 	 * Constructor of Player 
@@ -25,7 +26,7 @@ public class Player {
 	 * 
 	 * Setting behaviour: Player(stock, "p1", new Strategy0());
 	 */
-	public Player(Stock stock, String name, Behaviour behaviour) 
+	public Player(Stock stock, String name, StragetyBehaviour behaviour) 
 	{
 		//Init the default attributes
 		this.rack = new Rack();
@@ -57,7 +58,7 @@ public class Player {
 	 * @param name = The name of player
 	 * @param behaviour = The behaviour of the player
 	 */
-	public Player(String name, Behaviour behaviour) 
+	public Player(String name, StragetyBehaviour behaviour) 
 	{
 		rack = new Rack();
 		this.behaviour = behaviour;
@@ -86,10 +87,11 @@ public class Player {
 	 * Plays the player's turn on a table 
 	 * @param table = The table on which to play
 	 * @return 
+	 * @throws IOException 
 	 */
-	public ArrayList<Meld> play() 
+	public ArrayList<Meld> play() throws IOException 
 	{
-		return this.behaviour.play();
+		return this.behaviour.useStrategy(this.rack);
 	}
 
 	/**
