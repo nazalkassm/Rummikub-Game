@@ -179,8 +179,6 @@ public class Table implements Subject {
 	 * @return Null = If player's turn has not been initialised
 	 */
 	public Player getCurrentPlayer() {
-		//After every player turn we update observers
-		this.notifyObservers();
 			
 		if (this.currentPlayerTurn == -1) {
 			return null;
@@ -195,8 +193,7 @@ public class Table implements Subject {
 	 * @return Null = If player's turn has not been initialised
 	 */
 	public Player getNextPlayerTurn() {
-		//After every player turn we update observers
-		this.notifyObservers();
+	
 		
 		if (this.currentPlayerTurn == -1) {
 			return null;
@@ -207,6 +204,8 @@ public class Table implements Subject {
 		}
 		
 		this.currentPlayerTurn++;
+		//After every player turn we update observers
+		this.notifyObservers();
 		return this.players.get(this.currentPlayerTurn); 	
 	}
 	

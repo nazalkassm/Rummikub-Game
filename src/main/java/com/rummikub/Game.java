@@ -53,7 +53,7 @@ public class Game
 				table.addMeldToTable(m);
 			}
 				
-			table.notifyObservers();
+			//table.notifyObservers();
 			
 			if (currentPlayer.getPlayerRack().getSize() == 0) 
 			{
