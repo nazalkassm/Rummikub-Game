@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Strategy0 implements StragetyBehaviour 
 {
-	private TableInfo tableInfo = new TableInfo(); 
+	private TableInfo tableInfo ; 
 	
 	Strategy0() {	}
 	
