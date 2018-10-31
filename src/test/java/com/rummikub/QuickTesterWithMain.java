@@ -28,5 +28,10 @@ public class QuickTesterWithMain
 		TableList t2 = new TableList(2, "human","0").sortBy(0).withUnicode(true);
 		t2.addRow("Rack","1");
 		t2.print();
+		
+		player1.fillRack(stock);
+		player1.getPlayerRack().sortRack();
+		Print.print(player1.getPlayerRack().toString());
+		Print.print(player1.getPlayerRack().getMelds().toString());
 	}
 }

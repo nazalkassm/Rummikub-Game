@@ -18,8 +18,8 @@ public class Strategy0 implements StragetyBehaviour
 		tableInfo.currentRack.sortRack();
 		Print.print("It is now your turn :");
 		Print.printRacktoUser(tableInfo.currentRack);
-		Print.println(tableInfo.currentRack.getMelds().toString());
-
+		Print.print(tableInfo.currentRack.getMelds().toString());
+		
 		
 		//String choice = Prompt.promptInput("Enter the melds you want to play:");
 		
