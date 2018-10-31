@@ -3,7 +3,7 @@ package com.rummikub;
 import java.util.ArrayList;
 
 public class Strategy3 implements StragetyBehaviour {
-	private TableInfo tableInfo = new TableInfo(); 
+	private TableInfo tableInfo;
 	
 	Strategy3() 
 	{

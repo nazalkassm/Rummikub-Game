@@ -225,9 +225,9 @@ public class Table implements Subject {
 
 	@Override
 	public void notifyObservers() {
-		//Construct the table Info here
-		TableInfo tableState = new TableInfo();
 		int lowestHandCount = this.lowestTableHandCount();
+		//Construct the table Info here
+		TableInfo tableState = new TableInfo(lowestHandCount, this.melds);
 		this.players.get(1).getPlayerRack().getSize();
 		for (Observer observer : observers) {
       observer.update(tableState);
@@ -235,7 +235,12 @@ public class Table implements Subject {
 	}
 
 	private int lowestTableHandCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		int lowestCount = 0;
+		for (Map.Entry<Integer, Player> entry : players.entrySet()) {			
+			if (lowestCount < entry.getValue().getPlayerRack().getSize()) {
+				lowestCount = entry.getValue().getPlayerRack().getSize();
+			}
+		}
+		return lowestCount;
 	}
 }
