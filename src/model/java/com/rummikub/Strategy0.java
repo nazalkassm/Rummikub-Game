@@ -5,18 +5,24 @@ import java.util.ArrayList;
 
 public class Strategy0 implements StragetyBehaviour 
 {
-	private TableInfo tableInfo ; 
+	private TableInfo tableInfo; 
 	
 	Strategy0() {	}
 	
 	
 	@Override
-	public ArrayList<Meld> useStrategy(Rack rack) throws IOException 
+	public ArrayList<Meld> useStrategy() throws IOException 
 	{
-		rack.sortRack();
+		String[] arrayofNumbs = null;
+		
+		tableInfo.currentRack.sortRack();
 		Print.print("It is now your turn :");
-		Print.printRacktoUser(rack);
-		String choice = Prompt.promptInput("Enter the melds you want to play:");
+		Print.printRacktoUser(tableInfo.currentRack);
+		Print.println(tableInfo.currentRack.getMelds().toString());
+
+		
+		//String choice = Prompt.promptInput("Enter the melds you want to play:");
+		
 		
 		return null;
 	}
