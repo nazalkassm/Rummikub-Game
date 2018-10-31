@@ -44,7 +44,7 @@ public class Game
 		
 		do 
 		{
-			Player currentPlayer = players.get(0); // hard coded for now. Until @shiraj fixes the initPlayer function in table.
+			Player currentPlayer = players.get(0); 
 			Logger.info(currentPlayer.getName()); //log to file
 			meldsPlayed = currentPlayer.play();
 			

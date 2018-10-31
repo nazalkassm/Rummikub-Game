@@ -32,7 +32,7 @@ public class Print
 
 	public void printIntroduction() 
 	{
-		println("Hello","Welcome to TileRummy","The rules are :","1.) ");
+		println("Hello","Welcome to TileRummy");
 	}
 
 	public void printEnding() 

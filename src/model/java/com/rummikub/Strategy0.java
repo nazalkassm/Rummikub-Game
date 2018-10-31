@@ -16,7 +16,7 @@ public class Strategy0 implements StragetyBehaviour, Observer
 	public ArrayList<Meld> useStrategy(Rack rack) throws IOException 
 	{
 		rack.sortRack();
-		Print.print("Human Turn :");
+		Print.print("It is now your turn :");
 		Print.printRacktoUser(rack);
 		String choice = Prompt.promptInput("Enter the melds you want to play:");
 		
