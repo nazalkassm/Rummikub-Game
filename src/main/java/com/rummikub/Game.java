@@ -13,11 +13,11 @@ public class Game
 	
 	//Data Structure Variables
 	ArrayList<Player> players = new ArrayList<>();
-	ArrayList<Meld> meldsPlayed = new ArrayList<>();
+	ArrayList<Meld> meldsPlayed;
 	
 	//My data Variables
-	Print printer = new Print(); // Some methods are static and other are not in this class.
-	Prompt prompter = new Prompt(); // Some methods are static and other are not in this class.
+	Print printer = new Print(); 
+	Prompt prompter = new Prompt();
 	Stock stock = new Stock();
 	Table table = new Table(stock);
 	
@@ -28,7 +28,6 @@ public class Game
 		printer.printIntroduction();
 		prompter.promptEnterKey();
 		pName = Prompt.promptInput("Enter your name: ");
-		Logger.debug(pName);
 		
 		players.add(new Player(pName,new Strategy0()));
 		players.add(new Player("Computer 1",new Strategy1()));
