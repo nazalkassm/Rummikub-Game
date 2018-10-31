@@ -1,4 +1,2 @@
-2018-10-30 21:59:40 [main] com.rummikub.Game.start()
-DEBUG: Naz
-2018-10-30 21:59:40 [main] com.rummikub.Game.start()
-INFO: Naz
+2018-10-31 18:03:19 [main] com.rummikub.Game.start()
+DEBUG: naz

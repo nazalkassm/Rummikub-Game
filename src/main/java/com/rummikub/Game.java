@@ -44,8 +44,9 @@ public class Game
 		
 		do 
 		{
-			Player currentPlayer = players.get(0); 
-			Logger.info(currentPlayer.getName()); //log to file
+			Player currentPlayer = table.getNextPlayerTurn();
+			Logger.info(currentPlayer.getName());
+			Logger.info(currentPlayer.isHuman());//log to file
 			meldsPlayed = currentPlayer.play();
 			
 			for(Meld m: meldsPlayed)
