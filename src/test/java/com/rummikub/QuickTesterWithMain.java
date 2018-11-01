@@ -21,6 +21,10 @@ public class QuickTesterWithMain
 		player1.fillRack(stock);
 		
 		Print.printRacktoUser(player1.getPlayerRack());
+		player1.getPlayerRack().addTile(tile1);
+		Print.println("\r\n\r\n");
+		Print.printRacktoUser(player1.getPlayerRack());
+		//Print.printRacktoUser(player1.getPlayerRack());
 		
 		/*TableList tl = new TableList(3, "ID", "String 1", "String 2").sortBy(0).withUnicode(true);
 		// from a list
