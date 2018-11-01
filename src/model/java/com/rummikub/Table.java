@@ -19,21 +19,7 @@ public class Table implements Subject {
 	private Stock stock;
 	private int currentPlayerTurn = -1;
 	
-	/**
-	 * This constructor is used for ease of testing
-	 * @param stock = The stock with which to play
-	 * @param players = The players involved in this game
-	 */
-	Table(Stock stock, Player...players) {
-		this.stock = stock;
-		//Add all the players passed to the player collection
-		int counter = 0;
-		for (Player player : players) {
-			//By default all players are at 0
-			this.players.put(counter, player);
-			counter++;
-		}
-	}
+	
 	
 	/**
 	 * Construct the table with just a stock so that the players can be added later
@@ -226,7 +212,7 @@ public class Table implements Subject {
 	public void notifyObservers() {
 		int lowestHandCount = this.lowestTableHandCount();
 		//Construct the table Info here
-		TableInfo tableState = new TableInfo(lowestHandCount, this.melds, this.getCurrentPlayer().getPlayerRack(), this.getCurrentPlayer().playedInitial30);
+		TableInfo tableState = new TableInfo(lowestHandCount, this.melds);
 		for (Observer observer : observers) {
 			observer.update(tableState);
 		}

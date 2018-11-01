@@ -77,7 +77,7 @@ public class Player {
 	 */
 	public List<Meld> play() throws IOException 
 	{
-		return this.behaviour.useStrategy();
+		return this.behaviour.useStrategy(this);
 	}
 
 	/**
@@ -92,6 +92,21 @@ public class Player {
 			List<Tile> tableTiles = table.getAllTilesOnTable();	
 		} 
 		return canPlayOnExistingMelds;
+	}
+	
+	public void removeTiles(List<Meld> melds) {
+		for(Meld m: melds) {
+			for(Tile t: m.getMeld()) {
+				this.rack.getRackArray().remove(t);
+			}
+		}
+	}
+	
+	
+	public void removeTiles(Meld meld) {
+		for(Tile t: meld.getMeld()) {
+			this.rack.getRackArray().remove(t);
+		}
 	}
 	
 	/**

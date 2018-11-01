@@ -11,7 +11,7 @@ public class Strategy3 implements StrategyBehaviour {
 	}
 	
 	@Override
-	public List<Meld> useStrategy() 
+	public List<Meld> useStrategy(Player currPlayer) 
 	{
 		return null;
 	}

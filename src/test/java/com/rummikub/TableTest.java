@@ -22,7 +22,8 @@ public class TableTest {
 	static void setUpClass() throws Exception {
 		
 		//Create the new player
-		table = new Table(new Stock(), player1, player2, player3, player4);
+		table = new Table(new Stock());
+		table.addPlayers(player1, player2, player3, player4);
 		//Add 3 melds to table
 		assertTrue(table.addMeldToTable(m1));
 		assertTrue(table.addMeldToTable(m2));
@@ -50,7 +51,8 @@ public class TableTest {
 	public void getAllTilesOnTable() {
 		Stock stockTest = new Stock();
 		//Create the new table
-		Table tableTileTest = new Table(stockTest, player1, player2, player3, player4);
+		Table tableTileTest = new Table(stockTest);
+		table.addPlayers(player1, player2, player3, player4);
 		//Add 2 melds to table
 		assertTrue(tableTileTest.addMeldToTable(m1));
 		assertTrue(tableTileTest.addMeldToTable(m2));
@@ -73,7 +75,8 @@ public class TableTest {
 	public void getMeldTest() {
 		Stock stockTest = new Stock();
 		//Create the new table
-		Table tableTileTest = new Table(stockTest, player1, player2, player3, player4);
+		Table tableTileTest = new Table(stockTest);
+		table.addPlayers(player1, player2, player3, player4);
 		//Add 2 melds to table
 		assertTrue(tableTileTest.addMeldToTable(m1));
 		assertTrue(tableTileTest.addMeldToTable(m2));
@@ -88,7 +91,8 @@ public class TableTest {
 	public void getPlayerCountTest() {
 		Stock stockTest = new Stock();
 		//Create the new table
-		Table tableTileTest = new Table(stockTest, player1, player2, player3, player4);
+		Table tableTileTest = new Table(stockTest);
+		table.addPlayers(player1, player2, player3, player4);
 		//We had 4 players so make sure 4 player count
 		assertEquals(4, tableTileTest.getPlayerCount());
 		//Add 2 new players

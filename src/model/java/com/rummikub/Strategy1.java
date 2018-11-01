@@ -1,51 +1,46 @@
 package com.rummikub;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Strategy1 implements StrategyBehaviour {
 	private TableInfo tableInfo; 
 	
-	Strategy1() {
-		//subject.registerObserver(this);
-	}
+	Strategy1() {	}
 	
 	@Override
-	public List<Meld> useStrategy() 
+	public List<Meld> useStrategy(Player currPlayer) 
 	{
-		List<Meld> melds = tableInfo.currentRack.getMelds();
+		// Data Structure Variables
+		List<Meld> melds = new ArrayList<Meld>(currPlayer.getPlayerRack().getMelds());
 		
-		Print.print("AI01 cards: " + tableInfo.currentRack);
-		Print.print("AI01 melds to play: " + melds);
+		currPlayer.getPlayerRack().sortRack();
+		Print.printRacktoUser(currPlayer.getPlayerRack());
+		Print.print("AI01 melds to play: " + melds); // to change to printUserMeld
 		
 		int sum = 0;
 		
-		if(!tableInfo.playedInital30) {
+		if(!currPlayer.canPlayOnExistingMelds) {
 			for(Meld m: melds) {
 				sum += m.sumMeld(m);
 			}
 			
-			if(sum > 30) {
-				tableInfo.playedInital30 = true;
-				removeTiles(melds);
+			if(sum >= 30) {
+				currPlayer.canPlayOnExistingMelds = true;
+				currPlayer.removeTiles(melds);
 				return melds;
 			}
 			
 			else {
-				return null;
+				return Collections.emptyList(); // this might be wrong
 			}
 		}
 		
-		removeTiles(melds);	
+		currPlayer.removeTiles(melds);	
 		return melds;
 	}
 	
-	private void removeTiles(List<Meld> melds) {
-		for(Meld m: melds) {
-			for(Tile t: m.getMeld()) {
-				tableInfo.currentRack.getRackArray().remove(t);
-			}
-		}
-	}
 
 	@Override
 	public void update(TableInfo tableInfo) {
