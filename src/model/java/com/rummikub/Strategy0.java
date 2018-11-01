@@ -21,6 +21,7 @@ public class Strategy0 implements StragetyBehaviour
 		Print.print(tableInfo.currentRack.getMelds().toString());
 		
 		
+		
 		//String choice = Prompt.promptInput("Enter the melds you want to play:");
 		
 		
