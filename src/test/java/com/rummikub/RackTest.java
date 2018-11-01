@@ -131,8 +131,9 @@ public class RackTest {
 		
 		System.out.println("Meld Runs Test");
 		System.out.println(hand2.toString());
+		System.out.println(hand2.getMelds().toString());
 		
-		assertEquals("[[G4, G5, G6], [G10, G11, G12], [R9, R10, R11, R12]]", 
+		assertEquals("[G4 G5 G6 , G10 G11 G12 , R9 R10 R11 R12 ]", 
 				hand2.getMelds().toString());
 	}
 	
@@ -154,8 +155,9 @@ public class RackTest {
 		
 		System.out.println("Meld Sets Test");
 		System.out.println(hand3.toString());
+		System.out.println(hand3.getMelds().toString());
 		
-		assertEquals("[[G10, B10, R10, O10], [G10, R10, O10], [B12, R12, O12]]", 
+		assertEquals("[G10 B10 R10 O10 , G10 R10 O10 , B12 R12 O12 ]", 
 				hand3.getMelds().toString());
 	}
 	
@@ -184,7 +186,7 @@ public class RackTest {
 		System.out.println("All melds");
 		System.out.println(hand3.getMelds().toString());
 		
-		assertEquals("[[G8, G9, G10], [R6, R7, R8], [G8, B8, R8, O8], [G10, B10, O10]]", 
+		assertEquals("[G8 G9 G10 , R6 R7 R8 , G8 B8 R8 O8 , G10 B10 O10 ]", 
 				hand3.getMelds().toString());
 	}
 	

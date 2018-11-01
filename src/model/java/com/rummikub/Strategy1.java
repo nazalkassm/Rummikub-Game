@@ -1,8 +1,8 @@
 package com.rummikub;
 
-import java.util.ArrayList;
+import java.util.List;
 
-public class Strategy1 implements StragetyBehaviour {
+public class Strategy1 implements StrategyBehaviour {
 	private TableInfo tableInfo; 
 	
 	Strategy1() {
@@ -10,9 +10,25 @@ public class Strategy1 implements StragetyBehaviour {
 	}
 	
 	@Override
-	public ArrayList<Meld> useStrategy() 
+	public List<Meld> useStrategy() 
 	{
-		return null;
+		List<Meld> melds = tableInfo.currentRack.getMelds();
+		
+		Print.print("AI01 cards: " + tableInfo.currentRack);
+		Print.print("AI01 melds to play: " + melds);
+		
+		/*if(!played30) {
+			if
+		}*/
+		
+		for(Meld m: melds) {
+			for(Tile t: m.getMeld()) {
+				tableInfo.currentRack.getRackArray().remove(t);
+			}
+		}
+		
+		
+		return melds;
 	}
 
 	@Override

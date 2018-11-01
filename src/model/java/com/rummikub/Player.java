@@ -15,7 +15,7 @@ public class Player {
   public boolean canPlayOnExistingMelds; 
 	
 	/** The behaviour of the player */
-	protected StragetyBehaviour behaviour;
+	protected StrategyBehaviour behaviour;
 	
 
 	
@@ -36,7 +36,7 @@ public class Player {
 	 * @param name = The name of player
 	 * @param behaviour = The behaviour of the player
 	 */
-	public Player(String name, StragetyBehaviour behaviour) {
+	public Player(String name, StrategyBehaviour behaviour) {
 		rack = new Rack();
 		this.behaviour = behaviour;
 		this.name = name;
@@ -72,7 +72,7 @@ public class Player {
 	 * @return 
 	 * @throws IOException 
 	 */
-	public ArrayList<Meld> play() throws IOException 
+	public List<Meld> play() throws IOException 
 	{
 		return this.behaviour.useStrategy();
 	}
