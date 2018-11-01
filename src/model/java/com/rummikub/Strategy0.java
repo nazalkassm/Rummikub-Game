@@ -14,11 +14,12 @@ public class Strategy0 implements StrategyBehaviour
 	public List<Meld> useStrategy() throws IOException 
 	{
 		String[] arrayofNumbs = null;
-		
+		List<Meld> meldsPlayed;
 		tableInfo.currentRack.sortRack();
 		Print.print("It is now your turn :");
 		Print.printRacktoUser(tableInfo.currentRack);
 		Print.print(tableInfo.currentRack.getMelds().toString());
+		
 		
 		
 		//String choice = Prompt.promptInput("Enter the melds you want to play:");
