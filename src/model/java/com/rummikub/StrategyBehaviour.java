@@ -5,5 +5,5 @@ import java.util.List;
 
 public interface StrategyBehaviour extends Observer
 {
-	public List<Meld> useStrategy() throws IOException;
+	public List<Meld> useStrategy(Player currPlayer) throws IOException;
 }

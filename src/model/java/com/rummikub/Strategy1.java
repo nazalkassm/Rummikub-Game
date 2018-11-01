@@ -7,29 +7,28 @@ import java.util.List;
 public class Strategy1 implements StrategyBehaviour {
 	private TableInfo tableInfo; 
 	
-	Strategy1() {
-		//subject.registerObserver(this);
-	}
+	Strategy1() {	}
 	
 	@Override
-	public List<Meld> useStrategy() 
+	public List<Meld> useStrategy(Player currPlayer) 
 	{
 		// Data Structure Variables
-		List<Meld> melds = new ArrayList<Meld>(tableInfo.currentRack.getMelds());
+		List<Meld> melds = new ArrayList<Meld>(currPlayer.getPlayerRack().getMelds());
 		
-		tableInfo.currentRack.sortRack();
-		Print.printRacktoUser(tableInfo.currentRack);
+		currPlayer.getPlayerRack().sortRack();
+		Print.printRacktoUser(currPlayer.getPlayerRack());
 		Print.print("AI01 melds to play: " + melds); // to change to printUserMeld
 		
 		int sum = 0;
 		
-		if(!tableInfo.canPlayOnMelds) {
+		if(!currPlayer.canPlayOnExistingMelds) {
 			for(Meld m: melds) {
 				sum += m.sumMeld(m);
 			}
 			
 			if(sum >= 30) {
-				removeTiles(melds);
+				currPlayer.canPlayOnExistingMelds = true;
+				currPlayer.removeTiles(melds);
 				return melds;
 			}
 			
@@ -38,17 +37,10 @@ public class Strategy1 implements StrategyBehaviour {
 			}
 		}
 		
-		removeTiles(melds);	
+		currPlayer.removeTiles(melds);	
 		return melds;
 	}
 	
-	private void removeTiles(List<Meld> melds) {
-		for(Meld m: melds) {
-			for(Tile t: m.getMeld()) {
-				tableInfo.currentRack.getRackArray().remove(t);
-			}
-		}
-	}
 
 	@Override
 	public void update(TableInfo tableInfo) {
