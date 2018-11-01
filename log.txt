@@ -1,4 +1,8 @@
-2018-11-01 17:59:03 [main] com.rummikub.QuickTesterWithMain.main()
-INFO: 104
-2018-11-01 17:59:03 [main] com.rummikub.QuickTesterWithMain.main()
-INFO: [R8, B13, B2, R12, R10, G1, R9, B2, O6, R13, R10, O10, O2, R7, G7, O12, G12, G11, B11, B8, R13, G3, G7, O7, B12, B13, G3, O5, O3, R11, R2, G5, B11, O2, O4, G2, O13, R7, B5, B6, B7, B6, G6, G13, O8, B5, O3, R4, B9, O11, R6, O9, B4, R12, G8, R3, R1, G4, O12, R3, O1, G2, O1, G4, G11, G12, O7, B4, O11, R9, R5, R2, G9, B1, G1, R6, B1, R5, O13, G10, B12, B3, G5, R11, B9, G6, O10, O8, R1, O5, B10, B8, O9, B3, R8, G9, G13, B10, G8, G10, O6, B7, O4, R4]
+2018-11-01 18:55:52 [main] com.rummikub.ColorsTest.setUpAll()
+INFO: setUpAll
+2018-11-01 18:55:52 [main] com.rummikub.RanksTest.setUpAll()
+INFO: setUpAll
+2018-11-01 18:55:52 [main] com.rummikub.StockTest.shuffleTest()
+INFO: The number of same are : 2
+2018-11-01 18:55:52 [main] com.rummikub.TileTest.setUpAll()
+INFO: setUpAll
