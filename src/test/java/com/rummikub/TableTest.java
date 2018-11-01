@@ -13,10 +13,10 @@ public class TableTest {
 	private static Meld m1 = new Meld(new Tile("B","2"),new Tile("B", "3"),new Tile("B", "4"));
 	private static Meld m2 = new Meld(new Tile("G", "6"),new Tile("G", "5"),new Tile("G", "4"));
 	private static Meld m3 = new Meld(new Tile("G", "10"),new Tile("R", "10"),new Tile("O", "10"));
-	private static Player player1 = new Player("p1"); 
-	private static Player player2 = new Player("p2");
-	private static Player player3 = new Player("p3");
-	private static Player player4 = new Player("p4");		
+	private static Player player1 = new Player("p1", new Strategy0()); 
+	private static Player player2 = new Player("p2", new Strategy1()); 
+	private static Player player3 = new Player("p3", new Strategy2()); 
+	private static Player player4 = new Player("p4", new Strategy3()); 
 	
 	@BeforeAll
 	static void setUpClass() throws Exception {
