@@ -114,7 +114,7 @@ public class Meld
 	 * first gets rid of duplicate objects (so if there are two R5's)
 	 * then compares them to other colours and returns a list of same values
 	 */
-	public static List<ArrayList<Tile>> getSetMelds(List<Tile> tileList) {
+	public static List<Meld> getSetMelds(List<Tile> tileList) {
 	  //Initialize array list of 13, with 2 lists each of tiles
 		List<ArrayList<ArrayList<Tile>>> collectedSets = new ArrayList<ArrayList<ArrayList<Tile>>>();
 		for (int i = 0; i < 13; ++i ) {
@@ -148,12 +148,15 @@ public class Meld
 			}
 		}
 		
-		List<ArrayList<Tile>> setList = new ArrayList<ArrayList<Tile>>();
+		List<Meld> setList = new ArrayList<Meld>();
+		Meld meld = null;
 		//Loop over all the collected sets and add all of size => 3 to setList 
 		for (int i = 0; i < 13; i++) {
 			for (int j = 0; j < 2; j++) {
 				if (collectedSets.get(i).get(j).size() >=3 ) {
-					setList.add(collectedSets.get(i).get(j));
+					meld = new Meld();
+					meld.tiles = collectedSets.get(i).get(j);
+					setList.add(meld);
 				}
 			}
 		}
@@ -209,6 +212,15 @@ public class Meld
 	 */
 	public MeldType getMeldType() {
 		return meldType;
+	}
+	
+	@Override
+	public String toString() {
+		String a = "";
+		for(Tile s: this.tiles) {
+			a += s.toString() + " ";
+		}
+		return a;
 	}
 
 }

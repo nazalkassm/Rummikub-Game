@@ -24,10 +24,10 @@ class PlayerTest
 	private PlayerMock myPlayerMock;
 	
 	//Behaviors to assign for each player they are only created once.
-	private StragetyBehaviour s1;
-	private StragetyBehaviour s2;
-	private StragetyBehaviour s3;
-	private StragetyBehaviour s4;
+	private StrategyBehaviour s1;
+	private StrategyBehaviour s2;
+	private StrategyBehaviour s3;
+	private StrategyBehaviour s4;
 	
 	@BeforeAll
 	void setUpClass() throws Exception 

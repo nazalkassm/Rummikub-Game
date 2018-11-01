@@ -5,7 +5,7 @@ import com.rummikub.Player;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import com.rummikub.StragetyBehaviour;
+import com.rummikub.StrategyBehaviour;
 
 public class PlayerMock extends Player
 {

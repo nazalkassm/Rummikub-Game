@@ -2,7 +2,7 @@ package com.rummikub;
 
 import java.util.List;
 
-public class Strategy2 implements StragetyBehaviour {
+public class Strategy2 implements StrategyBehaviour {
 	private TableInfo tableInfo; 
 	
 	Strategy2() {

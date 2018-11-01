@@ -3,7 +3,7 @@ package com.rummikub;
 import java.io.IOException;
 import java.util.List;
 
-public class Strategy0 implements StragetyBehaviour 
+public class Strategy0 implements StrategyBehaviour 
 {
 	private TableInfo tableInfo; 
 	
