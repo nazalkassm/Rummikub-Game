@@ -3,6 +3,7 @@ package com.rummikub;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.AfterAll;
@@ -85,11 +86,11 @@ class Strategy1Test {
 		assertEquals(8,player2.getPlayerRack().getSize());
 		
 		//player1 tests
-		assertEquals("[G10 G11 G12 , R9 R10 R11 R12 ]",player1.play().toString());
+		assertEquals("[G10 G11 G12 , R9 R10 R11 R12 ]", player1.play().toString());
 		assertEquals(1,player1.getPlayerRack().getSize());
 		
 		//player2 tests
-		assertEquals(null,player2.play());
+		assertEquals(Collections.emptyList() ,player2.play());
 		assertEquals(8,player2.getPlayerRack().getSize());
 		
 	}
