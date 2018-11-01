@@ -13,7 +13,7 @@ public class Game
 	String pName = "";
 	
 	//Data Structure Variables
-	ArrayList<Player> players = new ArrayList<>();
+	List<Player> players = new ArrayList<>();
 	List<Meld> meldsPlayed;
 	
 	//My data Variables

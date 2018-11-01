@@ -28,7 +28,7 @@ public class Rack
 		return tileList;	
 	}
 	
-	public void setRackArray(ArrayList<Tile> rackList)
+	public void setRackArray(List<Tile> rackList)
 	{
 		for(int i = 0; i < Constants.RACK_SIZE; i++)
 		{
@@ -85,8 +85,8 @@ public class Rack
 	 * converts the map from getTilesByColorsAndValues() to an ArrayList<List<Tile>>
 	 * and returns that list
 	 */
-	public static ArrayList<List<Tile>> convertMaptoArrayList(Map<Colours, List<Tile>> map){
-		ArrayList<List<Tile>> list = new ArrayList<List<Tile>>();
+	public static List<List<Tile>> convertMaptoArrayList(Map<Colours, List<Tile>> map){
+		List<List<Tile>> list = new ArrayList<List<Tile>>();
 		for(Map.Entry<Colours, List<Tile>> m: map.entrySet()) {
 			list.add(m.getValue());
 		}

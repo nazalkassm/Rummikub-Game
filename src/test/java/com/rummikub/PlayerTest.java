@@ -39,9 +39,13 @@ class PlayerTest
 		stock = new Stock();
 		
 		player1 = new Player("p1"); 
+		player1.fillRack(stock);
 		player2 = new Player("p2");
+		player2.fillRack(stock);
 		player3 = new Player("p3");
+		player3.fillRack(stock);
 		player4 = new Player("p4");
+		player4.fillRack(stock);
 		
 		s1 = new Strategy0();
 		s2 = new Strategy1();
@@ -80,7 +84,6 @@ class PlayerTest
 	@Test
 	void playerRackTest() 
 	{
-		//assertThat(player1.getPlayerRack().getRackArray(), hasSize(14));
 		assertEquals(14, player1.getPlayerRack().getSize());
 	} 
 	
@@ -88,7 +91,6 @@ class PlayerTest
 	void playerGetTileTest()
 	{
 		newPlayer.getTileFromStock(stock);
-		//assertThat(newPlayer.getPlayerRack().getRackArray(), hasSize(1));
 		assertEquals(1, newPlayer.getPlayerRack().getSize());
 	}
 	

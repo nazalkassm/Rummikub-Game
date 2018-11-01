@@ -116,9 +116,9 @@ public class Meld
 	 */
 	public static List<Meld> getSetMelds(List<Tile> tileList) {
 	  //Initialize array list of 13, with 2 lists each of tiles
-		List<ArrayList<ArrayList<Tile>>> collectedSets = new ArrayList<ArrayList<ArrayList<Tile>>>();
+		List<List<List<Tile>>> collectedSets = new ArrayList<List<List<Tile>>>();
 		for (int i = 0; i < 13; ++i ) {
-		  ArrayList<ArrayList<Tile>> secondLevelArrayList = new ArrayList<ArrayList<Tile>>();
+		  List<List<Tile>> secondLevelArrayList = new ArrayList<List<Tile>>();
 		  collectedSets.add(secondLevelArrayList);
 		  for (int j = 0; j < 2; ++j ) {
 		    secondLevelArrayList.add(new ArrayList<Tile>());

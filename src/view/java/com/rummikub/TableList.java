@@ -2,6 +2,7 @@ package com.rummikub;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -27,7 +28,7 @@ public class TableList {
 	private static final String CROSSING_B = "\u253b";
 
 	private String[] descriptions;
-	private ArrayList<String[]> table;
+	private List<String[]> table;
 	private int[] tableSizes;
 	private int rows;
 	private int findex;
@@ -179,7 +180,7 @@ public class TableList {
 		System.out.println(line.toString());
 
 		line = null;
-		ArrayList<String[]> localTable = table;
+		List<String[]> localTable = table;
 
 		if (filter != null) {
 			Pattern p = Pattern.compile(filter);

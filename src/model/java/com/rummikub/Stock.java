@@ -2,6 +2,7 @@ package com.rummikub;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * This class is meant to model a stock in a tile rummy game. 
@@ -17,7 +18,7 @@ public class Stock
 	//Stock Size
 	int stockS;
 	//An Arraylist that stores all the tiles in a stock
-	private ArrayList<Tile> stockArray = new ArrayList<>(stockS);;
+	private List<Tile> stockArray = new ArrayList<>(stockS);;
 	
 	/**
 	 *Suppresses default constructor, ensuring non-instantiability.
@@ -64,14 +65,14 @@ public class Stock
 	 * @return an arraylist that contains 14 tiles 
 	 * @since version 1.00
 	 */
-	public ArrayList<Tile> deal14Tiles() 
+	public List<Tile> deal14Tiles() 
 	{
-		ArrayList<Tile> returnList = new ArrayList<>(14);
+		List<Tile> returnList = new ArrayList<>(14);
 		for(int i = 0; i < Constants.RACK_SIZE;i++)
 		{
 			returnList.add(this.stockArray.remove(i));
 		}
-		stockArray.trimToSize();
+		//stockArray.trimToSize(); // NEED TO TEST
 		return returnList;
 	}
 	
@@ -101,7 +102,7 @@ public class Stock
 	{
 		Tile returnTile;
 		returnTile = stockArray.remove(0);
-		stockArray.trimToSize();
+		//stockArray.trimToSize();
 		return returnTile;
 	};
 	
@@ -111,7 +112,7 @@ public class Stock
 	 * @return the current arraylist that contains all tiles.
 	 * @since version 1.00
 	 */
-	public ArrayList<Tile> getStockArray() 
+	public List<Tile> getStockArray() 
 	{
 		return this.stockArray;
 	}
