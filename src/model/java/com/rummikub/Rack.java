@@ -40,7 +40,7 @@ public class Rack
 		// TODO Auto-generated method stub
 		tileList.add(tile);	
 		isSorted = false;
-		//sortRack();
+		sortRack();
 	}
 
 	public Tile takeTile(Stock stock) {
@@ -48,6 +48,7 @@ public class Rack
 		Tile draw = stock.dealTile();
 		this.tileList.add(draw);
 		isSorted = false;
+		sortRack();
 		return draw;
 		
 	}

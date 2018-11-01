@@ -16,7 +16,6 @@ public class Strategy0 implements StrategyBehaviour
 	{
 		// String[] arrayofNumbs = null;
 		List<Meld> meldsPlayed = new ArrayList<Meld>();
-		currPlayer.getPlayerRack().sortRack();
 		Print.print("It is now your turn :");
 		Print.printRacktoUser(currPlayer.getPlayerRack());
 		Print.print(currPlayer.getPlayerRack().getMelds().toString());
