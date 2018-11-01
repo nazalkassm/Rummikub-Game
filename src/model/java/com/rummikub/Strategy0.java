@@ -1,6 +1,7 @@
 package com.rummikub;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Strategy0 implements StrategyBehaviour 
@@ -13,19 +14,18 @@ public class Strategy0 implements StrategyBehaviour
 	@Override
 	public List<Meld> useStrategy() throws IOException 
 	{
-		String[] arrayofNumbs = null;
-		List<Meld> meldsPlayed;
+		// String[] arrayofNumbs = null;
+		List<Meld> meldsPlayed = new ArrayList<Meld>();
 		tableInfo.currentRack.sortRack();
 		Print.print("It is now your turn :");
 		Print.printRacktoUser(tableInfo.currentRack);
 		Print.print(tableInfo.currentRack.getMelds().toString());
 		
 		
-		
 		//String choice = Prompt.promptInput("Enter the melds you want to play:");
 		
 		
-		return null;
+		return meldsPlayed;
 	}
 
 	@Override

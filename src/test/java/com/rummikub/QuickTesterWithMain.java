@@ -18,7 +18,11 @@ public class QuickTesterWithMain
 		//player1.fillRack(stock);
 		Logger.info(stock.getLength());
 		Logger.info(stock.getStockArray());
-		TableList tl = new TableList(3, "ID", "String 1", "String 2").sortBy(0).withUnicode(true);
+		player1.fillRack(stock);
+		
+		Print.printRacktoUser(player1.getPlayerRack());
+		
+		/*TableList tl = new TableList(3, "ID", "String 1", "String 2").sortBy(0).withUnicode(true);
 		// from a list
 		//yourListOrWhatever.forEach(element -> tl.addRow(element.getID(), element.getS1(), element.getS2()));
 		// or manually
@@ -32,6 +36,6 @@ public class QuickTesterWithMain
 		player1.fillRack(stock);
 		player1.getPlayerRack().sortRack();
 		Print.print(player1.getPlayerRack().toString());
-		Print.print(player1.getPlayerRack().getMelds().toString());
+		Print.print(player1.getPlayerRack().getMelds().toString());*/
 	}
 }
