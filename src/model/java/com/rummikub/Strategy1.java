@@ -1,5 +1,7 @@
 package com.rummikub;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Strategy1 implements StrategyBehaviour {
@@ -12,10 +14,12 @@ public class Strategy1 implements StrategyBehaviour {
 	@Override
 	public List<Meld> useStrategy() 
 	{
-		List<Meld> melds = tableInfo.currentRack.getMelds();
+		// Data Structure Variables
+		List<Meld> melds = new ArrayList<Meld>(tableInfo.currentRack.getMelds());
 		
-		Print.print("AI01 cards: " + tableInfo.currentRack);
-		Print.print("AI01 melds to play: " + melds);
+		tableInfo.currentRack.sortRack();
+		Print.printRacktoUser(tableInfo.currentRack);
+		Print.print("AI01 melds to play: " + melds); // to change to printUserMeld
 		
 		int sum = 0;
 		
@@ -31,7 +35,7 @@ public class Strategy1 implements StrategyBehaviour {
 			}
 			
 			else {
-				return null;
+				return Collections.emptyList();
 			}
 		}
 		
