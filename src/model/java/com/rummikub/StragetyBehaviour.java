@@ -1,9 +1,9 @@
 package com.rummikub;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 public interface StragetyBehaviour extends Observer
 {
-	public ArrayList<Meld> useStrategy() throws IOException;
+	public List<Meld> useStrategy() throws IOException;
 }

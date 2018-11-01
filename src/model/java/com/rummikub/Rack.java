@@ -58,7 +58,7 @@ public class Rack
 		isSorted = true;
 	}
 	
-	public List<ArrayList<Tile>> getMelds(){
+	public List<Meld> getMelds(){
 		return Meld.getMelds(tileList);
 	}
 	

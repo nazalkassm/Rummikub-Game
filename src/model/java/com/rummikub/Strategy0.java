@@ -1,7 +1,7 @@
 package com.rummikub;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 public class Strategy0 implements StragetyBehaviour 
 {
@@ -11,7 +11,7 @@ public class Strategy0 implements StragetyBehaviour
 	
 	
 	@Override
-	public ArrayList<Meld> useStrategy() throws IOException 
+	public List<Meld> useStrategy() throws IOException 
 	{
 		String[] arrayofNumbs = null;
 		

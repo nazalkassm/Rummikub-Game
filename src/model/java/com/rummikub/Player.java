@@ -72,7 +72,7 @@ public class Player {
 	 * @return 
 	 * @throws IOException 
 	 */
-	public ArrayList<Meld> play() throws IOException 
+	public List<Meld> play() throws IOException 
 	{
 		return this.behaviour.useStrategy();
 	}

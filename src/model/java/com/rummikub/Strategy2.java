@@ -1,6 +1,6 @@
 package com.rummikub;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class Strategy2 implements StragetyBehaviour {
 	private TableInfo tableInfo; 
@@ -10,7 +10,7 @@ public class Strategy2 implements StragetyBehaviour {
 	}
 	
 	@Override
-	public ArrayList<Meld> useStrategy() 
+	public List<Meld> useStrategy() 
 	{
 		return null;	
 	}

@@ -72,16 +72,19 @@ public class Meld
 		return sums.indexOf(max);
 	}
 	
-	public static List<ArrayList<Tile>> getMelds(List<Tile> tileList) {
-		List<ArrayList<Tile>> meldList = new ArrayList<ArrayList<Tile>>();
+	public static List<Meld> getMelds(List<Tile> tileList) {
+		List<Meld> meldList = new ArrayList<Meld>();
 		meldList.addAll(getRunMelds(tileList));
 		meldList.addAll(getSetMelds(tileList));
 		return meldList;
 	}
 	
-	public  static List<ArrayList<Tile>> getRunMelds(List<Tile> tileList) {
+	public static List<Meld> getRunMelds(List<Tile> tileList) {
 		int count = 0;
-		List<ArrayList<Tile>> meldList = new ArrayList<ArrayList<Tile>>();
+		List<Meld> meldList = new ArrayList<Meld>();
+		
+		Meld meld = null;
+		
 		boolean isRunOn = false;
 		for (int i = 1; i <= tileList.size() ; i++) {
 			if (i < tileList.size() && (isRunOn = tileList.get(i).isRunOn(tileList.get(i-1)))) {
@@ -95,7 +98,9 @@ public class Meld
 			} else {
 				
 				if (count >= 3) {
-					meldList.add(new ArrayList<Tile>(tileList.subList(i - count, i)));	
+					meld = new Meld();
+					meld.tiles = new ArrayList<Tile>(tileList.subList(i - count, i));
+					meldList.add(meld);	
 				}
 				isRunOn = false;
 				count = 0;
