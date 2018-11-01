@@ -13,9 +13,8 @@ public class Strategy1 implements StrategyBehaviour {
 	public List<Meld> useStrategy(Player currPlayer) 
 	{
 		// Data Structure Variables
-		List<Meld> melds = new ArrayList<Meld>(currPlayer.getPlayerRack().getMelds());
-		
 		currPlayer.getPlayerRack().sortRack();
+		List<Meld> melds = new ArrayList<Meld>(currPlayer.getPlayerRack().getMelds());
 		Print.printRacktoUser(currPlayer.getPlayerRack());
 		Print.print("AI01 melds to play: " + melds); // to change to printUserMeld
 		
