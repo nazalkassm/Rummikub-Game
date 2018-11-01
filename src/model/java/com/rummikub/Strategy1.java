@@ -23,19 +23,18 @@ public class Strategy1 implements StrategyBehaviour {
 		
 		int sum = 0;
 		
-		if(!tableInfo.playedInital30) {
+		if(!tableInfo.canPlayOnMelds) {
 			for(Meld m: melds) {
 				sum += m.sumMeld(m);
 			}
 			
-			if(sum > 30) {
-				tableInfo.playedInital30 = true;
+			if(sum >= 30) {
 				removeTiles(melds);
 				return melds;
 			}
 			
 			else {
-				return Collections.emptyList();
+				return Collections.emptyList(); // this might be wrong
 			}
 		}
 		

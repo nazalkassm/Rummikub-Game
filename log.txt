@@ -1,4 +1,4 @@
-2018-11-01 17:25:45 [main] com.rummikub.QuickTesterWithMain.main()
+2018-11-01 17:59:03 [main] com.rummikub.QuickTesterWithMain.main()
 INFO: 104
-2018-11-01 17:25:45 [main] com.rummikub.QuickTesterWithMain.main()
-INFO: [R12, O5, O4, G2, R6, O7, O6, R9, R13, R4, R10, G5, B10, B1, O1, O9, G1, B1, R8, O1, O10, G7, O12, R5, B8, R11, G11, O9, B12, G4, B4, G5, O13, G3, O3, B3, R2, G10, O12, G12, G13, B9, G3, B7, O6, R7, G8, O8, R9, G10, R10, R4, B10, O2, B13, R5, O2, R3, O11, G1, G13, B13, R8, B8, G9, O7, R11, B7, R1, G4, G6, B5, G9, R2, B3, R3, G7, R1, B11, B2, G8, R13, G12, O4, R6, B6, O13, G11, B4, B11, B6, G2, R7, B2, B12, O5, O11, R12, O10, O3, G6, B9, B5, O8]
+2018-11-01 17:59:03 [main] com.rummikub.QuickTesterWithMain.main()
+INFO: [R8, B13, B2, R12, R10, G1, R9, B2, O6, R13, R10, O10, O2, R7, G7, O12, G12, G11, B11, B8, R13, G3, G7, O7, B12, B13, G3, O5, O3, R11, R2, G5, B11, O2, O4, G2, O13, R7, B5, B6, B7, B6, G6, G13, O8, B5, O3, R4, B9, O11, R6, O9, B4, R12, G8, R3, R1, G4, O12, R3, O1, G2, O1, G4, G11, G12, O7, B4, O11, R9, R5, R2, G9, B1, G1, R6, B1, R5, O13, G10, B12, B3, G5, R11, B9, G6, O10, O8, R1, O5, B10, B8, O9, B3, R8, G9, G13, B10, G8, G10, O6, B7, O4, R4]
