@@ -17,18 +17,34 @@ public class Strategy1 implements StrategyBehaviour {
 		Print.print("AI01 cards: " + tableInfo.currentRack);
 		Print.print("AI01 melds to play: " + melds);
 		
-		/*if(!played30) {
-			if
-		}*/
+		int sum = 0;
 		
+		if(!tableInfo.playedInital30) {
+			for(Meld m: melds) {
+				sum += m.sumMeld(m);
+			}
+			
+			if(sum > 30) {
+				tableInfo.playedInital30 = true;
+				removeTiles(melds);
+				return melds;
+			}
+			
+			else {
+				return null;
+			}
+		}
+		
+		removeTiles(melds);	
+		return melds;
+	}
+	
+	private void removeTiles(List<Meld> melds) {
 		for(Meld m: melds) {
 			for(Tile t: m.getMeld()) {
 				tableInfo.currentRack.getRackArray().remove(t);
 			}
 		}
-		
-		
-		return melds;
 	}
 
 	@Override
