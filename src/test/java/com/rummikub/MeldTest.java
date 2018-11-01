@@ -18,13 +18,13 @@ public class MeldTest {
 	@BeforeAll
 	static void setUpAll() throws Exception 
 	{
-	tiles = new ArrayList<Tile>();
+		tiles = new ArrayList<Tile>();
 	}
 	
 	@AfterAll
 	static void tearDownAfterClass() throws Exception
 	{
-	tiles = null;
+		tiles = null;
 	}
 	
 	@Test

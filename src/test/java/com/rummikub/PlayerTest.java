@@ -1,6 +1,10 @@
 package com.rummikub;
 
 import org.junit.jupiter.api.BeforeAll;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterEach;
@@ -10,32 +14,35 @@ import static org.hamcrest.Matchers.*;
 
 class PlayerTest 
 {
-	private Stock stock;
+	static private Stock stock;
 	
 	//These players are going to be used for all the tests. 
 	//We need to keep track of their state.
-	private Player player1;
-	private Player player2;
-	private Player player3;
-	private Player player4;
+	static private Player player1;
+	static private Player player2;
+	static private Player player3;
+	static private Player player4;
 	
 	// This object is to test a newly created player for every test.
-	private Player newPlayer; 
-	private PlayerMock myPlayerMock;
+	static private Player newPlayer; 
+	static private PlayerMock myPlayerMock;
 	
 	//Behaviors to assign for each player they are only created once.
-	private StrategyBehaviour s1;
-	private StrategyBehaviour s2;
-	private StrategyBehaviour s3;
-	private StrategyBehaviour s4;
+	static private StrategyBehaviour s1;
+	static private StrategyBehaviour s2;
+	static private StrategyBehaviour s3;
+	static private StrategyBehaviour s4;
 	
 	@BeforeAll
-	void setUpClass() throws Exception 
+	static void setUpClass() throws Exception 
 	{
+		stock = new Stock();
+		
 		player1 = new Player("p1"); 
 		player2 = new Player("p2");
 		player3 = new Player("p3");
 		player4 = new Player("p4");
+		
 		s1 = new Strategy0();
 		s2 = new Strategy1();
 		s3 = new Strategy2();
@@ -43,12 +50,13 @@ class PlayerTest
 	}
 
 	@AfterAll
-	void tearDownClass() throws Exception 
+	static void tearDownClass() throws Exception 
 	{
 		player1 = null;
 		player2 = null;
 		player3 = null;
 		player4 = null;
+		
 		s1 = null;
 		s2 = null;
 		s3 = null;
@@ -72,21 +80,24 @@ class PlayerTest
 	@Test
 	void playerRackTest() 
 	{
-		assertThat(player1.getPlayerRack().getRackArray(), hasSize(14));
+		//assertThat(player1.getPlayerRack().getRackArray(), hasSize(14));
+		assertEquals(14, player1.getPlayerRack().getSize());
 	} 
 	
 	@Test
 	void playerGetTileTest()
 	{
 		newPlayer.getTileFromStock(stock);
-		assertThat(newPlayer.getPlayerRack().getRackArray(),hasSize(1));
+		//assertThat(newPlayer.getPlayerRack().getRackArray(), hasSize(1));
+		assertEquals(1, newPlayer.getPlayerRack().getSize());
 	}
 	
+	@Test
 	void isHumanTest() {
 		//Player with strategies 0 are humans (since input required)
 		Player human = new Player("some Name", new Strategy0());
 		
-		assertThat(true, is(human.isHuman()));
+		assertTrue(human.isHuman());
 	} 
 
 }

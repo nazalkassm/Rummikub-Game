@@ -2,6 +2,7 @@ package com.rummikub;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.pmw.tinylog.Logger;
 
@@ -13,7 +14,7 @@ public class Game
 	
 	//Data Structure Variables
 	ArrayList<Player> players = new ArrayList<>();
-	ArrayList<Meld> meldsPlayed;
+	List<Meld> meldsPlayed;
 	
 	//My data Variables
 	Print printer = new Print(); 
@@ -47,7 +48,7 @@ public class Game
 			Logger.info(currentPlayer.getName());
 			Logger.info(currentPlayer.isHuman());//log to file
 			meldsPlayed = currentPlayer.play();
-			
+			Print.print(meldsPlayed.toString());
 			for(Meld m: meldsPlayed)
 			{
 				table.addMeldToTable(m);
