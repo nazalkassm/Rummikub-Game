@@ -8,6 +8,9 @@ public class Player {
 	/** Name of player */
 	private String name;
 	
+	/** initial 30 var*/
+	boolean playedInitial30 = false;
+	
 	/** Player's rack */	
 	private Rack rack;
 	
