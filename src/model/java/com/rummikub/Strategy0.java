@@ -15,13 +15,13 @@ public class Strategy0 implements StrategyBehaviour
 	@Override
 	public List<Meld> useStrategy(Player currPlayer) throws IOException 
 	{
-		// String[] arrayofNumbs = null;
+
 		List<Meld> returnMelds = new ArrayList<>();
 		List<Meld> possibleMelds = new ArrayList<>(currPlayer.getPlayerRack().getMelds());
 		List<Tile> tempList = new ArrayList<>();
 		tempList.addAll(currPlayer.getPlayerRack().getRackArray());
-		//Rack tempRack = currPlayer.getPlayerRack();
-		//Print Hand Info
+
+		
 		Print.printRacktoUser(currPlayer.getPlayerRack());
 		Print.printMeldtoUser(possibleMelds);
 
@@ -40,7 +40,7 @@ public class Strategy0 implements StrategyBehaviour
 		else {
 			Print.print("You cannot play your initial 30 this round");
 			currPlayer.getPlayerRack().setRack(tempList);
-			return Collections.emptyList(); // this might be wrong
+			return Collections.emptyList(); 
 		}
 
 	}
