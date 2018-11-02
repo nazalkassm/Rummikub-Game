@@ -1,5 +1,6 @@
 package com.rummikub;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -39,9 +40,21 @@ public class Print
 		println("Hello","Welcome to TileRummy");
 	}
 
-	public void printEnding() 
+	public void printEnding(Player winner) throws IOException
 	{
-		print("That's all folks!");
+		int counter = 0;
+		System.out.print("Game ending\nThe winner is:");
+		while(counter < 3)
+		{
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			System.out.print(" ...");
+			counter ++;
+		}
+		print(" "+ winner.getName());
 	}
 	
 	public static void printRacktoUser(Rack rack)
@@ -67,18 +80,24 @@ public class Print
 	
 	public static void printMeldtoUser(List<Meld> melds)
 	{
-		List<String> meldStringList = melds.stream()
-                .map(Object::toString)
-               .collect(Collectors.toList());
-		
-		TableList meldTable = new TableList(2, "Meld Number", "Meld").sortBy(0).withUnicode(true);
-		
-		int meldNumber = 1;
-		for(String meld : meldStringList) {
-		    meldTable.addRow("Meld " + Integer.toString(meldNumber), meld);
-		    meldNumber++;
+		if (melds.isEmpty()) 
+		{
+			print("There are no melds\n");
 		}
-		
-		meldTable.print();
+		else 
+		{
+			List<String> meldStringList = melds.stream()
+	                .map(Object::toString)
+	               .collect(Collectors.toList());
+			
+			TableList meldTable = new TableList(2, "Meld Number", "Meld").sortBy(0).withUnicode(true);
+			
+			int meldNumber = 1;
+			for(String meld : meldStringList) {
+			    meldTable.addRow("Meld " + Integer.toString(meldNumber), meld);
+			    meldNumber++;
+			}
+			meldTable.print();
+		}
 	}
 }

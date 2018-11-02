@@ -12,7 +12,7 @@ public class Player {
 	boolean playedInitial30 = false;
 	
 	/** Player's rack */	
-	private Rack rack;
+	Rack rack;
 	
 	/** Boolean to hold if this player can play on melds that on the table */
   public boolean canPlayOnExistingMelds; 
@@ -106,12 +106,6 @@ public class Player {
 		}
 	}
 	
-	
-	public void removeTiles(Meld meld) {
-		for(Tile t: meld.getMeld()) {
-			this.rack.getRackArray().remove(t);
-		}
-	}
 	
 	/**
 	 * Print the rack of the player

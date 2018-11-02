@@ -25,7 +25,7 @@ class Strategy3Test {
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception 
 	{
-		//player1
+		//player1 has tiles greater than 30 and can play them.
 		player1 = new Player("Naz",new Strategy3());
 		player2 = new Player("Prady",new Strategy3());
 
@@ -39,7 +39,7 @@ class Strategy3Test {
 		player1.getPlayerRack().addTile(new Tile("R", "12")); //G6
 		
 		
-		//player2
+		//player2 does not have tiles greater than 30
 		player2.getPlayerRack().addTile(new Tile("R", "9")); //G4
 		player2.getPlayerRack().addTile(new Tile("G", "2")); //G5
 		player2.getPlayerRack().addTile(new Tile("G", "3")); //G6
@@ -75,8 +75,11 @@ class Strategy3Test {
 	}
 	
 	@Test
-	void useStrategy_removeTilesTest() throws IOException
+	void useStrategy_removeTiles_Test() throws IOException
 	{
+		//Testing if player2 using Strategy3 can play melds as soon as he gets 30.
+		//He starts with less than 30 then works his way up.
+		
 		//Tests getMelds()
 		assertEquals(2,meld1.size());
 		assertEquals(2,meld2.size());
