@@ -15,7 +15,7 @@ public class Player {
 	Rack rack;
 	
 	/** Boolean to hold if this player can play on melds that on the table */
-  public boolean canPlayOnExistingMelds; 
+  public boolean canPlayOnExistingMelds = false; 
 	
 	/** The behaviour of the player */
 	protected StrategyBehaviour behaviour;
@@ -126,6 +126,15 @@ public class Player {
 	}
 	
 	/**
+	 * set the player rack
+	 * 
+	 */
+	public void setPlayerRack(Rack rack) 
+	{
+		this.rack = rack;
+	}
+	
+	/**
 	 * Return the player's name
 	 * @return String = The name of the player
 	 */
@@ -141,4 +150,6 @@ public class Player {
 	public boolean isHuman() {
 		return this.behaviour instanceof Strategy0;
 	}
+	
+	
 }
