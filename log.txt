@@ -1,8 +1,4 @@
-2018-11-01 18:55:52 [main] com.rummikub.ColorsTest.setUpAll()
-INFO: setUpAll
-2018-11-01 18:55:52 [main] com.rummikub.RanksTest.setUpAll()
-INFO: setUpAll
-2018-11-01 18:55:52 [main] com.rummikub.StockTest.shuffleTest()
-INFO: The number of same are : 2
-2018-11-01 18:55:52 [main] com.rummikub.TileTest.setUpAll()
-INFO: setUpAll
+2018-11-01 20:06:14 [main] com.rummikub.Game.start()
+INFO: naz
+2018-11-01 20:06:14 [main] com.rummikub.Game.start()
+INFO: true

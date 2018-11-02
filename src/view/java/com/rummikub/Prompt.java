@@ -76,49 +76,4 @@ public class Prompt
 			}	
 	}
 
-	public static void promptInputForMelds() 
-	{
-//				outerloop:
-//				while(elementSize > 0 )
-//				{
-//				String[] arrayofNumbs = null;
-//				System.out.println("\nThere are " + elementSize + " elements.");
-//				System.out.println("\nYou are now deducting from the number " + elementNumber + " element. Enter (-1) to repeat a component.");
-//				System.out.println("\nEnter the sub-elements you want to deduct, enter " + component.getElements().get(elementNumber-1).getElements().size() + " numbers separated by space: ");	
-//				
-//					try 
-//					{
-//						arrayofNumbs = bi.readLine().split("\\s");
-//					}  
-//					catch (IOException e) 
-//					{
-//						e.printStackTrace();
-//					}
-//						for(int i=0; i<arrayofNumbs.length; i++) 
-//						{
-//							try 
-//							{
-//								if (Integer.parseInt(arrayofNumbs[i]) > 1 || Integer.parseInt(arrayofNumbs[i]) < 0 || arrayofNumbs.length != component.getElements().get(elementNumber-1).getElements().size())
-//								{
-//									throw new IllegalArgumentException();
-//								}
-//								else
-//								{
-//								returnArray.add(Integer.parseInt(arrayofNumbs[i]));
-//								}
-//							}
-//							catch (IllegalArgumentException e)
-//							{
-//								System.out.println("----------Wrong input try again-----------");
-//								elementNumber = 1;
-//								elementSize = component.getElements().size();
-//								returnArray.clear();
-//								continue outerloop;
-//							}
-//						}
-//				elementSize--;
-//				elementNumber++;
-//				returnArray.add(-1);
-//				}
-	}
 }

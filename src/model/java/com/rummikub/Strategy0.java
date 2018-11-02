@@ -2,6 +2,7 @@ package com.rummikub;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Strategy0 implements StrategyBehaviour 
@@ -15,16 +16,46 @@ public class Strategy0 implements StrategyBehaviour
 	public List<Meld> useStrategy(Player currPlayer) throws IOException 
 	{
 		// String[] arrayofNumbs = null;
-		List<Meld> meldsPlayed = new ArrayList<Meld>();
+		List<Meld> returnMelds = new ArrayList<>();
+		List<Meld> possibleMelds = new ArrayList<>(currPlayer.getPlayerRack().getMelds());
+		
+		//Print Hand Info
 		Print.print("It is now your turn :");
 		Print.printRacktoUser(currPlayer.getPlayerRack());
-		Print.print(currPlayer.getPlayerRack().getMelds().toString());
+		
+		if (possibleMelds.isEmpty()) 
+		{
+			Print.print("You have no possible melds to play");
+			//return Collections.emptyList();
+		}
+		else 
+		{
+			Print.printMeldtoUser(possibleMelds);
+		}
 		
 		
-		//String choice = Prompt.promptInput("Enter the melds you want to play:");
 		
 		
-		return meldsPlayed;
+		String inputString = Prompt.promptInput("Enter the melds you want to play (0 to stop) : ");
+		int input = Integer.parseInt(inputString);
+		
+		while(input > 0 && input <= possibleMelds.size() + Constants.ONE_INDEX)
+		{
+			returnMelds.add(possibleMelds.get(input-Constants.ONE_INDEX));
+			
+			currPlayer.removeTiles(possibleMelds.get(input-Constants.ONE_INDEX));
+			
+			inputString = Prompt.promptInput("Enter the melds you want to play (0 to pass): ");
+			input = Integer.parseInt(inputString);
+		}
+		
+		if(returnMelds.isEmpty())
+		{
+			return Collections.emptyList();
+		}
+		
+		
+		return returnMelds;
 	}
 
 	@Override

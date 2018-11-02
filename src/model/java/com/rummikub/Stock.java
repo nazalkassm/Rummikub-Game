@@ -67,11 +67,10 @@ public class Stock
 	 */
 	public List<Tile> deal14Tiles() 
 	{
-		List<Tile> returnList = new ArrayList<>(14);
+		List<Tile> returnList = new ArrayList<Tile>();
 		for(int i = 0; i < Constants.RACK_SIZE;i++)
 		{
 			returnList.add(this.stockArray.remove(0));
-			//Print.println(Integer.toString(stockArray.size()));
 		}
 		//stockArray.trimToSize(); // NEED TO TEST
 		return returnList;
@@ -91,8 +90,6 @@ public class Stock
 			}
 		}
 		this.shuffle();
-		
-		Print.println(Integer.toString((stockArray.size())));
 	}
 	
 	/**

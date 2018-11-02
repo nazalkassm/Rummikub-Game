@@ -30,6 +30,10 @@ public class Player {
 	public Player(String name) 
 	{
 		rack = new Rack();
+		if(name.equals(""))
+		{
+			name = "p1";
+		}
 		this.name = name;
 	}
 	

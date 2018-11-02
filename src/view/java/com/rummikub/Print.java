@@ -64,4 +64,21 @@ public class Print
 		rackTable.addRow(rackStringArray);
 		rackTable.print();
 	}
+	
+	public static void printMeldtoUser(List<Meld> melds)
+	{
+		List<String> meldStringList = melds.stream()
+                .map(Object::toString)
+               .collect(Collectors.toList());
+		
+		TableList meldTable = new TableList(2, "Meld Number", "Meld").sortBy(0).withUnicode(true);
+		
+		int meldNumber = 1;
+		for(String meld : meldStringList) {
+		    meldTable.addRow("Meld " + Integer.toString(meldNumber), meld);
+		    meldNumber++;
+		}
+		
+		meldTable.print();
+	}
 }
