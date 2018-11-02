@@ -35,6 +35,12 @@ public class Rack
 			tileList.add(rackList.get(i));
 		}
 	}
+	
+	public void setRack(List<Tile> rackList)
+	{
+		tileList = rackList;
+	}
+	
 
 	public void addTile(Tile tile) {
 		// TODO Auto-generated method stub

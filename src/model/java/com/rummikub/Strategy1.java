@@ -22,7 +22,7 @@ public class Strategy1 implements StrategyBehaviour {
 		
 		if(!currPlayer.canPlayOnExistingMelds) {
 			for(Meld m: melds) {
-				sum += m.sumMeld(m);
+				sum += m.sumMeld();
 			}
 			
 			if(sum >= 30) {

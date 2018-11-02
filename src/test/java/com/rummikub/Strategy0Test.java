@@ -133,12 +133,12 @@ class Strategy0Test {
 		assertThat(player1.getPlayerRack().getSize(), anyOf(is(1),is(5), is(4), is(8)));
 		
 		//player2 tests
-		assertEquals(Collections.emptyList(), list3);
+		assertEquals(Collections.emptyList(), list2);
 		assertEquals(8,player2.getPlayerRack().getSize());
 		
 		//player3 tests
 		assertEquals(Collections.emptyList(), list3);
-		assertEquals(8,player2.getPlayerRack().getSize());
+		assertEquals(8,player3.getPlayerRack().getSize());
 		
 	}
 }
