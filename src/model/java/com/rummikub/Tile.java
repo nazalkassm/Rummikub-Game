@@ -17,6 +17,15 @@ public class Tile implements Comparable<Tile> {
 		this(Colours.getColourFromSymbol(colourSymbol), Ranks.getRankFromSymbol(rankSymbol));
 	}
 	
+	public Tile(String tileString) {
+		if (!Tile.verifyTile(tileString)) {
+			throw new IllegalArgumentException("Invalid tile");
+		}
+		
+		this.rank = Ranks.getRankFromSymbol(tileString.substring(1));
+		this.colour = Colours.getColourFromSymbol(tileString.substring(0, 1).toUpperCase());
+	}
+	
 	@Override
 	public String toString() { 
 		return this.colour.getSymbol() + this.rank.getSymbol();
@@ -69,7 +78,7 @@ public class Tile implements Comparable<Tile> {
 
 	public static Boolean verifyTile(String element) {
 		if (Colours.getColourFromSymbol(element.substring(0, 1).toUpperCase()) != null &&
-				Ranks.getRankFromSymbol(element.substring(1).toUpperCase()) != null) {
+				Ranks.getRankFromSymbol(element.substring(1)) != null) {
 			return true;
 		}
 		return false;

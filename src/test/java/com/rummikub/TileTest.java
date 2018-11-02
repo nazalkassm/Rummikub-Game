@@ -36,11 +36,13 @@ class TileTest {
 	@Test
 	void creationTest() {
 		Tile tileStandard = new Tile("R", "1");
+		assertTrue(Tile.verifyTile("R1"));
 		Tile tileFileInput1 = new Tile("R1");
+		assertTrue(Tile.verifyTile("r1"));
 		Tile tileFileInput2 = new Tile("r1");
 		
-		assertEquals(tileStandard, tileFileInput1);
-		assertEquals(tileStandard, tileFileInput2);
+		assertEquals(tileStandard.toString(), tileFileInput1.toString());
+		assertEquals(tileStandard.toString(), tileFileInput2.toString());
 		
 		try {
 			new Tile("1");
