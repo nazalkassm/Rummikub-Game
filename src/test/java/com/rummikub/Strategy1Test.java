@@ -75,7 +75,7 @@ class Strategy1Test {
 	}
 	
 	@Test
-	void useStrategy_removeTilesTest() throws IOException
+	void useStrategy_removeTiles_Test() throws IOException
 	{
 		//Tests getMelds()
 		assertEquals(2,meld1.size());

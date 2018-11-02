@@ -92,7 +92,7 @@ class Strategy0Test {
 	}
 	
 	@Test
-	void useStrategy_removeTilesTest() throws IOException
+	void useStrategy_removeTiles_Test() throws IOException
 	{
 		List<Meld> list1 = player3.play(); 
 		
