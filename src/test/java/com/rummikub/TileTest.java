@@ -56,6 +56,13 @@ class TileTest {
 	}
 	
 	@Test
+	void verifyTileTest() {
+		assertTrue(Tile.verifyTile("R1"));
+		assertTrue(Tile.verifyTile("R"));
+		assertFalse(Tile.verifyTile("1"));
+	}
+	
+	@Test
 	void comparisonTests() {
 		//Compare the different compare methods in the tile class
 		//1. Compare same rank (value)

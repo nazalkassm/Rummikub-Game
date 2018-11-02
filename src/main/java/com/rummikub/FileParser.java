@@ -44,7 +44,7 @@ public class FileParser {
 					if (isValidTile(element)) {
 						stock.add(new Tile(element));
 					}
-					else if (isValidPlayerCommand(element)) {
+					else if (isInteger(element)) {
 						playerCommands.add(element);
 					}
 					else {
@@ -65,16 +65,13 @@ public class FileParser {
 			inputError = true;
 		}
 	}
-	
-	public static Boolean isValidTile(String element) {
-		Boolean check = false;
-		
-		return check;
-	}
-	
-	public static Boolean isValidPlayerCommand(String element) {
-		Boolean check = false;
-		
-		return check;
+
+	public static boolean isInteger(String value) {
+	    try {
+	        Integer.parseInt(value);
+	        return true;
+	    } catch (NumberFormatException ex) {
+	        return false;
+	    }
 	}
 }

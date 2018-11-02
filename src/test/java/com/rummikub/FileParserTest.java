@@ -14,11 +14,7 @@ import org.junit.jupiter.api.Test;
 import org.pmw.tinylog.Logger;
 
 class FileParserTest {
-	
-	@Test
-	public void scenario() {
-		
-	}
+
 	
 	
 }
