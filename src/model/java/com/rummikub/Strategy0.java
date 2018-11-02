@@ -22,16 +22,6 @@ public class Strategy0 implements StrategyBehaviour
 		//Print Hand Info
 		Print.printRacktoUser(currPlayer.getPlayerRack());
 		Print.printMeldtoUser(possibleMelds);
-			
-		if (possibleMelds.isEmpty()) 
-		{
-			Print.print("You have no possible melds to play");
-			//return Collections.emptyList();
-		}
-		else 
-		{
-			Print.printMeldtoUser(possibleMelds);
-		}
 		
 		int sum = 0;
 		if(!currPlayer.canPlayOnExistingMelds) {

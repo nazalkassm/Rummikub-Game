@@ -3,6 +3,7 @@ package com.rummikub;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -21,15 +22,20 @@ class Strategy3Test {
 	private static List<Meld> meld1,meld2;
 	private static Player player1;
 	private static Player player2;
+	private static Player player3;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception 
 	{
+		//Table because strategy 3 needs to observe
+		Stock stock = new Stock();
+		Table table = new Table(stock);
+		
 		//player1 has tiles greater than 30 and can play them.
 		player1 = new Player("Naz",new Strategy3());
 		player2 = new Player("Prady",new Strategy3());
 
-		player1.getPlayerRack().addTile(new Tile("R", "9")); //G4
+		//player 1 has two nice runs should play them all.
 		player1.getPlayerRack().addTile(new Tile("G", "10")); //G5
 		player1.getPlayerRack().addTile(new Tile("G", "11")); //G6
 		player1.getPlayerRack().addTile(new Tile("G", "12")); //G6
@@ -48,6 +54,18 @@ class Strategy3Test {
 		player2.getPlayerRack().addTile(new Tile("B", "4")); //G5
 		player2.getPlayerRack().addTile(new Tile("G", "4")); //G6
 		player2.getPlayerRack().addTile(new Tile("O", "4")); //G6
+		
+		//player 3 
+		player3.getPlayerRack().addTile(new Tile("G", "10")); //G5
+		player3.getPlayerRack().addTile(new Tile("G", "11")); //G6
+		player3.getPlayerRack().addTile(new Tile("G", "12")); //G6
+		player3.getPlayerRack().addTile(new Tile("R", "9"));  //G4
+		player3.getPlayerRack().addTile(new Tile("R", "10")); //G5
+		player3.getPlayerRack().addTile(new Tile("R", "11")); //G6
+		player3.getPlayerRack().addTile(new Tile("R", "12")); //G6
+		
+		table.addPlayers(player1,player2,player3);
+		table.notifyObservers();
 		
 		//meld
 		meld1 = player1.getPlayerRack().getMelds();
@@ -77,24 +95,20 @@ class Strategy3Test {
 	@Test
 	void useStrategy_removeTiles_Test() throws IOException
 	{
-		//Testing if player2 using Strategy3 can play melds as soon as he gets 30.
-		//He starts with less than 30 then works his way up.
-		
-		//Tests getMelds()
-		assertEquals(2,meld1.size());
-		assertEquals(2,meld2.size());
-		
 		//Test initial values
-		assertEquals(8,player1.getPlayerRack().getSize());
+		assertEquals(7,player1.getPlayerRack().getSize());
 		assertEquals(8,player2.getPlayerRack().getSize());
 		
 		//player1 tests
 		assertEquals("[G10 G11 G12 , R9 R10 R11 R12 ]", player1.play().toString());
-		assertEquals(1,player1.getPlayerRack().getSize());
+		assertEquals(0,player1.getPlayerRack().getSize());
 		
 		//player2 tests
 		assertEquals(Collections.emptyList() ,player2.play());
 		assertEquals(8,player2.getPlayerRack().getSize());
+		
+		//player3 tests (this tests has 3 fewer tiles).
+		player3.
 		
 	}
 }
