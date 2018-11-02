@@ -1,5 +1,8 @@
 package com.rummikub;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.junit.jupiter.api.BeforeAll;
 //import org.junit.jupiter.api.Disabled;
 //import org.junit.jupiter.api.Tag;
@@ -29,6 +32,30 @@ class TileTest {
 	}
 	
 	@Test
+	void creationTest() {
+		Tile tileStandard = new Tile("R", "1");
+		Tile tileFileInput1 = new Tile("R1");
+		Tile tileFileInput2 = new Tile("r1");
+		
+		assertEquals(tileStandard, tileFileInput1);
+		assertEquals(tileStandard, tileFileInput2);
+		
+		try {
+			new Tile("1");
+		}
+		catch (IllegalArgumentException ex) {
+			assertEquals("Invalid tile", ex.getMessage());
+		}
+		
+		try {
+			new Tile("R");
+		}
+		catch (IllegalArgumentException ex) {
+			assertEquals("Invalid tile", ex.getMessage());
+		}
+	}
+	
+	@Test
 	void comparisonTests() {
 		//Compare the different compare methods in the tile class
 		//1. Compare same rank (value)
@@ -42,13 +69,13 @@ class TileTest {
 		assertThat(true, is(tile1.equals(tile2)));
 		//4. Compare less than 
 		//1R is less then 12R
-    assertThat(-1, is(tile1.compareTo(tile4)));
-    //5. Compare greater than 
-    //12R is greater then 1R
-    assertThat(1, is(tile4.compareTo(tile1)));
-    //6. Compare equal to 
-    //1R is equal to 1B
-    assertThat(0, is(tile1.compareTo(tile2)));
+	    assertThat(-1, is(tile1.compareTo(tile4)));
+	    //5. Compare greater than 
+	    //12R is greater then 1R
+	    assertThat(1, is(tile4.compareTo(tile1)));
+	    //6. Compare equal to 
+	    //1R is equal to 1B
+	    assertThat(0, is(tile1.compareTo(tile2)));
 	}
 	
 	@Test
