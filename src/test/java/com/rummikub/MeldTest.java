@@ -3,6 +3,7 @@ package com.rummikub;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -155,11 +156,17 @@ public class MeldTest {
 	
 	@Test
 	public void sumMeldTest() {
-		
+		Meld m1 = new Meld(new Tile("B","2"),new Tile("B", "3"),new Tile("B", "4"));    
+		assertEquals(9, m1.sumMeld());
 	}
 	
 	@Test
 	public void getMaxIndexTest() {
+		Meld m1 = new Meld(new Tile("B","2"),new Tile("B", "3"),new Tile("B", "4"));    
+		Meld m2 = new Meld(new Tile("G", "6"),new Tile("G", "5"),new Tile("G", "4"));   
+		Meld m3 = new Meld(new Tile("G", "10"),new Tile("R", "10"),new Tile("O", "10"));
 		
+		List<Meld> melds = Arrays.asList(m1, m2, m3);
+		assertEquals(2,Meld.getMaxIndex(melds));
 	}
 }

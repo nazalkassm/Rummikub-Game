@@ -42,11 +42,11 @@ public class Meld
 	/*
 	 * finds the sum of the meld
 	 */
-	public int sumMeld(Meld list) {
+	public int sumMeld() {
 		// TODO Auto-generated method stub
 		int sum = 0;
-		for(int i = 0; i < list.getMeld().size(); i++) {
-			sum += list.getMeld().get(i).getValue();
+		for(int i = 0; i < this.getMeld().size(); i++) {
+			sum += this.getMeld().get(i).getValue();
 		}
 		return sum;
 	}
@@ -58,10 +58,10 @@ public class Meld
 	 * and returns the index where that max element is
 	 * because sum of each meld will be stored in the same index as its corresponding meld in the list of melds
 	 */
-	public int getMaxIndex(List<Meld> list) {
+	public static int getMaxIndex(List<Meld> list) {
 		List<Integer> sums = new ArrayList<Integer>();
 		for(Meld m: list) {
-			sums.add(m.sumMeld(m));
+			sums.add(m.sumMeld());
 		}
 		
 		Integer max = sums
