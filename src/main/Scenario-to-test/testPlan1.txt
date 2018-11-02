@@ -1,0 +1,5 @@
+Human (p1) goes first (always).
+This test plan does *not* reuse tiles on the table.
+
+
+Initial Hands:
