@@ -23,6 +23,7 @@ public class Strategy0 implements StrategyBehaviour
 		Print.print("It is now your turn :");
 		Print.printRacktoUser(currPlayer.getPlayerRack());
 		
+			
 		if (possibleMelds.isEmpty()) 
 		{
 			Print.print("You have no possible melds to play");
@@ -33,9 +34,47 @@ public class Strategy0 implements StrategyBehaviour
 			Print.printMeldtoUser(possibleMelds);
 		}
 		
+		int sum = 0;
+		if(!currPlayer.canPlayOnExistingMelds) {
+			Print.print("You have not played your initial 30 points yet");
+			for(Meld m: possibleMelds) {
+				sum += m.sumMeld(m);
+			}
+			
+			if(sum >= 30) {
+				inputPlay(currPlayer, possibleMelds, returnMelds);
+				
+				if(returnMelds.isEmpty())
+				{
+					return Collections.emptyList();
+				}	
+				
+				else {
+					return returnMelds;
+				}
+			}
+			
+			else {
+				Print.print("You cannot play your initial 30 this round");
+				return Collections.emptyList(); // this might be wrong
+			}
+			
+		}
 		
 		
+		inputPlay(currPlayer, possibleMelds, returnMelds);
 		
+		if(returnMelds.isEmpty())
+		{
+			return Collections.emptyList();
+		}
+		
+		
+		return returnMelds;
+	}
+	
+	
+	private void inputPlay(Player currPlayer, List<Meld> possibleMelds, List<Meld> returnMelds) throws IOException {
 		String inputString = Prompt.promptInput("Enter the melds you want to play (0 to stop) : ");
 		int input = Integer.parseInt(inputString);
 		
@@ -48,15 +87,8 @@ public class Strategy0 implements StrategyBehaviour
 			inputString = Prompt.promptInput("Enter the melds you want to play (0 to pass): ");
 			input = Integer.parseInt(inputString);
 		}
-		
-		if(returnMelds.isEmpty())
-		{
-			return Collections.emptyList();
-		}
-		
-		
-		return returnMelds;
 	}
+	
 
 	@Override
 	public void update(TableInfo tableInfo) 
