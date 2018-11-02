@@ -66,4 +66,12 @@ public class Tile implements Comparable<Tile> {
 		//Otherwise return true if the values are either +1 or -1
 		return (this.getValue() == (tile.getValue() - 1) || this.getValue() == (tile.getValue() + 1));
 	}
+
+	public static Boolean verifyTile(String element) {
+		if (Colours.getColourFromSymbol(element.substring(0, 1).toUpperCase()) != null &&
+				Ranks.getRankFromSymbol(element.substring(1).toUpperCase()) != null) {
+			return true;
+		}
+		return false;
+	}
 }

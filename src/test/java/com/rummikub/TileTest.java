@@ -1,7 +1,9 @@
 package com.rummikub;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeAll;
 //import org.junit.jupiter.api.Disabled;
@@ -58,7 +60,7 @@ class TileTest {
 	@Test
 	void verifyTileTest() {
 		assertTrue(Tile.verifyTile("R1"));
-		assertTrue(Tile.verifyTile("R"));
+		assertFalse(Tile.verifyTile("R"));
 		assertFalse(Tile.verifyTile("1"));
 	}
 	
