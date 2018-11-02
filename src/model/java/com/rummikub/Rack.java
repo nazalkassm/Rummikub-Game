@@ -104,4 +104,10 @@ public class Rack
 		return a;
 	}
 
+	public void removeTiles(Meld meld) {
+		for(Tile t: meld.getMeld()) {
+			this.getRackArray().remove(t);
+		}
+	}
+
 }

@@ -43,7 +43,7 @@ public class Strategy0 implements StrategyBehaviour
 		{
 			returnMelds.add(possibleMelds.get(input-Constants.ONE_INDEX));
 			
-			currPlayer.removeTiles(possibleMelds.get(input-Constants.ONE_INDEX));
+			currPlayer.rack.removeTiles(possibleMelds.get(input-Constants.ONE_INDEX));
 			
 			inputString = Prompt.promptInput("Enter the melds you want to play (0 to pass): ");
 			input = Integer.parseInt(inputString);
