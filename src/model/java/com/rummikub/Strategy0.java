@@ -24,6 +24,7 @@ public class Strategy0 implements StrategyBehaviour
 
 		//print table and possible melds
 		Print.printRacktoUser(currPlayer.getPlayerRack());
+		Print.print("Here are the melds you can play: ");
 		Print.printMeldtoUser(possibleMelds);
 
 		
@@ -39,6 +40,7 @@ public class Strategy0 implements StrategyBehaviour
 		//if it hasn't then it checks whether the playable meld's sum is 30 or greater
 		//if either true, returns played melds and ends turn
 		if(currPlayer.canPlayOnExistingMelds || sum >= 30) {
+			currPlayer.canPlayOnExistingMelds = true;
 			return returnMelds;
 		}
 
@@ -46,7 +48,7 @@ public class Strategy0 implements StrategyBehaviour
 		//player cannot place playable melds on table
 		//so player's rack gets reset to when the turn started and ends turn
 		else {
-			Print.print("You cannot play your initial 30 this round");
+			Print.print("There were no melds played this round because your melds do not sum up to 30.");
 			currPlayer.getPlayerRack().setRack(tempList);
 			return Collections.emptyList(); 
 		}
@@ -67,8 +69,9 @@ public class Strategy0 implements StrategyBehaviour
 			possibleMelds = new ArrayList<>(currPlayer.getPlayerRack().getMelds());
 			//Print Hand Info
 			Print.printRacktoUser(currPlayer.getPlayerRack());
+			Print.print("Here are the melds you can play: ");
 			Print.printMeldtoUser(possibleMelds);
-			inputString = Prompt.promptInput("Enter the melds you want to play (0 to pass): ");
+			inputString = Prompt.promptInput("Enter the melds you want to play (0 to pass or no melds): ");
 			input = Integer.parseInt(inputString);
 		}
 	}

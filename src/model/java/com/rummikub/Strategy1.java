@@ -36,6 +36,7 @@ public class Strategy1 implements StrategyBehaviour {
 		//if it hasn't then it checks whether the playable meld's sum is 30 or greater
 		//if either true, returns played melds and ends turn
 		if(currPlayer.canPlayOnExistingMelds || sum >= 30) {
+			currPlayer.canPlayOnExistingMelds = true;
 			return returnMelds;
 		}
 

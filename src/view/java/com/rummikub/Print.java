@@ -59,23 +59,30 @@ public class Print
 	
 	public static void printRacktoUser(Rack rack)
 	{
-		int rackSize = rack.getSize();
-		List<String> columnHeaders = new ArrayList<String>();
-		for (int i = 1; i < rackSize + 1; i++) {
-			columnHeaders.add(Integer.toString(i));
+		if(!(rack.getSize() == 0)) 
+		{
+			int rackSize = rack.getSize();
+			List<String> columnHeaders = new ArrayList<String>();
+			for (int i = 1; i < rackSize + 1; i++) {
+				columnHeaders.add(Integer.toString(i));
+			}
+			columnHeaders.add(0, "Tile Number");
+			
+			TableList rackTable = new TableList(rackSize + 1, columnHeaders.stream().toArray(String[]::new)).sortBy(0).withUnicode(true);
+			
+			List<String> rackStringList = rack.getRackArray().stream()
+																.map(Object::toString)
+																.collect(Collectors.toList());
+			rackStringList.add(0, "Rack");
+			String[] rackStringArray = rackStringList.stream().toArray(String[]::new);
+			
+			rackTable.addRow(rackStringArray);
+			rackTable.print();
 		}
-		columnHeaders.add(0, "Tile Number");
-		
-		TableList rackTable = new TableList(rackSize + 1, columnHeaders.stream().toArray(String[]::new)).sortBy(0).withUnicode(true);
-		
-		List<String> rackStringList = rack.getRackArray().stream()
-															.map(Object::toString)
-															.collect(Collectors.toList());
-		rackStringList.add(0, "Rack");
-		String[] rackStringArray = rackStringList.stream().toArray(String[]::new);
-		
-		rackTable.addRow(rackStringArray);
-		rackTable.print();
+		else
+		{
+			print("There are no tiles in the rack");
+		}
 	}
 	
 	public static void printMeldtoUser(List<Meld> melds)

@@ -32,9 +32,9 @@ public class Game
 		
 		//Adding players to the game
 		players.add(new Player(pName,new Strategy0()));
-		players.add(new Player("Computer 1",new Strategy1()));
-		players.add(new Player("Computer 2",new Strategy2()));
-		players.add(new Player("Computer 3",new Strategy3()));
+		players.add(new Player("Player 2",new Strategy1()));
+		players.add(new Player("Player 3",new Strategy2()));
+		players.add(new Player("Player 4",new Strategy3()));
 		
 		//Add players to the table
 		for (Player player: players) 
@@ -48,6 +48,11 @@ public class Game
 		// Game loop the game runs here until it ends.
 		do 
 		{
+			if(stock.getLength() == 0)
+			{
+				gameRunning = false;
+			}
+			
 			Player currentPlayer = table.getNextPlayerTurn();
 			Logger.info(currentPlayer.getName());
 			Logger.info(currentPlayer.isHuman());//log to file
@@ -64,11 +69,14 @@ public class Game
 			Print.print("Melds played by " + currentPlayer.getName() + " are: ");
 			Print.printMeldtoUser(meldsPlayed);
 			
-			if(!meldsPlayed.isEmpty())
+			//Clears the melds so we can add meldsPlayed
+			table.clearMelds();
+			
+			if(!(meldsPlayed.isEmpty()))
 			{
 				for(Meld m: meldsPlayed)
 				{
-					table.addMeldToTable(m);
+					table.updateMeldsOnTable(m); //updating this method now.
 				}
 				
 				table.notifyObservers();
@@ -78,7 +86,7 @@ public class Game
 				currentPlayer.getPlayerRack().takeTile(stock);
 			}
 			
-			gameRunning = false; // only for testing
+			//gameRunning = false; // only for testing
 			
 		}while(gameRunning );
 	
