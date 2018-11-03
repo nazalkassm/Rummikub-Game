@@ -15,28 +15,36 @@ public class Strategy0 implements StrategyBehaviour
 	@Override
 	public List<Meld> useStrategy(Player currPlayer) throws IOException 
 	{
-
+		//declare variables
+		int sum = 0;
 		List<Meld> returnMelds = new ArrayList<>();
 		List<Meld> possibleMelds = new ArrayList<>(currPlayer.getPlayerRack().getMelds());
 		List<Tile> tempList = new ArrayList<>();
 		tempList.addAll(currPlayer.getPlayerRack().getRackArray());
 
-		
+		//print table and possible melds
 		Print.printRacktoUser(currPlayer.getPlayerRack());
 		Print.printMeldtoUser(possibleMelds);
 
-		int sum = 0;
-
+		
+		//execute play logic for this strategy
 		inputPlay(currPlayer, possibleMelds, returnMelds);
+		
+		//checks for sum of returning melds
 		for (Meld m: returnMelds) {
 			sum += m.sumMeld();
 		}
 
+		//checks if player has already played its initial 30
+		//if it hasn't then it checks whether the playable meld's sum is 30 or greater
+		//if either true, returns played melds and ends turn
 		if(currPlayer.canPlayOnExistingMelds || sum >= 30) {
-			
 			return returnMelds;
 		}
 
+		//if player has not played inital 30 AND playable melds sums less than 30
+		//player cannot place playable melds on table
+		//so player's rack gets reset to when the turn started and ends turn
 		else {
 			Print.print("You cannot play your initial 30 this round");
 			currPlayer.getPlayerRack().setRack(tempList);

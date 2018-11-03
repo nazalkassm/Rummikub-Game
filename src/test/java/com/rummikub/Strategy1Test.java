@@ -86,7 +86,7 @@ class Strategy1Test {
 		assertEquals(8,player2.getPlayerRack().getSize());
 		
 		//player1 tests
-		assertEquals("[G10 G11 G12 , R9 R10 R11 R12 ]", player1.play().toString());
+		assertEquals("[R9 R10 R11 R12 , G10 G11 G12 ]", player1.play().toString());
 		assertEquals(1,player1.getPlayerRack().getSize());
 		
 		//player2 tests
