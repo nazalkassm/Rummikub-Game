@@ -15,11 +15,15 @@ import org.junit.jupiter.api.Test;
 import org.pmw.tinylog.Logger;
 
 public class ScenarioTest {
+	private static Game game;
+	
+	@BeforeAll
+	static void setUpClass() {
+		game = new Game();
+	}
 	
 	@Test
-	void Scenerio1Test() {
-		Game game = new Game();
-		
+	void Scenerio1Test() {		
 		FileParser.parse("src/main/resources/inputFiles/test1.txt");
 		game.stock = FileParser.stock;
 		game.table = new Table(game.stock);
@@ -32,6 +36,27 @@ public class ScenarioTest {
 			game.start();
 			
 			assertEquals("Human", game.winner.getName());
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+	}
+	
+	@Test
+	void Scenerio2Test() {
+		Game game = new Game();
+		
+		FileParser.parse("src/main/resources/inputFiles/test2.txt");
+		game.stock = FileParser.stock;
+		game.table = new Table(game.stock);
+		
+		assertEquals(56, game.stock.getLength());
+		assertEquals(3, FileParser.playerCommands.size());
+		
+		try {
+			Prompt.init(FileParser.playerCommands);
+			game.start();
+			
+			assertEquals("Player 2", game.winner.getName());
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}

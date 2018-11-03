@@ -1,5 +1,7 @@
 Human (p1) goes first (always).
 This test plan does *not* reuse tiles on the table.
+p1 goes out on their first turn.
+
 C: Orange
 D: Blue
 S: Green
