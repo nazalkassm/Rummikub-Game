@@ -39,6 +39,8 @@ public class ScenarioTest {
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
+		
+		Prompt.init();
 	}
 	
 	@Test
@@ -60,6 +62,9 @@ public class ScenarioTest {
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
+		
+		Prompt.init();
 	}
+	
 	
 }

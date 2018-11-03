@@ -27,11 +27,8 @@ public class Prompt
 	 */
 	public static void init() 
 	{
-		if (!initialized) 
-		{
-			initialized = true;
-			bi = new BufferedReader(new InputStreamReader(System.in));
-		}
+		initialized = true;
+		bi = new BufferedReader(new InputStreamReader(System.in));
 	}
 	
 	/**
@@ -50,7 +47,6 @@ public class Prompt
 		}
 		
 		String commandsString = sb.toString();
-		//Print.println(commandsString);
 		
 		bi = new BufferedReader(new StringReader(commandsString));
 	}

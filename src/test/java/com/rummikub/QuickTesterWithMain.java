@@ -1,5 +1,6 @@
 package com.rummikub;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import org.pmw.tinylog.Logger;
@@ -41,5 +42,18 @@ public class QuickTesterWithMain
 		player1.getPlayerRack().sortRack();
 		Print.print(player1.getPlayerRack().toString());
 		Print.print(player1.getPlayerRack().getMelds().toString());*/
+	}
+	
+	public static void rigGame(String filePath) throws IOException {
+		Game game = new Game();
+		FileParser.parse("src/main/resources/inputFiles/test1.txt");
+		
+		game.stock = FileParser.stock;
+		game.table = new Table(game.stock);
+		
+		if (FileParser.playerCommands.size() > 0) {
+			Prompt.init(FileParser.playerCommands);
+		}
+		game.start();
 	}
 }
