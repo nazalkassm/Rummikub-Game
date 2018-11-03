@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 /**
  * This class creates a nice table that we can fill with strings and then print.
- * @author therealfarfetchd - https://github.com/therealfarfetchd
+ * @author therealfarfetchd - https://github.com/therealfarfetchd/crogamp/blob/master/src/com/github/mrebhan/crogamp/cli/TableList.java
  *
  */
 
