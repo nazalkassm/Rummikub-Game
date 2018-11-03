@@ -102,15 +102,20 @@ public class Table implements Subject {
 	 * Add a meld to the table 
 	 * @param meldToAdd = A VALID meld to be added to the table 
 	 */
-	public boolean addMeldToTable(Meld meldToAdd) {
+	public boolean updateMeldsOnTable(Meld meldToAdd) {
 		//Make sure the meld type isn't invalid
-		if (meldToAdd.getMeldType() == Meld.MeldType.INVALID) {
+		if (meldToAdd.getMeldType() == Meld.MeldType.INVALID) 
+		{
 			return false;
 		}
-		
 		this.melds.add(meldToAdd);
 		
 		return true;
+	}
+	
+	public void clearMelds()
+	{
+		this.melds.clear();
 	}
 	
   /**

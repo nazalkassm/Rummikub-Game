@@ -68,7 +68,7 @@ public class Strategy0 implements StrategyBehaviour
 			//Print Hand Info
 			Print.printRacktoUser(currPlayer.getPlayerRack());
 			Print.printMeldtoUser(possibleMelds);
-			inputString = Prompt.promptInput("Enter the melds you want to play (0 to pass): ");
+			inputString = Prompt.promptInput("Enter the melds you want to play (0 to pass or no melds): ");
 			input = Integer.parseInt(inputString);
 		}
 	}
