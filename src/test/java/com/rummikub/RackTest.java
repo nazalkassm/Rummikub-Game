@@ -123,7 +123,7 @@ public class RackTest {
 		hand2.addTile(new Tile("G", "10")); //G5
 		hand2.addTile(new Tile("G", "11")); //G6
 		hand2.addTile(new Tile("G", "12")); //G6
-		hand2.addTile(new Tile("R", "9")); //G4
+		hand2.addTile(new Tile("R", "10")); //G4
 		hand2.addTile(new Tile("R", "10")); //G5
 		hand2.addTile(new Tile("R", "11")); //G6
 		hand2.addTile(new Tile("R", "12")); //G6
