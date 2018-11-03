@@ -75,7 +75,7 @@ public class Print
 				}
 				columnHeaders.add(0, "Tile Number");
 				
-				TableList rackTable = new TableList(rackSize + 1, columnHeaders.stream().toArray(String[]::new)).sortBy(0).withUnicode(true);
+				TableList rackTable = new TableList(rackSize + 1, columnHeaders.stream().toArray(String[]::new)).withUnicode(true);
 				
 				List<String> rackStringList = rack.getRackArray().stream()
 																	.map(Object::toString)
@@ -107,7 +107,7 @@ public class Print
 		                .map(Object::toString)
 		               .collect(Collectors.toList());
 				
-				TableList meldTable = new TableList(2, "Meld Number", "Meld").sortBy(0).withUnicode(true);
+				TableList meldTable = new TableList(2, "Meld Number", "Meld").withUnicode(true);
 				
 				int meldNumber = 1;
 				for(String meld : meldStringList) {
@@ -135,7 +135,7 @@ public class Print
 		               .map(Object::toString)
 		              .collect(Collectors.toList());
 				
-			TableList meldTable = new TableList(2, "Meld Number", "Table Melds").sortBy(0).withUnicode(true);
+			TableList meldTable = new TableList(2, "Meld Number", "Table Melds").withUnicode(true);
 				
 			int meldNumber = 1;
 			for(String meld : meldStringList) 
