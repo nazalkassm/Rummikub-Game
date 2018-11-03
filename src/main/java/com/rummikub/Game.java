@@ -76,7 +76,7 @@ public class Game
 			{
 				for(Meld m: meldsPlayed)
 				{
-					table.updateMeldsOnTable(m); //updating this method now.
+					table.updateMeldsOnTable(m);
 				}
 				
 				table.notifyObservers();
@@ -86,12 +86,14 @@ public class Game
 				currentPlayer.getPlayerRack().takeTile(stock);
 			}
 			
+			Print.println(currentPlayer.getName() + "'s turn is over.","------------------------------------\n");
+			
 			//gameRunning = false; // only for testing
 			
 		}while(gameRunning );
 	
 		//Game ending ( we print an ending and maybe who won, also we can reset variables and game state if needed)
-		printer.printEnding(winner); // we can maybe give it a winner so that it can print it.
+		printer.printEnding(winner);
 	
 	}
 }

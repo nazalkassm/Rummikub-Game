@@ -99,5 +99,4 @@ public class Prompt
 				System.exit(0);
 			}	
 	}
-
 }
