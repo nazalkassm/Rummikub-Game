@@ -64,7 +64,6 @@ public class Strategy0 implements StrategyBehaviour
 		while(input > 0 && input <= possibleMelds.size() + Constants.ONE_INDEX)
 		{
 			returnMelds.add(possibleMelds.get(input-Constants.ONE_INDEX));
-
 			currPlayer.getPlayerRack().removeTiles(possibleMelds.get(input-Constants.ONE_INDEX));
 			possibleMelds = new ArrayList<>(currPlayer.getPlayerRack().getMelds());
 			//Print Hand Info

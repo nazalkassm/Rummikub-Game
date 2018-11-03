@@ -5,6 +5,7 @@ public class Tile implements Comparable<Tile> {
 	/**The rank and colour of the tile */
 	private Ranks rank;
 	private Colours colour;
+	private boolean playedOnTable = false;
 	
 	//Constructor
 	public Tile(Colours colour, Ranks rank) {
@@ -82,5 +83,13 @@ public class Tile implements Comparable<Tile> {
 			return true;
 		}
 		return false;
+	}
+	
+	public boolean getPlayedOnTable( ) {
+		return playedOnTable;
+	}
+	
+	public void setPlayedOnTable(boolean bool) {
+		this.playedOnTable = bool;
 	}
 }
