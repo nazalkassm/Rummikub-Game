@@ -92,7 +92,7 @@ public class Prompt
 			init();
 		}
 		
-		System.out.println("Press \"ENTER\" to start game...");
+		System.out.println("Press \"ENTER\"");
 			
 			try {
 				bi.readLine();

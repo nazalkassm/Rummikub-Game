@@ -122,10 +122,12 @@ public class Print
 	public void printGameTable(Table table)
 	{
 		List <Meld> boardMelds = table.getAllMelds();
-			
+		
+		print("\n_____GAME TABLE_____");
+		
 		if (boardMelds.isEmpty()) 
 		{
-			println("\n_____GAME TABLE_____","There are no melds on the table\n");
+			println("There are no melds on the table\n");
 		}
 		else 
 		{
@@ -151,23 +153,10 @@ public class Print
 		System.out.print(message);
 		while(counter < 5)
 		{
-<<<<<<< HEAD
-			List<String> meldStringList = melds.stream()
-	                .map(Object::toString)
-	               .collect(Collectors.toList());
-			
-			TableList meldTable = new TableList(2, "Meld Number", "Meld").withUnicode(true);
-			
-			int meldNumber = 1;
-			for(String meld : meldStringList) {
-			    meldTable.addRow("Meld " + Integer.toString(meldNumber), meld);
-			    meldNumber++;
-=======
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
->>>>>>> 02554fbbd87c03bfdfd85a6e0faebf54b93a2257
 			}
 			System.out.print(" ...");
 			counter ++;

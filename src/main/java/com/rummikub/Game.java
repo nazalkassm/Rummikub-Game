@@ -78,11 +78,11 @@ public class Game
 			Print.print("\nMelds played by " + currentPlayer.getName() + " are: ");
 			Print.printMeldtoUser(meldsPlayed);
 			
-			//Clears the melds so we can add meldsPlayed
-			table.clearMelds();
-			
 			if(!(meldsPlayed.isEmpty()))
 			{
+				//Clears the melds so we can add meldsPlayed
+				table.clearMelds();
+				
 				turnsWithoutMoves = 0;
 				for(Meld m: meldsPlayed)
 				{
