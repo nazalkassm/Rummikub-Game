@@ -107,9 +107,6 @@ public class Meld
 		
 		Collections.sort(collectedTings.get(0));
 		Collections.sort(collectedTings.get(1));
-		System.out.println("0");
-		System.out.println(collectedTings.get(0));
-		System.out.println("1");
 
 		System.out.println(collectedTings.get(1));
 		Meld meld = null;
