@@ -1,5 +1,6 @@
 Human (p1) goes first (always).
 p4 goes out on their first turn. (4.c)
+p2 plays its first 30 after another player already has.
 
 Initial Hands:
 p1:
@@ -25,8 +26,8 @@ B13
 G13
 R1, R2, R3, R4, R5, R6, R7, R8, R9, R10, R11
 
-p1 plays
-p2 plays
-p3 plays
+p1 plays {O8, O9, O10, O11, O12}
+p2 does not play its initial 30 and draws.
+p3 does not play its initial 30 and draws.
 P4 plays {R1, R2, R3, R4, R5, R6, R7, R8, R9, R10, R11, R12}, {O13, B13, G13}
 p4 wins on first turn
