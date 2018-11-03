@@ -17,5 +17,9 @@ public class TableInfo
 	public int getLowestHandCount() {
 		return lowestHandCount;
 	}
+	
+	public List<Meld> getMelds() {
+		return melds;
+	}
 
 }
