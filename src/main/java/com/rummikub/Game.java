@@ -32,9 +32,9 @@ public class Game
 		
 		//Adding players to the game
 		players.add(new Player(pName,new Strategy0()));
-		players.add(new Player("Computer 1",new Strategy1()));
-		players.add(new Player("Computer 2",new Strategy2()));
-		players.add(new Player("Computer 3",new Strategy3()));
+		players.add(new Player("Player 2",new Strategy1()));
+		players.add(new Player("Player 3",new Strategy2()));
+		players.add(new Player("Player 4",new Strategy3()));
 		
 		//Add players to the table
 		for (Player player: players) 
@@ -78,7 +78,7 @@ public class Game
 				currentPlayer.getPlayerRack().takeTile(stock);
 			}
 			
-			gameRunning = false; // only for testing
+			//gameRunning = false; // only for testing
 			
 		}while(gameRunning );
 	

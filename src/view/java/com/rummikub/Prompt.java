@@ -39,23 +39,20 @@ public class Prompt
 	 */
 	public static void init(List<String> commands) 
 	{
-		if (!initialized) 
+		initialized = true;
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("\nHuman\n");
+		for (String s : commands)
 		{
-			initialized = true;
-			
-			StringBuilder sb = new StringBuilder();
-			sb.append("\nHuman\n");
-			for (String s : commands)
-			{
-			    sb.append(s);
-			    sb.append("\n");
-			}
-			
-			String commandsString = sb.toString();
-			//Print.println(commandsString);
-			
-			bi = new BufferedReader(new StringReader(commandsString));
+		    sb.append(s);
+		    sb.append("\n");
 		}
+		
+		String commandsString = sb.toString();
+		//Print.println(commandsString);
+		
+		bi = new BufferedReader(new StringReader(commandsString));
 	}
 	
 	/**

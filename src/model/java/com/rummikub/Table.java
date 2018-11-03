@@ -60,8 +60,8 @@ public class Table implements Subject {
 				newPlayerTurns.put(1, entry.getValue());
 			} else {
 				newPlayerTurns.put(turnNum, entry.getValue());
+				turnNum++;
 			}
-			turnNum++;
 		}
 		this.players = newPlayerTurns;
 		
