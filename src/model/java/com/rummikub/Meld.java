@@ -81,22 +81,82 @@ public class Meld
 	
 	
 	public static List<Meld> getMeldsWithTable(List<Tile> tileList) {
+		//??
 		List<Meld> meldList = new ArrayList<Meld>();
+		//To hold all the tiles that were on the table 
 		List<Tile> tilesOnTable = new ArrayList<Tile>();
+		//For each of the tiles in tile list, add only those with the played on table
+		//boolean true  to the tilesOnTable list
 		for (Tile t: tileList) {
 			if (t.getPlayedOnTable()) {
 				tilesOnTable.add(t);
 			}
 		}
 		
-		//Find max of 5 cominations
-		//For each of those, 
-		   //If one of them had on tilesOnTable true 
-			//That is what we're 
-		meldList.addAll(getRunMelds(tileList));
-		meldList.addAll(getSetMelds(tileList));
+		//To hold all the possible meld combinations that we could play
+		List<List<Meld>> combinationsOfMeld = new ArrayList<List<Meld>>();
 		
-		return meldList;
+		//Get all possible melds with this tileList
+		List<Meld> possibleMelds = new ArrayList<>(Meld.getMelds(tileList));
+	
+		for (int i = 0; i < possibleMelds.size(); i++ ) {
+		  List<Meld> secondLevelArrayList = new ArrayList<Meld>();
+		  combinationsOfMeld.add(secondLevelArrayList);
+		}
+		
+		int i = 0;
+		//For each these tiles 
+		for (Meld inititalMeldToPlay: possibleMelds) {
+			Rack tempRack = new Rack();
+			tempRack.setRack(tileList);
+			
+			Meld currMeld = inititalMeldToPlay;
+			List<Meld> currentPossibleMelds = new ArrayList<Meld>();
+			do {
+				//Get all possible melds with this tileList
+				
+				//now add Meld with max sum to return melds
+				combinationsOfMeld.get(i).add(currMeld);
+				//pop the tiles with were added to return melds
+				tempRack.removeTiles(currMeld);
+				currentPossibleMelds = new ArrayList<>(tempRack.getMelds());
+				
+				//update possible melds to get new list of melds
+				if (currentPossibleMelds.size() > 0) {
+				currMeld = currentPossibleMelds.get(Meld.getMaxIndex(currentPossibleMelds));
+				} else {
+					break;
+				}
+			} while (true);
+			i++;
+		}
+		
+		int combinationToPlay = -1;
+		int countPlayed = 1;
+		int j = 0;
+		for (List<Meld> melds: combinationsOfMeld) {
+
+			List<Tile> tiles = new ArrayList<>();
+			
+			for (Meld m: melds) {
+				tiles.addAll(m.getTiles());
+			}
+			
+			if (tiles.containsAll(tilesOnTable)) {
+			
+				if (tiles.size() > countPlayed) {
+					combinationToPlay = j;
+					countPlayed = tiles.size();
+				}
+			}
+			j++;
+		}
+		
+		if (combinationToPlay == -1) {
+			return Collections.emptyList(); 
+		} 
+		
+		return combinationsOfMeld.get(combinationToPlay);
 	}
 	
 	public static List<Meld> getRunMelds(List<Tile> tileList) {
@@ -111,8 +171,14 @@ public class Meld
 		
 		for (int i = 0; i < tileList.size() ; i++) {
 			Tile currTile = tileList.get(i); 
-	
-			if (collectedTings.get(0).contains(currTile)) {
+			boolean containTile = false;
+			//Check if the current tile's color is already in the first list
+			for (Tile tile : collectedTings.get(0)) {
+        if (tile.equals(currTile)) {
+        	containTile = true;
+        }
+			}
+			if (containTile) {
 				collectedTings.get(1).add(currTile);
 			} else {
 				collectedTings.get(0).add(currTile);
