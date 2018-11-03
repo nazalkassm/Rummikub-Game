@@ -113,8 +113,34 @@ public class Print
 			}
 		}
 	}
+	
+	public void printGameTable(Table table)
+	{
+		List <Meld> boardMelds = table.getAllMelds();
+			
+		if (boardMelds.isEmpty()) 
+		{
+			println("\n_____GAME TABLE_____","There are no melds on the table\n");
+		}
+		else 
+		{
+			List<String> meldStringList = boardMelds.stream()
+		               .map(Object::toString)
+		              .collect(Collectors.toList());
+				
+			TableList meldTable = new TableList(2, "Meld Number", "Table Melds").sortBy(0).withUnicode(true);
+				
+			int meldNumber = 1;
+			for(String meld : meldStringList) 
+			{
+				    meldTable.addRow("Meld " + Integer.toString(meldNumber), meld);
+				meldNumber++;
+			}
+			meldTable.print();
+		}
+	}
 
-	public static void printDelay(String message) 
+	public static void printMessageWithDelay(String message) 
 	{
 		int counter = 0;
 		System.out.print(message);

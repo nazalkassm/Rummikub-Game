@@ -7,8 +7,6 @@ public class Player {
 	/** Name of player */
 	private String name;
 	
-	/** initial 30 var*/
-	boolean playedInitial30 = false; // what is this are we using it ?
 	private boolean printRackMeldInPlayer = true;
 	
 	/** Player's rack */	

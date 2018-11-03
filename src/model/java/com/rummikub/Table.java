@@ -232,4 +232,9 @@ public class Table implements Subject {
 		}
 		return lowestCount;
 	}
+	
+	public List<Meld> getAllMelds()
+	{
+		return this.melds;
+	}
 }

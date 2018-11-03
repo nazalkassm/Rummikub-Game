@@ -61,6 +61,8 @@ public class Game
 				gameRunning = false;
 			}*/
 			
+			printer.printGameTable(table);
+			
 			Player currentPlayer = table.getNextPlayerTurn();
 			Logger.info(currentPlayer.getName());
 			Logger.info(currentPlayer.isHuman());//log to file
