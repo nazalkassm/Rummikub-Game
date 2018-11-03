@@ -30,6 +30,15 @@ public class Stock
 	}
 	
 	/**
+	 * Constructor to create a stock given a list of tiles.
+	 * @param tiles given list of tiles
+	*/
+	public Stock (List<Tile> tiles) {
+		stockArray = tiles;
+		stockS = tiles.size();
+	}
+	
+	/**
 	 * Main Constructor to create a stock you need to give a size.
 	 * When a stock is created we add two 52 distinct tiles. Then, they are shuffled.
 	 * @param sS given stock size
