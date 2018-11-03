@@ -1,6 +1,6 @@
 package com.rummikub;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -169,4 +169,22 @@ public class MeldTest {
 		List<Meld> melds = Arrays.asList(m1, m2, m3);
 		assertEquals(2,Meld.getMaxIndex(melds));
 	}
+	
+	@Test
+	public void getAllMeldsWithTableTest() {
+	
+		List<Tile> tiles = Arrays.asList(
+				//Tiles played on table
+				new Tile("R1", true), new Tile("R2", true), new Tile("R3", true), new Tile("R4", true),new Tile("R5", true), new Tile("R6", true),
+			
+				//Hand
+				new Tile("R4", false), new Tile("R5", false));
+	
+		//This is the case where a meld is played by rearranging multiple melds.
+		//The R1 to R4 is played and R4 to R6 is played by splitting R1 to R6 on the table
+		assertEquals("[R1 R2 R3 R4 , R4, R5, R6 ]", 
+				Meld.getMeldsWithTable(tiles).toString());
+
+	}
+	
 }

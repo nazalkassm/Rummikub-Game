@@ -3,6 +3,7 @@ package com.rummikub;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.*;
@@ -77,15 +78,4 @@ public class TableTest {
 		assertEquals(4, table.getPlayerCount());
 	}
 	
-	
-	@Test
-	public void getAllMelds() {
-		Stock stock = new Stock();
-		Rack rack = new Rack();
-		rack.setRack(stock.getStockArray());
-		rack.sortRack();
-		System.out.println(rack.getRackArray());
-		System.out.println(Meld.getRunMelds(rack.getRackArray()));
-
-	}
 }
