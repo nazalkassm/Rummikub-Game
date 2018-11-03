@@ -28,7 +28,7 @@ public class Strategy0 implements StrategyBehaviour
 
 		
 		//execute play logic for this strategy
-		inputPlay(currPlayer, possibleMelds, returnMelds);
+		playStrategy(currPlayer, possibleMelds, returnMelds);
 		
 		//checks for sum of returning melds
 		for (Meld m: returnMelds) {
@@ -53,8 +53,8 @@ public class Strategy0 implements StrategyBehaviour
 
 	}
 
-
-	private void inputPlay(Player currPlayer, List<Meld> possibleMelds, List<Meld> returnMelds) throws IOException {
+	@Override
+	public void playStrategy(Player currPlayer, List<Meld> possibleMelds, List<Meld> returnMelds) throws IOException {
 		String inputString = Prompt.promptInput("Enter the melds you want to play (0 to pass or no melds) : ");
 
 		int input = Integer.parseInt(inputString);

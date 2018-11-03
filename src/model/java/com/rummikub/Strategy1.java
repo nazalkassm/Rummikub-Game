@@ -25,7 +25,7 @@ public class Strategy1 implements StrategyBehaviour {
 
 		
 		//execute play logic for this strategy
-		inputPlay(currPlayer, possibleMelds, returnMelds);
+		playStrategy(currPlayer, possibleMelds, returnMelds);
 		
 		//checks for sum of returning melds
 		for (Meld m: returnMelds) {
@@ -50,8 +50,8 @@ public class Strategy1 implements StrategyBehaviour {
 	}
 	
 	
-
-	private void inputPlay(Player currPlayer, List<Meld> possibleMelds, List<Meld> returnMelds) {
+	@Override
+	public void playStrategy(Player currPlayer, List<Meld> possibleMelds, List<Meld> returnMelds) {
 		while (possibleMelds.size() > 0) {
 			//now add Meld with max sum to return melds
 			returnMelds.add(possibleMelds.get(Meld.getMaxIndex(possibleMelds)));

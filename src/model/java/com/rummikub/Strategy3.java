@@ -18,46 +18,45 @@ public class Strategy3 implements StrategyBehaviour {
 	@Override
 	public List<Meld> useStrategy(Player currPlayer) 
 	{
-		
-		// String[] arrayofNumbs = null;
+		//declare variables
+		int sum = 0;
 		List<Meld> returnMelds = new ArrayList<>();
 		List<Meld> possibleMelds = new ArrayList<>(currPlayer.getPlayerRack().getMelds());
-		
-		//Print Hand Info
+		List<Tile> tempList = new ArrayList<>();
+		tempList.addAll(currPlayer.getPlayerRack().getRackArray());
+
+		//print table and possible melds
 		Print.printRacktoUser(currPlayer.getPlayerRack());
+		Print.printMeldtoUser(possibleMelds);
+
 		
-		if (possibleMelds.isEmpty()) 
-		{
-			return Collections.emptyList();
-		}
-		else 
-		{
-			Print.printMeldtoUser(possibleMelds);
-		}
+		//execute play logic for this strategy
+		playStrategy(currPlayer, possibleMelds, returnMelds);
 		
-		int sum = 0;
-		if(!currPlayer.canPlayOnExistingMelds) {
-			for(Meld m: possibleMelds) {
-				sum += m.sumMeld(m);
-			}
-			
-			if(sum >= 30) {
-				
-			}
-			
-			else {
-				return Collections.emptyList();
-			}
-			
+		//checks for sum of returning melds
+		for (Meld m: returnMelds) {
+			sum += m.sumMeld();
 		}
-		
-		executePlay(currPlayer, possibleMelds, returnMelds);
-			
-		return returnMelds;
+
+		//checks if player has already played its initial 30
+		//if it hasn't then it checks whether the playable meld's sum is 30 or greater
+		//if either true, returns played melds and ends turn
+		if(currPlayer.canPlayOnExistingMelds || sum >= 30) {
+			return returnMelds;
+		}
+
+		//if player has not played inital 30 AND playable melds sums less than 30
+		//player cannot place playable melds on table
+		//so player's rack gets reset to when the turn started and ends turn
+		else {
+			Print.print("You cannot play your initial 30 this round");
+			currPlayer.getPlayerRack().setRack(tempList);
+			return Collections.emptyList(); 
+		}
 	}
 	
-	
-	public void executePlay(Player currPlayer, List<Meld> possibleMelds, List<Meld> returnMelds) {
+	@Override
+	public void playStrategy(Player currPlayer, List<Meld> possibleMelds, List<Meld> returnMelds) {
 		
 	}
 

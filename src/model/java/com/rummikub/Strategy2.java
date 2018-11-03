@@ -25,4 +25,10 @@ public class Strategy2 implements StrategyBehaviour {
 		subject.registerObserver(this);
 	}
 
+	@Override
+	public void playStrategy(Player currPlayer, List<Meld> possibleMelds, List<Meld> returnMelds) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
