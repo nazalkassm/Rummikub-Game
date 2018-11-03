@@ -54,7 +54,12 @@ public class Print
 			System.out.print(" ...");
 			counter ++;
 		}
-		print(" "+ winner.getName());
+		if (winner == null) {
+			print(" no one!");
+		}
+		else {
+			print(" "+ winner.getName());
+		}
 	}
 	
 	public static void printRacktoUser(Rack rack, boolean print_Rack)
@@ -146,10 +151,23 @@ public class Print
 		System.out.print(message);
 		while(counter < 5)
 		{
+<<<<<<< HEAD
+			List<String> meldStringList = melds.stream()
+	                .map(Object::toString)
+	               .collect(Collectors.toList());
+			
+			TableList meldTable = new TableList(2, "Meld Number", "Meld").withUnicode(true);
+			
+			int meldNumber = 1;
+			for(String meld : meldStringList) {
+			    meldTable.addRow("Meld " + Integer.toString(meldNumber), meld);
+			    meldNumber++;
+=======
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
+>>>>>>> 02554fbbd87c03bfdfd85a6e0faebf54b93a2257
 			}
 			System.out.print(" ...");
 			counter ++;
