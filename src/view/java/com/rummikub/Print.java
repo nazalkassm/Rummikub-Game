@@ -163,9 +163,4 @@ public class Print
 		}
 		System.out.println();
 	}
-
-	public static void printMeldtoUser(List<Meld> meldsPlayed) 
-	{
-		printMeldtoUser(meldsPlayed,true);
-	}	
 }
