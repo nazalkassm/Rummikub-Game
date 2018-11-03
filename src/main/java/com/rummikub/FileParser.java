@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class FileParser {
 	public static List<String> playerCommands;
-	public static List<Tile> stock;
+	public static Stock stock;
 	public static Boolean inputError = false;
 	
 
@@ -20,9 +20,6 @@ public class FileParser {
 		List<String> fileContents;
 
 		if(file.exists()) {
-			List<String> tileList = new ArrayList<String>();
-			playerCommands = new ArrayList<String>();
-
 			try(BufferedReader br = new BufferedReader(new FileReader(filePath))) {
 				String fileText = "";
 				StringBuilder sb = new StringBuilder();
@@ -37,20 +34,23 @@ public class FileParser {
 				fileText = sb.toString();
 				fileContents = Arrays.asList(fileText.split("\\s"));
 
-				stock = new ArrayList<Tile>();
+				List<Tile> tileList = new ArrayList<Tile>();
 				playerCommands = new ArrayList<String>(); 
 				
 				for (String element : fileContents) {
-					if (isValidTile(element)) {
-						stock.add(new Tile(element));
+					if (Tile.verifyTile(element)) {
+						tileList.add(new Tile(element));
 					}
 					else if (isInteger(element)) {
 						playerCommands.add(element);
 					}
 					else {
+						Print.println("Invalid file contents: " + element);
 						inputError = true;
 					}
 				}
+				
+				stock = new Stock(tileList);
 
 				// verify that the stock doesn't have any triplets of cards
 				// stock.validate
@@ -58,11 +58,14 @@ public class FileParser {
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				
+				Print.println("Unknown catch-all error");
 				inputError = true;
 			}
 		}
 		else {
 			inputError = true;
+			Print.println("File doesn't exist");
 		}
 	}
 
