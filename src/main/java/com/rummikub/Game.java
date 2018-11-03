@@ -48,10 +48,10 @@ public class Game
 		// Game loop the game runs here until it ends.
 		do 
 		{
-			if(stock.getLength() == 0)
+			/*if(stock.getLength() == 0)
 			{
 				gameRunning = false;
-			}
+			}*/
 			
 			Player currentPlayer = table.getNextPlayerTurn();
 			Logger.info(currentPlayer.getName());

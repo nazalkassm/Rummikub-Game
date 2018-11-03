@@ -65,13 +65,18 @@ public class Prompt
 	 */
 	public static String promptInput(String... message) throws IOException 
 	{
+		String input = null;
 		if (!initialized) 
 		{
 			init();
 		}
 		Print.println(message);
 		
-		return bi.readLine();
+		input = bi.readLine();
+		if (input == null) init();
+		input = bi.readLine();
+		
+		return input;
 	}
 	
 	/**

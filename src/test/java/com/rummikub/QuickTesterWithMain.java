@@ -1,5 +1,6 @@
 package com.rummikub;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -46,14 +47,16 @@ public class QuickTesterWithMain
 	
 	public static void rigGame(String filePath) throws IOException {
 		Game game = new Game();
-		FileParser.parse("src/main/resources/inputFiles/test1.txt");
+		FileParser.parse(filePath);
 		
-		game.stock = FileParser.stock;
-		game.table = new Table(game.stock);
-		
-		if (FileParser.playerCommands.size() > 0) {
-			Prompt.init(FileParser.playerCommands);
+		if (!FileParser.inputError) {
+			game.stock = FileParser.stock;
+			game.table = new Table(game.stock);
+			
+			if (FileParser.playerCommands.size() > 0) {
+				Prompt.init(FileParser.playerCommands);
+			}
+			game.start();
 		}
-		game.start();
 	}
 }
