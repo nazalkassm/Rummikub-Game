@@ -133,7 +133,7 @@ public class RackTest {
 		System.out.println(hand2.toString());
 		System.out.println(hand2.getMelds().toString());
 		
-		assertEquals("[G4 G5 G6 , G10 G11 G12 , R9 R10 R11 R12 ]", 
+		assertEquals("[G4 G5 G6 , G10 G11 G12 , R9 R10 R11 , R9 R10 R11 R12 ]", 
 				hand2.getMelds().toString());
 	}
 	
