@@ -27,6 +27,16 @@ public class Tile implements Comparable<Tile> {
 		this.colour = Colours.getColourFromSymbol(tileString.substring(0, 1).toUpperCase());
 	}
 	
+	public Tile(String tileString, boolean played) {
+		if (!Tile.verifyTile(tileString)) {
+			throw new IllegalArgumentException("Invalid tile");
+		}
+		
+		this.rank = Ranks.getRankFromSymbol(tileString.substring(1));
+		this.colour = Colours.getColourFromSymbol(tileString.substring(0, 1).toUpperCase());
+		this.playedOnTable = played;
+	}
+	
 	@Override
 	public String toString() { 
 		return this.colour.getSymbol() + this.rank.getSymbol();
@@ -40,8 +50,12 @@ public class Tile implements Comparable<Tile> {
 		return this.colour == tile.colour;
 	}
 	
-	public boolean equals(Tile tile) {
-		return isSameRank(tile) && isSameColour(tile);
+	public boolean equals(Object tile) {
+		if (tile instanceof Tile) {
+			return isSameRank((Tile)tile) && isSameColour((Tile)tile);
+		} else {
+			return false;
+		}
 	}
 	
 	//Getters and Setters

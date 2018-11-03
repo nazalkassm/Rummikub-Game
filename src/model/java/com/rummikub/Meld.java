@@ -91,14 +91,8 @@ public class Meld
 		
 		for (int i = 0; i < tileList.size() ; i++) {
 			Tile currTile = tileList.get(i); 
-			boolean containsTile = false;
-			//Check if the current tile's color is already in the first list
-			for (Tile tile : collectedTings.get(0)) {
-        if (tile.equals(currTile)) {
-        	containsTile = true;
-        }
-			}
-			if (containsTile) {
+	
+			if (collectedTings.get(0).contains(currTile)) {
 				collectedTings.get(1).add(currTile);
 			} else {
 				collectedTings.get(0).add(currTile);
@@ -108,7 +102,6 @@ public class Meld
 		Collections.sort(collectedTings.get(0));
 		Collections.sort(collectedTings.get(1));
 
-		System.out.println(collectedTings.get(1));
 		Meld meld = null;
 		
 		boolean isRunOn = false;
