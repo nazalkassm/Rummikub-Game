@@ -76,7 +76,7 @@ public class Game
 		    }
 			
 			Print.print("\nMelds played by " + currentPlayer.getName() + " are: ");
-			Print.printMeldtoUser(meldsPlayed);
+			Print.printMeldtoUser(meldsPlayed,true);
 			
 			if(!(meldsPlayed.isEmpty()))
 			{

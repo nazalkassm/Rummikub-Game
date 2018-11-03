@@ -50,12 +50,8 @@ public class Tile implements Comparable<Tile> {
 		return this.colour == tile.colour;
 	}
 	
-	public boolean equals(Object tile) {
-		if (tile instanceof Tile) {
-			return isSameRank((Tile)tile) && isSameColour((Tile)tile);
-		} else {
-			return false;
-		}
+	public boolean equals(Tile tile) {
+		return isSameRank((Tile)tile) && isSameColour((Tile)tile);	
 	}
 	
 	//Getters and Setters

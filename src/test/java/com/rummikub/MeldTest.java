@@ -182,7 +182,7 @@ public class MeldTest {
 	
 		//This is the case where a meld is played by rearranging multiple melds.
 		//The R1 to R4 is played and R4 to R6 is played by splitting R1 to R6 on the table
-		assertEquals("[R1 R2 R3 R4 , R4, R5, R6 ]", 
+		assertEquals("[R1 R2 R3 R4 R5 , R4 R5 R6 ]", 
 				Meld.getMeldsWithTable(tiles).toString());
 
 	}

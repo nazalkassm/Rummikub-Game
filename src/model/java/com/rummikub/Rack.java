@@ -38,7 +38,8 @@ public class Rack
 	
 	public void setRack(List<Tile> rackList)
 	{
-		tileList = rackList;
+		tileList = new ArrayList<Tile>();
+		tileList.addAll(rackList);
 	}
 	
 
@@ -112,7 +113,7 @@ public class Rack
 
 	public void removeTiles(Meld meld) {
 		for(Tile t: meld.getMeld()) {
-			this.getRackArray().remove(t);
+			this.tileList.remove(t);
 		}
 	}
 
