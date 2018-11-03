@@ -79,6 +79,26 @@ public class Meld
 		return meldList;
 	}
 	
+	
+	public static List<Meld> getMeldsWithTable(List<Tile> tileList) {
+		List<Meld> meldList = new ArrayList<Meld>();
+		List<Tile> tilesOnTable = new ArrayList<Tile>();
+		for (Tile t: tileList) {
+			if (t.getPlayedOnTable()) {
+				tilesOnTable.add(t);
+			}
+		}
+		
+		//Find max of 5 cominations
+		//For each of those, 
+		   //If one of them had on tilesOnTable true 
+			//That is what we're 
+		meldList.addAll(getRunMelds(tileList));
+		meldList.addAll(getSetMelds(tileList));
+		
+		return meldList;
+	}
+	
 	public static List<Meld> getRunMelds(List<Tile> tileList) {
 		int count = 0;
 		List<Meld> meldList = new ArrayList<Meld>();
@@ -113,15 +133,16 @@ public class Meld
 					} else {
 						count++;
 					}
+					if (count >= 3) {
+						Meld meld2 = new Meld();
+						meld2.tiles = new ArrayList<Tile>(tiles.subList(i - count + 1, i+1));
+						meldList.add(meld2);	
+					}
 					isRunOn = true;
 					
 				} else {
 					
-						if (count >= 3) {
-							meld = new Meld();
-							meld.tiles = new ArrayList<Tile>(tiles.subList(i - count, i));
-							meldList.add(meld);	
-						}
+						
 						isRunOn = false;
 						count = 0;
 					}
