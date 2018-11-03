@@ -23,7 +23,8 @@ public class ScenarioTest {
 	}
 	
 	@Test
-	void Scenerio1Test() {		
+	void Scenerio1Test() {
+		// 4.c)
 		FileParser.parse("src/main/resources/inputFiles/test1.txt");
 		assertFalse(FileParser.inputError);
 		
@@ -47,6 +48,7 @@ public class ScenarioTest {
 	
 	@Test
 	void Scenerio2Test() {
+		// 4.c)
 		Game game = new Game();
 		
 		FileParser.parse("src/main/resources/inputFiles/test2.txt");
@@ -72,6 +74,7 @@ public class ScenarioTest {
 	
 	@Test
 	void Scenerio3Test() {
+		// 4.c)
 		Game game = new Game();
 		
 		FileParser.parse("src/main/resources/inputFiles/test3.txt");
@@ -97,6 +100,7 @@ public class ScenarioTest {
 	
 	@Test
 	void Scenerio4Test() {
+		// 4.c)
 		Game game = new Game();
 		
 		FileParser.parse("src/main/resources/inputFiles/test4.txt");

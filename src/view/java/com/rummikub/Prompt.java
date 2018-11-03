@@ -73,8 +73,10 @@ public class Prompt
 		Print.println(message);
 		
 		input = bi.readLine();
-		if (input == null) init();
-		input = bi.readLine();
+		if (input == null) {
+			init();
+			input = bi.readLine();
+		}
 		
 		return input;
 	}
