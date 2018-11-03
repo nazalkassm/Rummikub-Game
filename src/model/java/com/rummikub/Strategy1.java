@@ -38,6 +38,8 @@ public class Strategy1 implements StrategyBehaviour {
 		//if either true, returns played melds and ends turn
 		if(currPlayer.canPlayOnExistingMelds || sum >= 30) {
 			currPlayer.canPlayOnExistingMelds = true;
+			if (tableInfo.getMelds().isEmpty())
+				returnMelds.addAll(tableInfo.getMelds());
 			return returnMelds;
 		}
 
