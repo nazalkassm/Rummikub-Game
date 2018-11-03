@@ -22,6 +22,7 @@ public class Strategy3 implements StrategyBehaviour {
 		int sum = 0;
 		List<Meld> returnMelds = new ArrayList<>();
 		List<Meld> possibleMelds = new ArrayList<>(currPlayer.getPlayerRack().getMelds());
+		
 		List<Tile> tempList = new ArrayList<>();
 		tempList.addAll(currPlayer.getPlayerRack().getRackArray());
 
@@ -31,9 +32,7 @@ public class Strategy3 implements StrategyBehaviour {
 
 		
 		//execute play logic for this strategy
-		if(currPlayer.getPlayerRack().getSize() <= tableInfo.getLowestHandCount() + 3) {
-			playStrategy(currPlayer, possibleMelds, returnMelds);
-		}
+		playStrategy(currPlayer, possibleMelds, returnMelds);
 		
 		
 		//checks for sum of returning melds
@@ -45,6 +44,7 @@ public class Strategy3 implements StrategyBehaviour {
 		//if it hasn't then it checks whether the playable meld's sum is 30 or greater
 		//if either true, returns played melds and ends turn
 		if(currPlayer.canPlayOnExistingMelds || sum >= 30) {
+			currPlayer.canPlayOnExistingMelds = true;
 			return returnMelds;
 		}
 
@@ -60,7 +60,26 @@ public class Strategy3 implements StrategyBehaviour {
 	
 	@Override
 	public void playStrategy(Player currPlayer, List<Meld> possibleMelds, List<Meld> returnMelds) {
-		
+		if(tableInfo.getLowestHandCount() <= currPlayer.getPlayerRack().getSize() - 3) {
+			while (possibleMelds.size() > 0) {
+				//now add Meld with max sum to return melds
+				returnMelds.add(possibleMelds.get(Meld.getMaxIndex(possibleMelds)));
+				//pop the tiles with were added to return melds
+				currPlayer.getPlayerRack().removeTiles(possibleMelds.get(Meld.getMaxIndex(possibleMelds)));
+				//update possible melds to get new list of melds
+				possibleMelds = new ArrayList<>(currPlayer.getPlayerRack().getMelds());
+				
+				//print updated rack and possible melds to UI
+				Print.printRacktoUser(currPlayer.getPlayerRack());
+				Print.printMeldtoUser(possibleMelds);
+			}
+			if (possibleMelds.size() == 0) {
+				//play using the table
+			}
+		}
+		else {
+			//play only table cards 
+		}
 	}
 
 	@Override

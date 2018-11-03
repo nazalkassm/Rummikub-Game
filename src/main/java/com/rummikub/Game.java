@@ -48,6 +48,11 @@ public class Game
 		// Game loop the game runs here until it ends.
 		do 
 		{
+			if(stock.getLength() == 0)
+			{
+				gameRunning = false;
+			}
+			
 			Player currentPlayer = table.getNextPlayerTurn();
 			Logger.info(currentPlayer.getName());
 			Logger.info(currentPlayer.isHuman());//log to file
@@ -64,11 +69,14 @@ public class Game
 			Print.print("Melds played by " + currentPlayer.getName() + " are: ");
 			Print.printMeldtoUser(meldsPlayed);
 			
-			if(!meldsPlayed.isEmpty())
+			//Clears the melds so we can add meldsPlayed
+			table.clearMelds();
+			
+			if(!(meldsPlayed.isEmpty()))
 			{
 				for(Meld m: meldsPlayed)
 				{
-					table.addMeldToTable(m);
+					table.updateMeldsOnTable(m); //updating this method now.
 				}
 				
 				table.notifyObservers();
