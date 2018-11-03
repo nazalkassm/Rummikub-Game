@@ -23,21 +23,23 @@ public class Strategy0 implements StrategyBehaviour
 		List<Tile> tempList = new ArrayList<>();
 		tempList.addAll(currPlayer.getPlayerRack().getRackArray());
 
-		//print table and possible melds
+		//print rack and possible melds
 		Print.printRacktoUser(currPlayer.getPlayerRack(),true);
 		Print.print("\nHere are the melds you can play: ");
 		Print.printMeldtoUser(possibleMelds,true);
 
 		
 		//execute play logic for this strategy
-		playStrategy(currPlayer, possibleMelds, returnMelds);
-		if (returnMelds.isEmpty()) {
+		playStrategy(currPlayer, possibleMelds, returnMelds); // <------ Change execution path here.
+		if (returnMelds.isEmpty()) 
+		{
 			Print.print("\n" + currPlayer.getName() + " wants to pass.");
 			return Collections.emptyList(); 
 		
 		}
 		//checks for sum of returning melds
-		for (Meld m: returnMelds) {
+		for (Meld m: returnMelds) 
+		{
 			sum += m.sumMeld();
 		}
 
@@ -61,7 +63,8 @@ public class Strategy0 implements StrategyBehaviour
 	}
 
 	@Override
-	public void playStrategy(Player currPlayer, List<Meld> possibleMelds, List<Meld> returnMelds) throws IOException {
+	public void playStrategy(Player currPlayer, List<Meld> possibleMelds, List<Meld> returnMelds) throws IOException 
+	{
 		String inputString = Prompt.promptInput("Enter the melds you want to play (0 to pass or no melds) : ");
 
 		int input = Integer.parseInt(inputString);
