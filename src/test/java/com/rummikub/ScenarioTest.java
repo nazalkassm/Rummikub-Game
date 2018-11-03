@@ -29,6 +29,7 @@ public class ScenarioTest {
 		assertEquals(3, FileParser.playerCommands.size());
 		
 		try {
+			Prompt.init(FileParser.playerCommands);
 			game.start();
 		} catch (IOException ex) {
 			ex.printStackTrace();
