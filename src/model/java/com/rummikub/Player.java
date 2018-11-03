@@ -1,7 +1,6 @@
 package com.rummikub;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
@@ -9,7 +8,8 @@ public class Player {
 	private String name;
 	
 	/** initial 30 var*/
-	boolean playedInitial30 = false;
+	boolean playedInitial30 = false; // what is this are we using it ?
+	private boolean printRackMeldInPlayer = true;
 	
 	/** Player's rack */	
 	Rack rack;
@@ -93,6 +93,7 @@ public class Player {
 	{
 		if (this.canPlayOnExistingMelds) 
 		{
+			@SuppressWarnings("unused")
 			List<Tile> tableTiles = table.getAllTilesOnTable();	
 		} 
 		return canPlayOnExistingMelds;
@@ -149,6 +150,16 @@ public class Player {
    */
 	public boolean isHuman() {
 		return this.behaviour instanceof Strategy0;
+	}
+
+	public boolean isPrint_rack_meld() 
+	{
+		return printRackMeldInPlayer;
+	}	
+
+	public void setPrint_rack_meld(boolean print_rack_meld) 
+	{
+		this.printRackMeldInPlayer = print_rack_meld;
 	}
 	
 	

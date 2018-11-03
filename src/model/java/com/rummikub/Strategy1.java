@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class Strategy1 implements StrategyBehaviour {
+	@SuppressWarnings("unused")
 	private TableInfo tableInfo; 
 	
 	Strategy1() {	}
@@ -19,10 +20,10 @@ public class Strategy1 implements StrategyBehaviour {
 		List<Tile> tempList = new ArrayList<>();
 		tempList.addAll(currPlayer.getPlayerRack().getRackArray());
 
-		//print table and possible melds
-		Print.printRacktoUser(currPlayer.getPlayerRack());
-		Print.printMeldtoUser(possibleMelds);
-
+		//print rack and possible melds
+		Print.printRacktoUser(currPlayer.getPlayerRack(),currPlayer.isPrint_rack_meld());
+		Print.printMeldtoUser(possibleMelds,currPlayer.isPrint_rack_meld());
+		
 		
 		//execute play logic for this strategy
 		playStrategy(currPlayer, possibleMelds, returnMelds);
@@ -62,8 +63,8 @@ public class Strategy1 implements StrategyBehaviour {
 			possibleMelds = new ArrayList<>(currPlayer.getPlayerRack().getMelds());
 			
 			//print updated rack and possible melds to UI
-			Print.printRacktoUser(currPlayer.getPlayerRack());
-			Print.printMeldtoUser(possibleMelds);
+			Print.printRacktoUser(currPlayer.getPlayerRack(),currPlayer.isPrint_rack_meld());
+			Print.printMeldtoUser(possibleMelds,currPlayer.isPrint_rack_meld());
 		}
 	}
 

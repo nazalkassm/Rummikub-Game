@@ -7,6 +7,7 @@ import java.util.List;
 
 public class Strategy0 implements StrategyBehaviour 
 {
+	@SuppressWarnings("unused")
 	private TableInfo tableInfo; 
 
 	Strategy0() {	}
@@ -23,14 +24,18 @@ public class Strategy0 implements StrategyBehaviour
 		tempList.addAll(currPlayer.getPlayerRack().getRackArray());
 
 		//print table and possible melds
-		Print.printRacktoUser(currPlayer.getPlayerRack());
+		Print.printRacktoUser(currPlayer.getPlayerRack(),currPlayer.isPrint_rack_meld());
 		Print.print("Here are the melds you can play: ");
 		Print.printMeldtoUser(possibleMelds);
 
 		
 		//execute play logic for this strategy
 		playStrategy(currPlayer, possibleMelds, returnMelds);
+		if (returnMelds.isEmpty()) {
+			Print.print("\n" + currPlayer.getName() + " wants to pass.");
+			return Collections.emptyList(); 
 		
+		}
 		//checks for sum of returning melds
 		for (Meld m: returnMelds) {
 			sum += m.sumMeld();
@@ -48,7 +53,7 @@ public class Strategy0 implements StrategyBehaviour
 		//player cannot place playable melds on table
 		//so player's rack gets reset to when the turn started and ends turn
 		else {
-			Print.print("Player 1 tried playing melds but the sum is < 30.");
+			Print.print("\nPlayer 1 tried playing melds but the sum is < 30.");
 			currPlayer.getPlayerRack().setRack(tempList);
 			return Collections.emptyList(); 
 		}
@@ -67,7 +72,7 @@ public class Strategy0 implements StrategyBehaviour
 			currPlayer.getPlayerRack().removeTiles(possibleMelds.get(input-Constants.ONE_INDEX));
 			possibleMelds = new ArrayList<>(currPlayer.getPlayerRack().getMelds());
 			//Print Hand Info
-			Print.printRacktoUser(currPlayer.getPlayerRack());
+			Print.printRacktoUser(currPlayer.getPlayerRack(),currPlayer.isPrint_rack_meld());
 			Print.print("Here are the melds you can play: ");
 			Print.printMeldtoUser(possibleMelds);
 			inputString = Prompt.promptInput("Enter the melds you want to play (0 to pass or no melds): ");

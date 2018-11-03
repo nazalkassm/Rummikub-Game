@@ -22,8 +22,8 @@ public class Strategy2 implements StrategyBehaviour {
 			tempList.addAll(currPlayer.getPlayerRack().getRackArray());
 
 			//print table and possible melds
-			Print.printRacktoUser(currPlayer.getPlayerRack());
-			Print.printMeldtoUser(possibleMelds);
+			Print.printRacktoUser(currPlayer.getPlayerRack(), currPlayer.isPrint_rack_meld());
+			Print.printMeldtoUser(possibleMelds,currPlayer.isPrint_rack_meld());
 			if (currPlayer.canPlayOnExistingMelds) {
 				while (possibleMelds.size() > 0) {
 					//now add Meld with max sum to return melds
@@ -34,8 +34,8 @@ public class Strategy2 implements StrategyBehaviour {
 					possibleMelds = new ArrayList<>(currPlayer.getPlayerRack().getMelds());
 					
 					//print updated rack and possible melds to UI
-					Print.printRacktoUser(currPlayer.getPlayerRack());
-					Print.printMeldtoUser(possibleMelds);
+					Print.printRacktoUser(currPlayer.getPlayerRack(),currPlayer.isPrint_rack_meld());
+					Print.printMeldtoUser(possibleMelds,currPlayer.isPrint_rack_meld());
 				}
 				
 				//Now with the current hand we do ..

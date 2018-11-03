@@ -82,6 +82,7 @@ public class Prompt
 	}
 	
 	/**
+	 * @param waitStatus 
 	 * 
 	 */
 	public void promptEnterKey()
@@ -100,5 +101,15 @@ public class Prompt
 			{
 				System.exit(0);
 			}	
+	}
+	/**
+	 * 
+	 */
+	public void promptEnterKey(boolean waitStatus)
+	{
+		if(waitStatus)
+		{
+			promptEnterKey();
+		}
 	}
 }
