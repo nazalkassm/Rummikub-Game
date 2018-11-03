@@ -27,11 +27,8 @@ public class Prompt
 	 */
 	public static void init() 
 	{
-		if (!initialized) 
-		{
-			initialized = true;
-			bi = new BufferedReader(new InputStreamReader(System.in));
-		}
+		initialized = true;
+		bi = new BufferedReader(new InputStreamReader(System.in));
 	}
 	
 	/**
@@ -50,7 +47,6 @@ public class Prompt
 		}
 		
 		String commandsString = sb.toString();
-		//Print.println(commandsString);
 		
 		bi = new BufferedReader(new StringReader(commandsString));
 	}
@@ -69,13 +65,20 @@ public class Prompt
 	 */
 	public static String promptInput(String... message) throws IOException 
 	{
+		String input = null;
 		if (!initialized) 
 		{
 			init();
 		}
 		Print.println(message);
 		
-		return bi.readLine();
+		input = bi.readLine();
+		if (input == null) {
+			init();
+			input = bi.readLine();
+		}
+		
+		return input;
 	}
 	
 	/**
@@ -98,5 +101,4 @@ public class Prompt
 				System.exit(0);
 			}	
 	}
-
 }

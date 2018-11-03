@@ -1,4 +1,0 @@
-2018-11-02 21:31:21 [main] com.rummikub.Game.start()
-INFO: naz
-2018-11-02 21:31:21 [main] com.rummikub.Game.start()
-INFO: true
