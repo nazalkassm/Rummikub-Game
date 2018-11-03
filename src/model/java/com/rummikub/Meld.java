@@ -89,9 +89,16 @@ public class Meld
 		  collectedTings.add(secondLevelArrayList);
 		}
 		
-		for (int i = 1; i <= tileList.size() ; i++) {
+		for (int i = 0; i < tileList.size() ; i++) {
 			Tile currTile = tileList.get(i); 
-			if (collectedTings.get(0).contains(currTile)) {
+			boolean containsTile = false;
+			//Check if the current tile's color is already in the first list
+			for (Tile tile : collectedTings.get(0)) {
+        if (tile.equals(currTile)) {
+        	containsTile = true;
+        }
+			}
+			if (containsTile) {
 				collectedTings.get(1).add(currTile);
 			} else {
 				collectedTings.get(0).add(currTile);
@@ -100,7 +107,11 @@ public class Meld
 		
 		Collections.sort(collectedTings.get(0));
 		Collections.sort(collectedTings.get(1));
-		
+		System.out.println("0");
+		System.out.println(collectedTings.get(0));
+		System.out.println("1");
+
+		System.out.println(collectedTings.get(1));
 		Meld meld = null;
 		
 		boolean isRunOn = false;
@@ -115,7 +126,7 @@ public class Meld
 					isRunOn = true;
 					
 				} else {
-					if (i < tiles.size() && !tiles.get(i).equals(tiles.get(i-1))) {
+					
 						if (count >= 3) {
 							meld = new Meld();
 							meld.tiles = new ArrayList<Tile>(tiles.subList(i - count, i));
@@ -124,7 +135,7 @@ public class Meld
 						isRunOn = false;
 						count = 0;
 					}
-				}
+				
 			}
 		}
 		return meldList;
