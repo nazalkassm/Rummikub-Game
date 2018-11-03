@@ -31,7 +31,10 @@ public class Strategy3 implements StrategyBehaviour {
 
 		
 		//execute play logic for this strategy
-		playStrategy(currPlayer, possibleMelds, returnMelds);
+		if(currPlayer.getPlayerRack().getSize() <= tableInfo.getLowestHandCount() + 3) {
+			playStrategy(currPlayer, possibleMelds, returnMelds);
+		}
+		
 		
 		//checks for sum of returning melds
 		for (Meld m: returnMelds) {
