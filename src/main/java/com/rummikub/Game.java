@@ -12,7 +12,6 @@ public class Game
 	//Primitive Variables
 	boolean gameRunning = true;
 	String pName = "";
-	
 	//Data Structure Variables
 	List<Player> players = new ArrayList<>();
 	List<Meld> meldsPlayed;
@@ -24,6 +23,10 @@ public class Game
 	Table table = new Table(stock);
 	Player winner;
 	int turnsWithoutMoves = 0;
+	
+	//Things to play with when testing
+	boolean waitAferEachTurn = true; //Prompts enter after each turn
+	boolean printRackMeld = false; // Turn it off so that you do not print the computers racks and melds.
 	
 	public void start() throws IOException
 	{
@@ -37,6 +40,12 @@ public class Game
 		players.add(new Player("Player 2",new Strategy1()));
 		players.add(new Player("Player 3",new Strategy2()));
 		players.add(new Player("Player 4",new Strategy3()));
+		
+		//Print the racks and melds of players, yes or no.
+		for(Player p : players)
+		{
+			p.setPrint_rack_meld(printRackMeld);
+		}
 		
 		//Add players to the table
 		for (Player player: players) 
@@ -54,7 +63,7 @@ public class Game
 			Player currentPlayer = table.getNextPlayerTurn();
 			Logger.info(currentPlayer.getName());
 			Logger.info(currentPlayer.isHuman());//log to file
-			Print.print("It is now " + currentPlayer.getName() + "'s turn: ");
+			Print.print("++++++ It is now " + currentPlayer.getName() + "'s turn: ++++++");
 			meldsPlayed = currentPlayer.play();
 			
 			if (currentPlayer.getPlayerRack().getSize() == Constants.ZERO_TILES) 
@@ -64,7 +73,7 @@ public class Game
 				break;
 		    }
 			
-			Print.print("Melds played by " + currentPlayer.getName() + " are: ");
+			Print.print("\nMelds played by " + currentPlayer.getName() + " are: ");
 			Print.printMeldtoUser(meldsPlayed);
 			
 			//Clears the melds so we can add meldsPlayed
@@ -92,7 +101,7 @@ public class Game
 				}
 			}
 			
-			Print.println(currentPlayer.getName() + "'s turn is over.","------------------------------------\n");
+			prompter.promptEnterKey(waitAferEachTurn);
 			
 			if (turnsWithoutMoves >= 4) {
 				Print.println("The stock is empty, and no one has played in 4 turns.");

@@ -1,11 +1,8 @@
 package com.rummikub;
 
-import java.lang.reflect.Executable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import javax.print.CancelablePrintJob;
 
 public class Strategy3 implements StrategyBehaviour {
 	private TableInfo tableInfo;
@@ -27,7 +24,7 @@ public class Strategy3 implements StrategyBehaviour {
 		tempList.addAll(currPlayer.getPlayerRack().getRackArray());
 
 		//print table and possible melds
-		Print.printRacktoUser(currPlayer.getPlayerRack());
+		Print.printRacktoUser(currPlayer.getPlayerRack(),currPlayer.isPrint_rack_meld());
 		Print.printMeldtoUser(possibleMelds);
 
 		
@@ -70,7 +67,7 @@ public class Strategy3 implements StrategyBehaviour {
 				possibleMelds = new ArrayList<>(currPlayer.getPlayerRack().getMelds());
 				
 				//print updated rack and possible melds to UI
-				Print.printRacktoUser(currPlayer.getPlayerRack());
+				Print.printRacktoUser(currPlayer.getPlayerRack(),currPlayer.isPrint_rack_meld());
 				Print.printMeldtoUser(possibleMelds);
 			}
 			if (possibleMelds.size() == 0) {

@@ -62,42 +62,70 @@ public class Print
 		}
 	}
 	
-	public static void printRacktoUser(Rack rack)
+	public static void printRacktoUser(Rack rack, boolean print_Rack)
 	{
-		if(!(rack.getSize() == 0)) 
+		if(print_Rack)
 		{
-			int rackSize = rack.getSize();
-			List<String> columnHeaders = new ArrayList<String>();
-			for (int i = 1; i < rackSize + 1; i++) {
-				columnHeaders.add(Integer.toString(i));
+			if(!(rack.getSize() == 0)) 
+			{
+				int rackSize = rack.getSize();
+				List<String> columnHeaders = new ArrayList<String>();
+				for (int i = 1; i < rackSize + 1; i++) {
+					columnHeaders.add(Integer.toString(i));
+				}
+				columnHeaders.add(0, "Tile Number");
+				
+				TableList rackTable = new TableList(rackSize + 1, columnHeaders.stream().toArray(String[]::new)).sortBy(0).withUnicode(true);
+				
+				List<String> rackStringList = rack.getRackArray().stream()
+																	.map(Object::toString)
+																	.collect(Collectors.toList());
+				rackStringList.add(0, "Rack");
+				String[] rackStringArray = rackStringList.stream().toArray(String[]::new);
+				
+				rackTable.addRow(rackStringArray);
+				rackTable.print();
 			}
-			columnHeaders.add(0, "Tile Number");
-			
-			TableList rackTable = new TableList(rackSize + 1, columnHeaders.stream().toArray(String[]::new)).sortBy(0).withUnicode(true);
-			
-			List<String> rackStringList = rack.getRackArray().stream()
-																.map(Object::toString)
-																.collect(Collectors.toList());
-			rackStringList.add(0, "Rack");
-			String[] rackStringArray = rackStringList.stream().toArray(String[]::new);
-			
-			rackTable.addRow(rackStringArray);
-			rackTable.print();
-		}
-		else
-		{
-			print("There are no tiles in the rack");
+			else
+			{
+				print("There are no tiles in the rack");
+			}
 		}
 	}
 	
-	public static void printMeldtoUser(List<Meld> melds)
+	public static void printMeldtoUser(List<Meld> melds, boolean print_Meld)
 	{
-		if (melds.isEmpty()) 
+		if(print_Meld)
 		{
-			print("There are no melds\n");
+			if (melds.isEmpty()) 
+			{
+				print("There are no melds\n");
+			}
+			else 
+			{
+				List<String> meldStringList = melds.stream()
+		                .map(Object::toString)
+		               .collect(Collectors.toList());
+				
+				TableList meldTable = new TableList(2, "Meld Number", "Meld").sortBy(0).withUnicode(true);
+				
+				int meldNumber = 1;
+				for(String meld : meldStringList) {
+				    meldTable.addRow("Meld " + Integer.toString(meldNumber), meld);
+				    meldNumber++;
+				}
+				meldTable.print();
+			}
 		}
-		else 
+	}
+
+	public static void printDelay(String message) 
+	{
+		int counter = 0;
+		System.out.print(message);
+		while(counter < 5)
 		{
+<<<<<<< HEAD
 			List<String> meldStringList = melds.stream()
 	                .map(Object::toString)
 	               .collect(Collectors.toList());
@@ -108,8 +136,21 @@ public class Print
 			for(String meld : meldStringList) {
 			    meldTable.addRow("Meld " + Integer.toString(meldNumber), meld);
 			    meldNumber++;
+=======
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+>>>>>>> 02554fbbd87c03bfdfd85a6e0faebf54b93a2257
 			}
-			meldTable.print();
+			System.out.print(" ...");
+			counter ++;
 		}
+		System.out.println();
+	}
+
+	public static void printMeldtoUser(List<Meld> meldsPlayed) 
+	{
+		printMeldtoUser(meldsPlayed,true);
 	}	
 }
