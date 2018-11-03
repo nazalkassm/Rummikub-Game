@@ -54,7 +54,12 @@ public class Print
 			System.out.print(" ...");
 			counter ++;
 		}
-		print(" "+ winner.getName());
+		if (winner == null) {
+			print(" no one!");
+		}
+		else {
+			print(" "+ winner.getName());
+		}
 	}
 	
 	public static void printRacktoUser(Rack rack)
@@ -97,7 +102,7 @@ public class Print
 	                .map(Object::toString)
 	               .collect(Collectors.toList());
 			
-			TableList meldTable = new TableList(2, "Meld Number", "Meld").sortBy(0).withUnicode(true);
+			TableList meldTable = new TableList(2, "Meld Number", "Meld").withUnicode(true);
 			
 			int meldNumber = 1;
 			for(String meld : meldStringList) {

@@ -3,6 +3,7 @@ package com.rummikub;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.pmw.tinylog.Logger;
 
@@ -22,6 +23,7 @@ public class Game
 	Stock stock = new Stock();
 	Table table = new Table(stock);
 	Player winner;
+	int turnsWithoutMoves = 0;
 	
 	public void start() throws IOException
 	{
@@ -48,10 +50,6 @@ public class Game
 		// Game loop the game runs here until it ends.
 		do 
 		{
-			/*if(stock.getLength() == 0)
-			{
-				gameRunning = false;
-			}*/
 			
 			Player currentPlayer = table.getNextPlayerTurn();
 			Logger.info(currentPlayer.getName());
@@ -74,6 +72,7 @@ public class Game
 			
 			if(!(meldsPlayed.isEmpty()))
 			{
+				turnsWithoutMoves = 0;
 				for(Meld m: meldsPlayed)
 				{
 					table.updateMeldsOnTable(m);
@@ -83,12 +82,22 @@ public class Game
 			}
 			else
 			{
-				currentPlayer.getPlayerRack().takeTile(stock);
+				if(stock.getLength() == 0)
+				{
+					turnsWithoutMoves++;
+				}
+				else {
+					currentPlayer.getPlayerRack().takeTile(stock);
+					Print.println(currentPlayer.getName() + " draws a tile from the stock.");
+				}
 			}
 			
 			Print.println(currentPlayer.getName() + "'s turn is over.","------------------------------------\n");
 			
-			//gameRunning = false; // only for testing
+			if (turnsWithoutMoves >= 4) {
+				Print.println("The stock is empty, and no one has played in 4 turns.");
+				gameRunning = false;
+			}
 			
 		}while(gameRunning );
 	

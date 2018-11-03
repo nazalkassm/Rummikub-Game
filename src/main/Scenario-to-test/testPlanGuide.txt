@@ -1,0 +1,7 @@
+Test plan guide:
+Requirement 4:
+4.a1) 
+4.a2)
+4.b1)
+4.b2)
+4.c) testPlan1.txt - testPlan4.txt (test1.txt - test4.txt)
