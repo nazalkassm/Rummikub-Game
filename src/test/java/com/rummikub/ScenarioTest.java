@@ -158,4 +158,25 @@ public class ScenarioTest {
 		Prompt.init();
 	}
 	
+	@Test
+	void Scenerio7Test() {
+		// 4a2, 8a
+		
+		FileParser.parse("src/main/resources/inputFiles/test7.txt");
+		assertFalse(FileParser.inputError);
+		
+		game.stock = FileParser.stock;
+		game.table = new Table(game.stock);
+		
+		assertEquals(60, game.stock.getLength());
+		
+		try {
+			Prompt.init(FileParser.playerCommands);
+			game.start();
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+		
+		Prompt.init();
+	}
 }
