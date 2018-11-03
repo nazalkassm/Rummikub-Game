@@ -82,28 +82,50 @@ public class Meld
 	public static List<Meld> getRunMelds(List<Tile> tileList) {
 		int count = 0;
 		List<Meld> meldList = new ArrayList<Meld>();
+		//Init array list of 2,all the sorted things in it 
+		List<List<Tile>> collectedTings = new ArrayList<List<Tile>>();
+		for (int i = 0; i < 2; ++i ) {
+		  List<Tile> secondLevelArrayList = new ArrayList<Tile>();
+		  collectedTings.add(secondLevelArrayList);
+		}
 		
+		for (int i = 0; i < tileList.size() ; i++) {
+			Tile currTile = tileList.get(i); 
+	
+			if (collectedTings.get(0).contains(currTile)) {
+				collectedTings.get(1).add(currTile);
+			} else {
+				collectedTings.get(0).add(currTile);
+			}
+		}
+		
+		Collections.sort(collectedTings.get(0));
+		Collections.sort(collectedTings.get(1));
+
 		Meld meld = null;
 		
 		boolean isRunOn = false;
-		for (int i = 1; i <= tileList.size() ; i++) {
-			if (i < tileList.size() && (isRunOn = tileList.get(i).isRunOn(tileList.get(i-1)))) {
-				if (count == 0) {
-					count = 2;
+		for (List<Tile> tiles: collectedTings) {
+			for (int i = 1; i <= tiles.size() ; i++) {
+				if (i < tiles.size() && (isRunOn = tiles.get(i).isRunOn(tiles.get(i-1)))) {
+					if (count == 0) {
+						count = 2;
+					} else {
+						count++;
+					}
+					isRunOn = true;
+					
 				} else {
-					count++;
-				}
-				isRunOn = true;
+					
+						if (count >= 3) {
+							meld = new Meld();
+							meld.tiles = new ArrayList<Tile>(tiles.subList(i - count, i));
+							meldList.add(meld);	
+						}
+						isRunOn = false;
+						count = 0;
+					}
 				
-			} else {
-				
-				if (count >= 3) {
-					meld = new Meld();
-					meld.tiles = new ArrayList<Tile>(tileList.subList(i - count, i));
-					meldList.add(meld);	
-				}
-				isRunOn = false;
-				count = 0;
 			}
 		}
 		return meldList;

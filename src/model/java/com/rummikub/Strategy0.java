@@ -48,7 +48,7 @@ public class Strategy0 implements StrategyBehaviour
 		//player cannot place playable melds on table
 		//so player's rack gets reset to when the turn started and ends turn
 		else {
-			Print.print("You cannot play your initial 30 this round");
+			Print.print("There were no melds played this round because your melds do not sum up to 30.");
 			currPlayer.getPlayerRack().setRack(tempList);
 			return Collections.emptyList(); 
 		}
@@ -64,7 +64,6 @@ public class Strategy0 implements StrategyBehaviour
 		while(input > 0 && input <= possibleMelds.size() + Constants.ONE_INDEX)
 		{
 			returnMelds.add(possibleMelds.get(input-Constants.ONE_INDEX));
-
 			currPlayer.getPlayerRack().removeTiles(possibleMelds.get(input-Constants.ONE_INDEX));
 			possibleMelds = new ArrayList<>(currPlayer.getPlayerRack().getMelds());
 			//Print Hand Info

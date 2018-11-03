@@ -76,4 +76,16 @@ public class TableTest {
 		//We had 4 players so make sure 4 player count
 		assertEquals(4, table.getPlayerCount());
 	}
+	
+	
+	@Test
+	public void getAllMelds() {
+		Stock stock = new Stock();
+		Rack rack = new Rack();
+		rack.setRack(stock.getStockArray());
+		rack.sortRack();
+		System.out.println(rack.getRackArray());
+		System.out.println(Meld.getRunMelds(rack.getRackArray()));
+
+	}
 }
