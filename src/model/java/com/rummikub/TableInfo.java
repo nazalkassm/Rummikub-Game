@@ -13,5 +13,13 @@ public class TableInfo
 		this.lowestHandCount = lowestHandCount;
 		this.melds = melds;
 	}
+	
+	public int getLowestHandCount() {
+		return lowestHandCount;
+	}
+	
+	public List<Meld> getMelds() {
+		return melds;
+	}
 
 }

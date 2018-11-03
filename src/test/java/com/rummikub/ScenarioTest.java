@@ -2,7 +2,6 @@ package com.rummikub;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -29,7 +28,10 @@ public class ScenarioTest {
 		assertEquals(3, FileParser.playerCommands.size());
 		
 		try {
+			Prompt.init(FileParser.playerCommands);
 			game.start();
+			
+			assertEquals("Human", game.winner.getName());
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}

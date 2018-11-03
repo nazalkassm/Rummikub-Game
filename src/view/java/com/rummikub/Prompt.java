@@ -3,6 +3,8 @@ package com.rummikub;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.StringReader;
+import java.util.List;
 
 /*
  * USAGE:
@@ -29,6 +31,30 @@ public class Prompt
 		{
 			initialized = true;
 			bi = new BufferedReader(new InputStreamReader(System.in));
+		}
+	}
+	
+	/**
+	 * Purpose:  Initialize the bufferReader with a list of commands.
+	 */
+	public static void init(List<String> commands) 
+	{
+		if (!initialized) 
+		{
+			initialized = true;
+			
+			StringBuilder sb = new StringBuilder();
+			sb.append("\nHuman\n");
+			for (String s : commands)
+			{
+			    sb.append(s);
+			    sb.append("\n");
+			}
+			
+			String commandsString = sb.toString();
+			//Print.println(commandsString);
+			
+			bi = new BufferedReader(new StringReader(commandsString));
 		}
 	}
 	
