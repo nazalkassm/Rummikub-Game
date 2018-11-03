@@ -18,20 +18,39 @@ public class Strategy3 implements StrategyBehaviour {
 		//declare variables
 		int sum = 0;
 		List<Meld> returnMelds = new ArrayList<>();
-		List<Meld> possibleMelds = new ArrayList<>(currPlayer.getPlayerRack().getMelds());
+		List<Meld> initialMelds = new ArrayList<>(currPlayer.getPlayerRack().getMelds());
+		List<Tile> temp = new ArrayList<>();
+		
+		for(Meld m: tableInfo.getMelds()) {
+			for(Tile t: m.getTiles()) {
+				temp.add(t);
+			}
+		}
+		
+		List<Tile> mergedMelds = new ArrayList<Tile>();
+		mergedMelds.addAll(currPlayer.getPlayerRack().getRackArray());
+		mergedMelds.addAll(temp);
+		
+		List<Meld> allPossibleMelds = new ArrayList<>(Meld.getMeldsWithTable(mergedMelds));
 		
 		List<Tile> tempList = new ArrayList<>();
 		tempList.addAll(currPlayer.getPlayerRack().getRackArray());
 
 		//print table and possible melds
 		Print.printRacktoUser(currPlayer.getPlayerRack(),currPlayer.isPrint_rack_meld());
-		Print.printMeldtoUser(possibleMelds,currPlayer.isPrint_rack_meld());
+		if(!currPlayer.canPlayOnExistingMelds) {
+			Print.printMeldtoUser(initialMelds,currPlayer.isPrint_rack_meld());
+		}
+		else {
+			Print.printMeldtoUser(allPossibleMelds,currPlayer.isPrint_rack_meld());
+		}
+		
 		
 		//checks if player has already played its initial 30
 		//if it hasn't then it checks whether the playable meld's sum is 30 or greater
 		//
 		if(!currPlayer.canPlayOnExistingMelds) {
-			logic(currPlayer, possibleMelds, returnMelds);
+			logic(currPlayer, initialMelds, returnMelds);
 			if(getSum(sum, returnMelds) >= 30){
 				currPlayer.canPlayOnExistingMelds = true;
 				return returnMelds;
@@ -40,7 +59,7 @@ public class Strategy3 implements StrategyBehaviour {
 
 		//if either true, returns played melds and ends turn
 		if(currPlayer.canPlayOnExistingMelds){
-			playStrategy(currPlayer, possibleMelds, returnMelds);
+			playStrategy(currPlayer, allPossibleMelds, returnMelds);
 			return returnMelds;
 		}
 		
@@ -54,15 +73,26 @@ public class Strategy3 implements StrategyBehaviour {
 	
 	@Override
 	public void playStrategy(Player currPlayer, List<Meld> possibleMelds, List<Meld> returnMelds) {
+		boolean track = false;
+		
 		if(tableInfo.getLowestHandCount() <= currPlayer.getPlayerRack().getSize() - 3) {
 			logic(currPlayer, possibleMelds, returnMelds);
-			if (possibleMelds.size() == 0) {
-				//play using the table
-			}
 		}
 		else {
 			//play only table cards 
-					
+			for(Meld m: possibleMelds) {	
+				for(Tile t: m.getTiles()) {
+					track = track || t.getPlayedOnTable();
+				}
+				if(track) {
+					returnMelds.add(m);
+					for(Tile t: m.getTiles()) {
+						if(!t.getPlayedOnTable()) {
+							currPlayer.getPlayerRack().getRackArray().remove(t);
+						}
+					}
+				}
+			}
 		}
 	}
 	
