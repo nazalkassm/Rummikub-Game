@@ -24,6 +24,7 @@ public class Strategy0 implements StrategyBehaviour
 
 		//print table and possible melds
 		Print.printRacktoUser(currPlayer.getPlayerRack());
+		Print.print("Here are the melds you can play: ");
 		Print.printMeldtoUser(possibleMelds);
 
 		
@@ -67,6 +68,7 @@ public class Strategy0 implements StrategyBehaviour
 			possibleMelds = new ArrayList<>(currPlayer.getPlayerRack().getMelds());
 			//Print Hand Info
 			Print.printRacktoUser(currPlayer.getPlayerRack());
+			Print.print("Here are the melds you can play: ");
 			Print.printMeldtoUser(possibleMelds);
 			inputString = Prompt.promptInput("Enter the melds you want to play (0 to pass or no melds): ");
 			input = Integer.parseInt(inputString);
