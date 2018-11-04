@@ -56,26 +56,28 @@ public class Strategy3 implements StrategyBehaviour {
 			initial30(currPlayer, initialMelds, returnMelds);
 			if(getSum(sum, returnMelds) >= 30){
 				currPlayer.canPlayOnExistingMelds = true;
+				return returnMelds;
 			}
 		}
 		//if either true, returns played melds and ends turn
-		else if(currPlayer.canPlayOnExistingMelds)
+		if(currPlayer.canPlayOnExistingMelds)
 		{
 			playStrategy(currPlayer, allPossibleMelds, returnMelds); //<-------- Changing Execution thread
+			return returnMelds;
 		}
 		
 		//if player has not played inital 30 AND playable melds sums less than 30
 		//player cannot place playable melds on table
 		//so player's rack gets reset to when the turn started and ends turn
-		else
-		{
+		
+		
 			//if player has not played inital 30 AND playable melds sums less than 30
 			//player cannot place playable melds on table
 			//so player's rack gets reset to when the turn started and ends turn
 			Print.print("Player 4 tried playing melds but the sum is < 30.");
 			currPlayer.getPlayerRack().setRack(tempList);
 			returnMelds = Collections.emptyList();
-		}
+	
 		
 		if(!tableInfo.getMelds().isEmpty() && returnMelds.size() > 0)
 			returnMelds.addAll(tableInfo.getMelds());
