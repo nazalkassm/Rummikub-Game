@@ -1,6 +1,7 @@
 package com.rummikub;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
@@ -79,7 +80,16 @@ public class Player {
 	 */
 	public List<Meld> play() throws IOException 
 	{
-		return this.behaviour.useStrategy(this);
+		List<Meld> melds = new ArrayList<>( this.behaviour.useStrategy(this));
+		for (Meld m: melds) {
+			for (Tile t: m.getTiles()) {
+				if (!t.getPlayedOnTable()) {
+					t.setPlayedOnTable(true);
+				}
+			}
+		}
+		
+		return melds;
 	}
 
 	/**
