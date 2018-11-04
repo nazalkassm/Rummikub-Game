@@ -3,8 +3,6 @@ package com.rummikub;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-
 import org.pmw.tinylog.Logger;
 
 public class Game
