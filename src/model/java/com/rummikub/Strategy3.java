@@ -7,10 +7,7 @@ import java.util.List;
 public class Strategy3 implements StrategyBehaviour {
 	private TableInfo tableInfo;
 	
-	Strategy3() 
-	{
-		//subject.registerObserver(this);
-	}
+	Strategy3() {}
 	
 	@Override
 	public List<Meld> useStrategy(Player currPlayer) 
@@ -19,24 +16,29 @@ public class Strategy3 implements StrategyBehaviour {
 		int sum = 0;
 		List<Meld> returnMelds = new ArrayList<>();
 		List<Meld> initialMelds = new ArrayList<>(currPlayer.getPlayerRack().getMelds());
-		List<Tile> temp = new ArrayList<>();
+		List<Tile> tempTiles = new ArrayList<>();
 		
+		//For all the tiles on the table, add them to a temporary arraylist of tiles
 		for(Meld m: tableInfo.getMelds()) {
 			for(Tile t: m.getTiles()) {
-				temp.add(t);
+				tempTiles.add(t);
 			}
 		}
 		
+		// Merge all the tiles from the table and the player hand into one tile arraylist.
 		List<Tile> mergedMelds = new ArrayList<Tile>();
 		mergedMelds.addAll(currPlayer.getPlayerRack().getRackArray());
-		mergedMelds.addAll(temp);
+		mergedMelds.addAll(tempTiles);
 		
+		// This gives you all the possible melds that this player can play from both the hand and table
 		List<Meld> allPossibleMelds = new ArrayList<>(Meld.getMeldsWithTable(mergedMelds));
 		
+		//This list stores the original hand of the player.
+		//So that if he tries playing something wrong, we will revert back his rack.
 		List<Tile> tempList = new ArrayList<>();
 		tempList.addAll(currPlayer.getPlayerRack().getRackArray());
 
-		//print table and possible melds
+		//print rack and possible melds
 		Print.printRacktoUser(currPlayer.getPlayerRack(),currPlayer.isPrint_rack_meld());
 		if(!currPlayer.canPlayOnExistingMelds) {
 			Print.printMeldtoUser(initialMelds,currPlayer.isPrint_rack_meld());
@@ -59,7 +61,7 @@ public class Strategy3 implements StrategyBehaviour {
 		//if either true, returns played melds and ends turn
 		else if(currPlayer.canPlayOnExistingMelds)
 		{
-			playStrategy(currPlayer, allPossibleMelds, returnMelds);
+			playStrategy(currPlayer, allPossibleMelds, returnMelds); //<-------- Changing Execution thread
 		}
 		
 		//if player has not played inital 30 AND playable melds sums less than 30
@@ -67,6 +69,9 @@ public class Strategy3 implements StrategyBehaviour {
 		//so player's rack gets reset to when the turn started and ends turn
 		else
 		{
+			//if player has not played inital 30 AND playable melds sums less than 30
+			//player cannot place playable melds on table
+			//so player's rack gets reset to when the turn started and ends turn
 			Print.print("Player 4 tried playing melds but the sum is < 30.");
 			currPlayer.getPlayerRack().setRack(tempList);
 			returnMelds = Collections.emptyList();
@@ -78,8 +83,6 @@ public class Strategy3 implements StrategyBehaviour {
 		
 		return returnMelds;
 		
-
-		
 	}
 	
 	@Override
@@ -87,6 +90,7 @@ public class Strategy3 implements StrategyBehaviour {
 		boolean track = false;
 		
 		if(tableInfo.getLowestHandCount() <= currPlayer.getPlayerRack().getSize() - 3) {
+			//Panic and play everything.
 			panicPlay(currPlayer, possibleMelds, returnMelds);
 		}
 		else {
