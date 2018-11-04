@@ -78,19 +78,23 @@ public class Player {
 	 * @return 
 	 * @throws IOException 
 	 */
-	public List<Meld> play() throws IOException 
-	{
-		List<Meld> melds = new ArrayList<>( this.behaviour.useStrategy(this));
-		for (Meld m: melds) {
-			for (Tile t: m.getTiles()) {
-				if (!t.getPlayedOnTable()) {
-					t.setPlayedOnTable(true);
-				}
-			}
-		}
-		
-		return melds;
-	}
+    public List<Meld> play() throws IOException 
+    {
+        List<Meld> melds = new ArrayList<>( this.behaviour.useStrategy(this));
+        
+        for (Meld m: melds) 
+        {
+            for (Tile t: m.getTiles()) 
+            {
+                if (!t.getPlayedOnTable()) 
+                {
+                    t.setPlayedOnTable(true);
+                }
+            }
+        }
+        
+        return melds;
+    }
 
 	/**
 	 * Plays the player's turn on a table 

@@ -7,96 +7,174 @@ import java.util.List;
 
 public class Strategy0 implements StrategyBehaviour 
 {
-	@SuppressWarnings("unused")
 	private TableInfo tableInfo; 
 
-	Strategy0() {	}
-
+	Strategy0() {}
 
 	@Override
-	public List<Meld> useStrategy(Player currPlayer) throws IOException 
+	public void update(TableInfo tableInfo) 
 	{
-		//declare variables
-		int sum = 0;
+		this.tableInfo = tableInfo;		
+	}
+
+	@Override
+	public void setSubject(Subject subject)
+	{
+		subject.registerObserver(this);
+	}
+
+	@Override
+	public List<Meld> useStrategy(Player currentPlayer) throws IOException 
+	{
+		//Basic Variables Needed 
+		List<Meld> possibleRackMelds = new ArrayList<>(currentPlayer.getPlayerRack().getMelds());
+		List<Meld> tableMelds = new ArrayList<>(tableInfo.getMelds());
 		List<Meld> returnMelds = new ArrayList<>();
-		List<Meld> possibleRackMelds = new ArrayList<>(currPlayer.getPlayerRack().getMelds());
-		List<Meld> allPossibleMelds = new ArrayList<>();
-		List<Tile> tempTiles = new ArrayList<>();
-		List<Tile> mergedTiles = new ArrayList<>();
-		List<Tile> tempList = new ArrayList<>();
 		
-		//
-		for(Meld m : tableInfo.getMelds())
+		List<Tile> playerHand = new ArrayList<>(currentPlayer.getPlayerRack().getRackArray());
+		List<Meld> meldsPlayedThisTurn = new ArrayList<>(); // possible to make it part of strategy
+		
+		String choiceOfPlayS = "";
+		int choiceOfPlayI = -10;
+		boolean userIsPlaying = true;
+		int sum=0;
+		
+		//Print
+		Print.print("Here is your rack :");
+		Print.printRacktoUser(currentPlayer.getPlayerRack(),true);
+		//Now we check if he played his initial
+		if(currentPlayer.canPlayOnExistingMelds)
 		{
-			for(Tile t: m.getMeld())
+			while(userIsPlaying)
 			{
-				tempTiles.add(t);
-			}
-		}
-		
-		mergedTiles.addAll(tempTiles);
-		mergedTiles.addAll(currPlayer.getPlayerRack().getRackArray());
-		
-		allPossibleMelds = Meld.getMeldsWithTable(mergedTiles);
-		
-		
-		// This is to revert the player's rack incase what he is playing is not valid.
-		tempList.addAll(currPlayer.getPlayerRack().getRackArray());
-		
-		//print rack and possible melds
-		Print.printRacktoUser(currPlayer.getPlayerRack(),true);	
-		
-		if(!(currPlayer.canPlayOnExistingMelds))
-		{
-			Print.print("\nHere are the melds you can play from your hand: ");
-			Print.printMeldtoUser(possibleRackMelds,true);
-			initialStrategy(currPlayer, possibleRackMelds, returnMelds); // <------ Change execution path here.
-			sum = checkSum(returnMelds);
-			
-			if(sum >= 30) 
-			{
-				currPlayer.canPlayOnExistingMelds = true;
-				
-				if (!tableInfo.getMelds().isEmpty() && returnMelds.size() > 0)
-					returnMelds.addAll(tableInfo.getMelds());
-				
-			}
-			else 
-			{
-				Print.print("\nPlayer 1 tried playing melds but the sum is < 30.");
-				currPlayer.getPlayerRack().setRack(tempList);
-				returnMelds = Collections.emptyList();
+			choiceOfPlayS = Prompt.promptInput("Choose 1 to play from hand, and 2 to play using the Table: (0 to play noting)(-1 to end turn)");
+			choiceOfPlayI = Integer.parseInt(choiceOfPlayS);
+				switch(choiceOfPlayI) 
+				{
+				   case -1:
+					  userIsPlaying = false;
+					  break;
+				   case 0 :
+				      returnMelds = Collections.emptyList();
+				      userIsPlaying = false;
+				      break; 
+				   case 1 :
+				      initialStrategy(currentPlayer,possibleRackMelds,returnMelds);
+				      break; 
+				   case 2:
+					  playStrategy(currentPlayer,tableMelds,returnMelds);
+					  break;
+				   default :
+					  Print.print("Wong input, leaving the game");
+					  System.exit(0);
+				}
 			}
 		}
 		else
 		{
-			Print.print("\nHere are the melds you can play from a combination of your hand and table: ");
-			Print.printMeldtoUser(allPossibleMelds, true);
-			playStrategy(currPlayer,allPossibleMelds,returnMelds); // <------ Change execution path here.
+			Print.print("\nHere are the melds you can play from your hand: ");
+			Print.printMeldtoUser(possibleRackMelds,true);
+			initialStrategy(currentPlayer, possibleRackMelds, returnMelds); // <------ Change execution path here.
+			
+			sum = checkSum(returnMelds);
+			Print.print("The total sum for melds played is : ", String.valueOf(sum));
+
+			//checks for sum of returning melds
+			sum = checkSum(returnMelds);
+			if(sum >= 30) 
+			{
+				currentPlayer.canPlayOnExistingMelds = true;
+				
+				if (!(tableInfo.getMelds().isEmpty()) && returnMelds.size() > 0)
+					returnMelds.addAll(tableInfo.getMelds());
+			}
+			//if player has not played inital 30 AND playable melds sums less than 30
+			//player cannot place playable melds on table
+			//so player's rack gets reset to when the turn started and ends turn	
+			else 
+			{
+				if(currentPlayer.canPlayOnExistingMelds == false && !(returnMelds.isEmpty()))
+				{
+					Print.print("\nPlayer 1 tried playing melds but the sum is < 30.");
+				}
+				currentPlayer.getPlayerRack().setRack(playerHand);
+				returnMelds = Collections.emptyList();
+			}
 		}
-		
-		//execute play logic for this strategy
-		
+
 		if (returnMelds.isEmpty()) 
 		{
-			Print.print("\n" + currPlayer.getName() + " wants to pass.");
+			Print.print("\n" + currentPlayer.getName() + " wants to pass.");
 			returnMelds = Collections.emptyList(); 
+		}
+
+		if (!(tableInfo.getMelds().isEmpty()) && returnMelds.size() > 0)
+
+		{
+			returnMelds.addAll(tableInfo.getMelds());
 		}
 		
 		return returnMelds;
-		
-		//checks for sum of returning melds
-	
-		
-		//checks if player has already played its initial 30
-		//if it hasn't then it checks whether the playable meld's sum is 30 or greater
-		//if either true, returns played melds and ends turn
-		
-		//if player has not played inital 30 AND playable melds sums less than 30
-		//player cannot place playable melds on table
-		//so player's rack gets reset to when the turn started and ends turn	
 	}
 
+	@Override
+	public void playStrategy(Player currentPlayer, List<Meld> tableMelds, List<Meld> returnMelds) throws IOException 
+	{
+		List<Tile> mergedTiles = new ArrayList<>(currentPlayer.getPlayerRack().getRackArray());
+		List<Meld> MergedMeld = new ArrayList<>();
+		
+		List<Integer> inputIntegerList = Prompt.promptUserTableMelds("Choose the melds that you are sure you can play on from the table :(Ex: 2 4 5)",tableMelds);
+		
+		boolean playerIsChoosing = true;
+		
+		for(Integer i : inputIntegerList)
+		{
+			mergedTiles.addAll(tableMelds.get(i.intValue()).getTiles());
+		}
+		
+		inputIntegerList = Prompt.promptUserTiles("Choose the tiles that you want to play on the melds you have chosen (Ex: 1 10 11 12)",currentPlayer.getPlayerRack());
+		
+		for(Integer i : inputIntegerList)
+		{
+			mergedTiles.add(currentPlayer.getPlayerRack().getRackArray().get(i.intValue()));
+
+		}
+		
+		MergedMeld = Meld.getMelds(mergedTiles);
+		
+		Print.print("Here is the combination you can play from your choices :");
+		Print.printMeldtoUser(MergedMeld, true);
+		
+		initialStrategy(currentPlayer,MergedMeld,returnMelds);
+		
+	}
+	
+	public void initialStrategy(Player currentPlayer, List<Meld> possibleMelds, List<Meld> returnMelds) throws IOException 
+	{
+		boolean playerIsChoosing = true;
+		
+		while(playerIsChoosing)
+		{
+			String inputString = Prompt.promptInput("Enter the melds you want to play (0 to pass) : ");
+			int inputInteger = Integer.parseInt(inputString);
+			if(inputInteger == 0)
+			{
+				break;
+			}
+			
+			//Add the melds chosen to returnMelds, removeTheTiles played, and update the melds he can play.
+			returnMelds.add(possibleMelds.get(inputInteger-Constants.ONE_INDEX));
+			currentPlayer.getPlayerRack().removeTiles(possibleMelds.get(inputInteger-Constants.ONE_INDEX));
+			possibleMelds.clear();
+			possibleMelds.addAll(currentPlayer.getPlayerRack().getMelds());
+			
+			//Print Hand Info
+			Print.printRacktoUser(currentPlayer.getPlayerRack(),true);
+			Print.print("\nHere are the melds you can play: ");
+			Print.printMeldtoUser(possibleMelds,true);
+		}
+	}
+	
 	private int checkSum(List<Meld> returnMelds) 
 	{
 		int sum = 0;
@@ -105,74 +183,5 @@ public class Strategy0 implements StrategyBehaviour
 			sum += m.sumMeld();
 		}
 		return sum;
-	}
-
-
-	@Override
-	public void playStrategy(Player currPlayer, List<Meld> possibleMelds, List<Meld> returnMelds) throws IOException 
-	{
-		String inputString = Prompt.promptInput("Enter the melds you want to play (0 to pass or no melds) : ");
-
-		int input = Integer.parseInt(inputString);
-
-		while(input > 0 && input <= possibleMelds.size() + Constants.ONE_INDEX)
-		{
-			boolean track = false;
-			for(Meld m: possibleMelds) {	
-				for(Tile t: m.getTiles()) {
-					track = track || t.getPlayedOnTable();
-				}
-				if(track) {
-					returnMelds.add(m);
-					for(Tile t: m.getTiles()) {
-						if(!t.getPlayedOnTable()) {
-							currPlayer.getPlayerRack().getRackArray().remove(t);
-						}
-					}
-				}
-			} //end of for
-//			returnMelds.add(possibleMelds.get(input-Constants.ONE_INDEX));
-//			currPlayer.getPlayerRack().removeTiles(possibleMelds.get(input-Constants.ONE_INDEX));
-//			possibleMelds = new ArrayList<>(currPlayer.getPlayerRack().getMelds());
-//			//Print Hand Info
-//			Print.printRacktoUser(currPlayer.getPlayerRack(),true);
-//			Print.print("\nHere are the melds you can play: ");
-//			Print.printMeldtoUser(possibleMelds,true);
-//			inputString = Prompt.promptInput("Enter the melds you want to play (0 to pass or no melds): ");
-//			input = Integer.parseInt(inputString);
-		}
-	}
-	
-	public void initialStrategy(Player currPlayer, List<Meld> possibleMelds, List<Meld> returnMelds) throws IOException 
-	{
-		String inputString = Prompt.promptInput("Enter the melds you want to play (0 to pass or no melds) : ");
-
-		int input = Integer.parseInt(inputString);
-
-		while(input > 0 && input <= possibleMelds.size() + Constants.ONE_INDEX)
-		{
-			returnMelds.add(possibleMelds.get(input-Constants.ONE_INDEX));
-			currPlayer.getPlayerRack().removeTiles(possibleMelds.get(input-Constants.ONE_INDEX));
-			possibleMelds = new ArrayList<>(currPlayer.getPlayerRack().getMelds());
-			//Print Hand Info
-			Print.printRacktoUser(currPlayer.getPlayerRack(),true);
-			Print.print("\nHere are the melds you can play: ");
-			Print.printMeldtoUser(possibleMelds,true);
-			inputString = Prompt.promptInput("Enter the melds you want to play (0 to pass or no melds): ");
-			input = Integer.parseInt(inputString);
-		}
-	}
-
-
-	@Override
-	public void update(TableInfo tableInfo) 
-	{
-		this.tableInfo = tableInfo;		
-	}
-
-
-	@Override
-	public void setSubject(Subject subject) {
-		subject.registerObserver(this);
 	}
 }

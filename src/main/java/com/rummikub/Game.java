@@ -59,6 +59,14 @@ public class Game
 		// Game loop the game runs here until it ends.
 		do 
 		{
+			// we might need to add this. I think we are adding empty collections to our table which was fucking us up
+			for(int i =0; i < table.getAllMelds().size(); i++)
+			{
+				if(table.getMeld(i).getTiles().isEmpty())
+				{
+					table.getAllMelds().remove(i);
+				}
+			}
 			
 			printer.printGameTable(table);
 			
