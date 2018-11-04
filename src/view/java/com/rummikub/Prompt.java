@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringReader;
+import java.util.ArrayList;
 import java.util.List;
 
 /*
@@ -111,5 +112,52 @@ public class Prompt
 		{
 			promptEnterKey();
 		}
+	}
+
+	public static List<Integer> promptUserTiles(String message, Rack rack) 
+	{
+		String[] input = null;
+		List<Integer> returnArray = new ArrayList<>();
+		
+		if (!initialized) 
+		{
+			init();
+		}
+		
+		Print.println(message);
+		
+		try 
+		{
+			input = bi.readLine().split("\\s");
+		}  
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
+		
+		
+		for(int i=0; i<input.length; i++) 
+		{
+			try 
+			{
+				if (Integer.parseInt(input[i]) < 0 || Integer.parseInt(input[i]) > rack.getSize())
+				{
+					throw new IllegalArgumentException();
+				}
+				else
+				{
+				returnArray.add(Integer.parseInt(input[i]));
+				}
+			}
+			catch (IllegalArgumentException e)
+			{
+				Print.println("----------Wrong input try again-----------","Here is your hand: ");
+				Print.printRacktoUser(rack, true);
+				returnArray.clear();
+				promptUserTiles(message,rack);
+			}
+		}
+		
+		return returnArray;
 	}
 }
