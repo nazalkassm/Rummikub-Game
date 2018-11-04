@@ -32,7 +32,7 @@ public class ScenarioTest {
 		assertEquals(3, FileParser.playerCommands.size());
 		
 		try {
-			Prompt.init(FileParser.playerCommands);
+			//Prompt.init(FileParser.playerCommands);
 			game.start();
 			
 			assertEquals("Human", game.winner.getName());
@@ -55,7 +55,7 @@ public class ScenarioTest {
 		assertEquals(60, game.stock.getLength());
 		
 		try {
-			Prompt.init(FileParser.playerCommands);
+			//Prompt.init(FileParser.playerCommands);
 			game.start();
 			
 			assertEquals("Player 2", game.winner.getName());
@@ -79,7 +79,7 @@ public class ScenarioTest {
 		assertEquals(60, game.stock.getLength());
 		
 		try {
-			Prompt.init(FileParser.playerCommands);
+			//Prompt.init(FileParser.playerCommands);
 			game.start();
 			
 			assertEquals("Player 3", game.winner.getName());
@@ -127,7 +127,7 @@ public class ScenarioTest {
 		assertEquals(60, game.stock.getLength());
 		
 		try {
-			Prompt.init(FileParser.playerCommands);
+			//Prompt.init(FileParser.playerCommands);
 			game.start();
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -149,7 +149,7 @@ public class ScenarioTest {
 		assertEquals(60, game.stock.getLength());
 		
 		try {
-			Prompt.init(FileParser.playerCommands);
+			//rompt.init(FileParser.playerCommands);
 			game.start();
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -171,7 +171,7 @@ public class ScenarioTest {
 		assertEquals(60, game.stock.getLength());
 		
 		try {
-			Prompt.init(FileParser.playerCommands);
+			//Prompt.init(FileParser.playerCommands);
 			game.start();
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -193,7 +193,7 @@ public class ScenarioTest {
 		assertEquals(60, game.stock.getLength());
 		
 		try {
-			Prompt.init(FileParser.playerCommands);
+			//Prompt.init(FileParser.playerCommands);
 			game.start();
 		} catch (IOException ex) {
 			ex.printStackTrace();

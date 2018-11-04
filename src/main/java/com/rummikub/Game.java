@@ -120,7 +120,7 @@ public class Game
 		}while(gameRunning );
 	
 		//Game ending ( we print an ending and maybe who won, also we can reset variables and game state if needed)
-		printer.printEnding(winner);
+		printer.printEnding(winner, waitAferEachTurn);
 	
 	}
 }

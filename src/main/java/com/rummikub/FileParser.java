@@ -38,11 +38,14 @@ public class FileParser {
 				playerCommands = new ArrayList<String>(); 
 				
 				for (String element : fileContents) {
-					if (Tile.verifyTile(element)) {
-						tileList.add(new Tile(element));
+					if (element.length() == 0) {
+						// do nothing
 					}
 					else if (isInteger(element)) {
 						playerCommands.add(element);
+					}
+					else if (Tile.verifyTile(element)) {
+						tileList.add(new Tile(element));
 					}
 					else {
 						Print.println("Invalid file contents: " + element);
@@ -66,6 +69,10 @@ public class FileParser {
 		else {
 			inputError = true;
 			Print.println("File doesn't exist");
+		}
+		
+		if (!inputError) {
+			Prompt.init(FileParser.playerCommands);
 		}
 	}
 

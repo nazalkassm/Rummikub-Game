@@ -12,37 +12,23 @@ import org.pmw.tinylog.Logger;
 
 public class QuickTesterWithMain 
 {
-	public static void main(String[] args) 
+	public static void main(String[] args) throws IOException 
 	{
-		Tile tile1 = new Tile(Colours.BLUE, Ranks.ONE);
-		Stock stock = new Stock();
-		Player player1 = new Player("naz");
-		//player1.fillRack(stock);
-		Logger.info(stock.getLength());
-		Logger.info(stock.getStockArray());
-		player1.fillRack(stock);
+		Game game = new Game();
+		game.printRackMeld = true;
+		game.waitAferEachTurn = false;
 		
-		//Print.printRacktoUser(player1.getPlayerRack());
-		player1.getPlayerRack().addTile(tile1);
-		Print.println("\r\n\r\n");
-		//Print.printRacktoUser(player1.getPlayerRack());
-		//Print.printRacktoUser(player1.getPlayerRack());
+		FileParser.parse("src/main/resources/inputFiles/test9.txt");
 		
-		/*TableList tl = new TableList(3, "ID", "String 1", "String 2").sortBy(0).withUnicode(true);
-		// from a list
-		//yourListOrWhatever.forEach(element -> tl.addRow(element.getID(), element.getS1(), element.getS2()));
-		// or manually
-		tl.addRow("Hi", "I am", "Bob");
-
-		tl.print();
-		TableList t2 = new TableList(2, "human","0").sortBy(0).withUnicode(true);
-		t2.addRow("Rack","1");
-		t2.print();
-		
-		player1.fillRack(stock);
-		player1.getPlayerRack().sortRack();
-		Print.print(player1.getPlayerRack().toString());
-		Print.print(player1.getPlayerRack().getMelds().toString());*/
+		if (!FileParser.inputError) {
+			game.stock = FileParser.stock;
+			game.table = new Table(game.stock);
+			
+			game.start();
+		}
+		else {
+			Print.print("Input error");
+		}
 	}
 	
 	public static void rigGame(String filePath) throws IOException {

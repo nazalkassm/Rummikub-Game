@@ -21,6 +21,14 @@ public class Print
 		}
 		System.out.println();
 	}
+	public static void print(int number) 
+	{
+		Print.print(Integer.toString(number));
+	}
+	public static void print(boolean bool) 
+	{
+		Print.print(Boolean.toString(bool));
+	}
 	
 	/**
 	 * Purpose: Prints as many sentences you enter on different lines.
@@ -34,26 +42,42 @@ public class Print
 			System.out.println(s);
 		}
 	}
-
+	public static void println(int number) 
+	{
+		Print.println(Integer.toString(number));
+	}
+	public static void println(boolean bool) 
+	{
+		Print.println(Boolean.toString(bool));
+	}
+	
 	public void printIntroduction() 
 	{
 		println("Hello","Welcome to TileRummy");
 	}
 
-	public void printEnding(Player winner) throws IOException
+	public void printEnding(Player winner, boolean wait) throws IOException
 	{
 		int counter = 0;
 		System.out.print("Game ending\nThe winner is:");
-		while(counter < 3)
+		if (wait) 
 		{
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+			while(counter < 3)
+			{
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				System.out.print(" ...");
+				counter ++;
 			}
-			System.out.print(" ...");
-			counter ++;
 		}
+		else 
+		{
+			System.out.print(" ... ... ...");
+		}
+		
 		if (winner == null) {
 			print(" no one!");
 		}
