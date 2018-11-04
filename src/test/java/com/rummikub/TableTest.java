@@ -2,6 +2,9 @@ package com.rummikub;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.CoreMatchers.*;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -85,6 +88,17 @@ public class TableTest {
 		player1.getPlayerRack().setRack(Arrays.asList(new Tile("B","4")));
 		//Set the player's rack to 1 so now the lowest table hand count will be 1
 		assertEquals(1, table.lowestTableHandCount());
+	}
+	
+	public void getDiffMeldsTest() {
+		Meld m4 = new Meld(new Tile("B2", false),new Tile("B3"),new Tile("B4"));
+		List<Meld> meldsOld = Arrays.asList(m1,m3,m2);
+		List<Meld> meldsNew = Arrays.asList(m1,m3,m2,m4);
+		//This should return the melds that are new/changed
+		List<Meld> difMelds = Table.getDiffMelds(meldsOld, meldsNew);
+		//In this case only m4 should be there one meld returned
+		assertThat(difMelds.size(), is(1));
+		assertThat(difMelds.get(0), is(m4));
 	}
 	
 }
