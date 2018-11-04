@@ -90,6 +90,7 @@ public class TableTest {
 		assertEquals(1, table.lowestTableHandCount());
 	}
 	
+	@Test
 	public void getDiffMeldsTest() {
 		Meld m4 = new Meld(new Tile("B2", false),new Tile("B3"),new Tile("B4"));
 		List<Meld> meldsOld = Arrays.asList(m1,m3,m2);

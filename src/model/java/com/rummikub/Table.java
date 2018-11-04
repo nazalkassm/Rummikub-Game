@@ -239,4 +239,17 @@ public class Table implements Subject {
 	{
 		return this.melds;
 	}
+
+	public static List<Meld> getDiffMelds(List<Meld> meldsOld, List<Meld> meldsNew) {
+		List<Meld> difMelds = new ArrayList<Meld>();
+		//For each new meld
+		for (Meld m: meldsNew) {
+			//If the old meld don't contain the new meld  
+			if (!meldsOld.contains(m)) {
+				//Add it to diff melds
+				difMelds.add(m);
+			}
+		}
+		return difMelds;
+	}
 }
