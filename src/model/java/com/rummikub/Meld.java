@@ -43,7 +43,6 @@ public class Meld
 	 * finds the sum of the meld
 	 */
 	public int sumMeld() {
-		// TODO Auto-generated method stub
 		int sum = 0;
 		for(int i = 0; i < this.getMeld().size(); i++) {
 			sum += this.getMeld().get(i).getValue();
