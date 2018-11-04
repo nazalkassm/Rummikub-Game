@@ -71,7 +71,7 @@ public class Tile implements Comparable<Tile> {
 	public int compareTo(Tile tile) {
 		//if colours don't match just return -1
 		int compareValue;
-		if ((compareValue = tile.colour.compareTo(this.colour)) != 0) {
+		if ((compareValue = this.colour.getSymbol().compareTo(tile.colour.getSymbol())) != 0) {
 			return compareValue;	
 		}
 		
