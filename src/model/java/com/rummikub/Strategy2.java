@@ -51,7 +51,7 @@ public class Strategy2 implements StrategyBehaviour {
 				currPlayer.canPlayOnExistingMelds = true;
 				melds.addAll(tableInfo.getMelds());
 			} else {
-				Print.print("Player 2 tried playing melds but their sum is less than 30.");
+				Print.print("Player 3 tried playing melds but their sum is less than 30.");
 				return Collections.emptyList(); 
 			}
 		} else {
