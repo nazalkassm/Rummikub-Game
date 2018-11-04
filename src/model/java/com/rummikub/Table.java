@@ -242,17 +242,21 @@ public class Table implements Subject {
 
 	public static List<Meld> getDiffMelds(List<Meld> meldsOld, List<Meld> meldsNew) {
 		List<Meld> difMelds = new ArrayList<Meld>();
+		int newCount = 0;
+		int oldCount = 0;
 		//For each new meld
 		for (Meld m: meldsNew) {
+			newCount += m.getTiles().size();
 			boolean isNewMeld = true;
 			//If the old meld don't contain the new meld  
 			for (Meld mOld: meldsOld) {
+				oldCount += mOld.getTiles().size();
 				if (mOld.getTiles().containsAll(m.getTiles())) {
 					isNewMeld = false;
 				}
 			}
 			
-			if (isNewMeld) {
+			if (isNewMeld && oldCount != newCount) {
 				//Add it to diff melds if new meld
 				difMelds.add(m);
 			}

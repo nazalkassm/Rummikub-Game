@@ -171,6 +171,7 @@ public class MeldTest {
 	}
 	
 	@Test
+	//Requirements 9 tests
 	public void getAllMeldsWithTableTest() {
 	
 		List<Tile> tiles = Arrays.asList(

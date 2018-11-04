@@ -73,7 +73,7 @@ public class Strategy3 implements StrategyBehaviour {
 		currPlayer.removeTiles(melds);
 		//print rack and possible melds
 		Print.printRacktoUser(currPlayer.getPlayerRack(),currPlayer.isPrint_rack_meld());
-		Print.printMeldtoUser(melds,currPlayer.isPrint_rack_meld());
+		//Print.printMeldtoUser(melds,currPlayer.isPrint_rack_meld());
 		return melds;
 		
 	}
