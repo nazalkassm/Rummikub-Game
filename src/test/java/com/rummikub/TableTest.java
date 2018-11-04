@@ -95,11 +95,16 @@ public class TableTest {
 		Meld m4 = new Meld(new Tile("B2", false),new Tile("B3"),new Tile("B4"));
 		List<Meld> meldsOld = Arrays.asList(m1,m3,m2);
 		List<Meld> meldsNew = Arrays.asList(m1,m3,m2,m4);
+		
+		Meld m1New = new Meld(m1.getTiles().get(0), m1.getTiles().get(1), m1.getTiles().get(2));
+		List<Meld> meldsNew2 = Arrays.asList(m2,m3,m1New);
 		//This should return the melds that are new/changed
 		List<Meld> difMelds = Table.getDiffMelds(meldsOld, meldsNew);
+		List<Meld> difMelds2 = Table.getDiffMelds(meldsOld, meldsNew2);
 		//In this case only m4 should be there one meld returned
 		assertThat(difMelds.size(), is(1));
 		assertThat(difMelds.get(0), is(m4));
+		assertThat(difMelds2.size(), is(0));
 	}
 	
 }

@@ -244,9 +244,16 @@ public class Table implements Subject {
 		List<Meld> difMelds = new ArrayList<Meld>();
 		//For each new meld
 		for (Meld m: meldsNew) {
+			boolean isNewMeld = true;
 			//If the old meld don't contain the new meld  
-			if (!meldsOld.contains(m)) {
-				//Add it to diff melds
+			for (Meld mOld: meldsOld) {
+				if (mOld.getTiles().containsAll(m.getTiles())) {
+					isNewMeld = false;
+				}
+			}
+			
+			if (isNewMeld) {
+				//Add it to diff melds if new meld
 				difMelds.add(m);
 			}
 		}

@@ -71,15 +71,16 @@ public class Game
 				winner = currentPlayer;
 				break;
 		    }
+			//Get list of changed melds 
+			List<Meld> changedMelds = new ArrayList<>(Table.getDiffMelds(table.getAllMelds(), meldsPlayed));
+			
 			
 			Print.print("\nMelds played by " + currentPlayer.getName() + " are: ");
-			Print.printMeldtoUser(Table.getDiffMelds(table.getAllMelds(), meldsPlayed),true);
+			Print.printMeldtoUser(changedMelds, true);
 			
-			if(!(meldsPlayed.isEmpty()))
+			//If the changed melds is not empty, then add we're updating things
+			if(!(changedMelds.isEmpty()))
 			{
-				//Clears the melds so we can add meldsPlayed
-				table.clearMelds();
-				
 				turnsWithoutMoves = 0;
 			
 				table.updateMeldsOnTable(meldsPlayed);
