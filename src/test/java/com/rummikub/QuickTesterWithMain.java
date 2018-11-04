@@ -13,35 +13,21 @@ import org.pmw.tinylog.Logger;
 public class QuickTesterWithMain 
 {
 	public static void main(String[] args) throws IOException 
-	{
-		Game game = new Game();
-		game.printRackMeld = true;
-		game.waitAferEachTurn = false;
-		
-		FileParser.parse("src/main/resources/inputFiles/test9.txt");
-		
-		if (!FileParser.inputError) {
-			game.stock = FileParser.stock;
-			game.table = new Table(game.stock);
-			
-			game.start();
-		}
-		else {
-			Print.print("Input error");
-		}
+	{		
+		rigGame("src/main/resources/inputFiles/test8.txt");
 	}
 	
 	public static void rigGame(String filePath) throws IOException {
 		Game game = new Game();
+		game.printRackMeld = true;
+		game.waitAferEachTurn = false;
+		
 		FileParser.parse(filePath);
 		
 		if (!FileParser.inputError) {
 			game.stock = FileParser.stock;
 			game.table = new Table(game.stock);
 			
-			if (FileParser.playerCommands.size() > 0) {
-				Prompt.init(FileParser.playerCommands);
-			}
 			game.start();
 		}
 	}

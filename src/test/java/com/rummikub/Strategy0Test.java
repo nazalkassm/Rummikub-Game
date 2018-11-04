@@ -22,6 +22,9 @@ class Strategy0Test {
 	private static Player player1;
 	private static Player player2;
 	private static Player player3;
+	private static Player player4;
+	Game game = new Game();
+	
 
 
 	@BeforeAll
@@ -30,16 +33,16 @@ class Strategy0Test {
 		//player1
 		player1 = new Player("Naz",new Strategy0());
 		player2 = new Player("Prady",new Strategy0());
-		player3 = new Player("zz", new Strategy0());
+		player3 = new Player("Shiraj", new Strategy0());
+		player4 = new Player("Elijah", new Strategy0());
 
-		player1.getPlayerRack().addTile(new Tile("R", "9")); //G4
-		player1.getPlayerRack().addTile(new Tile("G", "10")); //G5
-		player1.getPlayerRack().addTile(new Tile("G", "11")); //G6
-		player1.getPlayerRack().addTile(new Tile("G", "12")); //G6
-		player1.getPlayerRack().addTile(new Tile("R", "9")); //G4
-		player1.getPlayerRack().addTile(new Tile("R", "10")); //G5
-		player1.getPlayerRack().addTile(new Tile("R", "11")); //G6
-		player1.getPlayerRack().addTile(new Tile("R", "12")); //G6
+		player1.getPlayerRack().addTile(new Tile("R", "9"));
+		player1.getPlayerRack().addTile(new Tile("G", "10"));
+		player1.getPlayerRack().addTile(new Tile("G", "11"));
+		player1.getPlayerRack().addTile(new Tile("G", "12"));
+		player1.getPlayerRack().addTile(new Tile("R", "10")); 
+		player1.getPlayerRack().addTile(new Tile("R", "11")); 
+		player1.getPlayerRack().addTile(new Tile("R", "12")); 
 		
 		
 		//player2
@@ -52,6 +55,7 @@ class Strategy0Test {
 		player2.getPlayerRack().addTile(new Tile("G", "4")); //G6
 		player2.getPlayerRack().addTile(new Tile("O", "4")); //G6
 		
+		//player3
 		player3.getPlayerRack().addTile(new Tile("R", "9")); //G4
 		player3.getPlayerRack().addTile(new Tile("G", "2")); //G5
 		player3.getPlayerRack().addTile(new Tile("G", "5")); //G6
@@ -61,8 +65,8 @@ class Strategy0Test {
 		player3.getPlayerRack().addTile(new Tile("G", "13")); //G6
 		player3.getPlayerRack().addTile(new Tile("O", "1")); //G6
 		
-		
-		
+		//player4
+		player4.getPlayerRack().addTile(new Tile("R", "9"));
 		
 		//meld
 		meld1 = player1.getPlayerRack().getMelds();
@@ -95,50 +99,19 @@ class Strategy0Test {
 	void useStrategy_removeTiles_Test() throws IOException
 	{
 		//Tests getMelds()
-		assertEquals(2,meld1.size());
+		assertEquals(3,meld1.size());
 		assertEquals(2,meld2.size());
 		assertEquals(0,meld3.size());
 		
 		//Test initial values
-		assertEquals(8,player1.getPlayerRack().getSize());
+		assertEquals(7,player1.getPlayerRack().getSize());
 		assertEquals(8,player2.getPlayerRack().getSize());
 		assertEquals(8,player3.getPlayerRack().getSize());
 		
 		
 		//runs the execution of strategy 0 under different scenarios
-		List<Meld> list1 = player1.play(); 
-		System.out.println("player1's remaning cards after turn is executed: ");
-		System.out.println(player1.getPlayerRack().toString());
-		System.out.println();
-		System.out.println();
-		
-		List<Meld> list2 = player2.play(); 
-		System.out.println("player2's remaning cards after turn is executed: ");
-		System.out.println(player2.getPlayerRack().toString());
-		System.out.println();
-		System.out.println();
-		
-		List<Meld> list3 = player3.play(); 
-		System.out.println("player3's remaning cards after turn is executed: ");
-		System.out.println(player3.getPlayerRack().toString());
-		System.out.println();
-		System.out.println();
-		
-		
-		//player1 tests
-		assertThat(list1.toString(), anyOf(is("[G10 G11 G12 , R9 R10 R11 R12 ]"), 
-										   is("[R9 R10 R11 R12 ]"),
-										   is("[G10 G11 G12 ]"),
-										   is("[]")));
-		assertThat(player1.getPlayerRack().getSize(), anyOf(is(1),is(5), is(4), is(8)));
-		
-		//player2 tests
-		assertEquals(Collections.emptyList(), list2);
-		assertEquals(8,player2.getPlayerRack().getSize());
-		
-		//player3 tests
-		assertEquals(Collections.emptyList(), list3);
-		assertEquals(8,player3.getPlayerRack().getSize());
+		String filePath = ("src/main/resources/Strategy0Tests/test1.txt");
+		QuickTesterWithMain.rigGame(filePath);
 		
 	}
 }
