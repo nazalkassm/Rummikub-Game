@@ -160,4 +160,51 @@ public class Prompt
 		
 		return returnArray;
 	}
+	
+	public static List<Integer> promptUserTableMelds(String message, List<Meld> melds) 
+	{
+		String[] input = null;
+		List<Integer> returnArray = new ArrayList<>();
+		
+		if (!initialized) 
+		{
+			init();
+		}
+		
+		Print.println(message);
+		
+		try 
+		{
+			input = bi.readLine().split("\\s");
+		}  
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
+		
+		
+		for(int i=0; i<input.length; i++) 
+		{
+			try 
+			{
+				if (Integer.parseInt(input[i]) < 0 || Integer.parseInt(input[i]) > melds.size())
+				{
+					throw new IllegalArgumentException();
+				}
+				else
+				{
+				returnArray.add(Integer.parseInt(input[i]));
+				}
+			}
+			catch (IllegalArgumentException e)
+			{
+				Print.println("----------Wrong input try again-----------","Here is your hand: ");
+				Print.printMeldtoUser(melds, true);
+				returnArray.clear();
+				promptUserTableMelds(message,melds);
+			}
+		}
+		
+		return returnArray;
+	}
 }
