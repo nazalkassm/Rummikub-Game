@@ -40,12 +40,12 @@ public class TableTest {
 		//We added 3 melds so this should be 3
 		assertEquals(3, table.getMeldCount());
 
-		List<Meld> melds = Arrays.asList(m1);
+		List<Meld> melds = Arrays.asList(m1,m3);
 
 		assertTrue(table.updateMeldsOnTable(melds));
 		
-		//After adding 1 more meld to the table, ensure the new count is 4
-		assertEquals(4, table.getMeldCount());
+		//After updating meld to the table, ensure the new count is 2
+		assertEquals(2, table.getMeldCount());
 	}
 	
 	@Test
