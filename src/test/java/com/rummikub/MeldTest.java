@@ -175,16 +175,74 @@ public class MeldTest {
 	
 		List<Tile> tiles = Arrays.asList(
 				//Tiles played on table
-				new Tile("R1", true), new Tile("B1", true), new Tile("O1", true)/*, new Tile("R4", true),new Tile("R5", true), new Tile("R6", true),*/
-				,new Tile("R6", true), new Tile("R7", true), new Tile("R8", true),
+				new Tile("R1", true), new Tile("B1", true), new Tile("O1", true),
+				new Tile("R6", true), new Tile("R7", true), new Tile("R8", true),
 				//Hand
-				new Tile("R9", false), new Tile("R5", false), new Tile("R2", false), new Tile("R3", false),new Tile("B2", false), new Tile("B3", false),new Tile("O2", false), new Tile("O3", false));
+				new Tile("R9", false), new Tile("R5", false), new Tile("R2", false), new Tile("R3", false), new Tile("B2", false), new Tile("B3", false),new Tile("O2", false), new Tile("O3", false));
 	
 		//This is the case where a meld is played by rearranging multiple melds.
 		//The R1 to R4 is played and R4 to R6 is played by splitting R1 to R6 on the table
-		assertEquals("[R1 R2 R3 R4 R5 , R4 R5 R6 ]", 
+		assertEquals("[B1 B2 B3 , R5 R6 R7 R8 R9 , O1 O2 O3 , R1 R2 R3 ]", 
 				Meld.getMeldsWithTable(tiles).toString());
 
+		
+		
+		/*
+		table: o11 g11 b11, g1 g2 g3, r5 r6 r7
+		hand: r11 g4 r4
+
+		outcome:
+		9b) 9f) played: o11 g11 b11 r11, g1 g2 g3 g4, r4 r5 r6 r7 */
+		tiles = Arrays.asList(
+				//Tiles played on table
+				new Tile("O11", true), new Tile("G11", true), new Tile("B11", true),
+				new Tile("G1", true), new Tile("G2", true), new Tile("G3", true),
+				new Tile("R5", true), new Tile("R6", true), new Tile("R7", true),
+				//Hand
+				new Tile("R11", false), new Tile("G4", false), new Tile("R4", false));
+	
+		//This is the case where a meld is played by rearranging multiple melds.
+		//The R1 to R4 is played and R4 to R6 is played by splitting R1 to R6 on the table
+		assertEquals("[G1 G2 G3 G4 , O11 G11 B11 R11 , R4 R5 R6 R7 ]", 
+				Meld.getMeldsWithTable(tiles).toString());
+
+		
+		/*
+		  table: r1 r2 r3 r4, o5 o6 o7
+			hand: b4 g4 o8 o9
+			
+			outcome:
+			9c) 9d) played: r1 r2 r3, b4 g4 r4, o5 o6 o7 o8 o9 */
+		tiles = Arrays.asList(
+				//Tiles played on table
+				new Tile("R1", true), new Tile("R2", true), new Tile("R3", true), new Tile("R4", true),
+				new Tile("O5", true), new Tile("O6", true), new Tile("O7", true),
+				//Hand
+				new Tile("B4", false), new Tile("G4", false), new Tile("O8", false), new Tile("O9", false));
+	
+		//This is the case where a meld is played by rearranging multiple melds.
+		//The R1 to R4 is played and R4 to R6 is played by splitting R1 to R6 on the table
+		assertEquals("[O5 O6 O7 O8 O9 , R4 B4 G4 , R1 R2 R3 ]", 
+				Meld.getMeldsWithTable(tiles).toString());
+		
+		/*
+	  table: r1 r2 r3 r4, o4 o5 o6 o7
+		hand: b4 
+		
+		outcome:
+		9c) 9d) played: r1 r2 r3, b4 o4 r4, o5 o6 o7 */
+	tiles = Arrays.asList(
+			//Tiles played on table
+			new Tile("R1", true), new Tile("R2", true), new Tile("R3", true), new Tile("R4", true),
+			new Tile("O4", true), new Tile("O5", true), new Tile("O6", true), new Tile("O7", true),
+			//Hand
+			new Tile("B4", false));
+
+	//This is the case where a meld is played by rearranging multiple melds.
+	//The R1 to R4 is played and R4 to R6 is played by splitting R1 to R6 on the table
+	assertEquals("[R4 O4 B4 , O5 O6 O7 , R1 R2 R3 ]", 
+			Meld.getMeldsWithTable(tiles).toString());
+		
 	}
 	
 }
