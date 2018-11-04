@@ -1,8 +1,10 @@
 package com.rummikub;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.ListIterator;
 
 public class Strategy2 implements StrategyBehaviour {
 	private TableInfo tableInfo; 
@@ -13,70 +15,66 @@ public class Strategy2 implements StrategyBehaviour {
 	
 	@Override
 	public List<Meld> useStrategy(Player currPlayer) {
+		List<Tile> tiles = new ArrayList<>(); 
 		
-	//declare variables
+		//If no other player has played on the table
+		if (tableInfo.getMelds().isEmpty()) {
+			//Can't play so passes
+			return Collections.emptyList();
+		}
+		
+		//Add current player to tiles
+		tiles.addAll(currPlayer.getPlayerRack().getRackArray());
+		
+		//If the player can play on existing melds 
+		if (currPlayer.canPlayOnExistingMelds) {	
+			for (Meld m: tableInfo.getMelds()) {
+				tiles.addAll(m.getTiles());
+			}
+		}
+		
+		List<Meld> melds = new ArrayList<>(Meld.getMeldsWithTable(tiles));
+		List<Tile> tempTiles = new ArrayList<>(); 
+		for (Meld m: melds) {
+			tempTiles.addAll(m.getTiles());
+		}
+		
+		if (!currPlayer.canPlayOnExistingMelds) {
 			int sum = 0;
-			List<Meld> returnMelds = new ArrayList<>();
-			List<Meld> possibleMelds = new ArrayList<>(currPlayer.getPlayerRack().getMelds());
-			List<Tile> tempList = new ArrayList<>();
-			tempList.addAll(currPlayer.getPlayerRack().getRackArray());
-
-			//print table and possible melds
-			Print.printRacktoUser(currPlayer.getPlayerRack(), currPlayer.isPrint_rack_meld());
-			Print.printMeldtoUser(possibleMelds,currPlayer.isPrint_rack_meld());
-			if (currPlayer.canPlayOnExistingMelds) {
-				while (possibleMelds.size() > 0) {
-					//now add Meld with max sum to return melds
-					returnMelds.add(possibleMelds.get(Meld.getMaxIndex(possibleMelds)));
-					//pop the tiles with were added to return melds
-					currPlayer.getPlayerRack().removeTiles(possibleMelds.get(Meld.getMaxIndex(possibleMelds)));
-					//update possible melds to get new list of melds
-					possibleMelds = new ArrayList<>(currPlayer.getPlayerRack().getMelds());
-					
-					//print updated rack and possible melds to UI
-					Print.printRacktoUser(currPlayer.getPlayerRack(),currPlayer.isPrint_rack_meld());
-					Print.printMeldtoUser(possibleMelds,currPlayer.isPrint_rack_meld());
-				}
-				
-				//Now with the current hand we do ..
-				for (Meld tableMeld: tableInfo.getMelds()) {
-					
-					List<Tile> listOfHandAndMeld = new ArrayList<>();
-					listOfHandAndMeld.addAll(currPlayer.getPlayerRack().getRackArray());
-					listOfHandAndMeld.addAll(tableMeld.getTiles());
-					List<Meld> meldList = Meld.getMelds(listOfHandAndMeld);
-					boolean hasMeld = false;
-					for (Meld m: meldList) {
-						
-					}
-				}
+			//checks for sum of returning melds
+			for (Meld m: melds) {
+				sum += m.sumMeld();
+			}
+	
+			if (sum >= 30) {
+				currPlayer.canPlayOnExistingMelds = true;			
 			} else {
-			
-				//execute play logic for this strategy
-				playStrategy(currPlayer, possibleMelds, returnMelds);
+				Print.print("Player 2 tried playing melds but their sum is less than 30.");
+				return Collections.emptyList(); 
+			}
+		} else {
+		
+			//If the tempTiles which has all the tiles that we should play, contains the player rack in it then.. 
+			if (tempTiles.containsAll(currPlayer.getPlayerRack().getRackArray())) {
 				
-				//checks for sum of returning melds
-				for (Meld m: returnMelds) {
-					sum += m.sumMeld();
-				}
-		
-				//checks if player has already played its initial 30
-				//if it hasn't then it checks whether the playable meld's sum is 30 or greater
-				//if either true, returns played melds and ends turn
-				if(currPlayer.canPlayOnExistingMelds || sum >= 30) {
-					return returnMelds;
-				}
-		
-				//if player has not played inital 30 AND playable melds sums less than 30
-				//player cannot place playable melds on table
-				//so player's rack gets reset to when the turn started and ends turn
-				else {
-					Print.print("You cannot play your initial 30 this round");
-					currPlayer.getPlayerRack().setRack(tempList);
-					return Collections.emptyList(); 
+			} 
+			//Otherwise we can't get rid of all the tiles so we need to 
+			else {
+				ListIterator<Meld> iter = melds.listIterator();
+				while (iter.hasNext()){
+					boolean poop = false;
+					for (Tile t: iter.next().getTiles()) {
+						poop = poop || t.getPlayedOnTable();
+					}
+					if (!poop) 
+						iter.remove();
 				}
 			}
-			return possibleMelds;
+		}
+		//We can play this entire hand and win
+		currPlayer.removeTiles(melds);
+		
+		return melds;
 	}
 
 	@Override

@@ -113,7 +113,7 @@ class Strategy2Test {
 			List<Meld> melds = new ArrayList<>(table.getNextPlayerTurn().play());
 			System.out.println(melds.toString());
 			//If the first player played something then we play our hand so...R9, R10, R11
-			assertEquals("[R9 R10 R11 R12 ]", melds.toString());
+			assertEquals("[R9 R10 R11 ]", melds.toString());
 		}
 		
 		
