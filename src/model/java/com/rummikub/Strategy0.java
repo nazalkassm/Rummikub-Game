@@ -49,6 +49,9 @@ public class Strategy0 implements StrategyBehaviour
 			{
 				return Collections.emptyList();
 			}
+			
+			if (!(tableInfo.getMelds().isEmpty()) && returnMelds.size() > 0)
+				returnMelds.addAll(tableInfo.getMelds());
 		}
 		else
 		{
