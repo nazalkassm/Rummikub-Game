@@ -42,7 +42,6 @@ public class Strategy0 implements StrategyBehaviour
 		//Print
 		Print.print("Here is your rack :");
 		Print.printRacktoUser(currentPlayer.getPlayerRack(),true);
-		
 		//Now we check if he played his initial
 		if(currentPlayer.canPlayOnExistingMelds)
 		{
@@ -79,7 +78,9 @@ public class Strategy0 implements StrategyBehaviour
 			
 			sum = checkSum(returnMelds);
 			Print.print("The total sum for melds played is : ", String.valueOf(sum));
-			
+
+			//checks for sum of returning melds
+			sum = checkSum(returnMelds);
 			if(sum >= 30) 
 			{
 				currentPlayer.canPlayOnExistingMelds = true;
@@ -87,6 +88,9 @@ public class Strategy0 implements StrategyBehaviour
 				if (!(tableInfo.getMelds().isEmpty()) && returnMelds.size() > 0)
 					returnMelds.addAll(tableInfo.getMelds());
 			}
+			//if player has not played inital 30 AND playable melds sums less than 30
+			//player cannot place playable melds on table
+			//so player's rack gets reset to when the turn started and ends turn	
 			else 
 			{
 				if(currentPlayer.canPlayOnExistingMelds == false && !(returnMelds.isEmpty()))
@@ -97,14 +101,15 @@ public class Strategy0 implements StrategyBehaviour
 				returnMelds = Collections.emptyList();
 			}
 		}
-		
+
 		if (returnMelds.isEmpty()) 
 		{
 			Print.print("\n" + currentPlayer.getName() + " wants to pass.");
 			returnMelds = Collections.emptyList(); 
 		}
-		
+
 		if (!(tableInfo.getMelds().isEmpty()) && returnMelds.size() > 0)
+
 		{
 			returnMelds.addAll(tableInfo.getMelds());
 		}
@@ -132,6 +137,7 @@ public class Strategy0 implements StrategyBehaviour
 		for(Integer i : inputIntegerList)
 		{
 			mergedTiles.add(currentPlayer.getPlayerRack().getRackArray().get(i.intValue()));
+
 		}
 		
 		MergedMeld = Meld.getMelds(mergedTiles);
