@@ -1,32 +1,32 @@
-Human (p1) goes first (always).
-p1, p2, p3, and p4 each play one run meld (4a2, 8a)
+Human goes first (always).
+Human, p1, p2, and p3 each play one run meld (4a2, 8a)
 
 Initial Hands:
-p1:
+Human:
 O3 O5 O6 O8
 B2 B5
 G6 G8 G11 G12 G13
 R2 R3 R9
 
-p2:
+p1:
 O1 O2 O4 O13
 B7
 G4 G5
 R1 R2 R5 R7 R11 R12 R13
 
-p3:
+p2:
 O1 O2 O5 O8
 B2 B5 B7 B11 B12 B13
 G1 G4 G7
 R4
 
-p4:
+p3:
 O4 O7 O11 O12 O12 O13
 B1 B3 B6
 G3
 R1 R4 R6 R7
 
-p1 plays {G11, G12, G13}
-p2 plays {R11, R12, R13}
-p3 plays {B11, B12, B13}
-P4 plays {O11, O12, O13}
+Human plays {G11, G12, G13}
+p1 plays {R11, R12, R13}
+p2 plays {B11, B12, B13}
+P3 plays {O11, O12, O13}

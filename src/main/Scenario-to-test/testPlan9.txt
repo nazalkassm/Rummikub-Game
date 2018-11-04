@@ -10,15 +10,15 @@ G1 G3 G5
 R2 R4 R6 R11
 
 p1:
-O2 O4 O6 O13
+O2 O4 O6
 B1 B3 B5 B13
 G2 G4 G6
-R1 R3 R5
+R1 R3 R5 R13
 
 p2:
-O1 O3 O5
+O1 O3 O5 O12
 B2 B4 B6 B12
-G1 G3 G5 G12
+G1 G3 G5
 R2 R4 R12
 
 p3:
@@ -28,5 +28,15 @@ G2 G4
 R1 R3 R12 R13
 
 Stock:
-O12 G13 O13 G13
+O13 G13 O13 G9
 O10 B10 G10 R10
+
+
+Human plays {B11, O11, R11}
+p1 passes and draws O13
+p2 plays {B12, O12, R12}
+p3 plays {B12, O12, R12}
+
+Human passes and draws G13.
+p1 plays {B13, O13, R13} //10c
+p2 passes and draws G9 //17b

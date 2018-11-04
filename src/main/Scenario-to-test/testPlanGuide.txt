@@ -24,7 +24,7 @@ Requirement 8:
 8b)
   - testPlan5.txt (Scenerio5Test) (All players)
 8c)
-
+  - testPlan8.txt (Scenerio8Test) (All players)
 8d)
   - testPlan7.txt (Scenerio7Test) (All players)
 
@@ -41,7 +41,7 @@ Requirement 10:
 10b)
   - testPlan1.txt (Scenerio1Test)
 10c)
-  -
+  - testPlan9.txt (Scenerio9Test)
 10d)
   - testPlan10.txt (Scenerio10Test)
 10e)
@@ -62,10 +62,14 @@ Requirement 12:
 
 Requirement 15:
 15.a)
-  - testPlan2.txt (Scenerio2Test)
-15.b)
   - testPlan4.txt (Scenerio4Test)
+15.b)
+  - testPlan12.txt (Scenerio12Test)
 
 Requirement 16:
 16.a)
   - testPlan3.txt (Scenerio3Test)
+
+Requirement 17:
+17.b)
+  - testPlan1.txt (Scenerio1Test)
