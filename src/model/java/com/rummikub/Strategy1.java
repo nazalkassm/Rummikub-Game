@@ -49,7 +49,7 @@ public class Strategy1 implements StrategyBehaviour {
 			returnMelds =  Collections.emptyList(); 
 		}
 			
-		if (!tableInfo.getMelds().isEmpty())
+		if (!tableInfo.getMelds().isEmpty() && returnMelds.size() > 0)
 			returnMelds.addAll(tableInfo.getMelds());
 		
 		return returnMelds;

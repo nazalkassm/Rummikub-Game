@@ -61,6 +61,10 @@ public class Strategy3 implements StrategyBehaviour {
 		{
 			playStrategy(currPlayer, allPossibleMelds, returnMelds);
 		}
+		
+		//if player has not played inital 30 AND playable melds sums less than 30
+		//player cannot place playable melds on table
+		//so player's rack gets reset to when the turn started and ends turn
 		else
 		{
 			Print.print("Player 4 tried playing melds but the sum is < 30.");
@@ -68,14 +72,13 @@ public class Strategy3 implements StrategyBehaviour {
 			returnMelds = Collections.emptyList();
 		}
 		
-		if(!tableInfo.getMelds().isEmpty())
+		if(!tableInfo.getMelds().isEmpty() && returnMelds.size() > 0)
 			returnMelds.addAll(tableInfo.getMelds());
+		
 		
 		return returnMelds;
 		
-		//if player has not played inital 30 AND playable melds sums less than 30
-		//player cannot place playable melds on table
-		//so player's rack gets reset to when the turn started and ends turn
+
 		
 	}
 	
