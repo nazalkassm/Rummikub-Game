@@ -84,10 +84,9 @@ public class Game
 				table.clearMelds();
 				
 				turnsWithoutMoves = 0;
-				for(Meld m: meldsPlayed)
-				{
-					table.updateMeldsOnTable(m);
-				}
+			
+					table.updateMeldsOnTable(meldsPlayed);
+				
 				
 				table.notifyObservers();
 			}

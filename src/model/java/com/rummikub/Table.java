@@ -100,16 +100,18 @@ public class Table implements Subject {
 	
 	/**
 	 * Add a meld to the table 
-	 * @param meldToAdd = A VALID meld to be added to the table 
+	 * @param list = A VALID meld to be added to the table 
 	 */
-	public boolean updateMeldsOnTable(Meld meldToAdd) {
-		//Make sure the meld type isn't invalid
-		if (meldToAdd.getMeldType() == Meld.MeldType.INVALID) 
-		{
-			return false;
+	public boolean updateMeldsOnTable(List<Meld> list) {
+		this.melds.clear();
+		for (Meld m: list) {
+			//Make sure the meld type isn't invalid
+			if (m.getMeldType() == Meld.MeldType.INVALID) 
+			{
+				return false;
+			}
+			this.melds.add(m);
 		}
-		this.melds.add(meldToAdd);
-		
 		return true;
 	}
 	
