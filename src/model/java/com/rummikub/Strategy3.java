@@ -44,7 +44,7 @@ public class Strategy3 implements StrategyBehaviour {
 				currPlayer.canPlayOnExistingMelds = true;
 				melds.addAll(tableInfo.getMelds());
 			} else {
-				Print.print("Player 2 tried playing melds but their sum is less than 30.");
+				Print.print("Player " + currPlayer.getName() + " tried playing melds but their sum is less than 30.");
 				return Collections.emptyList(); 
 			}
 		} else {
@@ -72,7 +72,7 @@ public class Strategy3 implements StrategyBehaviour {
 		//We can play this entire hand and win
 		currPlayer.removeTiles(melds);
 		//print rack and possible melds
-		Print.printRacktoUser(currPlayer.getPlayerRack(),currPlayer.isPrint_rack_meld());
+		//Print.printRacktoUser(currPlayer.getPlayerRack(),currPlayer.isPrint_rack_meld());
 		//Print.printMeldtoUser(melds,currPlayer.isPrint_rack_meld());
 		return melds;
 		

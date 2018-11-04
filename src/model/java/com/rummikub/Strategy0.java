@@ -87,7 +87,7 @@ public class Strategy0 implements StrategyBehaviour
 			{
 				if(currentPlayer.canPlayOnExistingMelds == false && !(returnMelds.isEmpty()))
 				{
-					Print.print("\nPlayer 1 tried playing melds but the sum is < 30.");
+					Print.print("\nPlayer " + currentPlayer.getName() + " tried playing melds but the sum is < 30.");
 				}
 				currentPlayer.getPlayerRack().setRack(playerHand);
 				returnMelds = Collections.emptyList();

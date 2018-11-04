@@ -51,7 +51,7 @@ public class Strategy2 implements StrategyBehaviour {
 				currPlayer.canPlayOnExistingMelds = true;
 				melds.addAll(tableInfo.getMelds());
 			} else {
-				Print.print("Player 3 tried playing melds but their sum is less than 30.");
+				Print.print("Player " + currPlayer.getName() + " tried playing melds but their sum is less than 30.");
 				return Collections.emptyList(); 
 			}
 		} else {
@@ -59,7 +59,7 @@ public class Strategy2 implements StrategyBehaviour {
 			//If the tempTiles which has all the tiles that we should play, contains the player rack in it then.. 
 			if (tempTiles.containsAll(currPlayer.getPlayerRack().getRackArray())) {
 				
-			} 
+			}
 			//Otherwise we can't get rid of all the tiles so we need to 
 			else {
 				ListIterator<Meld> iter = melds.listIterator();
@@ -76,7 +76,7 @@ public class Strategy2 implements StrategyBehaviour {
 		//We can play this entire hand and win
 		currPlayer.removeTiles(melds);
 		//print rack and possible melds
-		Print.printRacktoUser(currPlayer.getPlayerRack(),currPlayer.isPrint_rack_meld());
+		//Print.printRacktoUser(currPlayer.getPlayerRack(),currPlayer.isPrint_rack_meld());
 		//Print.printMeldtoUser(melds,currPlayer.isPrint_rack_meld());
 		return melds;
 	}

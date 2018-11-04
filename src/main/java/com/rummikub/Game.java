@@ -35,9 +35,9 @@ public class Game
 		
 		//Adding players to the game
 		players.add(new Player(pName,new Strategy0()));
-		players.add(new Player("Player 2",new Strategy1()));
-		players.add(new Player("Player 3",new Strategy2()));
-		players.add(new Player("Player 4",new Strategy3()));
+		players.add(new Player("p1",new Strategy1()));
+		players.add(new Player("p2",new Strategy2()));
+		players.add(new Player("P3",new Strategy3()));
 		
 		//Print the racks and melds of players, yes or no.
 		for(Player p : players)
@@ -85,7 +85,6 @@ public class Game
 			
 				table.updateMeldsOnTable(meldsPlayed);
 				
-				
 				table.notifyObservers();
 			}
 			else
@@ -95,12 +94,10 @@ public class Game
 					turnsWithoutMoves++;
 				}
 				else {
-					Print.println(currentPlayer.getName() + " draws a tile from the stock: ");
-					System.out.println(currentPlayer.getPlayerRack().takeTile(stock));
-					
+					Print.println(currentPlayer.getName() + " draws a tile from the stock: " + currentPlayer.getPlayerRack().takeTile(stock).toString());					
 				}
 			}
-			
+			Print.println(currentPlayer.getName() + " rack size is " + currentPlayer.getPlayerRack().getSize());
 			prompter.promptEnterKey(waitAferEachTurn);
 			
 			if (turnsWithoutMoves >= 4) 

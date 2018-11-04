@@ -44,7 +44,7 @@ public class Strategy1 implements StrategyBehaviour {
 		//player cannot place playable melds on table
 		//so player's rack gets reset to when the turn started and ends turn
 		else {
-			Print.print("Player 2 tried playing melds but their sum is less than 30.");
+			Print.print("Player " + currPlayer.getName() + " tried playing melds but their sum is less than 30.");
 			currPlayer.getPlayerRack().setRack(tempList);
 			returnMelds =  Collections.emptyList(); 
 		}
@@ -67,8 +67,8 @@ public class Strategy1 implements StrategyBehaviour {
 			possibleMelds = new ArrayList<>(currPlayer.getPlayerRack().getMelds());
 			
 			//print updated rack and possible melds to UI
-			Print.printRacktoUser(currPlayer.getPlayerRack(),currPlayer.isPrint_rack_meld());
-			Print.printMeldtoUser(possibleMelds,currPlayer.isPrint_rack_meld());
+			//Print.printRacktoUser(currPlayer.getPlayerRack(),currPlayer.isPrint_rack_meld());
+			//Print.printMeldtoUser(possibleMelds,currPlayer.isPrint_rack_meld());
 		}
 	}
 
