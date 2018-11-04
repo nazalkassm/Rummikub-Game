@@ -225,10 +225,10 @@ public class Table implements Subject {
 		}
 	}
 
-	private int lowestTableHandCount() {
-		int lowestCount = 0;
+	public int lowestTableHandCount() {
+		int lowestCount = Constants.STOCK_SIZE;
 		for (Map.Entry<Integer, Player> entry : players.entrySet()) {			
-			if (lowestCount < entry.getValue().getPlayerRack().getSize()) {
+			if (lowestCount > entry.getValue().getPlayerRack().getSize()) {
 				lowestCount = entry.getValue().getPlayerRack().getSize();
 			}
 		}
