@@ -16,13 +16,14 @@ public class Strategy2 implements StrategyBehaviour {
 	@Override
 	public List<Meld> useStrategy(Player currPlayer) {
 		List<Tile> tiles = new ArrayList<>(); 
-		
+		//print rack and possible melds
+		Print.printRacktoUser(currPlayer.getPlayerRack(),currPlayer.isPrint_rack_meld());
 		//If no other player has played on the table
 		if (tableInfo.getMelds().isEmpty()) {
 			//Can't play so passes
 			return Collections.emptyList();
 		}
-		
+	
 		//Add current player to tiles
 		tiles.addAll(currPlayer.getPlayerRack().getRackArray());
 		
@@ -73,7 +74,9 @@ public class Strategy2 implements StrategyBehaviour {
 		}
 		//We can play this entire hand and win
 		currPlayer.removeTiles(melds);
-		
+		//print rack and possible melds
+		Print.printRacktoUser(currPlayer.getPlayerRack(),currPlayer.isPrint_rack_meld());
+		Print.printMeldtoUser(melds,currPlayer.isPrint_rack_meld());
 		return melds;
 	}
 

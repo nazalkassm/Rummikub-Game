@@ -26,7 +26,7 @@ public class Game
 	
 	//Things to play with when testing
 	boolean waitAferEachTurn = true; //Prompts enter after each turn
-	boolean printRackMeld = false; // Turn it off so that you do not print the computers racks and melds.
+	boolean printRackMeld = true; // Turn it off so that you do not print the computers racks and melds.
 	
 	public void start() throws IOException
 	{

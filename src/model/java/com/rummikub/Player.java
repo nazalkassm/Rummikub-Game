@@ -120,7 +120,8 @@ public class Player {
 	 * @return Rack = The player's rack
 	 */
 	public Rack getPlayerRack() 
-	{
+	{ 
+		this.rack.sortRack();
 		return this.rack;
 	}
 	
