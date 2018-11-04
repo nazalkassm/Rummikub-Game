@@ -25,10 +25,8 @@ public class TableTest {
 		//Create the new player
 		table = new Table(new Stock());
 		table.addPlayers(player1, player2, player3, player4);
-		
-		table.updateMeldsOnTable(m1);
-		table.updateMeldsOnTable(m2);
-		table.updateMeldsOnTable(m3);
+		List<Meld> melds = Arrays.asList(m1,m2,m3);
+		table.updateMeldsOnTable(melds);
 	}
 	
 	@Test
@@ -41,8 +39,10 @@ public class TableTest {
 	public void tableMeldCountTest() {
 		//We added 3 melds so this should be 3
 		assertEquals(3, table.getMeldCount());
-		
-		assertTrue(table.updateMeldsOnTable(m1));
+
+		List<Meld> melds = Arrays.asList(m1);
+
+		assertTrue(table.updateMeldsOnTable(melds));
 		
 		//After adding 1 more meld to the table, ensure the new count is 4
 		assertEquals(4, table.getMeldCount());
