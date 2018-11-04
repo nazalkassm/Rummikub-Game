@@ -38,9 +38,6 @@ public class Strategy1 implements StrategyBehaviour {
 		//if either true, returns played melds and ends turn
 		if(currPlayer.canPlayOnExistingMelds || sum >= 30) {
 			currPlayer.canPlayOnExistingMelds = true;
-			if (tableInfo.getMelds().isEmpty())
-				returnMelds.addAll(tableInfo.getMelds());
-			return returnMelds;
 		}
 
 		//if player has not played inital 30 AND playable melds sums less than 30
@@ -49,8 +46,13 @@ public class Strategy1 implements StrategyBehaviour {
 		else {
 			Print.print("Player 2 tried playing melds but their sum is less than 30.");
 			currPlayer.getPlayerRack().setRack(tempList);
-			return Collections.emptyList(); 
+			returnMelds =  Collections.emptyList(); 
 		}
+			
+		if (!tableInfo.getMelds().isEmpty())
+			returnMelds.addAll(tableInfo.getMelds());
+		
+		return returnMelds;
 	}
 	
 	

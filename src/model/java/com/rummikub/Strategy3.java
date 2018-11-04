@@ -51,7 +51,7 @@ public class Strategy3 implements StrategyBehaviour {
 		//
 		if(!currPlayer.canPlayOnExistingMelds) 
 		{
-			logic(currPlayer, initialMelds, returnMelds);
+			initial30(currPlayer, initialMelds, returnMelds);
 			if(getSum(sum, returnMelds) >= 30){
 				currPlayer.canPlayOnExistingMelds = true;
 			}
@@ -68,6 +68,9 @@ public class Strategy3 implements StrategyBehaviour {
 			returnMelds = Collections.emptyList();
 		}
 		
+		if(!tableInfo.getMelds().isEmpty())
+			returnMelds.addAll(tableInfo.getMelds());
+		
 		return returnMelds;
 		
 		//if player has not played inital 30 AND playable melds sums less than 30
@@ -81,7 +84,7 @@ public class Strategy3 implements StrategyBehaviour {
 		boolean track = false;
 		
 		if(tableInfo.getLowestHandCount() <= currPlayer.getPlayerRack().getSize() - 3) {
-			logic(currPlayer, possibleMelds, returnMelds);
+			panicPlay(currPlayer, possibleMelds, returnMelds);
 		}
 		else {
 			//play only table cards 
@@ -101,7 +104,7 @@ public class Strategy3 implements StrategyBehaviour {
 		}
 	}
 	
-	public void logic(Player currPlayer, List<Meld> possibleMelds, List<Meld> returnMelds) {
+	public void initial30(Player currPlayer, List<Meld> possibleMelds, List<Meld> returnMelds) {
 		while (possibleMelds.size() > 0) {
 			//now add Meld with max sum to return melds
 			returnMelds.add(possibleMelds.get(Meld.getMaxIndex(possibleMelds)));
@@ -115,6 +118,22 @@ public class Strategy3 implements StrategyBehaviour {
 			Print.printMeldtoUser(possibleMelds,currPlayer.isPrint_rack_meld());
 		}
 	}
+	
+	//in here the possible melds does not have to get updated with getMeld()
+	//because we're using playing melds with rack and table
+	public void panicPlay(Player currPlayer, List<Meld> possibleMelds, List<Meld> returnMelds) {
+		while (possibleMelds.size() > 0) {
+			//now add Meld with max sum to return melds
+			returnMelds.add(possibleMelds.get(Meld.getMaxIndex(possibleMelds)));
+			//pop the tiles with were added to return melds
+			currPlayer.getPlayerRack().removeTiles(possibleMelds.get(Meld.getMaxIndex(possibleMelds)));
+			
+			//print updated rack and possible melds to UI
+			Print.printRacktoUser(currPlayer.getPlayerRack(),currPlayer.isPrint_rack_meld());
+			Print.printMeldtoUser(possibleMelds,currPlayer.isPrint_rack_meld());
+		}
+	}
+	
 	
 	public int getSum(int sum, List<Meld> returnMelds) {
 		//checks for sum of returning melds
