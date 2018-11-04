@@ -58,16 +58,7 @@ public class Game
 		
 		// Game loop the game runs here until it ends.
 		do 
-		{
-			// we might need to add this. I think we are adding empty collections to our table which was fucking us up
-			for(int i =0; i < table.getAllMelds().size(); i++)
-			{
-				if(table.getMeld(i).getTiles().isEmpty())
-				{
-					table.getAllMelds().remove(i);
-				}
-			}
-			
+		{			
 			printer.printGameTable(table);
 			
 			Player currentPlayer = table.getNextPlayerTurn();
@@ -84,7 +75,7 @@ public class Game
 		    }
 			
 			Print.print("\nMelds played by " + currentPlayer.getName() + " are: ");
-			Print.printMeldtoUser(meldsPlayed,true);
+			Print.printMeldtoUser(Table.getDiffMelds(table.getAllMelds(), meldsPlayed),true);
 			
 			if(!(meldsPlayed.isEmpty()))
 			{
@@ -93,7 +84,7 @@ public class Game
 				
 				turnsWithoutMoves = 0;
 			
-					table.updateMeldsOnTable(meldsPlayed);
+				table.updateMeldsOnTable(meldsPlayed);
 				
 				
 				table.notifyObservers();
@@ -112,7 +103,8 @@ public class Game
 			
 			prompter.promptEnterKey(waitAferEachTurn);
 			
-			if (turnsWithoutMoves >= 4) {
+			if (turnsWithoutMoves >= 4) 
+			{
 				Print.println("The stock is empty, and no one has played in 4 turns.");
 				gameRunning = false;
 			}

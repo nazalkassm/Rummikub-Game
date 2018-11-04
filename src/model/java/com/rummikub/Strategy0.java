@@ -32,7 +32,6 @@ public class Strategy0 implements StrategyBehaviour
 		List<Meld> returnMelds = new ArrayList<>();
 		
 		List<Tile> playerHand = new ArrayList<>(currentPlayer.getPlayerRack().getRackArray());
-		List<Meld> meldsPlayedThisTurn = new ArrayList<>(); // possible to make it part of strategy
 		
 		String choiceOfPlayS = "";
 		int choiceOfPlayI = -10;
@@ -47,17 +46,17 @@ public class Strategy0 implements StrategyBehaviour
 		{
 			while(userIsPlaying)
 			{
-			choiceOfPlayS = Prompt.promptInput("Choose 1 to play from hand, and 2 to play using the Table: (0 to play noting)(-1 to end turn)");
+			choiceOfPlayS = Prompt.promptInput("Choose 1 to play from hand, and 2 to play using the Table: (-1 to play noting)(0 to end turn)");
 			choiceOfPlayI = Integer.parseInt(choiceOfPlayS);
 				switch(choiceOfPlayI) 
 				{
-				   case -1:
-					  userIsPlaying = false;
-					  break;
-				   case 0 :
+				   case -1 :
 				      returnMelds = Collections.emptyList();
 				      userIsPlaying = false;
 				      break; 
+				   case 0:
+					  userIsPlaying = false;
+					  break;
 				   case 1 :
 				      initialStrategy(currentPlayer,possibleRackMelds,returnMelds);
 				      break; 
@@ -72,21 +71,14 @@ public class Strategy0 implements StrategyBehaviour
 		}
 		else
 		{
-			Print.print("\nHere are the melds you can play from your hand: ");
-			Print.printMeldtoUser(possibleRackMelds,true);
 			initialStrategy(currentPlayer, possibleRackMelds, returnMelds); // <------ Change execution path here.
 			
 			sum = checkSum(returnMelds);
 			Print.print("The total sum for melds played is : ", String.valueOf(sum));
 
-			//checks for sum of returning melds
-			sum = checkSum(returnMelds);
 			if(sum >= 30) 
 			{
 				currentPlayer.canPlayOnExistingMelds = true;
-				
-				if (!(tableInfo.getMelds().isEmpty()) && returnMelds.size() > 0)
-					returnMelds.addAll(tableInfo.getMelds());
 			}
 			//if player has not played inital 30 AND playable melds sums less than 30
 			//player cannot place playable melds on table
@@ -102,10 +94,13 @@ public class Strategy0 implements StrategyBehaviour
 			}
 		}
 
-		if (returnMelds.isEmpty()) 
+		if (choiceOfPlayI == 0) 
+		{
+			Print.print("\n" + currentPlayer.getName() + " ended his turn.");
+		}
+		else if(choiceOfPlayI == 1)
 		{
 			Print.print("\n" + currentPlayer.getName() + " wants to pass.");
-			returnMelds = Collections.emptyList(); 
 		}
 
 		if (!(tableInfo.getMelds().isEmpty()) && returnMelds.size() > 0)
@@ -129,21 +124,18 @@ public class Strategy0 implements StrategyBehaviour
 		
 		for(Integer i : inputIntegerList)
 		{
-			mergedTiles.addAll(tableMelds.get(i.intValue()).getTiles());
+			mergedTiles.addAll(tableMelds.get(i.intValue()-1).getTiles());
 		}
 		
 		inputIntegerList = Prompt.promptUserTiles("Choose the tiles that you want to play on the melds you have chosen (Ex: 1 10 11 12)",currentPlayer.getPlayerRack());
 		
 		for(Integer i : inputIntegerList)
 		{
-			mergedTiles.add(currentPlayer.getPlayerRack().getRackArray().get(i.intValue()));
+			mergedTiles.add(currentPlayer.getPlayerRack().getRackArray().get(i.intValue()-1));
 
 		}
 		
 		MergedMeld = Meld.getMelds(mergedTiles);
-		
-		Print.print("Here is the combination you can play from your choices :");
-		Print.printMeldtoUser(MergedMeld, true);
 		
 		initialStrategy(currentPlayer,MergedMeld,returnMelds);
 		
@@ -155,6 +147,8 @@ public class Strategy0 implements StrategyBehaviour
 		
 		while(playerIsChoosing)
 		{
+			Print.print("\nHere are the melds you can play: ");
+			Print.printMeldtoUser(possibleMelds,true);
 			String inputString = Prompt.promptInput("Enter the melds you want to play (0 to pass) : ");
 			int inputInteger = Integer.parseInt(inputString);
 			if(inputInteger == 0)
@@ -165,13 +159,7 @@ public class Strategy0 implements StrategyBehaviour
 			//Add the melds chosen to returnMelds, removeTheTiles played, and update the melds he can play.
 			returnMelds.add(possibleMelds.get(inputInteger-Constants.ONE_INDEX));
 			currentPlayer.getPlayerRack().removeTiles(possibleMelds.get(inputInteger-Constants.ONE_INDEX));
-			possibleMelds.clear();
-			possibleMelds.addAll(currentPlayer.getPlayerRack().getMelds());
-			
-			//Print Hand Info
-			Print.printRacktoUser(currentPlayer.getPlayerRack(),true);
-			Print.print("\nHere are the melds you can play: ");
-			Print.printMeldtoUser(possibleMelds,true);
+			possibleMelds = currentPlayer.getPlayerRack().getMelds();
 		}
 	}
 	
