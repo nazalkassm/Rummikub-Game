@@ -95,8 +95,9 @@ public class Game
 					turnsWithoutMoves++;
 				}
 				else {
-					currentPlayer.getPlayerRack().takeTile(stock);
-					Print.println(currentPlayer.getName() + " draws a tile from the stock.");
+					Print.println(currentPlayer.getName() + " draws a tile from the stock: ");
+					System.out.println(currentPlayer.getPlayerRack().takeTile(stock));
+					
 				}
 			}
 			
