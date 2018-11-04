@@ -43,7 +43,7 @@ Requirement 10:
 10c)
   -
 10d)
-  -
+  - testPlan10.txt (Scenerio10Test)
 10e)
   - testPlan4.txt (Scenerio4Test)
 10f)
@@ -52,6 +52,8 @@ Requirement 10:
 Requirement 11:
 11a)
   - testPlan4.txt (Scenerio4Test)
+11b)
+  - testPlan11.txt (Scenerio11Test)
 
 Requirement 12:
 12a)

@@ -1,7 +1,5 @@
 Human goes first (always).
 p1 can play several melds on a subsequent turn (10d)
-p3 plays 30+ points on a subsequent turn (11b)
-p2 cannot play at least one tile that requires use of tiles of the table and thus draws (17b)
 
 Initial Hands:
 Human:
@@ -11,10 +9,10 @@ G1 G3 G5 G12
 R2 R4 R6
 
 p1:
-O1 O3 O5 O7
-B2 B4 B6
+O1 O3 O5 O7 O13
+B2 B6
 G1 G3 G5 G13
-R2 R4 R5 R6
+R2 R5 R6
 
 p2:
 O2 O4 O6 O13
@@ -30,3 +28,13 @@ R1 R3 R12 R13
 
 
 Stock:
+G9 R13 B9 O9
+
+Human passes and draws G9.
+p1 passes and draws R13.
+p2 passes and draws B9.
+p3 plays {B12, O12, R12}
+
+Human passes and draws O9.
+p1 plays {O5, G5, R5} and {O13, G13, R13} (10d)
+... (Game continues but is irrelevant)

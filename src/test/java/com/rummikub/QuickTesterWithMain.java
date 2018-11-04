@@ -13,10 +13,8 @@ import org.pmw.tinylog.Logger;
 public class QuickTesterWithMain 
 {
 	public static void main(String[] args) throws IOException 
-	{
-		Game game = new Game();
-		
-		rigGame("src/main/resources/inputFiles/test9.txt");
+	{		
+		rigGame("src/main/resources/inputFiles/test8.txt");
 	}
 	
 	public static void rigGame(String filePath) throws IOException {
