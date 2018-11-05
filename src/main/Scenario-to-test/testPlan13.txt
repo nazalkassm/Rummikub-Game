@@ -1,0 +1,37 @@
+Human goes first (always).
+p2 wins using some tiles on the table on its last turn. (Req: 16b)
+
+Human:
+O4 O5
+B1 B3 B5 B13
+G4 G4 G6 G12
+R1 R3 R5 R8
+
+p1:
+O1 O3 O6
+B2 B4
+G1 G3 G5 G12
+R2 R4 R11 R12 R13
+
+p2:
+O1 O2 O3 O4 O5 O6 O7 O8 O9 O10 O11 O12 O13
+R10
+
+p3:
+O2 O12 O13
+B3 B6 B10 B11
+G2 G7 G8 G11
+R4 R9 R9
+
+Stock:
+O11 R6 R7 B5
+
+Human draws O11
+p1 plays {R11, R12, 13}
+p2 plays {O1, O2, O3, O4, O5, O6, O7, O7, O8, O9, O10, O11, O12, O13}
+p3 draws R6
+
+Human draws R7
+p1 draws B5
+p2 plays R10 on {R11, R12, R13} // Req: 16b
+p2 wins the game.

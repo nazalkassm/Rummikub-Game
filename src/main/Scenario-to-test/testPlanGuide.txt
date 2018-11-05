@@ -58,6 +58,8 @@ Req: 11b)
 Requirement 12:
 Req: 12a)
   - testPlan3.txt (Scenerio3Test)
+Req: 12b)
+  - testPlan14.txt (Scenerio14Test)
 
 
 Requirement 15:
@@ -69,6 +71,8 @@ Req: 15.b)
 Requirement 16:
 Req: 16.a)
   - testPlan3.txt (Scenerio3Test)
+Req: 16.b)
+  - testPlan13.txt (Scenerio13Test)
 
 Requirement 17:
 Req: 17.b)

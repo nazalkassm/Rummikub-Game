@@ -17,6 +17,7 @@ public class ScenarioTest {
 		game = new Game();
 		game.printRackMeld = true;
 		game.waitAferEachTurn = false;
+		FileParser.reset();
 	}
 	
 	@Test
@@ -56,7 +57,7 @@ public class ScenarioTest {
 		try {
 			game.start();
 			
-			assertEquals("Player 2", game.winner.getName());
+			assertEquals("p1", game.winner.getName());
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
@@ -79,7 +80,7 @@ public class ScenarioTest {
 		try {
 			game.start();
 			
-			assertEquals("Player 3", game.winner.getName());
+			assertEquals("p2", game.winner.getName());
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
@@ -102,7 +103,7 @@ public class ScenarioTest {
 		try {
 			game.start();
 			
-			assertEquals("Player 4", game.winner.getName());
+			assertEquals("p3", game.winner.getName());
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
@@ -267,6 +268,50 @@ public class ScenarioTest {
 		
 		try {
 			game.start();
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+		
+		Prompt.init();
+	}
+	
+	@Test
+	void Scenerio13Test() {
+		// 4.c)
+		FileParser.parse("src/main/resources/inputFiles/test13.txt");
+		assertFalse(FileParser.inputError);
+		
+		game.stock = FileParser.stock;
+		game.table = new Table(game.stock);
+		
+		assertEquals(60, game.stock.getLength());
+		
+		try {
+			game.start();
+			
+			assertEquals("p2", game.winner.getName());
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+		
+		Prompt.init();
+	}
+	
+	@Test
+	void Scenerio14Test() {
+		// 4.c)
+		FileParser.parse("src/main/resources/inputFiles/test14.txt");
+		assertFalse(FileParser.inputError);
+		
+		game.stock = FileParser.stock;
+		game.table = new Table(game.stock);
+		
+		assertEquals(61, game.stock.getLength());
+		
+		try {
+			game.start();
+			
+			assertEquals("p3", game.winner.getName());
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
