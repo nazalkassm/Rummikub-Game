@@ -137,7 +137,7 @@ public class Strategy0 implements StrategyBehaviour
 		
 		MergedMeld = Meld.getMelds(mergedTiles);
 		
-		initialStrategy(currentPlayer,MergedMeld,returnMelds);
+		initialStrategy2(currentPlayer,MergedMeld,returnMelds,mergedTiles);
 		
 	}
 	
@@ -171,5 +171,30 @@ public class Strategy0 implements StrategyBehaviour
 			sum += m.sumMeld();
 		}
 		return sum;
+	}
+	
+	public void initialStrategy2(Player currentPlayer, List<Meld> possibleMelds, List<Meld> returnMelds, List<Tile> toPlayWithRack) throws IOException 
+	{
+		boolean playerIsChoosing = true;
+		
+		while(playerIsChoosing)
+		{
+			Print.print("\nHere are the melds you can play: ");
+			Print.printMeldtoUser(possibleMelds,Collections.emptyList(), true);
+			String inputString = Prompt.promptInput("Enter the melds you want to play (0 to pass) : ");
+			int inputInteger = Integer.parseInt(inputString);
+			if(inputInteger == 0)
+			{
+				break;
+			}
+			
+			//Add the melds chosen to returnMelds, removeTheTiles played, and update the melds he can play.
+			returnMelds.add(possibleMelds.get(inputInteger-Constants.ONE_INDEX));
+			currentPlayer.getPlayerRack().removeTiles(possibleMelds.get(inputInteger-Constants.ONE_INDEX));
+			Meld meldPlayed = possibleMelds.get(inputInteger-Constants.ONE_INDEX);
+			List<Tile> tilesPlayed = meldPlayed.getMeld();
+			toPlayWithRack.removeAll(tilesPlayed);
+			possibleMelds = Meld.getMelds(toPlayWithRack);
+		}	
 	}
 }
