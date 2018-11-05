@@ -1,17 +1,17 @@
 Test plan guide:
 Requirement 4:
-4.a1)
+Req: 4.a1)
   - testPlan5.txt (Scenerio5Test) (All players)
-4.a2)
+Req: 4.a2)
   - testPlan6.txt (Scenerio6Test) (All players)
-4.b1)
+Req: 4.b1)
   - testPlan7.txt (Scenerio7Test) (All players)
-4.b2)
+Req: 4.b2)
   - testPlan1.txt (Scenerio1Test) (Player 1)
   - testPlan2.txt (Scenerio2Test) (Player 2)
   - testPlan3.txt (Scenerio3Test) (Player 3)
   - testPlan4.txt (Scenerio4Test) (Player 4)
-4.c)
+Req: 4.c)
   - testPlan1.txt (Scenerio1Test) (Player 1)
   - testPlan2.txt (Scenerio2Test) (Player 2)
   - testPlan3.txt (Scenerio3Test) (Player 3)
@@ -19,16 +19,16 @@ Requirement 4:
 
 
 Requirement 8:
-8a)
+Req: 8a)
   - testPlan6.txt (Scenerio6Test) (All players)
-8b)
+Req: 8b)
   - testPlan5.txt (Scenerio5Test) (All players)
-8c)
+Req: 8c)
   - testPlan8.txt (Scenerio8Test) (All players)
-8d)
+Req: 8d)
   - testPlan7.txt (Scenerio7Test) (All players)
 
-8e)
+Req: 8e)
 - testPlan1.txt (Scenerio1Test) (Player 1)
 - testPlan2.txt (Scenerio2Test) (Player 2)
 - testPlan3.txt (Scenerio3Test) (Player 3)
@@ -36,40 +36,40 @@ Requirement 8:
 
 
 Requirement 10:
-10a)
+Req: 10a)
   - testPlan5.txt (Scenerio5Test)
-10b)
+Req: 10b)
   - testPlan1.txt (Scenerio1Test)
-10c)
+Req: 10c)
   - testPlan9.txt (Scenerio9Test)
-10d)
+Req: 10d)
   - testPlan10.txt (Scenerio10Test)
-10e)
+Req: 10e)
   - testPlan4.txt (Scenerio4Test)
-10f)
+Req: 10f)
   - testPlan7.txt (Scenerio7Test)
 
 Requirement 11:
-11a)
+Req: 11a)
   - testPlan4.txt (Scenerio4Test)
-11b)
+Req: 11b)
   - testPlan11.txt (Scenerio11Test)
 
 Requirement 12:
-12a)
+Req: 12a)
   - testPlan3.txt (Scenerio3Test)
 
 
 Requirement 15:
-15.a)
+Req: 15.a)
   - testPlan4.txt (Scenerio4Test)
-15.b)
+Req: 15.b)
   - testPlan12.txt (Scenerio12Test)
 
 Requirement 16:
-16.a)
+Req: 16.a)
   - testPlan3.txt (Scenerio3Test)
 
 Requirement 17:
-17.b)
+Req: 17.b)
   - testPlan1.txt (Scenerio1Test)

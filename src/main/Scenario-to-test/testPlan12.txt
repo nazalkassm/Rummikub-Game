@@ -1,5 +1,5 @@
 Human goes first (always).
-p2 can not play its first 30 after another player already has, so they draw. (15.b)
+p2 can not play its first 30 after another player already has, so they draw. (Req: Req: 15.b)
 
 Initial Hands:
 Human:
@@ -28,5 +28,5 @@ R2 R4 R5 R9
 Human plays {O8, O9, O10, O11, O12}
 p1 can not play and draws.
 p2 can not play and draws.
-P3 can't play 30 points and draws. // 15.b
+P3 can't play 30 points and draws. // Req: Req: 15.b
 ... Game continues but it is irrelevant

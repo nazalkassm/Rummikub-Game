@@ -32,7 +32,6 @@ public class ScenarioTest {
 		assertEquals(3, FileParser.playerCommands.size());
 		
 		try {
-			//Prompt.init(FileParser.playerCommands);
 			game.start();
 			
 			assertEquals("Human", game.winner.getName());
@@ -55,7 +54,6 @@ public class ScenarioTest {
 		assertEquals(60, game.stock.getLength());
 		
 		try {
-			//Prompt.init(FileParser.playerCommands);
 			game.start();
 			
 			assertEquals("Player 2", game.winner.getName());
@@ -79,7 +77,6 @@ public class ScenarioTest {
 		assertEquals(60, game.stock.getLength());
 		
 		try {
-			//Prompt.init(FileParser.playerCommands);
 			game.start();
 			
 			assertEquals("Player 3", game.winner.getName());
@@ -103,7 +100,6 @@ public class ScenarioTest {
 		assertEquals(60, game.stock.getLength());
 		
 		try {
-			Prompt.init(FileParser.playerCommands);
 			game.start();
 			
 			assertEquals("Player 4", game.winner.getName());
@@ -127,7 +123,6 @@ public class ScenarioTest {
 		assertEquals(60, game.stock.getLength());
 		
 		try {
-			//Prompt.init(FileParser.playerCommands);
 			game.start();
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -149,7 +144,6 @@ public class ScenarioTest {
 		assertEquals(60, game.stock.getLength());
 		
 		try {
-			//rompt.init(FileParser.playerCommands);
 			game.start();
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -171,7 +165,6 @@ public class ScenarioTest {
 		assertEquals(60, game.stock.getLength());
 		
 		try {
-			//Prompt.init(FileParser.playerCommands);
 			game.start();
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -193,7 +186,6 @@ public class ScenarioTest {
 		assertEquals(60, game.stock.getLength());
 		
 		try {
-			//Prompt.init(FileParser.playerCommands);
 			game.start();
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -201,4 +193,85 @@ public class ScenarioTest {
 		
 		Prompt.init();
 	}
+	
+	@Test
+	void Scenerio9Test() {
+		
+		FileParser.parse("src/main/resources/inputFiles/test9.txt");
+		assertFalse(FileParser.inputError);
+		
+		game.stock = FileParser.stock;
+		game.table = new Table(game.stock);
+		
+		assertEquals(64, game.stock.getLength());
+		
+		try {
+			game.start();
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+		
+		Prompt.init();
+	}
+	
+	@Test
+	void Scenerio10Test() {
+		
+		FileParser.parse("src/main/resources/inputFiles/test10.txt");
+		assertFalse(FileParser.inputError);
+		
+		game.stock = FileParser.stock;
+		game.table = new Table(game.stock);
+		
+		assertEquals(60, game.stock.getLength());
+		
+		try {
+			game.start();
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+		
+		Prompt.init();
+	}
+	
+	@Test
+	void Scenerio11Test() {
+		
+		FileParser.parse("src/main/resources/inputFiles/test11.txt");
+		assertFalse(FileParser.inputError);
+		
+		game.stock = FileParser.stock;
+		game.table = new Table(game.stock);
+		
+		assertEquals(64, game.stock.getLength());
+		
+		try {
+			game.start();
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+		
+		Prompt.init();
+	}
+	
+	@Test
+	void Scenario12Test() {
+		
+		FileParser.parse("src/main/resources/inputFiles/test12.txt");
+		assertFalse(FileParser.inputError);
+		
+		game.stock = FileParser.stock;
+		game.table = new Table(game.stock);
+		
+		assertEquals(60, game.stock.getLength());
+		
+		try {
+			game.start();
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+		
+		Prompt.init();
+	}
+
 }

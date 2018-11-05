@@ -1,5 +1,5 @@
 Human goes first (always).
-p3 plays 30+ points on a subsequent turn (11b)
+p3 plays 30+ points on a subsequent turn (Req: 11b)
 
 Initial Hands:
 Human:
@@ -38,5 +38,5 @@ p3 passes and draws R13.
 Human passes and draws O9.
 p1 passes and draws O10.
 p2 passes and draws B10.
-p3 plays {O5, G5, R5} and {O13, G13, R13} (10b)
+p3 plays {O5, G5, R5} and {O13, G13, R13} (Req: 10b)
 ... (Game continues but is irrelevant)

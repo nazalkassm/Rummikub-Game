@@ -1,5 +1,5 @@
 Human goes first (always).
-Human, p1, p2, and p3 each play two set melds (4b1)
+Human, p1, p2, and p3 each play two set melds (Req: 4b1)
 
 Initial Hands:
 Human:
