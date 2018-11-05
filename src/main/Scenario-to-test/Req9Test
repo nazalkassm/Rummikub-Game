@@ -1,0 +1,72 @@
+///////// TEST 1
+Human exists for only p3 to check lowest hand count
+
+Initial Hands:
+Human:
+G13
+
+p3:
+B3 B5 R4 G5
+
+Table Melds:
+{[G1 G2 G3 G4],[R4 R5 R6],[O4 B4 G4]}
+
+p3 plays: {[G1 G2 G3 G4 G5],[B3 B4 B5],[O4 G4 R4],[R4 R5 6]}
+- player added a tile to run on the table //Req: 9.a
+- player created a meld that uses a card from an existing set on the table//Req: 9.e
+
+
+
+//////// TEST 2
+Human exists for only p3 to check lowest hand count
+
+Initial Hands:
+Human:
+O1
+
+p3:
+R11 G4 R4
+
+Table Melds:
+{[O11 G11 B11],[G1 G2 G3],[R5 R6 R7]}
+
+p3 plays: {[O11 G11 B11 R11],[G1 G2 G3 G4],[R4 R5 R6 R7]}
+- player added a tile to a set on the table //Req: 9.b
+- player used several tile to add to multiple melds on the table //Req: 9.f
+
+
+
+///////// TEST 3
+Human exists for only p3 to check lowest hand count
+
+Initial Hands:
+Human:
+G13
+
+p3:
+B4 G4 O8 O9
+
+Table Melds:
+{[R1 R2 R3 R4],[O5 O6 O7]}
+
+p3 plays: {[R1 R2 R3],[B4 G4 R4],[O5 O6 O7 O8 O9]}
+- player adds several (2) tiles to an existing run on the table //Req: 9.c
+- player uses a tile from an existing run on the table //Req: 9.d
+
+
+
+///////// TEST 4
+Human exists for only p3 to check lowest hand count
+
+Initial Hands:
+Human:
+G13
+
+p3: 
+B4
+
+Table Melds:
+{[R1 R2 R3 R4],[O4 O5 O6 O7]}
+
+p3 plays: {[R1 R2 R3],[B4 O4 R4],[O5 O6 O7]}
+- player plays a meld that reorganizes several (2) melds on the table //Req 9.g
