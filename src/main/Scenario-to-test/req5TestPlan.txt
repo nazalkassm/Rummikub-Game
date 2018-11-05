@@ -1,0 +1,55 @@
+Strategy0 Test plan, Requirment 5
+
+Turn1----
+p1: has a set B11 O11 R11 to play his first meld of > 30.
+p2: has no meld to play
+p3: plays a set B11 B12 B13, and B12 O12 R12
+p4: has no meld to play
+
+Turn2----
+p1: Uses B10 from his hand, and B11 B12 B13 from the table to play B10 B11 B12 B13
+
+This test is done with Junit testing.
+
+Another Scenario is done by running a mock game. The second test and called mockScenarioTest().
+
+Turn1----
+p1 first plays an initial meld of O10 O11 O12. Then passes even though he can play more.
+More melds are played on the table from the rest of the AI players.
+Turn2----
+Game table looks like:
+_____GAME TABLE_____
+┌─────────────┬──────────────┐
+│ Meld Number │ Table Melds  │
+┢━━━━━━━━━━━━━╈━━━━━━━━━━━━━━┪
+┃ Meld 1      ┃ R10 R11 R12  ┃
+┃ Meld 2      ┃ B5 B6 B7     ┃
+┃ Meld 3      ┃ G10 G11 G12  ┃
+┃ Meld 4      ┃ R5 R6 R7     ┃
+┃ Meld 5      ┃ O10 O11 O12  |
+------------------------------
+
+Player Rack looks like this.
+
+Tile Number │ 1  │ 2  │ 3  │ 4  │ 5  │ 6  │ 7  │ 8  │ 9  │ 10 │ 11 │
+┢━━━━━━━━━━━━━╈━━━━╈━━━━╈━━━━╈━━━━╈━━━━╈━━━━╈━━━━╈━━━━╈━━━━╈━━━━╈━━━━┪
+┃ Rack        ┃ B5 ┃ G3 ┃ G5 ┃ G6 ┃ G7 ┃ O1 ┃ O5 ┃ O6 ┃ O7 ┃ R2 ┃ R6
+
+
+The player decides to play melds 2 and 4 , with tiles 3,4,5 and 7,8,9.
+
+Then he plays a meld created from this first:
+B5 G5 O5 R5
+next:
+G6 O6 R6 B6
+next:
+G7 O7 B7 R7
+now no more melds can be played.
+
+Meld Number │ Meld            │
+┢━━━━━━━━━━━━━╈━━━━━━━━━━━━━━━━━┪
+┃ Meld 1      ┃ * B5 G5 O5 R5 * ┃
+┃ Meld 2      ┃ * G6 O6 R6 B6 * ┃
+┃ Meld 3      ┃ * G7 O7 B7 R7 *
+
+Those new melds are played by p1.
