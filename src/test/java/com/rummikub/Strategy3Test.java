@@ -69,6 +69,7 @@ class Strategy3Test {
 	static void tearDownAfterClass() throws Exception 
 	{
 		player1 = null;
+		player2 = null;
 		meld1 = null;
 		meld2 = null;
 	}
