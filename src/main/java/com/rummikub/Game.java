@@ -75,13 +75,12 @@ public class Game
 			//Get list of changed melds 
 			List<Meld> changedMelds = new ArrayList<>(Table.getDiffMelds(table.getAllMelds(), meldsPlayed));
 			
-			
-			Print.print("\nTable is: ");
-			Print.printMeldtoUser(meldsPlayed, changedMelds, true);
-			
 			//If the changed melds is not empty, then add we're updating things
 			if(!(changedMelds.isEmpty()))
 			{
+				Print.print("\nTable is: ");
+				Print.printMeldtoUser(meldsPlayed, changedMelds, true);
+				
 				turnsWithoutMoves = 0;
 			
 				table.updateMeldsOnTable(meldsPlayed);
