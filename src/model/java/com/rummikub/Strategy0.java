@@ -8,6 +8,7 @@ import java.util.List;
 public class Strategy0 implements StrategyBehaviour 
 {
 	private TableInfo tableInfo; 
+	private List<Meld> meldsToRemove = new ArrayList<>();
 
 	Strategy0() {}
 
@@ -107,6 +108,7 @@ public class Strategy0 implements StrategyBehaviour
 
 		{
 			returnMelds.addAll(tableInfo.getMelds());
+			returnMelds.removeAll(meldsToRemove);
 		}
 		
 		return returnMelds;
@@ -117,7 +119,6 @@ public class Strategy0 implements StrategyBehaviour
 	{
 		List<Tile> mergedTiles = new ArrayList<>(currentPlayer.getPlayerRack().getRackArray());
 		List<Meld> MergedMeld = new ArrayList<>();
-		
 		List<Integer> inputIntegerList = Prompt.promptUserTableMelds("Choose the melds that you are sure you can play on from the table :(Ex: 2 4 5)",tableMelds);
 		
 		boolean playerIsChoosing = true;
@@ -125,6 +126,7 @@ public class Strategy0 implements StrategyBehaviour
 		for(Integer i : inputIntegerList)
 		{
 			mergedTiles.addAll(tableMelds.get(i.intValue()-1).getTiles());
+			meldsToRemove.add(tableMelds.get(i.intValue()-1));
 		}
 		
 		inputIntegerList = Prompt.promptUserTiles("Choose the tiles that you want to play on the melds you have chosen (Ex: 1 10 11 12)",currentPlayer.getPlayerRack());
