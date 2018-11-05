@@ -17,14 +17,16 @@ public class QuickTesterWithMain
 		rigGame("src/main/resources/inputFiles/test12.txt");
 	}
 	
-	public static void rigGame(String filePath) throws IOException {
+	public static void rigGame(String filePath) throws IOException 
+	{
 		Game game = new Game();
 		game.printRackMeld = true;
 		game.waitAferEachTurn = false;
 		
 		FileParser.parse(filePath);
 		
-		if (!FileParser.inputError) {
+		if (!FileParser.inputError) 
+		{
 			game.stock = FileParser.stock;
 			game.table = new Table(game.stock);
 			

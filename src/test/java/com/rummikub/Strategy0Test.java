@@ -24,6 +24,7 @@ class Strategy0Test {
 	private static Player player3;
 	private static Player player4;
 	Game game = new Game();
+	Stock stock = new Stock();
 	
 
 
@@ -111,7 +112,12 @@ class Strategy0Test {
 		
 		//runs the execution of strategy 0 under different scenarios
 		String filePath = ("src/main/resources/Strategy0Tests/test1.txt");
-		QuickTesterWithMain.rigGame(filePath);
+		String filePath2 = ("src/main/resources/Strategy0Tests/test2.txt");
+		//Scenario1
+		//QuickTesterWithMain.rigGame(filePath);
+		QuickTesterWithMain.rigGame(filePath2);
+		
+		//returnMelds = player1.play();
 		
 	}
 }
