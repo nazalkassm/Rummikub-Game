@@ -1,0 +1,22 @@
+Game starts
+
+Initial Hands:
+Human:
+G10 G11 G12 
+B9 B10 B11 B12
+O1
+
+p3:
+R6 B6
+
+
+Human goes first (always).
+
+Human plays initial 30 so..
+Human plays {G10, G11, G12} and { B9 B10 B11 B12}
+
+Let's assume P3 can play on melds...
+
+Since human player has 3 fewer tiles, p3 plays everything
+P3 can't play anything so instead draws some card // Req 14a
+
