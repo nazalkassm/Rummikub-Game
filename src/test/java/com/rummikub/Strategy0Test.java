@@ -92,4 +92,11 @@ class Strategy0Test {
 		assertTrue(melds.toString().contains("B10 B11 B12 B13"));
 		table.updateMeldsOnTable(melds);
 	}
+	
+	@Test
+	void mockScenarioTest() throws IOException
+	{
+		String filePath = "src/main/resources/Strategy0Tests/test2.txt";
+		QuickTesterWithMain.rigGame(filePath);
+	}
 }
