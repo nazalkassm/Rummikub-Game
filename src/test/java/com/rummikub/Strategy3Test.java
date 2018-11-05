@@ -88,7 +88,10 @@ class Strategy3Test {
 	
 	@Test
 	void scenario14AandB() throws IOException
-	{System.out.println("===========\n 14A followed by 14B test \n ==========");/*p1:		
+	{System.out.println("===========\n 14A followed by 14B test \n ==========");
+	System.out.println("Player should play nothing and pass using 0");
+	/*p1:		
+	
 		/*p1:		
 		"G", "10"
 		"G", "11"
@@ -195,7 +198,8 @@ class Strategy3Test {
 	@Test
 	void scenario13b() throws IOException
 	{
-		System.out.println("===========\n 13B test \n ==========");/*p1:		
+		System.out.println("===========\n 13B test \n ==========");
+		System.out.println("Player shoud play all melds it can ");/*p1:		
 		"G", "10"
 		"G", "11"
 		"G", "12"
@@ -256,6 +260,7 @@ class Strategy3Test {
 	@Test
 	void scenario13a() throws IOException
 	{System.out.println("===========\n 13A test \n ==========");
+	System.out.println("Player should play all melds it can");
 		/*p1:		
 		"G", "10"
 		"G", "11"
@@ -331,7 +336,7 @@ class Strategy3Test {
 		player1.getPlayerRack().setRack(Collections.emptyList());
 		player2.getPlayerRack().setRack(Collections.emptyList());
 	
-		
+		player2.canPlayOnExistingMelds = true;
 		Tile t1 = new Tile("G","1");
 		Tile t2 = new Tile("G","2");
 		Tile t3 = new Tile("G","3");
@@ -364,8 +369,12 @@ class Strategy3Test {
 		player2.getPlayerRack().addTile(t14);
 		
 		table.updateMeldsOnTable(tMelds);
-		
-		player2.play();	
+		table.notifyObservers();
+		List<Meld> returnedMelds = player2.play();
+		assertTrue(returnedMelds.toString().contains("G1 G2 G3 G4 G5"));
+		assertTrue(returnedMelds.toString().contains("B3 B4 B5"));
+		assertTrue(returnedMelds.toString().contains("R4 O4 G4"));
+		assertTrue(returnedMelds.toString().contains("R4 R5 R6"));
 	}
 	
 	@Test
@@ -386,7 +395,7 @@ class Strategy3Test {
 		player1.getPlayerRack().setRack(Collections.emptyList());
 		player2.getPlayerRack().setRack(Collections.emptyList());
 	
-		
+		player2.canPlayOnExistingMelds = true;
 		Tile t1 = new Tile("O","11");
 		Tile t2 = new Tile("G","11");
 		Tile t3 = new Tile("B","11");
@@ -416,8 +425,11 @@ class Strategy3Test {
 		player2.getPlayerRack().addTile(t12);
 		
 		table.updateMeldsOnTable(tMelds);
-		
-		player2.play();	
+		table.notifyObservers();
+		List<Meld> returnedMelds = player2.play();
+		assertTrue(returnedMelds.toString().contains("R11 O11 G11 B11"));
+		assertTrue(returnedMelds.toString().contains("G1 G2 G3 G4"));
+		assertTrue(returnedMelds.toString().contains("R4 R5 R6 R7"));
 	}
 	
 	@Test
@@ -438,7 +450,7 @@ class Strategy3Test {
 		player1.getPlayerRack().setRack(Collections.emptyList());
 		player2.getPlayerRack().setRack(Collections.emptyList());
 	
-		
+		player2.canPlayOnExistingMelds = true;
 		Tile t1 = new Tile("R","1");
 		Tile t2 = new Tile("R","2");
 		Tile t3 = new Tile("R","3");
@@ -466,8 +478,11 @@ class Strategy3Test {
 		player2.getPlayerRack().addTile(t11);
 		
 		table.updateMeldsOnTable(tMelds);
-		
-		player2.play();	
+		table.notifyObservers();
+		List<Meld> returnedMelds = player2.play();
+		assertTrue(returnedMelds.toString().contains("R1 R2 R3"));
+		assertTrue(returnedMelds.toString().contains("B4 G4 R4"));
+		assertTrue(returnedMelds.toString().contains("O5 O6 O7 O8 O9"));
 	}
 	
 	@Test
@@ -487,7 +502,7 @@ class Strategy3Test {
 		
 		player1.getPlayerRack().setRack(Collections.emptyList());
 		player2.getPlayerRack().setRack(Collections.emptyList());
-	
+		player2.canPlayOnExistingMelds = true;
 		
 		Tile t1 = new Tile("R","1");
 		Tile t2 = new Tile("R","2");
@@ -511,7 +526,10 @@ class Strategy3Test {
 		player2.getPlayerRack().addTile(t9);
 		
 		table.updateMeldsOnTable(tMelds);
-		
-		player2.play();	
+		table.notifyObservers();
+		List<Meld> returnedMelds = player2.play();
+		assertTrue(returnedMelds.toString().contains("R1 R2 R3"));
+		assertTrue(returnedMelds.toString().contains("O5 O6 O7"));
+		assertTrue(returnedMelds.toString().contains("B4 R4 O4"));
 	}
 }

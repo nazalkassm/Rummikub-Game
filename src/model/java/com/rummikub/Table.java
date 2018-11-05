@@ -18,6 +18,7 @@ public class Table implements Subject {
 
 	private Stock stock;
 	private int currentPlayerTurn = -1;
+	private int tableRound = 0;
 	
 	
 	
@@ -64,7 +65,7 @@ public class Table implements Subject {
 			}
 		}
 		this.players = newPlayerTurns;
-		
+		tableRound = 1;
 		/*this.stock.createStock();
 		//For each player we will get the tile
 		//We will temporarily set the key as the value of the tile
@@ -193,6 +194,7 @@ public class Table implements Subject {
 		}
 		
 		if (this.currentPlayerTurn == this.getPlayerCount()) {
+			tableRound++;
 			this.currentPlayerTurn = 0;
 		}
 		
@@ -267,5 +269,9 @@ public class Table implements Subject {
 			}
 		}
 		return difMelds;
+	}
+	
+	public int getTableRound() {
+		return this.tableRound;
 	}
 }
