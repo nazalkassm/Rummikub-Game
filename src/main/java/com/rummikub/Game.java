@@ -37,7 +37,7 @@ public class Game
 		players.add(new Player(pName,new Strategy0()));
 		players.add(new Player("p1",new Strategy1()));
 		players.add(new Player("p2",new Strategy2()));
-		players.add(new Player("P3",new Strategy3()));
+		players.add(new Player("p3",new Strategy3()));
 		
 		//Print the racks and melds of players, yes or no.
 		for(Player p : players)
@@ -63,6 +63,7 @@ public class Game
 			Logger.info(currentPlayer.getName());
 			Logger.info(currentPlayer.isHuman());//log to file
 			Print.print("++++++ It is now " + currentPlayer.getName() + "'s turn: ++++++");
+			Print.print("++++++ Round: " + table.getTableRound() + " ++++++");
 			meldsPlayed = currentPlayer.play();
 			
 			if (currentPlayer.getPlayerRack().getSize() == Constants.ZERO_TILES) 

@@ -231,7 +231,7 @@ public class MeldTest {
 		hand: b4 
 		
 		outcome:
-		9c) 9d) played: r1 r2 r3, b4 o4 r4, o5 o6 o7 */
+		9g) played: r1 r2 r3, b4 o4 r4, o5 o6 o7 */
 	tiles = Arrays.asList(
 			//Tiles played on table
 			new Tile("R1", true), new Tile("R2", true), new Tile("R3", true), new Tile("R4", true),

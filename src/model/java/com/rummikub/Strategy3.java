@@ -67,6 +67,10 @@ public class Strategy3 implements StrategyBehaviour {
 							iter.remove();
 					}
 				}
+				//If the player could play but had no tiles...
+				if (Table.getDiffMelds(tableInfo.getMelds(), melds).isEmpty()) {
+					Print.print("Player " + currPlayer.getName() + " could play but has no tile to play.");
+				}
 			}
 		}
 		//We can play this entire hand and win
