@@ -14,7 +14,7 @@ public class QuickTesterWithMain
 {
 	public static void main(String[] args) throws IOException 
 	{		
-		rigGame("src/main/resources/inputFiles/test12.txt");
+		rigGame("src/main/resources/inputFiles/test13.txt");
 	}
 	
 	public static void rigGame(String filePath) throws IOException 

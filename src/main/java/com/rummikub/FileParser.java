@@ -84,4 +84,10 @@ public class FileParser {
 	        return false;
 	    }
 	}
+
+	public static void reset() {
+		playerCommands = new ArrayList<String>();
+		stock = null;
+		inputError = false;
+	}
 }
