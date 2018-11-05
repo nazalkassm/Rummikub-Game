@@ -79,7 +79,6 @@ class Strategy0Test {
 		//Regardless of what player plays, player 2 will get rid of initial 30 
 		List<Meld> melds = new ArrayList<>(table.getNextPlayerTurn().play());
 		table.updateMeldsOnTable(melds);
-		System.out.println(melds);
 		assertTrue(melds.toString().contains("B11 O11 R11"));
 		
 		/** P2 Turn*/ 
@@ -90,7 +89,7 @@ class Strategy0Test {
 		List<Meld> tableMelds = table.getAllMelds();
 		Print.printMeldtoUser(tableMelds,Collections.emptyList(),true);
 		melds = table.getNextPlayerTurn().play();
-		assertTrue(melds.toString().contains("B11 O11 R11"));
+		assertTrue(melds.toString().contains("B10 B11 B12 B13"));
 		table.updateMeldsOnTable(melds);
 	}
 }
