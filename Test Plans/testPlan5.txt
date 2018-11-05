@@ -1,0 +1,32 @@
+Human goes first (always).
+Human, p1, p2, and p3 each play one set meld (Req: 4a1, Req: 8b, Req: 10a)
+
+Initial Hands:
+Human:
+O3 O5 O6 O8 O11
+B2 B5
+G6 G8 G11
+R2 R3 R9 R11
+
+Human:
+O1 O2 O4 O13
+B7 B13
+G4 G5 B13
+R1 R2 R5 R7 R11
+
+Human:
+O1 O2 O5 O8 O12
+B2 B5 B7 B12
+G1 G4 G7
+R4 R12
+
+Human:
+O4 O7
+B1 B3 B6 B10
+G3 G10
+R1 R4 R6 R7 R10 R13
+
+Human plays {O11, G11, R11}
+p1 plays {O12, B12, R12}
+p2 plays {O12, B12, R12}
+P3 plays {B10, G10, R10}

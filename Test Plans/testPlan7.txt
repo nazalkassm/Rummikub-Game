@@ -1,0 +1,32 @@
+Human goes first (always).
+Human, p1, p2, and p3 each play two set melds (Req: 4b1)
+
+Initial Hands:
+Human:
+O2 O12 O13
+B1 B3 B8
+G2 G3 G8
+R1 R2 R4 R8 R11
+
+p1:
+O1 O2 O4
+B2 B3 B5 B9
+G1 G3 G4 G9
+R1 R5 R9
+
+p2:
+O3 O4 O8
+B2 B5 B8
+G2 G4 G8 G13
+R2 R3 R5 R12
+
+p3:
+O1 O3 O5
+B1 B4 B6
+G1 G5
+R3 R4 R6 R8 R9 R10
+
+Human plays {B8, G8, R8}, {O2, G2, R2}
+p1 plays {B9, G9, R9}, {O1, G1, R1}
+p2 plays {O8, B8, G8}, {B2, G2, R2}
+P3 plays {R8, R9, R10}, {O1, B1, G1}
