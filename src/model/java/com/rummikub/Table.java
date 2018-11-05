@@ -244,13 +244,18 @@ public class Table implements Subject {
 		List<Meld> difMelds = new ArrayList<Meld>();
 		int newCount = 0;
 		int oldCount = 0;
-		//For each new meld
 		for (Meld m: meldsNew) {
 			newCount += m.getTiles().size();
+		}
+		for (Meld mOld: meldsOld) {
+			oldCount += mOld.getTiles().size();
+		}
+		//For each new meld
+		for (Meld m: meldsNew) {
+		
 			boolean isNewMeld = true;
 			//If the old meld don't contain the new meld  
 			for (Meld mOld: meldsOld) {
-				oldCount += mOld.getTiles().size();
 				if (mOld.getTiles().containsAll(m.getTiles())) {
 					isNewMeld = false;
 				}
