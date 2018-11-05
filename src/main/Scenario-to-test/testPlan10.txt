@@ -1,5 +1,5 @@
 Human goes first (always).
-p1 can play several melds on a subsequent turn (10d)
+p1 can play several melds on a subsequent turn (Req: 10d)
 
 Initial Hands:
 Human:
@@ -36,5 +36,5 @@ p2 passes and draws B9.
 p3 plays {B12, O12, R12}
 
 Human passes and draws O9.
-p1 plays {O5, G5, R5} and {O13, G13, R13} (10d)
+p1 plays {O5, G5, R5} and {O13, G13, R13} (Req: 10d)
 ... (Game continues but is irrelevant)

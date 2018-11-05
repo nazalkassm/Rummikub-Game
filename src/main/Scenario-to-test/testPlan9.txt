@@ -1,6 +1,6 @@
 Human goes first (always).
-p1 can play one meld on a subsequent turn (10c)
-p2 cannot play at least one tile that requires use of tiles of the table and thus draws (17b)
+p1 can play one meld on a subsequent turn (Req: 10c)
+p2 cannot play at least one tile that requires use of tiles of the table and thus draws (Req: 17b)
 
 Initial Hands:
 Human:
@@ -38,5 +38,5 @@ p2 plays {B12, O12, R12}
 p3 plays {B12, O12, R12}
 
 Human passes and draws G13.
-p1 plays {B13, O13, R13} //10c
-p2 passes and draws G9 //17b
+p1 plays {B13, O13, R13} //Req: 10c
+p2 passes and draws G9 //Req: 17b

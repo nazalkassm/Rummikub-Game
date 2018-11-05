@@ -1,5 +1,5 @@
 Human goes first (always).
-Human, p1, p2, and p3 each play one set meld (4a1, 8b, 10a)
+Human, p1, p2, and p3 each play one set meld (Req: 4a1, Req: 8b, Req: 10a)
 
 Initial Hands:
 Human:

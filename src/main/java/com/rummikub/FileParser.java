@@ -71,8 +71,8 @@ public class FileParser {
 			Print.println("File doesn't exist");
 		}
 		
-		if (!inputError) {
-			Prompt.init(FileParser.playerCommands);
+		if (!inputError && playerCommands.size() > 0) {
+			Prompt.init(playerCommands);
 		}
 	}
 

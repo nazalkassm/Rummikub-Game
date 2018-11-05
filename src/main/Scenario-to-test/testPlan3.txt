@@ -1,6 +1,6 @@
 Human goes first (always).
-p2 goes out on their first turn. (4.c)
-p2 plays several melds for more than 30 points (4.b2)
+p2 goes out on their first turn. (Req: 4.c)
+p2 plays several melds for more than 30 points (Req: 4.b2)
 
 Initial Hands:
 Human:
@@ -28,5 +28,5 @@ R4, R5, R6
 
 Human plays {O8, O9, O10, O11, O12}
 p1 plays {O5. O6, O7}. {O8, G8, R8}
-P2 plays {R1, R2, R3, R4, R5, R6, R7, R8, R9, R10, R11, R12}, {O13, B13, G13} // 4.b2
-p2 wins on first turn // 4.c
+P2 plays {R1, R2, R3, R4, R5, R6, R7, R8, R9, R10, R11, R12}, {O13, B13, G13} // Req: 4.b2
+p2 wins on first turn // Req: 4.c
