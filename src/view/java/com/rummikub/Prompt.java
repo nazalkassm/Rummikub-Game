@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /*
@@ -199,7 +200,7 @@ public class Prompt
 			catch (IllegalArgumentException e)
 			{
 				Print.println("----------Wrong input try again-----------","Here is your hand: ");
-				Print.printMeldtoUser(melds, true);
+				Print.printMeldtoUser(melds, Collections.emptyList(), true);
 				returnArray.clear();
 				promptUserTableMelds(message,melds);
 			}

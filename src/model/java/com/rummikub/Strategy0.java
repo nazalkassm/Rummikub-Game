@@ -148,7 +148,7 @@ public class Strategy0 implements StrategyBehaviour
 		while(playerIsChoosing)
 		{
 			Print.print("\nHere are the melds you can play: ");
-			Print.printMeldtoUser(possibleMelds,true);
+			Print.printMeldtoUser(possibleMelds,Collections.emptyList(), true);
 			String inputString = Prompt.promptInput("Enter the melds you want to play (0 to pass) : ");
 			int inputInteger = Integer.parseInt(inputString);
 			if(inputInteger == 0)

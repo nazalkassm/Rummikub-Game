@@ -75,8 +75,8 @@ public class Game
 			List<Meld> changedMelds = new ArrayList<>(Table.getDiffMelds(table.getAllMelds(), meldsPlayed));
 			
 			
-			Print.print("\nMelds played by " + currentPlayer.getName() + " are: ");
-			Print.printMeldtoUser(changedMelds, true);
+			Print.print("\nTable is: ");
+			Print.printMeldtoUser(meldsPlayed, changedMelds, true);
 			
 			//If the changed melds is not empty, then add we're updating things
 			if(!(changedMelds.isEmpty()))
@@ -98,6 +98,9 @@ public class Game
 				}
 			}
 			Print.println(currentPlayer.getName() + " rack size is " + currentPlayer.getPlayerRack().getSize());
+			//print rack and possible melds
+			System.out.println(currentPlayer.getName() + " players new hand is" );
+			Print.printRacktoUser(currentPlayer.getPlayerRack(),currentPlayer.isPrint_rack_meld());
 			prompter.promptEnterKey(waitAferEachTurn);
 			
 			if (turnsWithoutMoves >= 4) 

@@ -41,7 +41,7 @@ public class Strategy0Old implements StrategyBehaviour
 			
 			if(handOrTable.equals("1"))
 			{
-				Print.printMeldtoUser(possibleRackMelds, true);
+				Print.printMeldtoUser(possibleRackMelds, null, true);
 				initialStrategy(currPlayer,possibleRackMelds,returnMelds);
 			}
 			else if(handOrTable.equals("2"))
@@ -59,7 +59,7 @@ public class Strategy0Old implements StrategyBehaviour
 		else
 		{
 			Print.print("\nHere are the melds you can play from your hand: ");
-			Print.printMeldtoUser(possibleRackMelds,true);
+			Print.printMeldtoUser(possibleRackMelds,null, true);
 			initialStrategy(currPlayer, possibleRackMelds, returnMelds); // <------ Change execution path here.
 			
 			sum = checkSum(returnMelds);
@@ -120,7 +120,7 @@ public class Strategy0Old implements StrategyBehaviour
 			mergedTiles.clear();
 			inputTiles.clear();
 			meldOptions.clear();
-			Print.printMeldtoUser(possibleMelds, true);
+			Print.printMeldtoUser(possibleMelds, Collections.emptyList(), true);
 			inputString = Prompt.promptInput("Choose the meld you want to play on from the table (0 to pass or no melds) : ");
 			
 			input = Integer.parseInt(inputString);
@@ -148,7 +148,7 @@ public class Strategy0Old implements StrategyBehaviour
 				
 				meldOptions.addAll(Meld.getMelds(mergedTiles));
 				Print.print("\nHere are the melds you can play: ");
-				Print.printMeldtoUser(meldOptions, true);
+				Print.printMeldtoUser(meldOptions, Collections.emptyList(), true);
 				//initialStrategy(currPlayer,meldOptions,returnMelds);
 				String inputString2 = Prompt.promptInput("Enter the melds you want to play (0 to pass or no melds) : ");
 				int input2 = Integer.parseInt(inputString2);
@@ -174,7 +174,7 @@ public class Strategy0Old implements StrategyBehaviour
 			//Print Hand Info
 			Print.printRacktoUser(currPlayer.getPlayerRack(),true);
 			Print.print("\nHere are the melds you can play: ");
-			Print.printMeldtoUser(possibleMelds,true);
+			Print.printMeldtoUser(possibleMelds,Collections.emptyList(), true);
 			inputString = Prompt.promptInput("Enter the melds you want to play (0 to pass or no melds): ");
 			input = Integer.parseInt(inputString);
 		}

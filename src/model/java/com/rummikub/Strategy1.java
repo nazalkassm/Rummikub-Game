@@ -22,7 +22,7 @@ public class Strategy1 implements StrategyBehaviour {
 
 		//print rack and possible melds
 		Print.printRacktoUser(currPlayer.getPlayerRack(),currPlayer.isPrint_rack_meld());
-		Print.printMeldtoUser(possibleMelds,currPlayer.isPrint_rack_meld());
+		Print.printMeldtoUser(possibleMelds,Collections.emptyList(), currPlayer.isPrint_rack_meld());
 		
 		
 		//execute play logic for this strategy
