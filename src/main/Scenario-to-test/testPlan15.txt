@@ -1,0 +1,41 @@
+Human goes first (always).
+p2 plays at least one tile that requires use of tiles of the table after having played their 30 points (Req: 17a)
+
+Initial Hands:
+Human:
+O1 O3 O5 O11
+B2 B4 B11
+G1 G3 G5
+R2 R4 R6 R11
+
+p1:
+O2 O4 O6
+B1 B3 B5 B13
+G2 G4 G6
+R1 R3 R5 R13
+
+p2:
+O1 O3 O5 O12
+B2 B4 B6 B12
+G1 G3 G11
+R2 R4 R12
+
+p3:
+O2 O4 O12
+B1 B3 B5 B12 B13
+G2 G4
+R1 R3 R12 R13
+
+Stock:
+O13 G13 O13 G9
+O10 B10 G10 R10
+
+
+Human plays {B11, O11, R11}
+p1 passes and draws O13
+p2 plays {B12, O12, R12}
+p3 plays {B12, O12, R12}
+
+Human passes and draws G13.
+p1 plays {B13, O13, R13}
+p2 plays G11 on {B11, O11, R11} // Req: 17a

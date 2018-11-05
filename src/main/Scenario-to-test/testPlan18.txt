@@ -1,0 +1,29 @@
+Game starts
+
+Initial Hands:
+Human:
+G10 G11 G12 
+B9 B10 B11 B12
+O1
+
+p3:
+R11 R9 R10
+G2 R3 B4 G6 O6
+
+
+Human goes first (always).
+Human passes turn
+
+p3 plays intital 30 so
+p3 plays {R9, R10, R11}
+
+Human passes turn
+
+For sake of skipping turns give the p3 R12, R6, B6
+Since no other player has 3 fewer tiles, p3 plays on table melds
+p3 plays modifies {R9, R10, R11} to {R9, R10, R11, R12} //Req: 14a
+
+Human passes
+
+Since no other player has 3 fewer tiles, p3 plays on table melds
+p3 can't play anything on table since no tiles //Req: 14b
