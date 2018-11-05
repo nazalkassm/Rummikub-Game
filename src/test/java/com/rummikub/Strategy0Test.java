@@ -3,6 +3,7 @@ package com.rummikub;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -23,11 +24,12 @@ class Strategy0Test {
 	private static Player player2;
 	private static Player player3;
 	private static Player player4;
-	Game game = new Game();
-	Stock stock = new Stock();
+	static Game game;
+	static Stock stock;
+	static Table table;
+	List<Player> players = new ArrayList<>();
+
 	
-
-
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception 
 	{
@@ -73,6 +75,11 @@ class Strategy0Test {
 		meld1 = player1.getPlayerRack().getMelds();
 		meld2 = player2.getPlayerRack().getMelds();
 		meld3 = player3.getPlayerRack().getMelds();
+		
+		//test
+		game = new Game();
+		stock = new Stock();
+		table = new Table(stock);
 	}
 
 	@AfterAll
@@ -115,9 +122,18 @@ class Strategy0Test {
 		String filePath2 = ("src/main/resources/Strategy0Tests/test2.txt");
 		//Scenario1
 		//QuickTesterWithMain.rigGame(filePath);
-		QuickTesterWithMain.rigGame(filePath2);
+		//QuickTesterWithMain.rigGame(filePath2);
 		
-		//returnMelds = player1.play();
+		players.add(player1);
+		players.add(player2);
+		players.add(player3);
+		players.add(player4);
+
+		for (Player player: players) 
+		{
+			table.addPlayers(player);
+	    }
 		
+		List<Meld> meldsPlayed = player1.play();
 	}
 }

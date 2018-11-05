@@ -312,4 +312,206 @@ class Strategy3Test {
 			assertTrue(prevCountHand + 1 == table.getCurrentPlayer().getPlayerRack().getSize());
 		}
 	}
+	
+	@Test
+	/*
+	 * accounts for 9a) 9e)
+	 */
+	public void scenario9Testa() throws IOException {
+		Stock stock = new Stock();
+		table = new Table(stock);
+		
+		//player1 has tiles greater than 30 and can play them.
+		player1 = new Player("Naz",new Strategy0());
+		player2 = new Player("p3",new Strategy3());
+		
+		table.addPlayers(player1,player2);
+		table.initPlayersTurn();
+		
+		player1.getPlayerRack().setRack(Collections.emptyList());
+		player2.getPlayerRack().setRack(Collections.emptyList());
+	
+		
+		Tile t1 = new Tile("G","1");
+		Tile t2 = new Tile("G","2");
+		Tile t3 = new Tile("G","3");
+		Tile t4 = new Tile("G","4");
+		Tile t5 = new Tile("R","4");
+		Tile t6 = new Tile("R","5");
+		Tile t7 = new Tile("R","6");
+		Tile t8 = new Tile("O","4");
+		Tile t9 = new Tile("B","4");
+		Tile t10 = new Tile("G","4");
+		Tile t11 = new Tile("B","3");
+		Tile t12 = new Tile("B","5");
+		Tile t13 = new Tile("R","4");
+		Tile t14 = new Tile("G","5");
+		
+		Meld m1 = new Meld(t1,t2,t3,t4);
+		Meld m2 = new Meld(t5,t6,t7);
+		Meld m3 = new Meld(t8,t9,t10);
+		
+		List<Meld> tMelds = new ArrayList<Meld>();
+		tMelds.add(m1);
+		tMelds.add(m2);
+		tMelds.add(m3);
+		
+		player1.getPlayerRack().addTile(new Tile("G", "13"));
+		
+		player2.getPlayerRack().addTile(t11);
+		player2.getPlayerRack().addTile(t12);
+		player2.getPlayerRack().addTile(t13);
+		player2.getPlayerRack().addTile(t14);
+		
+		table.updateMeldsOnTable(tMelds);
+		
+		player2.play();	
+	}
+	
+	@Test
+	/*
+	 * accounts for 9b) 9f)
+	 */
+	public void scenario9Testb() throws IOException {
+		Stock stock = new Stock();
+		table = new Table(stock);
+		
+		//player1 has tiles greater than 30 and can play them.
+		player1 = new Player("Naz",new Strategy0());
+		player2 = new Player("p3",new Strategy3());
+		
+		table.addPlayers(player1,player2);
+		table.initPlayersTurn();
+		
+		player1.getPlayerRack().setRack(Collections.emptyList());
+		player2.getPlayerRack().setRack(Collections.emptyList());
+	
+		
+		Tile t1 = new Tile("O","11");
+		Tile t2 = new Tile("G","11");
+		Tile t3 = new Tile("B","11");
+		Tile t4 = new Tile("G","1");
+		Tile t5 = new Tile("G","2");
+		Tile t6 = new Tile("G","3");
+		Tile t7 = new Tile("R","5");
+		Tile t8 = new Tile("R","6");
+		Tile t9 = new Tile("R","7");
+		Tile t10 = new Tile("R","11");
+		Tile t11 = new Tile("G","4");
+		Tile t12 = new Tile("R","4");
+		
+		Meld m1 = new Meld(t1,t2,t3);
+		Meld m2 = new Meld(t4,t5,t6);
+		Meld m3 = new Meld(t7,t8,t9);
+		
+		List<Meld> tMelds = new ArrayList<Meld>();
+		tMelds.add(m1);
+		tMelds.add(m2);
+		tMelds.add(m3);
+		
+		player1.getPlayerRack().addTile(new Tile("O", "1"));
+		
+		player2.getPlayerRack().addTile(t10);
+		player2.getPlayerRack().addTile(t11);
+		player2.getPlayerRack().addTile(t12);
+		
+		table.updateMeldsOnTable(tMelds);
+		
+		player2.play();	
+	}
+	
+	@Test
+	/*
+	 * accounts for 9c) 9d)
+	 */
+	public void scenario9Testc() throws IOException {
+		Stock stock = new Stock();
+		table = new Table(stock);
+		
+		//player1 has tiles greater than 30 and can play them.
+		player1 = new Player("Naz",new Strategy0());
+		player2 = new Player("p3",new Strategy3());
+		
+		table.addPlayers(player1,player2);
+		table.initPlayersTurn();
+		
+		player1.getPlayerRack().setRack(Collections.emptyList());
+		player2.getPlayerRack().setRack(Collections.emptyList());
+	
+		
+		Tile t1 = new Tile("R","1");
+		Tile t2 = new Tile("R","2");
+		Tile t3 = new Tile("R","3");
+		Tile t4 = new Tile("R","4");
+		Tile t5 = new Tile("O","5");
+		Tile t6 = new Tile("O","6");
+		Tile t7 = new Tile("O","7");
+		Tile t8 = new Tile("B","4");
+		Tile t9 = new Tile("G","4");
+		Tile t10 = new Tile("O","8");
+		Tile t11 = new Tile("O","9");
+		
+		Meld m1 = new Meld(t1,t2,t3,t4);
+		Meld m2 = new Meld(t5,t6,t7);
+		
+		List<Meld> tMelds = new ArrayList<Meld>();
+		tMelds.add(m1);
+		tMelds.add(m2);
+		
+		player1.getPlayerRack().addTile(new Tile("G", "13"));
+		
+		player2.getPlayerRack().addTile(t8);
+		player2.getPlayerRack().addTile(t9);
+		player2.getPlayerRack().addTile(t10);
+		player2.getPlayerRack().addTile(t11);
+		
+		table.updateMeldsOnTable(tMelds);
+		
+		player2.play();	
+	}
+	
+	@Test
+	/*
+	 * accounts for 9g)
+	 */
+	public void scenario9Testd() throws IOException {
+		Stock stock = new Stock();
+		table = new Table(stock);
+		
+		//player1 has tiles greater than 30 and can play them.
+		player1 = new Player("Naz",new Strategy0());
+		player2 = new Player("p3",new Strategy3());
+		
+		table.addPlayers(player1,player2);
+		table.initPlayersTurn();
+		
+		player1.getPlayerRack().setRack(Collections.emptyList());
+		player2.getPlayerRack().setRack(Collections.emptyList());
+	
+		
+		Tile t1 = new Tile("R","1");
+		Tile t2 = new Tile("R","2");
+		Tile t3 = new Tile("R","3");
+		Tile t4 = new Tile("R","4");
+		Tile t5 = new Tile("O","4");
+		Tile t6 = new Tile("O","5");
+		Tile t7 = new Tile("O","6");
+		Tile t8 = new Tile("O","7");
+		Tile t9 = new Tile("B","4");
+		
+		Meld m1 = new Meld(t1,t2,t3,t4);
+		Meld m2 = new Meld(t5,t6,t7,t8);
+		
+		List<Meld> tMelds = new ArrayList<Meld>();
+		tMelds.add(m1);
+		tMelds.add(m2);
+		
+		player1.getPlayerRack().addTile(new Tile("G", "13"));
+		
+		player2.getPlayerRack().addTile(t9);
+		
+		table.updateMeldsOnTable(tMelds);
+		
+		player2.play();	
+	}
 }
