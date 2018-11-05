@@ -18,5 +18,5 @@ Human plays {G10, G11, G12} and { B9 B10 B11 B12}
 Let's assume P3 can play on melds...
 
 Since human player has 3 fewer tiles, p3 plays everything
-P3 can't play anything so instead draws some card // Req 14a
+P3 can't play anything so instead draws some card // Req 13a
 
