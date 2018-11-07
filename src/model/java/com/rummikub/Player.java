@@ -176,15 +176,16 @@ public class Player {
 	}
 
 	public static class Memento {
-		private final Rack rack;
+		private final Rack savedRack;
 
 		public Memento(Rack rackToSave) {
-			rack = rackToSave;
+			this.savedRack = new Rack();
+			this.savedRack.setRack(rackToSave.getRackArray());
 		}
 
 		// accessible by outer class only
     private Rack getSavedRack() {
-        return rack;
+        return savedRack;
     }
 	}
 
