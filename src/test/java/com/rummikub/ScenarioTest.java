@@ -318,5 +318,25 @@ public class ScenarioTest {
 		
 		Prompt.init();
 	}
+	
+	@Test
+	void Scenerio15Test() {
+		// 4.c)
+		FileParser.parse("src/main/resources/inputFiles/test15.txt");
+		assertFalse(FileParser.inputError);
+		
+		game.stock = FileParser.stock;
+		game.table = new Table(game.stock);
+		
+		assertEquals(58, game.stock.getLength());
+		
+		try {
+			game.start();
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+		
+		Prompt.init();
+	}
 
 }
