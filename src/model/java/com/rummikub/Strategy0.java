@@ -33,6 +33,12 @@ public class Strategy0 implements StrategyBehaviour
 		List<Meld> returnMelds = new ArrayList<>();
 		
 		List<Tile> playerHand = new ArrayList<>(currentPlayer.getPlayerRack().getRackArray());
+
+		/*
+	  Player.Memento playerHand = currentPlayer.saveToMemento();
+		//Do something to currentPlayer and then if we want to rollback,
+		currentPlayer.restoreFromMemento(playerHand);
+		*/
 		
 		String choiceOfPlayS = "";
 		int choiceOfPlayI = -10;
