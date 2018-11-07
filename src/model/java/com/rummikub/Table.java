@@ -54,7 +54,7 @@ public class Table implements Subject {
 	 * @return Boolean = True if in sorted order by tile value, false otherwise 
 	 */
 	public boolean initPlayersTurn() {
-		int turnNum = 2;
+		/*int turnNum = 2;
 		HashMap<Integer, Player> newPlayerTurns = new HashMap<Integer, Player>();
 		for (Map.Entry<Integer, Player> entry : players.entrySet()) {			
 			if (entry.getValue().isHuman()) {
@@ -65,13 +65,13 @@ public class Table implements Subject {
 			}
 		}
 		this.players = newPlayerTurns;
-		tableRound = 1;
-		/*this.stock.createStock();
+		tableRound = 1;*/
+		Stock tempStock = new Stock();
 		//For each player we will get the tile
 		//We will temporarily set the key as the value of the tile
 		for (int i = 0; i < this.getPlayerCount(); i++) {
 		  //Put the player back into the players with tile value as key
-			players.put(this.stock.dealTile().getValue(), players.remove(i));
+			players.put(tempStock.dealTile().getValue(), players.remove(i));
 		}
 		
 		//Putting players into tree map will sort by key (lowest to highest)
@@ -93,7 +93,7 @@ public class Table implements Subject {
 		  //We've assigned the player turn number for this player, so decrement
 		  turnNumber--;
 		}
-		*/
+		
 		//Set current player turn to 1
 		this.currentPlayerTurn = 0;
 		return true;
