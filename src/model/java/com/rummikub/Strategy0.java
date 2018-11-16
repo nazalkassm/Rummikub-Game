@@ -31,14 +31,10 @@ public class Strategy0 implements StrategyBehaviour
 		List<Meld> possibleRackMelds = new ArrayList<>(currentPlayer.getPlayerRack().getMelds());
 		List<Meld> tableMelds = new ArrayList<>(tableInfo.getMelds());
 		List<Meld> returnMelds = new ArrayList<>();
-		
+		//The player Hand we want to save
 		List<Tile> playerHand = new ArrayList<>(currentPlayer.getPlayerRack().getRackArray());
-
-		/*
-	  Player.Memento playerHand = currentPlayer.saveToMemento();
-		//Do something to currentPlayer and then if we want to rollback,
-		currentPlayer.restoreFromMemento(playerHand);
-		*/
+		Player.Memento playerMomento1 = currentPlayer.saveToMemento();
+		TableInfo.Memento tableMomento1 = tableInfo.saveToMemento();
 		
 		String choiceOfPlayS = "";
 		int choiceOfPlayI = -10;
@@ -58,7 +54,7 @@ public class Strategy0 implements StrategyBehaviour
 				switch(choiceOfPlayI) 
 				{
 				   case -1 :
-				      returnMelds = Collections.emptyList();
+				      returnMelds = tableInfo.getMelds();
 				      userIsPlaying = false;
 				      break; 
 				   case 0:
@@ -87,7 +83,7 @@ public class Strategy0 implements StrategyBehaviour
 			{
 				currentPlayer.canPlayOnExistingMelds = true;
 			}
-			//if player has not played inital 30 AND playable melds sums less than 30
+			//if player has not played initial 30 AND playable melds sums less than 30
 			//player cannot place playable melds on table
 			//so player's rack gets reset to when the turn started and ends turn	
 			else 
@@ -96,8 +92,9 @@ public class Strategy0 implements StrategyBehaviour
 				{
 					Print.print("\nPlayer " + currentPlayer.getName() + " tried playing melds but the sum is < 30.");
 				}
-				currentPlayer.getPlayerRack().setRack(playerHand);
-				returnMelds = Collections.emptyList();
+				currentPlayer.restoreFromMemento(playerMomento1);
+				tableInfo.restoreFromMemento(tableMomento1);
+				returnMelds = tableInfo.getMelds();
 			}
 		}
 
