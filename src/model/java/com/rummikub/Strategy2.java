@@ -16,12 +16,16 @@ public class Strategy2 implements StrategyBehaviour {
 	@Override
 	public List<Meld> useStrategy(Player currPlayer) {
 		List<Tile> tiles = new ArrayList<>(); 
+		Player.Memento playerState = currPlayer.saveToMemento();
+		TableInfo.Memento tableState = tableInfo.saveToMemento();
 		//print rack and possible melds
 		Print.printRacktoUser(currPlayer.getPlayerRack(),currPlayer.isPrint_rack_meld());
 		//If no other player has played on the table
 		if (tableInfo.getMelds().isEmpty()) {
 			//Can't play so passes
-			return Collections.emptyList();
+			currPlayer.restoreFromMemento(playerState);
+			tableInfo.restoreFromMemento(tableState);
+			return tableInfo.getMelds();
 		}
 	
 		//Add current player to tiles
@@ -52,7 +56,9 @@ public class Strategy2 implements StrategyBehaviour {
 				melds.addAll(tableInfo.getMelds());
 			} else {
 				Print.print("Player " + currPlayer.getName() + " tried playing melds but their sum is less than 30.");
-				return Collections.emptyList(); 
+				currPlayer.restoreFromMemento(playerState);
+				tableInfo.restoreFromMemento(tableState);
+				return tableInfo.getMelds();
 			}
 		} else {
 		
