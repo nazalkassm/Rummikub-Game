@@ -41,7 +41,9 @@ public class TableInfo
 			this.savedMelds = new ArrayList<Meld>();
 			
 			for (Meld meld : meldsToSave) {
-				this.savedMelds.add(new Meld((Tile[]) meld.getMeld().toArray()));
+				List<Tile> tiles = new ArrayList<Tile>(meld.getTiles());
+	
+				this.savedMelds.add(new Meld(tiles.toArray(new Tile[tiles.size()])));
 			}
 		}
 
