@@ -1,6 +1,8 @@
 package com.rummikub;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main 
 {
@@ -11,7 +13,14 @@ public class Main
 	*/
 	public static void main(String[] args) throws IOException 
 	{
-	Game tileRummy = new Game(); 
-	tileRummy.start();
+		List<Player>players = new ArrayList<Player>();
+		
+		players.add(new Player("p0",new Strategy0()));
+		players.add(new Player("p1",new Strategy1()));
+		players.add(new Player("p2",new Strategy2()));
+		players.add(new Player("p3",new Strategy3()));
+		
+		Game tileRummy = new Game(players); 
+		tileRummy.start();
 	}
 }

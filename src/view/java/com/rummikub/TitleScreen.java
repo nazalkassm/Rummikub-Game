@@ -1,8 +1,10 @@
 package com.rummikub;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.sun.media.jfxmedia.events.PlayerStateEvent.PlayerState;
 
 import javafx.application.*;
 import javafx.event.ActionEvent;
@@ -11,6 +13,7 @@ import javafx.event.EventType;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import sun.net.www.content.text.plain;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -29,7 +32,10 @@ public class TitleScreen extends Application {
 	
 	
 	public static void main(String[] args) {
+		System.out.println("before");
 		launch(args);
+		System.out.println("after");
+
 	}
 	
 	@Override
@@ -71,15 +77,16 @@ public class TitleScreen extends Application {
 		playButton.relocate(200, 200);
 		playButton.setDisable(true);
 		
-		playerCount.setOnAction(new playerCounCBtHandler(canvas));
+		playerCount.setOnAction(new PlayerCounCBtHandler(canvas));
+		playButton.setOnAction(new ButtonStartGame());
 		canvas.getChildren().addAll(label, playerCount, playButton);
 		
 	}
 	
 	
-	private class playerCounCBtHandler implements EventHandler<ActionEvent> {
+	private class PlayerCounCBtHandler implements EventHandler<ActionEvent> {
 		Pane canvas;
-		playerCounCBtHandler(Pane canvas){
+		PlayerCounCBtHandler(Pane canvas){
 			this.canvas = canvas;
 		}
 		
@@ -116,6 +123,45 @@ public class TitleScreen extends Application {
             if (check) {
             	playButton.setDisable(false);
             }
+        }
+    }
+	
+	private class ButtonStartGame implements EventHandler<ActionEvent> {
+		List<Player> players = new ArrayList<Player>(); 
+		
+        @Override
+        public void handle(ActionEvent event) {
+        	int i = 1;
+        	 for (ComboBox<String> c: strategyType) {
+        		 switch (c.getValue()) {
+	        		 case "Human":
+	        			 players.add(new Player("p" + i, new Strategy0())); 
+	        			 break;
+	        		 case "Strategy 1":
+	        			 players.add(new Player("p" + i, new Strategy1())); 
+	        			 break;
+	        		 case "Strategy 2":
+	        			 players.add(new Player("p" + i, new Strategy2())); 
+	        			 break;
+	        		 case "Strategy 3":
+	        			 players.add(new Player("p" + i, new Strategy3())); 
+	        			 break;
+	        		 //case "Strategy 4":
+	        			 //players.add(new Player("p" + i, new Strategy4())); 
+	        			 //break;
+        			 default:
+        				 // Error?
+        		 }
+        		 i++;
+             }
+        	 
+        	 Game game = new Game(players);
+        	 try {
+				game.start();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
         }
     }
 }
