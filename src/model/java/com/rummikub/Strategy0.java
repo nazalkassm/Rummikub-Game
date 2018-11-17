@@ -32,7 +32,6 @@ public class Strategy0 implements StrategyBehaviour
 		List<Meld> tableMelds = new ArrayList<>(tableInfo.getMelds());
 		List<Meld> returnMelds = new ArrayList<>();
 		//The player Hand we want to save
-		List<Tile> playerHand = new ArrayList<>(currentPlayer.getPlayerRack().getRackArray());
 		Player.Memento playerMomento1 = currentPlayer.saveToMemento();
 		TableInfo.Memento tableMomento1 = tableInfo.saveToMemento();
 		
