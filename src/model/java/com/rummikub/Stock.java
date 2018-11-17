@@ -94,10 +94,15 @@ public class Stock
 		{
 			for(Ranks r:Ranks.values())
 			{
-				stockArray.add(new Tile(c, r));
-				stockArray.add(new Tile(c, r));
+				if(!(c.equals(Colours.JOKER) || r.equals(Ranks.JOKER)))
+				{
+					stockArray.add(new Tile(c, r));
+					stockArray.add(new Tile(c, r));	
+				}
 			}
 		}
+		stockArray.add(new Joker());
+		stockArray.add(new Joker());
 		this.shuffle();
 	}
 	

@@ -4,7 +4,8 @@ public enum Colours {
 	ORANGE("O"),
 	RED("R"),
 	BLUE("B"),
-	GREEN("G");
+	GREEN("G"),
+	JOKER("J");
 	
 	//Hold the symbol that represents the colour
 	private String colourSymbol;
