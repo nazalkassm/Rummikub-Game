@@ -31,9 +31,11 @@ public class Strategy4 implements StrategyBehaviour
 		//Saving Memento for both the table and player
 		Player.Memento playerMomento1 = currentPlayer.saveToMemento();
 		TableInfo.Memento  tableMomento1 = tableInfo.saveToMemento();
+		double probability_of_getting_out = 0;
 		
 		//Print rack and possible melds
 		Print.printRacktoUser(currentPlayer.getPlayerRack(), currentPlayer.isPrint_rack_meld());
+		
 		
 		
 		

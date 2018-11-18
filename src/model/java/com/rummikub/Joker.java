@@ -30,6 +30,7 @@ public class Joker extends Tile
 				if(!(c.equals(Colours.JOKER) || r.equals(Ranks.JOKER)))
 				{
 				Joker j = new Joker(c,r);
+				j.setJoker(true);
 				possibleTiles.add(j);
 				}
 			}

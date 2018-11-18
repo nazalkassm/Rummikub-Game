@@ -1,4 +1,5 @@
 package com.rummikub;
+import org.pmw.tinylog.Logger;
 
 import static org.junit.jupiter.api.Assumptions.assumingThat;
 
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
+
 
 public class Meld 
 {
@@ -77,7 +79,7 @@ public class Meld
 	public static List<Meld> getMelds(List<Tile> tileList) 
 	{
 		List<Meld> meldList = new ArrayList<Meld>();
-		List<Tile> originalList = new ArrayList<Tile>(tileList);
+		List<Tile> temporaryList = new ArrayList<Tile>(tileList);
 		
 		Iterator<Tile> iterator = tileList.iterator();
 		
@@ -86,12 +88,16 @@ public class Meld
 			Tile tile = iterator.next();
 			if(tile.isJoker())
 			{
-				tileList.addAll(tile.getPossibleTiles());
+				temporaryList.addAll(tile.getPossibleTiles());
 			}
 		}
 		
+		tileList.addAll(temporaryList);
+		
+		Logger.debug(tileList);
+		
 		meldList.addAll(getRunMelds(tileList));
-		meldList.addAll(getSetMelds(tileList));
+		//meldList.addAll(getSetMelds(tileList));
 		
 		return meldList;
 	}
@@ -120,11 +126,64 @@ public class Meld
 		
 		//Get all possible melds with this tileList
 		List<Meld> possibleMelds = new ArrayList<>(Meld.getMelds(tileList));
-	
-		for (int i = 0; i < possibleMelds.size(); i++ ) {
+		
+		//Joker implementation, shiraj find a way to include this somewhere in this function
+		
+		// primitive variables
+		int highest_meld_sum = 0;
+		int current_meld_sum = 0;
+		int lowest_meld_tile_number = 0;
+		int current_meld_tile_number = 0;
+		// non-primitive variables
+		List<Meld> meldsToRemove = new ArrayList<>();
+		Meld highest_meldSum_fromLowest = null;
+		Iterator<Meld> iterator = possibleMelds.iterator();
+		
+		while (iterator.hasNext())
+		{
+			Meld meld = iterator.next();
+			if(Meld.check_if_meld_has_joker(meld) == true)
+			{
+				current_meld_tile_number = meld.getTiles().size();
+				
+				if (lowest_meld_tile_number > current_meld_tile_number )
+				{
+					lowest_meld_tile_number = current_meld_tile_number;
+					if (highest_meld_sum < current_meld_sum)
+					{
+						highest_meld_sum = current_meld_sum;
+						highest_meldSum_fromLowest = meld;
+					}
+				}
+				meldsToRemove.add(meld);
+			}
+		}
+		
+		possibleMelds.removeAll(meldsToRemove);
+		possibleMelds.add(highest_meldSum_fromLowest);
+		
+		for(Tile t: highest_meldSum_fromLowest.getTiles())
+		{
+			if(t.isJoker())
+			{
+				Joker j = (Joker) t;
+				String[] possibleTileString = new String[2];
+				possibleTileString[0] = t.getColour().getSymbol();
+				possibleTileString[1] = t.getRank().getSymbol();
+				j.setPossibleTiles(possibleTileString);
+			}
+		}
+		
+		
+		//Done with Joker algo
+		
+		for (int i = 0; i < possibleMelds.size(); i++ ) 
+		{
 		  List<Meld> secondLevelArrayList = new ArrayList<Meld>();
 		  combinationsOfMeld.add(secondLevelArrayList);
 		}
+		
+		
 		
 		int i = 0;
 		//For each these tiles 
@@ -352,6 +411,20 @@ public class Meld
 			a += s.toString() + " ";
 		}
 		return a;
+	}
+	
+	public static boolean check_if_meld_has_joker(Meld meld)
+	{
+		boolean got_a_joker = false;
+		for(Tile tile: meld.getTiles())
+		{
+			if(tile.isJoker())
+			{
+				got_a_joker = true;
+			}
+		}
+		
+		return got_a_joker;
 	}
 
 }
