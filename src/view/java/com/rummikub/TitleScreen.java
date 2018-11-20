@@ -4,22 +4,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.omg.CORBA.PRIVATE_MEMBER;
-
-import com.sun.media.jfxmedia.events.PlayerStateEvent.PlayerState;
-import com.sun.media.sound.InvalidDataException;
-
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.util.Duration;
-import sun.net.www.content.text.plain;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.text.*;
 
