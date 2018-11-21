@@ -12,11 +12,15 @@ import com.sun.javafx.geom.AreaOp.AddOp;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 
 public class TitleScreenController implements Initializable {
 	@FXML
@@ -88,7 +92,7 @@ public class TitleScreenController implements Initializable {
 	}
 	
 	@FXML
-	public void handlePlayBtn(ActionEvent event) {
+	public void handlePlayBtn(ActionEvent event) throws Exception {
 		int numPlayers = Integer.parseInt(cb_PlayerCount.getValue());	
 		List<Player> players = new ArrayList<Player>(); 
 		boolean error = false;
@@ -118,8 +122,12 @@ public class TitleScreenController implements Initializable {
 		}
 
 		if (!error) {
-			Print.print("Starting Game");
 			Game game = new Game(players);
+			
+			// Get the event's source stage, and set the scene to be the game.
+			Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+			stage.setScene(TitleScreen.loadScene("MainScreen.fxml"));
+			
 			try {
 				game.start();
 			} catch (IOException e) {
@@ -132,4 +140,6 @@ public class TitleScreenController implements Initializable {
 		}
 
 	}
+	
+	
 }

@@ -1,6 +1,7 @@
 package com.rummikub;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,9 +20,6 @@ import javafx.scene.text.*;
 
 public class TitleScreen extends Application{
 	
-	private VBox root;
-	private Scene scene;
-	
 	public static void main(String[] args) {
 		Application.launch(args);
 	}
@@ -29,15 +27,25 @@ public class TitleScreen extends Application{
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
-		FXMLLoader fxmlLoader = new FXMLLoader();
-		String titleScreenFXML = "TitleScreen.new.fxml";
-		fxmlLoader.setLocation(getClass().getResource(titleScreenFXML));
-		root = fxmlLoader.load();
-		
-		scene = new Scene(root);
-		primaryStage.setScene(scene);
+		primaryStage.setScene(loadScene("TitleScreen.fxml"));
 		primaryStage.setResizable(false);
 		primaryStage.show();
 	}
 	
+	public static Scene loadScene(String fxmlPath) throws Exception  {
+		URL url = TitleScreen.class.getResource(fxmlPath);
+		Scene scene;
+		
+		if (url != null) {
+			FXMLLoader fxmlLoader = new FXMLLoader();
+			fxmlLoader.setLocation(url);
+			Parent root = fxmlLoader.load();
+			
+			scene = new Scene(root);
+		}
+		else {
+			throw new Exception("FXML file \"" + fxmlPath +  "\" does not exist.");
+		}
+		return scene;
+	}
 }
