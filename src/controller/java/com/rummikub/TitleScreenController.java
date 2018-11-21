@@ -126,7 +126,7 @@ public class TitleScreenController implements Initializable {
 			
 			// Get the event's source stage, and set the scene to be the game.
 			Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-			stage.setScene(TitleScreen.loadScene("MainScreen.fxml"));
+			stage.setScene(Rummy.loadScene("MainScreen.fxml"));
 			
 			try {
 				game.start();

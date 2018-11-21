@@ -18,7 +18,7 @@ import javafx.scene.layout.*;
 import javafx.scene.text.*;
 
 
-public class TitleScreen extends Application{
+public class Rummy extends Application{
 	
 	public static void main(String[] args) {
 		Application.launch(args);
@@ -33,7 +33,7 @@ public class TitleScreen extends Application{
 	}
 	
 	public static Scene loadScene(String fxmlPath) throws Exception  {
-		URL url = TitleScreen.class.getResource(fxmlPath);
+		URL url = Rummy.class.getResource(fxmlPath);
 		Scene scene;
 		
 		if (url != null) {
