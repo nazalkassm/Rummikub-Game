@@ -3,6 +3,7 @@ package com.rummikub;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.pmw.tinylog.Logger;
 
@@ -19,7 +20,13 @@ public class QuickTesterWithMain
 	
 	public static void rigGame(String filePath) throws IOException 
 	{
-		Game game = new Game();
+		List<Player>players = new ArrayList<Player>();
+		players.add(new Player("p0",new Strategy0()));
+		players.add(new Player("p1",new Strategy1()));
+		players.add(new Player("p2",new Strategy2()));
+		players.add(new Player("p3",new Strategy3()));
+		
+		Game game = new Game(players); 
 		game.printRackMeld = true;
 		game.waitAferEachTurn = false;
 		
