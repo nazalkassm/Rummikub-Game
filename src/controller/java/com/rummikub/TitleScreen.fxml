@@ -8,72 +8,29 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<VBox fx:id="root" prefHeight="309.0" prefWidth="416.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.rummikub.TitleScreenController">
-  <children>
-    <MenuBar VBox.vgrow="NEVER">
-      <menus>
-        <Menu mnemonicParsing="false" text="File">
-          <items>
-            <MenuItem mnemonicParsing="false" text="New" />
-            <MenuItem mnemonicParsing="false" text="Open…" />
-            <Menu mnemonicParsing="false" text="Open Recent" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Close" />
-            <MenuItem mnemonicParsing="false" text="Save" />
-            <MenuItem mnemonicParsing="false" text="Save As…" />
-            <MenuItem mnemonicParsing="false" text="Revert" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Preferences…" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Quit" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Edit">
-          <items>
-            <MenuItem mnemonicParsing="false" text="Undo" />
-            <MenuItem mnemonicParsing="false" text="Redo" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Cut" />
-            <MenuItem mnemonicParsing="false" text="Copy" />
-            <MenuItem mnemonicParsing="false" text="Paste" />
-            <MenuItem mnemonicParsing="false" text="Delete" />
-            <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Select All" />
-            <MenuItem mnemonicParsing="false" text="Unselect All" />
-          </items>
-        </Menu>
-        <Menu mnemonicParsing="false" text="Help">
-          <items>
-            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
-          </items>
-        </Menu>
-      </menus>
-    </MenuBar>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="381.0" prefWidth="548.0" VBox.vgrow="ALWAYS">
-      <children>
-        <Label alignment="CENTER" layoutX="66.0" layoutY="14.0" style="&#10;" text="Please select the number of players." textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
-          <font>
+<AnchorPane maxHeight="-1.0" maxWidth="-1.0" minHeight="381.0" minWidth="548.0" prefHeight="381.0" prefWidth="548.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.rummikub.TitleScreenController">
+   <children>
+      <Label alignment="CENTER" layoutX="132.0" layoutY="14.0" minWidth="284.0" style="&#10;" text="Please select the number of players." textAlignment="CENTER" textFill="#9f9f9f" wrapText="false" AnchorPane.leftAnchor="132.0" AnchorPane.rightAnchor="132.0" AnchorPane.topAnchor="14.0">
+         <font>
             <Font size="18.0" />
-          </font>
-        </Label>
-            <ComboBox fx:id="cb_PlayerCount" layoutX="133.0" layoutY="41.0" onAction="#handlePlayerCountCB" prefWidth="150.0" value="Select" />
-            <Button fx:id="btn_Play" disable="true" layoutX="188.0" layoutY="245.0" mnemonicParsing="false" onAction="#handlePlayBtn" text="Play!" />
-            <VBox fx:id="vb_PlayerStrategies" layoutX="133.0" layoutY="87.0" prefHeight="117.0" prefWidth="150.0" spacing="10.0">
+         </font>
+      </Label>
+      <ComboBox fx:id="cb_PlayerCount" layoutX="199.0" layoutY="41.0" onAction="#handlePlayerCountCB" prefWidth="150.0" value="Select" AnchorPane.leftAnchor="199.0" AnchorPane.rightAnchor="199.0" AnchorPane.topAnchor="41.0" />
+      <Button fx:id="btn_Play" disable="true" layoutX="254.0" layoutY="251.0" mnemonicParsing="false" onAction="#handlePlayBtn" text="Play!" AnchorPane.bottomAnchor="105.0" AnchorPane.leftAnchor="254.0" AnchorPane.rightAnchor="253.0" />
+      <VBox fx:id="vb_PlayerStrategies" layoutX="199.0" layoutY="91.0" prefHeight="117.0" prefWidth="150.0" spacing="10.0" AnchorPane.leftAnchor="199.0" AnchorPane.rightAnchor="199.0" AnchorPane.topAnchor="91.0">
+         <children>
+            <ComboBox fx:id="cb_Player1" onAction="#handleStrategyCB" prefWidth="150.0" value="Select" />
+            <ComboBox fx:id="cb_Player2" onAction="#handleStrategyCB" prefWidth="150.0" value="Select">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
-               <children>
-                  <ComboBox fx:id="cb_Player1" onAction="#handleStrategyCB" prefWidth="150.0" value="Select" />
-                  <ComboBox fx:id="cb_Player2" onAction="#handleStrategyCB" prefWidth="150.0" value="Select">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </ComboBox>
-                  <ComboBox fx:id="cb_Player3" onAction="#handleStrategyCB" prefWidth="150.0" value="Select" />
-                  <ComboBox fx:id="cb_Player4" onAction="#handleStrategyCB" prefWidth="150.0" value="Select" />
-               </children>
-            </VBox>
-      </children>
-    </AnchorPane>
-  </children>
-</VBox>
+            </ComboBox>
+            <ComboBox fx:id="cb_Player3" onAction="#handleStrategyCB" prefWidth="150.0" value="Select" />
+            <ComboBox fx:id="cb_Player4" onAction="#handleStrategyCB" prefWidth="150.0" value="Select" />
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </VBox>
+   </children>
+</AnchorPane>

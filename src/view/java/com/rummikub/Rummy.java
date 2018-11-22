@@ -28,7 +28,7 @@ public class Rummy extends Application{
 	public void start(Stage primaryStage) throws Exception {
 
 		primaryStage.setScene(loadScene("TitleScreen.fxml"));
-		primaryStage.setResizable(false);
+		//primaryStage.setResizable(false);
 		primaryStage.show();
 	}
 	
@@ -39,7 +39,7 @@ public class Rummy extends Application{
 		if (url != null) {
 			FXMLLoader fxmlLoader = new FXMLLoader();
 			fxmlLoader.setLocation(url);
-			Parent root = fxmlLoader.load();
+			Pane root = fxmlLoader.load();
 			
 			scene = new Scene(root);
 		}
