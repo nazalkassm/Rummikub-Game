@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,10 +13,19 @@ import org.junit.jupiter.api.Test;
 
 public class ScenarioTest {
 	private Game game;
+	static private List<Player>players = new ArrayList<Player>();
+	
+	@BeforeAll
+	static void setUpClass() {
+		players.add(new Player("p0",new Strategy0()));
+		players.add(new Player("p1",new Strategy1()));
+		players.add(new Player("p2",new Strategy2()));
+		players.add(new Player("p3",new Strategy3()));
+	}
 	
 	@BeforeEach
-	void setUpClass() {
-		game = new Game();
+	void setUpTest() {
+		game = new Game(players); 
 		game.printRackMeld = true;
 		game.waitAferEachTurn = false;
 		FileParser.reset();
