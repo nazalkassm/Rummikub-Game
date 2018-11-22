@@ -14,7 +14,8 @@ public enum Ranks {
 	TEN("10"),
 	ELEVEN("11"),
 	TWELVE("12"),
-	THIRTEEN("13");
+	THIRTEEN("13"),
+	JOKER("0");
 	
 	//Hold the symbol and value that represents the rank 
 	private String rankSymbol;

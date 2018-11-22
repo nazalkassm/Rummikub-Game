@@ -1,8 +1,11 @@
 package com.rummikub;
 
+import static org.junit.jupiter.api.Assumptions.assumingThat;
+
 import java.io.Console;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -71,11 +74,31 @@ public class Meld
 		return sums.indexOf(max);
 	}
 	
-	public static List<Meld> getMelds(List<Tile> tileList) {
+	public static List<Meld> getMelds(List<Tile> tileList) 
+	{
 		List<Meld> meldList = new ArrayList<Meld>();
+		List<Tile> originalList = new ArrayList<Tile>(tileList);
+		
+		Iterator<Tile> iterator = tileList.iterator();
+		
+		while (iterator.hasNext())
+		{
+			Tile tile = iterator.next();
+			if(tile.isJoker())
+			{
+				tileList.addAll(tile.getPossibleTiles());
+			}
+		}
+		
 		meldList.addAll(getRunMelds(tileList));
 		meldList.addAll(getSetMelds(tileList));
+		
 		return meldList;
+	}
+	
+	public static void figureOutWhereToPutJoker(List<Tile> tileList) 
+	{
+		
 	}
 	
 	
