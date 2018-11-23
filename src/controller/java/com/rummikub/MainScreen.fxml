@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.rummikub.MainScreenController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="450.0" layoutX="47.0" layoutY="54.0" stroke="BLACK" strokeType="INSIDE" width="688.0" />
+      <Label fx:id="lbl_Player1" layoutX="384.0" layoutY="504.0" prefHeight="32.0" prefWidth="61.0" text="Player 1" />
+      <Label fx:id="lbl_Player2" layoutY="278.0" prefHeight="32.0" prefWidth="61.0" rotate="-90.0" text="Player 2" />
+      <Label fx:id="lbl_Player3" layoutX="365.0" layoutY="14.0" text="Player 3" />
+      <Label fx:id="lbl_Player4" layoutX="749.0" layoutY="284.0" rotate="90.0" text="Player 4" />
+      <Label layoutX="369.0" layoutY="82.0" prefHeight="32.0" prefWidth="45.0" text="Stock" />
+   </children>
+</AnchorPane>
