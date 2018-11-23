@@ -19,6 +19,8 @@ public class Player {
 	/** The behaviour of the player */
 	protected StrategyBehaviour behaviour;
 
+	public boolean turnTaken = false;
+
 	/**
 	 * Constructor of Player
 	 * 
@@ -184,9 +186,9 @@ public class Player {
 		}
 
 		// accessible by outer class only
-    private Rack getSavedRack() {
-        return savedRack;
-    }
+		private Rack getSavedRack() {
+			return savedRack;
+		}
 	}
 
 }

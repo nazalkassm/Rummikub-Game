@@ -38,10 +38,11 @@ public class Game {
 		// pName = Prompt.promptInput("Enter your name: ");
 
 		// Adding players to the game
-		players.add(new Player("p1", new Strategy0()));
-		players.add(new Player("p1", new Strategy1()));
-		players.add(new Player("p2", new Strategy2()));
-		players.add(new Player("p3", new Strategy3()));
+		/*
+		 * players.add(new Player("p1", new Strategy0())); players.add(new Player("p1",
+		 * new Strategy1())); players.add(new Player("p2", new Strategy2()));
+		 * players.add(new Player("p3", new Strategy3()));
+		 */
 
 		// Print the racks and melds of players, yes or no.
 		for (Player p : players) {
