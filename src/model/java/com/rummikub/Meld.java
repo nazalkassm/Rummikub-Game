@@ -1,5 +1,4 @@
 package com.rummikub;
-import org.pmw.tinylog.Logger;
 
 import static org.junit.jupiter.api.Assumptions.assumingThat;
 
@@ -81,7 +80,9 @@ public class Meld
 		List<Meld> meldList = new ArrayList<Meld>();
 		List<Tile> temporaryList = new ArrayList<Tile>(tileList);
 		
+		//Repalcing Jokers
 		Iterator<Tile> iterator = tileList.iterator();
+		Tile tileToRemove = null;
 		
 		while (iterator.hasNext())
 		{
@@ -89,15 +90,69 @@ public class Meld
 			if(tile.isJoker())
 			{
 				temporaryList.addAll(tile.getPossibleTiles());
+				tileToRemove = tile;
 			}
 		}
+		if (tileToRemove != null) {
+			tileList.addAll(temporaryList);
+		tileList.remove(tileToRemove);
+		}
 		
-		tileList.addAll(temporaryList);
 		
-		Logger.debug(tileList);
+		
+//		//Joker implementation, shiraj find a way to include this somewhere in this function
+//		
+//		// primitive variables
+//		int highest_meld_sum = 0;
+//		int current_meld_sum = 0;
+//		int lowest_meld_tile_number = 0;
+//		int current_meld_tile_number = 0;
+//		// non-primitive variables
+//		List<Meld> meldsToRemove = new ArrayList<>();
+//		Meld highest_meldSum_fromLowest = null;
+//		
+//		Iterator<Meld> iterator = possibleMelds.iterator();
+//		
+//		while (iterator.hasNext())
+//		{
+//			Meld meld = iterator.next();
+//			if(Meld.check_if_meld_has_joker(meld) == true)
+//			{
+//				current_meld_tile_number = meld.getTiles().size();
+//				
+//				if (lowest_meld_tile_number > current_meld_tile_number )
+//				{
+//					lowest_meld_tile_number = current_meld_tile_number;
+//					if (highest_meld_sum < current_meld_sum)
+//					{
+//						highest_meld_sum = current_meld_sum;
+//						highest_meldSum_fromLowest = meld;
+//					}
+//				}
+//				meldsToRemove.add(meld);
+//			}
+//		}
+//		
+//		possibleMelds.removeAll(meldsToRemove);
+//		possibleMelds.add(highest_meldSum_fromLowest);
+//		
+//		for(Tile t: highest_meldSum_fromLowest.getTiles())
+//		{
+//			if(t.isJoker())
+//			{
+//				Joker j = (Joker) t;
+//				String[] possibleTileString = new String[2];
+//				possibleTileString[0] = t.getColour().getSymbol();
+//				possibleTileString[1] = t.getRank().getSymbol();
+//				j.setPossibleTiles(possibleTileString);
+//			}
+//		}
+//		
+//		
+//		//Done with Joker algo
 		
 		meldList.addAll(getRunMelds(tileList));
-		//meldList.addAll(getSetMelds(tileList));
+		meldList.addAll(getSetMelds(tileList));
 		
 		return meldList;
 	}
@@ -108,7 +163,8 @@ public class Meld
 	}
 	
 	
-	public static List<Meld> getMeldsWithTable(List<Tile> tileList) {
+	public static List<Meld> getMeldsWithTable(List<Tile> tileList) 
+	{
 		//??
 		List<Meld> meldList = new ArrayList<Meld>();
 		//To hold all the tiles that were on the table 
@@ -127,55 +183,7 @@ public class Meld
 		//Get all possible melds with this tileList
 		List<Meld> possibleMelds = new ArrayList<>(Meld.getMelds(tileList));
 		
-		//Joker implementation, shiraj find a way to include this somewhere in this function
-		
-		// primitive variables
-		int highest_meld_sum = 0;
-		int current_meld_sum = 0;
-		int lowest_meld_tile_number = 0;
-		int current_meld_tile_number = 0;
-		// non-primitive variables
-		List<Meld> meldsToRemove = new ArrayList<>();
-		Meld highest_meldSum_fromLowest = null;
-		Iterator<Meld> iterator = possibleMelds.iterator();
-		
-		while (iterator.hasNext())
-		{
-			Meld meld = iterator.next();
-			if(Meld.check_if_meld_has_joker(meld) == true)
-			{
-				current_meld_tile_number = meld.getTiles().size();
-				
-				if (lowest_meld_tile_number > current_meld_tile_number )
-				{
-					lowest_meld_tile_number = current_meld_tile_number;
-					if (highest_meld_sum < current_meld_sum)
-					{
-						highest_meld_sum = current_meld_sum;
-						highest_meldSum_fromLowest = meld;
-					}
-				}
-				meldsToRemove.add(meld);
-			}
-		}
-		
-		possibleMelds.removeAll(meldsToRemove);
-		possibleMelds.add(highest_meldSum_fromLowest);
-		
-		for(Tile t: highest_meldSum_fromLowest.getTiles())
-		{
-			if(t.isJoker())
-			{
-				Joker j = (Joker) t;
-				String[] possibleTileString = new String[2];
-				possibleTileString[0] = t.getColour().getSymbol();
-				possibleTileString[1] = t.getRank().getSymbol();
-				j.setPossibleTiles(possibleTileString);
-			}
-		}
-		
-		
-		//Done with Joker algo
+
 		
 		for (int i = 0; i < possibleMelds.size(); i++ ) 
 		{
@@ -200,6 +208,30 @@ public class Meld
 				combinationsOfMeld.get(i).add(currMeld);
 				//pop the tiles with were added to return melds
 				tempRack.removeTiles(currMeld);
+				boolean poop = false;
+				List<Tile> tilesToRemove = new ArrayList<>();
+				
+				for (Tile tile : currMeld.getTiles())
+				{
+					if(tile.isJoker())
+					{
+						poop = true;
+					}
+				}
+				
+				if( true)
+				{
+					tilesToRemove.clear();
+					for(Tile tile : tempRack.getRackArray())
+					{
+						if(tile.isJoker())
+						{
+							tilesToRemove.add(tile);
+						}
+					}
+					tempRack.getRackArray().removeAll(tilesToRemove);
+				}
+					
 				currentPossibleMelds = new ArrayList<>(tempRack.getMelds());
 				
 				//update possible melds to get new list of melds
@@ -208,6 +240,7 @@ public class Meld
 				} else {
 					break;
 				}
+				System.out.println(i);
 			} while (true);
 			i++;
 		}
@@ -216,7 +249,7 @@ public class Meld
 		int countPlayed = 1;
 		int j = 0;
 		for (List<Meld> melds: combinationsOfMeld) {
-
+			System.out.print("j: " + j);
 			List<Tile> tiles = new ArrayList<>();
 			
 			for (Meld m: melds) {
@@ -310,7 +343,7 @@ public class Meld
 		for (int i = 0; i < 13; ++i ) {
 		  List<List<Tile>> secondLevelArrayList = new ArrayList<List<Tile>>();
 		  collectedSets.add(secondLevelArrayList);
-		  for (int j = 0; j < 2; ++j ) {
+		  for (int j = 0; j < 3; ++j ) {
 		    secondLevelArrayList.add(new ArrayList<Tile>());
 		  }
 		}
@@ -322,15 +355,33 @@ public class Meld
 			int index = currTile.getValue() - 1;
 			boolean containColor = false;
 			//Check if the current tile's color is already in the first list
-			for (Tile tile : collectedSets.get(index).get(0)) {
-        if (tile.isSameColour(currTile)) {
-        	containColor = true;
-        }
+			for (Tile tile : collectedSets.get(index).get(0)) 
+			{
+		        if (tile.isSameColour(currTile)) 
+		        {
+		        	containColor = true;
+		        }
 			}
 			
 			//If the color is in the first list then add it to the second list 
-			if (containColor) {
+			if (containColor) 
+			{
+				for (Tile tile : collectedSets.get(index).get(1)) 
+				{
+			        if (tile.isSameColour(currTile)) 
+			        {
+			        	containColor = true;
+			        }
+				}
+				if (containColor) 
+				{
+					
+				collectedSets.get(index).get(2).add(currTile);
+				}
+				else
+				{
 				collectedSets.get(index).get(1).add(currTile);
+				}
 			} 
 			//Otherwise we add it to the first list
 			else {
