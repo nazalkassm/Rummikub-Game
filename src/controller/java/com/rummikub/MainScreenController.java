@@ -21,7 +21,6 @@ public class MainScreenController implements Initializable {
 	RummyGame game;
 	@FXML
 	private AnchorPane root;
-
 	@FXML
 	private Label lbl_Player1;
 	@FXML
@@ -32,7 +31,9 @@ public class MainScreenController implements Initializable {
 	private Label lbl_Player4;
 	@FXML
 	private Button endTurnButton;
-
+	@FXML
+	private Button startGame;
+	
 	private List<Label> labels = new ArrayList<Label>();
 
 	@Override
@@ -85,7 +86,11 @@ public class MainScreenController implements Initializable {
 			}
 		}
 	}
-
+	
+	public void drawTableText() {
+		
+	}
+	
 	public class RummyGame {
 
 		// Primitive Variables
