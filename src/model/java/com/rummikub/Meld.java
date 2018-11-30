@@ -77,18 +77,18 @@ public class Meld
 	public static List<Meld> getMelds(List<Tile> tileList) 
 	{
 		List<Meld> meldList = new ArrayList<Meld>();
-		List<Tile> originalList = new ArrayList<Tile>(tileList);
-		
-		Iterator<Tile> iterator = tileList.iterator();
-		
-		while (iterator.hasNext())
-		{
-			Tile tile = iterator.next();
-			if(tile.isJoker())
-			{
-				tileList.addAll(tile.getPossibleTiles());
-			}
-		}
+//		List<Tile> originalList = new ArrayList<Tile>(tileList);
+//		
+//		Iterator<Tile> iterator = tileList.iterator();
+//		
+//		while (iterator.hasNext())
+//		{
+//			Tile tile = iterator.next();
+//			if(tile.isJoker())
+//			{
+//				tileList.addAll(tile.getPossibleTiles());
+//			}
+//		}
 		
 		meldList.addAll(getRunMelds(tileList));
 		meldList.addAll(getSetMelds(tileList));
