@@ -13,8 +13,8 @@ public class Tile implements Comparable<Tile> {
 	private Colours colour;
 	private boolean playedOnTable = false;
 	private boolean isJoker = false;
-	private Image cardImage;
-	private ImageView imageView = new ImageView(cardImage);
+	private Image tileImage;
+	private ImageView imageView = new ImageView(tileImage);
 
 	// Constructor
 	public Tile(Colours colour, Ranks rank) {
@@ -25,7 +25,7 @@ public class Tile implements Comparable<Tile> {
 	public Tile(Colours colour, Ranks rank, Image img) {
 		this.rank = rank;
 		this.colour = colour;
-		cardImage = img;
+		tileImage = img;
 	};
 
 	public Tile(String colourSymbol, String rankSymbol) {
@@ -91,8 +91,8 @@ public class Tile implements Comparable<Tile> {
 		return this.rank.getValue();
 	}
 
-	public Image getCardImage() {
-		return cardImage;
+	public Image getTileImage() {
+		return tileImage;
 	}
 
 	@Override

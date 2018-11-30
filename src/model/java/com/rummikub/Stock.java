@@ -32,6 +32,10 @@ public class Stock {
 		this(Constants.STOCK_SIZE);
 	}
 
+	public Stock(Boolean view) {
+		this(Constants.STOCK_SIZE, view);
+	}
+
 	/**
 	 * Constructor to create a stock given a list of tiles.
 	 * 
@@ -51,6 +55,13 @@ public class Stock {
 	public Stock(int sS) {
 		this.stockS = sS;
 		this.createStock();
+	}
+
+	public Stock(int sS, boolean view) {
+		this.stockS = sS;
+		if (view) {
+			this.createStockWithImages();
+		}
 	}
 
 	/**
@@ -90,6 +101,23 @@ public class Stock {
 	}
 
 	public void createStock() {
+		// Clear the previous stock if there was one
+		stockArray.clear();
+
+		for (Colours c : Colours.values()) {
+			for (Ranks r : Ranks.values()) {
+				if (!(c.equals(Colours.JOKER) || r.equals(Ranks.JOKER))) {
+					stockArray.add(new Tile(c, r));
+					stockArray.add(new Tile(c, r));
+				}
+			}
+		}
+		stockArray.add(new Joker());
+		stockArray.add(new Joker());
+		this.shuffle();
+	}
+
+	public void createStockWithImages() {
 		// Clear the previous stock if there was one
 
 		try {

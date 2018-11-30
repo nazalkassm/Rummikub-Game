@@ -13,10 +13,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 
 public class MainScreenController implements Initializable {
 
 	RummyGame game;
+	@FXML
+	private AnchorPane root;
+
 	@FXML
 	private Label lbl_Player1;
 	@FXML
@@ -27,12 +32,12 @@ public class MainScreenController implements Initializable {
 	private Label lbl_Player4;
 	@FXML
 	private Button endTurnButton;
-	
+
 	private List<Label> labels = new ArrayList<Label>();
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
+
 		game = new RummyGame(Rummy.players);
 		try {
 			game.start();
@@ -40,52 +45,49 @@ public class MainScreenController implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//drawHands();
+		// drawHands();
 		try {
 			game.takeTurn();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
+
 		labels.add(lbl_Player1);
 		labels.add(lbl_Player2);
 
 		if (lbl_Player3.isVisible()) {
 			labels.add(lbl_Player3);
-			
+
 			if (lbl_Player4.isVisible()) {
 				labels.add(lbl_Player4);
 			}
 		}
-		
-		
+
 	}
-	
+
 	@FXML
 	public void handleEndTurnBtn(ActionEvent event) throws IOException {
 		game.takeTurn();
 		drawTable();
-		
+
 		if (!(game.currentPlayer.isHuman() && !game.table.checkNextPlayer().isHuman())) {
 			handleEndTurnBtn(event);
 		}
 	}
 
 	public void drawTable() {
-		for (Player p: game.players) {
+		for (Player p : game.players) {
 			if (game.currentPlayer == p) {
 				labels.get(p.getNumber() - 1).setText("CURRENT PLAYER");
-			}
-			else {
+			} else {
 				labels.get(p.getNumber() - 1).setText("Player " + Integer.toString(p.getNumber()));
 			}
 		}
 	}
-	
+
 	public class RummyGame {
-		
+
 		// Primitive Variables
 		boolean gameRunning = true;
 		String pName = "";
@@ -96,13 +98,13 @@ public class MainScreenController implements Initializable {
 		// My data Variables
 		Print printer = new Print();
 		Prompt prompter = new Prompt();
-		Stock stock = new Stock();
+		Stock stock = new Stock(true);
 		Table table = new Table(stock);
 		Player winner;
 		int turnsWithoutMoves = 0;
 		Player currentPlayer;
 		Boolean humanTurn = false;
-		
+
 		// Things to play with when testing
 		boolean waitAferEachTurn = false; // Prompts enter after each turn
 		boolean printRackMeld = true; // Turn it off so that you do not print the computers racks and melds.
@@ -110,7 +112,7 @@ public class MainScreenController implements Initializable {
 		RummyGame(List<Player> players) {
 			this.players = players;
 		}
-		
+
 		public void start() throws IOException {
 			// Start game
 			printer.printIntroduction();
@@ -128,10 +130,10 @@ public class MainScreenController implements Initializable {
 
 			// Initializes which player is starting and keeps track of player's turn
 			table.initPlayersTurn();
-			
+
 			currentPlayer = table.getNextPlayerTurn();
 		}
-		
+
 		public void takeTurn() throws IOException {
 			printer.printGameTable(table);
 
@@ -144,8 +146,7 @@ public class MainScreenController implements Initializable {
 			if (currentPlayer.getPlayerRack().getSize() == Constants.ZERO_TILES) {
 				gameRunning = false;
 				winner = currentPlayer;
-			}
-			else {
+			} else {
 				// Get list of changed melds
 				List<Meld> changedMelds = new ArrayList<>(Table.getDiffMelds(table.getAllMelds(), meldsPlayed));
 
@@ -176,19 +177,26 @@ public class MainScreenController implements Initializable {
 				if (turnsWithoutMoves >= 4) {
 					Print.println("The stock is empty, and no one has played in 4 turns.");
 					gameRunning = false;
-				}
-				else {
+				} else {
 					currentPlayer = table.getNextPlayerTurn();
 				}
 			}
-			
-			
+
 		}
-		
+
 		public void end() throws IOException {
 			// Game ending ( we print an ending and maybe who won, also we can reset
 			// variables and game state if needed)
 			printer.printEnding(winner, waitAferEachTurn);
+		}
+	}
+
+	public void playerView() {
+		for (int i = 0; i < game.currentPlayer.getPlayerRack().getSize(); i++) {
+			ImageView view = new ImageView(game.currentPlayer.getPlayerRack().getRackArray().get(i).getTileImage());
+			view.relocate(50, 50 + (5 * i));
+
+			root.getChildren().add(view);
 		}
 	}
 
