@@ -150,6 +150,10 @@ public class Player {
 	public String getName() {
 		return name;
 	}
+	
+	public int getNumber() {
+		return Integer.parseInt(this.getName().substring(1));
+	}
 
 	/**
 	 * Returns if current player is human (uses strategy0 as the indicator)

@@ -15,5 +15,6 @@
       <Label fx:id="lbl_Player3" layoutX="365.0" layoutY="14.0" text="Player 3" />
       <Label fx:id="lbl_Player4" layoutX="749.0" layoutY="284.0" rotate="90.0" text="Player 4" />
       <Label layoutX="369.0" layoutY="82.0" prefHeight="32.0" prefWidth="45.0" text="Stock" />
+      <Button fx:id="endTurnButton" layoutX="578.0" layoutY="410.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="125.0" text="End Turn" />
    </children>
 </AnchorPane>

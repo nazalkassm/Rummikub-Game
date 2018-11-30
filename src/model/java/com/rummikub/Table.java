@@ -204,6 +204,13 @@ public class Table implements Subject {
 		return this.players.get(this.currentPlayerTurn); 	
 	}
 	
+	public Player checkNextPlayer() {
+		int nextPlayer = this.currentPlayerTurn;
+		nextPlayer = (nextPlayer + 1) % this.getPlayerCount();
+		
+		return this.players.get(nextPlayer); 
+	}
+	
 	@Override
 	public void registerObserver(Observer O) {
 		this.observers.add(O);
@@ -274,4 +281,5 @@ public class Table implements Subject {
 	public int getTableRound() {
 		return this.tableRound;
 	}
+
 }
