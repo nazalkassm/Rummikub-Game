@@ -38,9 +38,8 @@ public class Tile implements Comparable<Tile> {
 		this(Colours.getColourFromSymbol(colourSymbol), Ranks.getRankFromSymbol(rankSymbol), img);
 	}
 
-	public static String getFilename(String colourSymbol, String rankSymbol) {
-		return "file:resources/cardsImages/JEPG/" + Colours.getColourFromSymbol(colourSymbol)
-				+ Ranks.getRankFromSymbol(rankSymbol) + ".jpg";
+	public static String getFilename(Colours colour, Ranks rank) {
+		return "file:resources/cardsImages/JEPG/" + colour.getSymbol() + rank.getSymbol() + ".jpg";
 	}
 
 	public Tile(String tileString) {
