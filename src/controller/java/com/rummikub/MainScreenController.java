@@ -15,12 +15,16 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.Pane;
 
 public class MainScreenController implements Initializable {
 
 	RummyGame game;
 	@FXML
 	private AnchorPane root;
+
+	private Pane Player1 = new Pane();
 	@FXML
 	private Label lbl_Player1;
 	@FXML
@@ -30,14 +34,38 @@ public class MainScreenController implements Initializable {
 	@FXML
 	private Label lbl_Player4;
 	@FXML
+	private FlowPane player1_pane;
+	@FXML
+	private FlowPane player2_pane;
+	@FXML
+	private FlowPane player3_pane;
+	@FXML
+	private FlowPane player4_pane;
+	@FXML
 	private Button endTurnButton;
 	@FXML
 	private Button startGame;
-	
+
 	private List<Label> labels = new ArrayList<Label>();
+	private List<FlowPane> playerPanes = new ArrayList<FlowPane>();
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+
+		labels.add(lbl_Player1);
+		playerPanes.add(player1_pane);
+		labels.add(lbl_Player2);
+		playerPanes.add(player2_pane);
+
+		if (lbl_Player3.isVisible()) {
+			labels.add(lbl_Player3);
+			playerPanes.add(player3_pane);
+
+			if (lbl_Player4.isVisible()) {
+				labels.add(lbl_Player4);
+				playerPanes.add(player4_pane);
+			}
+		}
 
 		game = new RummyGame(Rummy.players);
 		try {
@@ -52,17 +80,6 @@ public class MainScreenController implements Initializable {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-
-		labels.add(lbl_Player1);
-		labels.add(lbl_Player2);
-
-		if (lbl_Player3.isVisible()) {
-			labels.add(lbl_Player3);
-
-			if (lbl_Player4.isVisible()) {
-				labels.add(lbl_Player4);
-			}
 		}
 
 	}
@@ -86,11 +103,11 @@ public class MainScreenController implements Initializable {
 			}
 		}
 	}
-	
+
 	public void drawTableText() {
-		
+
 	}
-	
+
 	public class RummyGame {
 
 		// Primitive Variables
@@ -126,6 +143,7 @@ public class MainScreenController implements Initializable {
 			// Print the racks and melds of players, yes or no.
 			for (Player p : players) {
 				p.setPrint_rack_meld(printRackMeld);
+
 			}
 
 			// Add players to the table
@@ -141,6 +159,8 @@ public class MainScreenController implements Initializable {
 
 		public void takeTurn() throws IOException {
 			printer.printGameTable(table);
+
+			playerView(currentPlayer, playerPanes.get(players.indexOf(currentPlayer)));
 
 			Logger.info(currentPlayer.getName());
 			Logger.info(currentPlayer.isHuman());// log to file
@@ -196,12 +216,12 @@ public class MainScreenController implements Initializable {
 		}
 	}
 
-	public void playerView() {
-		for (int i = 0; i < game.currentPlayer.getPlayerRack().getSize(); i++) {
-			ImageView view = new ImageView(game.currentPlayer.getPlayerRack().getRackArray().get(i).getTileImage());
-			view.relocate(50, 50 + (5 * i));
+	public void playerView(Player currPlayer, FlowPane pane) {
+		for (int i = 0; i < currPlayer.getPlayerRack().getSize(); i++) {
+			ImageView tileImg = new ImageView(currPlayer.getPlayerRack().getRackArray().get(i).getTileImage());
+			tileImg.relocate(50, 50 + (5 * i));
 
-			root.getChildren().add(view);
+			pane.getChildren().add(tileImg);
 		}
 	}
 
