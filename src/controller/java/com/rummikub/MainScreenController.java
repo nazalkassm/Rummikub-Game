@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Orientation;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
@@ -60,7 +61,12 @@ public class MainScreenController implements Initializable {
 		for (int i = 0; i < playerPanes.size(); i++) {
 			viewTiles(game.players.get(i), playerPanes.get(i));
 		}
+		
+		ImageView iv1 = new ImageView(new Image("http://icons.iconarchive.com/icons/kidaubis-design/cool-heroes/128/Ironman-icon.png"));
+        iv1.relocate(table_pane.getLayoutX(), table_pane.getLayoutY());
+        table_pane.getChildren().addAll(iv1);
 	}
+	
 
 	@FXML
 	public void handleEndTurnBtn(ActionEvent event) {
