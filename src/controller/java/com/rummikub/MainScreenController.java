@@ -8,8 +8,6 @@ import java.util.ResourceBundle;
 
 import org.pmw.tinylog.Logger;
 
-import com.sun.javafx.geom.Rectangle;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -19,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.shape.Rectangle;
 
 public class MainScreenController implements Initializable {
 
@@ -90,17 +89,73 @@ public class MainScreenController implements Initializable {
 		}
 	}
 
-	public void drawTable() {
-		Print.print("********CALLED DRAWTABLE()********");
-		for (Player p : game.players) {
-			if (game.currentPlayer == p) {
-				labels.get(p.getNumber()).setText("CURRENT PLAYER");
-			} else {
-				labels.get(p.getNumber()).setText("Player " + Integer.toString(p.getNumber()));
+	public void viewTiles(Player currPlayer, FlowPane pane) {
+		Print.print("********CALLED PLAYERVIEW()********");
+		double x_axis = pane.getLayoutX();
+		double y_axis = pane.getLayoutY();
+
+		double x_axis_vertical = pane.getWidth();
+		double y_axis_vertical = pane.getLayoutY();
+
+		for (Tile tile : currPlayer.getPlayerRack().getRackArray()) {
+			ImageView tileImg = new ImageView(tile.getTileImage());
+
+			if (pane.getOrientation() == Orientation.VERTICAL) {
+				tileImg.setRotate(90);
+
+				if (y_axis_vertical >= pane.getHeight()) {
+					y_axis_vertical = pane.getLayoutY();
+					x_axis_vertical -= 10;
+					tileImg.relocate(x_axis_vertical, y_axis_vertical);
+					pane.getChildren().add(tileImg);
+				} else {
+					tileImg.relocate(x_axis_vertical, y_axis_vertical);
+					pane.getChildren().add(tileImg);
+					y_axis_vertical -= 10;
+				}
+
+			}
+
+			else {
+
+				if (x_axis >= pane.getWidth()) {
+					x_axis = pane.getLayoutX();
+					y_axis -= 10;
+					tileImg.relocate(x_axis, y_axis);
+					pane.getChildren().add(tileImg);
+				} else {
+					tileImg.relocate(x_axis, y_axis);
+					pane.getChildren().add(tileImg);
+					x_axis += 10;
+				}
 			}
 		}
 	}
 
+	public void viewTiles(Table table, FlowPane pane) {
+		double x_axis = pane.getLayoutX();
+		double y_axis = pane.getLayoutY();
+
+		for (Meld meld : table.getAllMelds()) {
+			for (Tile tile : meld.getMeld()) {
+				ImageView tileImg = new ImageView(tile.getTileImage());
+				if (x_axis >= pane.getWidth()) {
+					x_axis = pane.getLayoutX();
+					y_axis -= 10;
+					tileImg.relocate(x_axis, y_axis);
+					pane.getChildren().add(tileImg);
+				} else {
+					tileImg.relocate(x_axis, y_axis);
+					pane.getChildren().add(tileImg);
+					x_axis += 10;
+				}
+			}
+			x_axis += 30;
+		}
+	}
+
+	
+	
 	public class RummyGame {
 
 		// Primitive Variables
@@ -208,71 +263,6 @@ public class MainScreenController implements Initializable {
 			// Game ending ( we print an ending and maybe who won, also we can reset
 			// variables and game state if needed)
 			printer.printEnding(winner, waitAferEachTurn);
-		}
-	}
-
-	public void viewTiles(Player currPlayer, FlowPane pane) {
-		Print.print("********CALLED PLAYERVIEW()********");
-		double x_axis = pane.getLayoutX();
-		double y_axis = pane.getLayoutY();
-
-		double x_axis_vertical = pane.getWidth();
-		double y_axis_vertical = pane.getLayoutY();
-
-		for (Tile tile : currPlayer.getPlayerRack().getRackArray()) {
-			ImageView tileImg = new ImageView(tile.getTileImage());
-
-			if (pane.getOrientation() == Orientation.VERTICAL) {
-				tileImg.setRotate(90);
-
-				if (y_axis_vertical >= pane.getHeight()) {
-					y_axis_vertical = pane.getLayoutY();
-					x_axis_vertical -= 10;
-					tileImg.relocate(x_axis_vertical, y_axis_vertical);
-					pane.getChildren().add(tileImg);
-				} else {
-					tileImg.relocate(x_axis_vertical, y_axis_vertical);
-					pane.getChildren().add(tileImg);
-					y_axis_vertical -= 10;
-				}
-
-			}
-
-			else {
-
-				if (x_axis >= pane.getWidth()) {
-					x_axis = pane.getLayoutX();
-					y_axis -= 10;
-					tileImg.relocate(x_axis, y_axis);
-					pane.getChildren().add(tileImg);
-				} else {
-					tileImg.relocate(x_axis, y_axis);
-					pane.getChildren().add(tileImg);
-					x_axis += 10;
-				}
-			}
-		}
-	}
-
-	public void viewTiles(Table table, FlowPane pane) {
-		double x_axis = pane.getLayoutX();
-		double y_axis = pane.getLayoutY();
-
-		for (Meld meld : table.getAllMelds()) {
-			for (Tile tile : meld.getMeld()) {
-				ImageView tileImg = new ImageView(tile.getTileImage());
-				if (x_axis >= pane.getWidth()) {
-					x_axis = pane.getLayoutX();
-					y_axis -= 10;
-					tileImg.relocate(x_axis, y_axis);
-					pane.getChildren().add(tileImg);
-				} else {
-					tileImg.relocate(x_axis, y_axis);
-					pane.getChildren().add(tileImg);
-					x_axis += 10;
-				}
-			}
-			x_axis += 30;
 		}
 	}
 }
