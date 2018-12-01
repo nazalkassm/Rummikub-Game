@@ -1,6 +1,5 @@
 package com.rummikub;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +12,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Orientation;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
@@ -41,7 +39,6 @@ public class MainScreenController implements Initializable {
 	@FXML
 	private Button startGameButton;
 
-	private List<Label> labels = new ArrayList<Label>();
 	private List<FlowPane> playerPanes = new ArrayList<FlowPane>();
 
 	@Override
@@ -60,8 +57,9 @@ public class MainScreenController implements Initializable {
 		game = new RummyGame(Rummy.players);
 		game.start();
 
-		// DRAW THE TILES HERE (game.previousPlayer is the player that just went, update
-		// their hand.)
+		for (int i = 0; i < playerPanes.size(); i++) {
+			viewTiles(game.players.get(i), playerPanes.get(i));
+		}
 	}
 
 	@FXML
@@ -81,8 +79,8 @@ public class MainScreenController implements Initializable {
 		viewTiles(game.currentPlayer, playerPanes.get(game.currentPlayer.getNumber()));
 
 		game.takeTurn();
-		// DRAW THE TILES HERE (game.previousPlayer is the player that just went, update
-		// their hand.)
+		viewTiles(game.previousPlayer, playerPanes.get(game.previousPlayer.getNumber()));
+		viewTiles(game.table, table_pane);
 
 		if (!game.previousPlayer.isHuman()) {
 			takeTurn();
@@ -90,6 +88,7 @@ public class MainScreenController implements Initializable {
 	}
 
 	public void viewTiles(Player currPlayer, FlowPane pane) {
+		pane.getChildren().clear();
 		Print.print("********CALLED PLAYERVIEW()********");
 		double x_axis = pane.getLayoutX();
 		double y_axis = pane.getLayoutY();
@@ -133,6 +132,7 @@ public class MainScreenController implements Initializable {
 	}
 
 	public void viewTiles(Table table, FlowPane pane) {
+		pane.getChildren().clear();
 		double x_axis = pane.getLayoutX();
 		double y_axis = pane.getLayoutY();
 
@@ -154,8 +154,6 @@ public class MainScreenController implements Initializable {
 		}
 	}
 
-	
-	
 	public class RummyGame {
 
 		// Primitive Variables
@@ -178,7 +176,8 @@ public class MainScreenController implements Initializable {
 
 		// Things to play with when testing
 		boolean waitAferEachTurn = false; // Prompts enter after each turn
-		boolean printRackMeld = Rummy.testingMode; // Turn it off so that you do not print the computers racks and melds.
+		boolean printRackMeld = Rummy.testingMode; // Turn it off so that you do not print the computers racks and
+													// melds.
 
 		RummyGame(List<Player> players) {
 			this.players = players;
