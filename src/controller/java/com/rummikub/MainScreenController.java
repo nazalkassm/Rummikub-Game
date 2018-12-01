@@ -93,7 +93,8 @@ public class MainScreenController implements Initializable {
 	
 	public void takeTurn() throws IOException {
 		Print.print("********CALLED TAKETURN()********");
-		playerView(game.currentPlayer, playerPanes.get(game.players.indexOf(game.currentPlayer)));
+		Print.print("Current player:" + game.currentPlayer.getName());
+		playerView(game.currentPlayer, playerPanes.get(game.currentPlayer.getNumber()));
 		
 		game.takeTurn();
 		drawTable();
@@ -209,7 +210,10 @@ public class MainScreenController implements Initializable {
 				} else {
 					previousPlayer = currentPlayer;
 					currentPlayer = table.getNextPlayerTurn();
-					
+					if (currentPlayer == null) {
+						Print.print("PLEASE FUCKING KILL ME");
+						Print.print("fuck");
+					}
 				}
 			}
 
@@ -223,6 +227,7 @@ public class MainScreenController implements Initializable {
 	}
 
 	public void playerView(Player currPlayer, FlowPane pane) {
+		Print.print("********CALLED PLAYERVIEW()********");
 		for (int i = 0; i < currPlayer.getPlayerRack().getSize(); i++) {
 			ImageView tileImg = new ImageView(currPlayer.getPlayerRack().getRackArray().get(i).getTileImage());
 			tileImg.relocate(50, 50 + (5 * i));
