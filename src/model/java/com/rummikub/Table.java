@@ -77,8 +77,8 @@ public class Table implements Subject {
 			}
 			counter++;
 		}
-		tempStock.getStockArray().remove(toRemove[0]);
-		tempStock.getStockArray().remove(toRemove[1]-1);
+	//	tempStock.getStockArray().remove(toRemove[0]);
+	//	tempStock.getStockArray().remove(toRemove[1]-1);
 		//For each player we will get the tile
 		//We will temporarily set the key as the value of the tile
 		for (int i = 0; i < this.getPlayerCount(); i++) {
