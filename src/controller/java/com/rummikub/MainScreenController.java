@@ -8,6 +8,8 @@ import java.util.ResourceBundle;
 
 import org.pmw.tinylog.Logger;
 
+import com.sun.javafx.geom.Rectangle;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,7 +18,6 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.Pane;
 
 public class MainScreenController implements Initializable {
 
@@ -24,7 +25,11 @@ public class MainScreenController implements Initializable {
 	@FXML
 	private AnchorPane root;
 
-	private Pane Player1 = new Pane();
+	@FXML
+	private Rectangle rect_table;
+	@FXML
+	private FlowPane table_pane;
+
 	@FXML
 	private Label lbl_Player1;
 	@FXML
@@ -48,7 +53,7 @@ public class MainScreenController implements Initializable {
 
 	@FXML
 	private Button startGameButton;
-	
+
 	private List<Label> labels = new ArrayList<Label>();
 	private List<FlowPane> playerPanes = new ArrayList<FlowPane>();
 
@@ -68,42 +73,41 @@ public class MainScreenController implements Initializable {
 				playerPanes.add(player4_pane);
 			}
 		}
-		
-		
+
 		game = new RummyGame(Rummy.players);
 		game.start();
-		
+
 		drawTable();
 	}
 
 	@FXML
 	public void handleEndTurnBtn(ActionEvent event) throws IOException {
 		Print.print("********CALLED HANDLEENDTURNBTN()********");
-		
+
 		takeTurn();
 	}
-	
+
 	@FXML
 	public void handleStartGameBtn(ActionEvent event) throws IOException {
 		Print.print("********CALLED HANDLESTARTGAMEBTN()********");
 		startGameButton.setVisible(false);
-		
+
 		takeTurn();
 	}
-	
+
 	public void takeTurn() throws IOException {
 		Print.print("********CALLED TAKETURN()********");
 		Print.print("Current player:" + game.currentPlayer.getName());
-		playerView(game.currentPlayer, playerPanes.get(game.currentPlayer.getNumber()));
-		
+		viewTiles(game.currentPlayer, playerPanes.get(game.currentPlayer.getNumber()));
+
 		game.takeTurn();
 		drawTable();
-		
+
 		if (!game.previousPlayer.isHuman()) {
 			takeTurn();
 		}
 	}
-	
+
 	public void drawTable() {
 		Print.print("********CALLED DRAWTABLE()********");
 		for (Player p : game.players) {
@@ -114,7 +118,7 @@ public class MainScreenController implements Initializable {
 			}
 		}
 	}
-	
+
 	public class RummyGame {
 
 		// Primitive Variables
@@ -166,7 +170,6 @@ public class MainScreenController implements Initializable {
 
 		public void takeTurn() throws IOException {
 			printer.printGameTable(table);
-
 			Logger.info(currentPlayer.getName());
 			Logger.info(currentPlayer.isHuman());// log to file
 			Print.print("++++++ It is now " + currentPlayer.getName() + "'s turn: ++++++");
@@ -226,7 +229,7 @@ public class MainScreenController implements Initializable {
 		}
 	}
 
-	public void playerView(Player currPlayer, FlowPane pane) {
+	public void viewTiles(Player currPlayer, FlowPane pane) {
 		Print.print("********CALLED PLAYERVIEW()********");
 		for (int i = 0; i < currPlayer.getPlayerRack().getSize(); i++) {
 			ImageView tileImg = new ImageView(currPlayer.getPlayerRack().getRackArray().get(i).getTileImage());
@@ -236,4 +239,22 @@ public class MainScreenController implements Initializable {
 		}
 	}
 
+	public void viewTiles(Table table, FlowPane pane) {
+		double x_axis = table_pane.getLayoutX();
+		double y_axis = table_pane.getLayoutY();
+
+		for (Meld meld : table.getAllMelds()) {
+			for (Tile tile : meld.getMeld()) {
+				ImageView tileImg = new ImageView(tile.getTileImage());
+				if (x_axis <= table_pane.getWidth()) {
+					y_axis += 10;
+					tileImg.relocate(x_axis, y_axis);
+				} else {
+					x_axis += 10;
+					tileImg.relocate(x_axis, y_axis);
+				}
+			}
+			x_axis += 30;
+		}
+	}
 }
