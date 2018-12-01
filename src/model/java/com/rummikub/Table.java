@@ -54,7 +54,7 @@ public class Table implements Subject {
 	 * @return Boolean = True if in sorted order by tile value, false otherwise 
 	 */
 	public boolean initPlayersTurn() {
-		/*int turnNum = 2;
+		/*int turnNum = 1;
 		HashMap<Integer, Player> newPlayerTurns = new HashMap<Integer, Player>();
 		for (Map.Entry<Integer, Player> entry : players.entrySet()) {			
 			if (entry.getValue().isHuman()) {
@@ -88,23 +88,28 @@ public class Table implements Subject {
 		
 		//Putting players into tree map will sort by key (lowest to highest)
 		Map<Integer, Player> sortedList = new TreeMap<Integer, Player>(players);
-		
-		//Note that we use set the last turn first since the first entry is lowest numbered tile
-		int turnNumber = this.getPlayerCount();
-		Integer prevKey = 0;
-		for (Map.Entry<Integer, Player> entry : sortedList.entrySet()) {
-			
-		  Integer key = entry.getKey();
-		  //Ensure that the prev key was equal or less then the current key 
-		  //then we are sorting correctly
-		  if (prevKey != 0 && prevKey <= key) {
-				return false;
-			}
-		  
-		  players.put(turnNumber, players.remove(key));
-		  //We've assigned the player turn number for this player, so decrement
-		  turnNumber--;
+		Map.Entry<Integer, Player> maxEntry = null;
+
+		for (Map.Entry<Integer, Player> entry : sortedList.entrySet())
+		{
+		    if (maxEntry == null || entry.getKey().compareTo(maxEntry.getKey()) > 0)
+		    {
+		        maxEntry = entry;
+		    }
 		}
+		
+		int turnNum = 1;
+		HashMap<Integer, Player> newPlayerTurns = new HashMap<Integer, Player>();
+		for (Map.Entry<Integer, Player> entry : players.entrySet()) {			
+			if (maxEntry.getValue() == entry.getValue()) {
+				newPlayerTurns.put(0, entry.getValue());
+			} else {
+				newPlayerTurns.put(turnNum, entry.getValue());
+				turnNum++;
+			}
+		}
+		this.players = newPlayerTurns;
+		tableRound = 1;
 		
 		//Set current player turn to 1
 		this.currentPlayerTurn = 0;
