@@ -83,7 +83,7 @@ public class Table implements Subject {
 		//We will temporarily set the key as the value of the tile
 		for (int i = 0; i < this.getPlayerCount(); i++) {
 		  //Put the player back into the players with tile value as key
-			players.put(tempStock.dealTile().getValue(), players.remove(i));
+			players.put(tempStock.dealTile().getValue() + 5, players.remove(i));
 		}
 		
 		//Putting players into tree map will sort by key (lowest to highest)
