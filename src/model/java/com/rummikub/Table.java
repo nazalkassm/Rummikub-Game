@@ -92,7 +92,7 @@ public class Table implements Subject {
 		Map.Entry<Integer, Player> maxEntry = null;
 
 		for (Map.Entry<Integer, Player> entry : sortedList.entrySet()) {
-		    if (maxEntry == null || entry.getKey().compareTo(maxEntry.getKey()) > 0)
+		    if (maxEntry == null || entry.getKey() > (maxEntry.getKey()))
 		    {
 		        maxEntry = entry;
 		    }
