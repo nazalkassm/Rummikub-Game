@@ -24,7 +24,7 @@ public class Game {
 	int turnsWithoutMoves = 0;
 
 	// Things to play with when testing
-	boolean waitAferEachTurn = true; // Prompts enter after each turn
+	boolean waitAferEachTurn = false; // Prompts enter after each turn
 	boolean printRackMeld = true; // Turn it off so that you do not print the computers racks and melds.
 
 	Game(List<Player> players) {
