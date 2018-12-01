@@ -67,6 +67,18 @@ public class Table implements Subject {
 		this.players = newPlayerTurns;
 		tableRound = 1;*/
 		Stock tempStock = new Stock();
+		int toRemove[] = {0,0};
+		int toRemoveEmptyIndex = 0;
+		int counter = 0;
+		for (Tile t :tempStock.getStockArray()) {
+			if (t.getColour() == Colours.JOKER && t.getRank() == Ranks.JOKER) {
+				toRemove[toRemoveEmptyIndex] = counter;
+				toRemoveEmptyIndex++;
+			}
+			counter++;
+		}
+		tempStock.getStockArray().remove(toRemove[0]);
+		tempStock.getStockArray().remove(toRemove[1]-1);
 		//For each player we will get the tile
 		//We will temporarily set the key as the value of the tile
 		for (int i = 0; i < this.getPlayerCount(); i++) {
@@ -95,7 +107,7 @@ public class Table implements Subject {
 		}
 		
 		//Set current player turn to 1
-		this.currentPlayerTurn = 0;
+		this.currentPlayerTurn = 1;
 		return true;
 	}
 	
@@ -193,9 +205,9 @@ public class Table implements Subject {
 			return null;
 		}
 		
-		if (this.currentPlayerTurn == this.getPlayerCount()) {
+		if (this.currentPlayerTurn == this.getPlayerCount() - 1) {
 			tableRound++;
-			this.currentPlayerTurn = 0;
+			this.currentPlayerTurn = -1;
 		}
 		
 		this.currentPlayerTurn++;
