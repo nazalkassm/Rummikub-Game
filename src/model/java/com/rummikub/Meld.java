@@ -297,20 +297,24 @@ public class Meld
 	
 	static public MeldType checkMeldType(List<Tile> newTiles) {
 		MeldType newMeldType = MeldType.INVALID;
-		 Map<Colours, List<Tile>> tilesByColour = newTiles.stream()
+		List<Tile> tilesToCheck = new ArrayList<Tile>(newTiles = newTiles.stream().filter(p -> !(p instanceof Joker)).collect(Collectors.toList()));
+		if (tilesToCheck.size() == 1) {
+			return MeldType.RUN;
+		} 
+		 Map<Colours, List<Tile>> tilesByColour = tilesToCheck.stream()
 				 .collect(Collectors.groupingBy(Tile::getColour));
 		
 		 // a meld is a set iff: 
 		 // - There is only one tile per colour
 		 // - Each tile of each colour is equal
-		 if (tilesByColour.keySet().size() == newTiles.size() && 
-			 checkEqualRanks(newTiles)) {
+		 if (tilesByColour.keySet().size() == tilesToCheck.size() && 
+			 checkEqualRanks(tilesToCheck)) {
 			 newMeldType = MeldType.SET;
 		 }
 		 // a meld is a run iff:
 		 // - the tiles are of only one colour
 		 // - the tiles are in a sequence
-		 else if (checkSequence(newTiles)) {
+		 else if (checkSequence(tilesToCheck)) {
 			 newMeldType = MeldType.RUN;
 		 }
 		 
