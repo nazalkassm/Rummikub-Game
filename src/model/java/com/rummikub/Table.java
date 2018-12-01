@@ -107,7 +107,7 @@ public class Table implements Subject {
 		}
 		
 		//Set current player turn to 1
-		this.currentPlayerTurn = 1;
+		this.currentPlayerTurn = 0;
 		return true;
 	}
 	
