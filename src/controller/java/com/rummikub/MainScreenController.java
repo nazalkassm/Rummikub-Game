@@ -59,8 +59,9 @@ public class MainScreenController implements Initializable {
 
 		game = new RummyGame(Rummy.players);
 		game.start();
-		
-		//DRAW THE TILES HERE (game.previousPlayer is the player that just went, update their hand.)
+
+		// DRAW THE TILES HERE (game.previousPlayer is the player that just went, update
+		// their hand.)
 	}
 
 	@FXML
@@ -84,8 +85,9 @@ public class MainScreenController implements Initializable {
 		viewTiles(game.currentPlayer, playerPanes.get(game.currentPlayer.getNumber()));
 
 		game.takeTurn();
-		//DRAW THE TILES HERE (game.previousPlayer is the player that just went, update their hand.)
-		
+		// DRAW THE TILES HERE (game.previousPlayer is the player that just went, update
+		// their hand.)
+
 		if (!game.previousPlayer.isHuman()) {
 			takeTurn();
 		}
@@ -232,9 +234,11 @@ public class MainScreenController implements Initializable {
 				if (x_axis <= table_pane.getWidth()) {
 					y_axis += 10;
 					tileImg.relocate(x_axis, y_axis);
+					pane.getChildren().add(tileImg);
 				} else {
 					x_axis += 10;
 					tileImg.relocate(x_axis, y_axis);
+					pane.getChildren().add(tileImg);
 				}
 			}
 			x_axis += 30;
