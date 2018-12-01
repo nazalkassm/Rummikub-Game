@@ -26,11 +26,13 @@ public class JokerTest {
 	//Requirements 9 tests
 	public void setPossibleTilesTest() {
 		Joker joke = new Joker();
+		Tile b1 = new Tile("B1", true);
+		Tile o1 = new Tile("O1", true);
 		//Tiles played on table and meld with joker
-		Meld setMeld = new Meld(joke, new Tile("B1", true), new Tile("O1", true));
+		Meld setMeld = new Meld(joke, b1, o1);
 		
 		ArrayList<Tile> tiles = new ArrayList<Tile>(Arrays.asList(
-				joke, new Tile("B1"), new Tile("O1"),
+				joke, b1, o1,
 				new Tile("G1"), new Tile("R1"), new Tile("O1"),
 				new Tile("G2"), new Tile("G2"), new Tile("G3"), new Tile("B2"), new Tile("B3"),new Tile("O2"), new Tile("O3")));
 		//Set the tile, it should now be R1 or G1 
@@ -50,8 +52,10 @@ public class JokerTest {
 		
 		Meld rowMeld = new Meld(new Tile("B1"), joke, new Tile("B3"), new Tile("B4"));
 		
+		Tile b3 = new Tile("B3", true);
+		Tile b4 = new Tile("B4", true);
 		tiles = new ArrayList<Tile>( Arrays.asList(
-	  		new Tile("B1"), joke, new Tile("B3"), new Tile("B4"),
+	  		b1, joke, b3 , b4,
 	  		new Tile("G2"), new Tile("G2"), new Tile("G3"), new Tile("B2"), new Tile("B3"),new Tile("O2"), new Tile("O3")));
 		//Set the tile, it should now be B2 
 		joke.setPossibleTiles(rowMeld, tiles);
