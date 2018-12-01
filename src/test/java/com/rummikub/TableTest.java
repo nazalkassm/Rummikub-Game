@@ -84,10 +84,10 @@ public class TableTest {
 	@Test
 	public void getLowestHandCountTest() {
 		//We have 14 tiles for each player
-		assertEquals(14, table.lowestTableHandCount());
+		assertEquals(14, table.getPlayersRackCount());
 		player1.getPlayerRack().setRack(Arrays.asList(new Tile("B","4")));
 		//Set the player's rack to 1 so now the lowest table hand count will be 1
-		assertEquals(1, table.lowestTableHandCount());
+		assertEquals(1, table.getPlayersRackCount());
 	}
 	
 	@Test

@@ -243,23 +243,30 @@ public class Table implements Subject {
 
 	@Override
 	public void notifyObservers() {
-		int lowestHandCount = this.lowestTableHandCount();
+		int[] players_rack_count = this.getPlayersRackCount();
 		//Construct the table Info here
-		TableInfo tableState = new TableInfo(lowestHandCount, this.melds);
+		TableInfo tableState = new TableInfo(players_rack_count, this.melds);
 		for (Observer observer : observers) {
 			observer.update(tableState);
 		}
 	}
 
-	public int lowestTableHandCount() {
-		int lowestCount = Constants.STOCK_SIZE;
-		for (Map.Entry<Integer, Player> entry : players.entrySet()) {			
-			if (lowestCount > entry.getValue().getPlayerRack().getSize()) {
-				lowestCount = entry.getValue().getPlayerRack().getSize();
-			}
+	public int[] getPlayersRackCount() 
+	{
+		int players_count[] = new int[this.getPlayerCount()];
+		int counter = 0;
+		for (Map.Entry<Integer, Player> entry : players.entrySet()) 
+		{			
+			players_count[counter] = entry.getValue().getPlayerRack().getSize();
+			counter++;
 		}
-		return lowestCount;
+		return players_count;
 	}
+	
+	//To be deleted:
+//	if (lowestCount > entry.getValue().getPlayerRack().getSize()) {
+//		lowestCount = entry.getValue().getPlayerRack().getSize();
+//	}
 	
 	public List<Meld> getAllMelds()
 	{

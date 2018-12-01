@@ -77,9 +77,10 @@ public class Player {
 	 * Plays the player's turn on a table
 	 * 
 	 * @param table = The table on which to play
-	 * @return melds = The list of melds played
+	 * @return
+	 * @throws Exception 
 	 */
-	public List<Meld> play() {
+	public List<Meld> play() throws Exception {
 		List<Meld> melds = new ArrayList<>(this.behaviour.useStrategy(this));
 
 		for (Meld m : melds) {

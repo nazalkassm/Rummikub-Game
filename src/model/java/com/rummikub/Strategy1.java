@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.List;
 
 public class Strategy1 implements StrategyBehaviour {
-	@SuppressWarnings("unused")
 	private TableInfo tableInfo; 
 	
 	Strategy1() {	}

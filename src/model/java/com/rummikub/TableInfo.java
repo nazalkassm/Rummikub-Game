@@ -8,16 +8,16 @@ import com.rummikub.Player.Memento;
 public class TableInfo 
 {
 	
-	private int lowestHandCount;
+	private int[] players_rack_count;
 	private List<Meld> melds = new ArrayList<Meld>();
 	
-	public TableInfo(int lowestHandCount, List<Meld> melds) {
-		this.lowestHandCount = lowestHandCount;
+	public TableInfo(int[] lowestHandCount, List<Meld> melds) {
+		this.players_rack_count = lowestHandCount;
 		this.melds = melds;
 	}
 	
-	public int getLowestHandCount() {
-		return lowestHandCount;
+	public int[] getPlayersRackCount() {
+		return players_rack_count;
 	}
 	
 	public List<Meld> getMeldsFromTable() {
