@@ -176,14 +176,14 @@ public class MeldTest {
 	
 		List<Tile> tiles = Arrays.asList(
 				//Tiles played on table
-				new Tile("R1", true), new Tile("B1", true), new Tile("O1", true),
+				new Tile("JJ", true), new Tile("B1", true), new Tile("O1", true),
 				new Tile("R6", true), new Tile("R7", true), new Tile("R8", true),
 				//Hand
 				new Tile("R9", false), new Tile("R5", false), new Tile("R2", false), new Tile("R3", false), new Tile("B2", false), new Tile("B3", false),new Tile("O2", false), new Tile("O3", false));
 	
 		//This is the case where a meld is played by rearranging multiple melds.
 		//The R1 to R4 is played and R4 to R6 is played by splitting R1 to R6 on the table
-		assertEquals("[B1 B2 B3 , R5 R6 R7 R8 R9 , O1 O2 O3 , R1 R2 R3 ]", 
+		assertEquals("[B1 B2 B3 , R5 R6 R7 R8 R9 , O1 O2 O3 , JJ R2 R3 ]", 
 				Meld.getMeldsWithTable(tiles).toString());
 
 		
