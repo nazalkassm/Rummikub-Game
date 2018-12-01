@@ -66,22 +66,18 @@ public class MainScreenController implements Initializable {
 	}
 
 	@FXML
-	public void handleEndTurnBtn(ActionEvent event) throws IOException {
-		Print.print("********CALLED HANDLEENDTURNBTN()********");
-
+	public void handleEndTurnBtn(ActionEvent event) {
 		takeTurn();
 	}
 
 	@FXML
-	public void handleStartGameBtn(ActionEvent event) throws IOException {
-		Print.print("********CALLED HANDLESTARTGAMEBTN()********");
+	public void handleStartGameBtn(ActionEvent event) {
 		startGameButton.setVisible(false);
 
 		takeTurn();
 	}
 
-	public void takeTurn() throws IOException {
-		Print.print("********CALLED TAKETURN()********");
+	public void takeTurn() {
 		Print.print("Current player:" + game.currentPlayer.getName());
 		viewTiles(game.currentPlayer, playerPanes.get(game.currentPlayer.getNumber()));
 
@@ -127,7 +123,7 @@ public class MainScreenController implements Initializable {
 
 		// Things to play with when testing
 		boolean waitAferEachTurn = false; // Prompts enter after each turn
-		boolean printRackMeld = true; // Turn it off so that you do not print the computers racks and melds.
+		boolean printRackMeld = Rummy.testingMode; // Turn it off so that you do not print the computers racks and melds.
 
 		RummyGame(List<Player> players) {
 			this.players = players;
@@ -154,7 +150,7 @@ public class MainScreenController implements Initializable {
 			currentPlayer = table.getNextPlayerTurn();
 		}
 
-		public void takeTurn() throws IOException {
+		public void takeTurn() {
 			printer.printGameTable(table);
 			Logger.info(currentPlayer.getName());
 			Logger.info(currentPlayer.isHuman());// log to file
@@ -208,7 +204,7 @@ public class MainScreenController implements Initializable {
 
 		}
 
-		public void end() throws IOException {
+		public void end() {
 			// Game ending ( we print an ending and maybe who won, also we can reset
 			// variables and game state if needed)
 			printer.printEnding(winner, waitAferEachTurn);

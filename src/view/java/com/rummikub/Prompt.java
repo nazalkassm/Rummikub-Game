@@ -53,12 +53,14 @@ public class Prompt
 		bi = new BufferedReader(new StringReader(commandsString));
 	}
 	
-	/**
-	 * @throws IOException 
-	 */
-	public void close() throws IOException 
+	public void close() 
 	{
-		bi.close();
+		try {
+			bi.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**

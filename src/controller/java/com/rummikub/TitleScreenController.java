@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -27,6 +28,8 @@ public class TitleScreenController implements Initializable {
 	private ComboBox<String> cb_Player3;
 	@FXML
 	private ComboBox<String> cb_Player4;
+	@FXML
+	private CheckBox ckBx_GameMode;
 	@FXML
 	private VBox vb_PlayerStrategies;
 	@FXML
@@ -82,7 +85,7 @@ public class TitleScreenController implements Initializable {
 	}
 
 	@FXML
-	public void handlePlayBtn(ActionEvent event) throws Exception {
+	public void handlePlayBtn(ActionEvent event) throws Exception  {
 		int numPlayers = Integer.parseInt(cb_PlayerCount.getValue());
 		List<Player> players = new ArrayList<Player>();
 		boolean error = false;
@@ -112,18 +115,11 @@ public class TitleScreenController implements Initializable {
 		}
 
 		if (!error) {
-			// Game game = new Game(players);
 			Rummy.players = players;
+			Rummy.testingMode = ckBx_GameMode.isSelected();
 			// Get the event's source stage, and set the scene to be the game.
 			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			stage.setScene(Rummy.loadScene("MainScreen.fxml"));
-
-			// try {
-			// game.start();
-			// } catch (IOException e) {
-			// TODO Auto-generated catch block
-			// e.printStackTrace();
-			// }
 		} else {
 			Print.print("Unknown strategy selected.");
 		}

@@ -52,7 +52,7 @@ public class Print {
 		println("Hello", "Welcome to TileRummy");
 	}
 
-	public void printEnding(Player winner, boolean wait) throws IOException {
+	public void printEnding(Player winner, boolean wait) {
 		int counter = 0;
 		System.out.print("Game ending\nThe winner is:");
 		if (wait) {
