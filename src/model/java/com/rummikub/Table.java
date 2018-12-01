@@ -81,6 +81,7 @@ public class Table implements Subject {
 	//	tempStock.getStockArray().remove(toRemove[1]-1);
 		//For each player we will get the tile
 		//We will temporarily set the key as the value of the tile
+	  HashMap<Integer, Player> tempplayers = new HashMap<Integer, Player>(players);
 		for (int i = 0; i < this.getPlayerCount(); i++) {
 		  //Put the player back into the players with tile value as key
 			players.put(tempStock.dealTile().getValue() + 5, players.remove(i));
@@ -90,8 +91,7 @@ public class Table implements Subject {
 		Map<Integer, Player> sortedList = new TreeMap<Integer, Player>(players);
 		Map.Entry<Integer, Player> maxEntry = null;
 
-		for (Map.Entry<Integer, Player> entry : sortedList.entrySet())
-		{
+		for (Map.Entry<Integer, Player> entry : sortedList.entrySet()) {
 		    if (maxEntry == null || entry.getKey().compareTo(maxEntry.getKey()) > 0)
 		    {
 		        maxEntry = entry;
@@ -100,7 +100,7 @@ public class Table implements Subject {
 		
 		int turnNum = 1;
 		HashMap<Integer, Player> newPlayerTurns = new HashMap<Integer, Player>();
-		for (Map.Entry<Integer, Player> entry : players.entrySet()) {			
+		for (Map.Entry<Integer, Player> entry : tempplayers.entrySet()) {			
 			if (maxEntry.getValue() == entry.getValue()) {
 				newPlayerTurns.put(0, entry.getValue());
 			} else {
