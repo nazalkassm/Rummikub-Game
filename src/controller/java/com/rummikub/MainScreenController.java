@@ -13,6 +13,7 @@ import com.sun.javafx.geom.Rectangle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Orientation;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -216,29 +217,63 @@ public class MainScreenController implements Initializable {
 
 	public void viewTiles(Player currPlayer, FlowPane pane) {
 		Print.print("********CALLED PLAYERVIEW()********");
-		for (int i = 0; i < currPlayer.getPlayerRack().getSize(); i++) {
-			ImageView tileImg = new ImageView(currPlayer.getPlayerRack().getRackArray().get(i).getTileImage());
-			tileImg.relocate(50, 50 + (5 * i));
+		double x_axis = pane.getLayoutX();
+		double y_axis = pane.getLayoutY();
 
-			pane.getChildren().add(tileImg);
+		double x_axis_vertical = pane.getWidth();
+		double y_axis_vertical = pane.getLayoutY();
+
+		for (Tile tile : currPlayer.getPlayerRack().getRackArray()) {
+			ImageView tileImg = new ImageView(tile.getTileImage());
+
+			if (pane.getOrientation() == Orientation.VERTICAL) {
+				tileImg.setRotate(90);
+
+				if (y_axis_vertical >= pane.getHeight()) {
+					y_axis_vertical = pane.getLayoutY();
+					x_axis_vertical -= 10;
+					tileImg.relocate(x_axis_vertical, y_axis_vertical);
+					pane.getChildren().add(tileImg);
+				} else {
+					tileImg.relocate(x_axis_vertical, y_axis_vertical);
+					pane.getChildren().add(tileImg);
+					y_axis_vertical -= 10;
+				}
+
+			}
+
+			else {
+
+				if (x_axis >= pane.getWidth()) {
+					x_axis = pane.getLayoutX();
+					y_axis -= 10;
+					tileImg.relocate(x_axis, y_axis);
+					pane.getChildren().add(tileImg);
+				} else {
+					tileImg.relocate(x_axis, y_axis);
+					pane.getChildren().add(tileImg);
+					x_axis += 10;
+				}
+			}
 		}
 	}
 
 	public void viewTiles(Table table, FlowPane pane) {
-		double x_axis = table_pane.getLayoutX();
-		double y_axis = table_pane.getLayoutY();
+		double x_axis = pane.getLayoutX();
+		double y_axis = pane.getLayoutY();
 
 		for (Meld meld : table.getAllMelds()) {
 			for (Tile tile : meld.getMeld()) {
 				ImageView tileImg = new ImageView(tile.getTileImage());
-				if (x_axis <= table_pane.getWidth()) {
-					y_axis += 10;
+				if (x_axis >= pane.getWidth()) {
+					x_axis = pane.getLayoutX();
+					y_axis -= 10;
 					tileImg.relocate(x_axis, y_axis);
 					pane.getChildren().add(tileImg);
 				} else {
-					x_axis += 10;
 					tileImg.relocate(x_axis, y_axis);
 					pane.getChildren().add(tileImg);
+					x_axis += 10;
 				}
 			}
 			x_axis += 30;
