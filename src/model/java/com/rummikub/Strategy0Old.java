@@ -14,12 +14,12 @@ public class Strategy0Old implements StrategyBehaviour
 
 	// Only Entrance to this class.
 	@Override
-	public List<Meld> useStrategy(Player currPlayer) throws IOException 
+	public List<Meld> useStrategy(Player currPlayer) 
 	{
 		// Gets all the possible melds in rack
 		List<Meld> possibleRackMelds = new ArrayList<>(currPlayer.getPlayerRack().getMelds());
 		//Gets all the melds on the table
-		List<Meld> tableMelds = new ArrayList<>(tableInfo.getMelds());
+		List<Meld> tableMelds = new ArrayList<>(tableInfo.getMeldsFromTable());
 		//declare variables
 		int sum = 0;
 		List<Meld> returnMelds = new ArrayList<>();
@@ -53,8 +53,8 @@ public class Strategy0Old implements StrategyBehaviour
 				return Collections.emptyList();
 			}
 			
-			if (!(tableInfo.getMelds().isEmpty()) && returnMelds.size() > 0)
-				returnMelds.addAll(tableInfo.getMelds());
+			if (!(tableInfo.getMeldsFromTable().isEmpty()) && returnMelds.size() > 0)
+				returnMelds.addAll(tableInfo.getMeldsFromTable());
 		}
 		else
 		{
@@ -69,8 +69,8 @@ public class Strategy0Old implements StrategyBehaviour
 			{
 				currPlayer.canPlayOnExistingMelds = true;
 				
-				if (!(tableInfo.getMelds().isEmpty()) && returnMelds.size() > 0)
-					returnMelds.addAll(tableInfo.getMelds());
+				if (!(tableInfo.getMeldsFromTable().isEmpty()) && returnMelds.size() > 0)
+					returnMelds.addAll(tableInfo.getMeldsFromTable());
 			}
 			else 
 			{
@@ -106,7 +106,7 @@ public class Strategy0Old implements StrategyBehaviour
 
 
 	@Override
-	public void playStrategy(Player currPlayer, List<Meld> possibleMelds, List<Meld> returnMelds) throws IOException 
+	public void playStrategy(Player currPlayer, List<Meld> possibleMelds, List<Meld> returnMelds) 
 	{
 		List<Integer> inputTiles = new ArrayList<>();
 		List<Meld> meldOptions = new ArrayList<>();
@@ -158,7 +158,7 @@ public class Strategy0Old implements StrategyBehaviour
 		}// end of while
 	}
 	
-	public void initialStrategy(Player currPlayer, List<Meld> possibleMelds, List<Meld> returnMelds) throws IOException 
+	public void initialStrategy(Player currPlayer, List<Meld> possibleMelds, List<Meld> returnMelds) 
 	{
 		String inputString = Prompt.promptInput("Enter the melds you want to play (0 to pass or no melds) : ");
 

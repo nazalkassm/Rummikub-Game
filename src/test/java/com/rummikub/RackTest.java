@@ -38,7 +38,7 @@ public class RackTest {
 	
 	
 	@AfterAll
-	static void tearDownAfterClass() throws Exception 
+	static void tearDownAfterClass() 
 	{
 		hand = null;
 		hand2 = null;
@@ -47,14 +47,14 @@ public class RackTest {
 	}
 
 	@BeforeEach
-	void setUp() throws Exception 
+	void setUp() 
 	{
 		stock = new Stock();
 		handTest = new Rack();
 	}
 
 	@AfterEach
-	void tearDown() throws Exception 
+	void tearDown() 
 	{
 		handTest = null;
 	}

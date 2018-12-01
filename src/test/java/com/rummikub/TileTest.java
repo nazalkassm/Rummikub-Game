@@ -23,7 +23,7 @@ class TileTest {
 	private static Tile tile4;
 	
 	@BeforeAll
-	static void setUpAll() throws Exception 
+	static void setUpAll() 
 	{
 		Logger.info("setUpAll");
 		tile1 = new Tile("R", "1");

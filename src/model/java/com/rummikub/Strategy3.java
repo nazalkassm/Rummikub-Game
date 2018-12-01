@@ -24,7 +24,7 @@ public class Strategy3 implements StrategyBehaviour {
 		
 		//If the player can play on existing melds 
 		if (currPlayer.canPlayOnExistingMelds) {	
-			for (Meld m: tableInfo.getMelds()) {
+			for (Meld m: tableInfo.getMeldsFromTable()) {
 				tiles.addAll(m.getTiles());
 			}
 		}
@@ -44,12 +44,12 @@ public class Strategy3 implements StrategyBehaviour {
 	
 			if (sum >= 30) {
 				currPlayer.canPlayOnExistingMelds = true;
-				melds.addAll(tableInfo.getMelds());
+				melds.addAll(tableInfo.getMeldsFromTable());
 			} else {
 				Print.print("Player " + currPlayer.getName() + " tried playing melds but their sum is less than 30.");
 				currPlayer.restoreFromMemento(playerState);
 				tableInfo.restoreFromMemento(tableState);
-				return tableInfo.getMelds(); 
+				return tableInfo.getMeldsFromTable(); 
 			}
 		} else {
 		
@@ -72,7 +72,7 @@ public class Strategy3 implements StrategyBehaviour {
 					}
 				}
 				//If the player could play but had no tiles...
-				if (Table.getDiffMelds(tableInfo.getMelds(), melds).isEmpty()) {
+				if (Table.getDiffMelds(tableInfo.getMeldsFromTable(), melds).isEmpty()) {
 					Print.print("Player " + currPlayer.getName() + " could play but has no tile to play.");
 				}
 			}

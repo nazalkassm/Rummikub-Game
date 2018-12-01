@@ -1,6 +1,5 @@
 package com.rummikub;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,12 +10,12 @@ import org.pmw.tinylog.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Orientation;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.Pane;
+import javafx.scene.shape.Rectangle;
 
 public class MainScreenController implements Initializable {
 
@@ -24,15 +23,11 @@ public class MainScreenController implements Initializable {
 	@FXML
 	private AnchorPane root;
 
-	private Pane Player1 = new Pane();
 	@FXML
-	private Label lbl_Player1;
+	private Rectangle rect_table;
 	@FXML
-	private Label lbl_Player2;
-	@FXML
-	private Label lbl_Player3;
-	@FXML
-	private Label lbl_Player4;
+	private FlowPane table_pane;
+
 	@FXML
 	private FlowPane player1_pane;
 	@FXML
@@ -42,70 +37,120 @@ public class MainScreenController implements Initializable {
 	@FXML
 	private FlowPane player4_pane;
 	@FXML
-	private Button endTurnButton;
-	@FXML
-	private Button startGame;
+	private Button startGameButton;
 
-	private List<Label> labels = new ArrayList<Label>();
 	private List<FlowPane> playerPanes = new ArrayList<FlowPane>();
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
-		labels.add(lbl_Player1);
 		playerPanes.add(player1_pane);
-		labels.add(lbl_Player2);
 		playerPanes.add(player2_pane);
 
-		if (lbl_Player3.isVisible()) {
-			labels.add(lbl_Player3);
+		if (player3_pane.isVisible()) {
 			playerPanes.add(player3_pane);
 
-			if (lbl_Player4.isVisible()) {
-				labels.add(lbl_Player4);
+			if (player4_pane.isVisible()) {
 				playerPanes.add(player4_pane);
 			}
 		}
 
 		game = new RummyGame(Rummy.players);
-		try {
-			game.start();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		// drawHands();
-		try {
-			game.takeTurn();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		game.start();
 
+		for (int i = 0; i < playerPanes.size(); i++) {
+			viewTiles(game.players.get(i), playerPanes.get(i));
+		}
 	}
 
 	@FXML
-	public void handleEndTurnBtn(ActionEvent event) throws IOException {
-		game.takeTurn();
-		drawTable();
+	public void handleEndTurnBtn(ActionEvent event) {
+		takeTurn();
+	}
 
-		if (!(game.currentPlayer.isHuman() && !game.table.checkNextPlayer().isHuman())) {
-			handleEndTurnBtn(event);
+	@FXML
+	public void handleStartGameBtn(ActionEvent event) {
+		startGameButton.setVisible(false);
+
+		takeTurn();
+	}
+
+	public void takeTurn() {
+		Print.print("Current player:" + game.currentPlayer.getName());
+		viewTiles(game.currentPlayer, playerPanes.get(game.currentPlayer.getNumber()));
+
+		game.takeTurn();
+		viewTiles(game.previousPlayer, playerPanes.get(game.previousPlayer.getNumber()));
+		viewTiles(game.table, table_pane);
+
+		if (!game.previousPlayer.isHuman()) {
+			takeTurn();
 		}
 	}
 
-	public void drawTable() {
-		for (Player p : game.players) {
-			if (game.currentPlayer == p) {
-				labels.get(p.getNumber() - 1).setText("CURRENT PLAYER");
-			} else {
-				labels.get(p.getNumber() - 1).setText("Player " + Integer.toString(p.getNumber()));
+	public void viewTiles(Player currPlayer, FlowPane pane) {
+		pane.getChildren().clear();
+		double x_axis = pane.getLayoutX();
+		double y_axis = pane.getLayoutY();
+
+		double x_axis_vertical = pane.getWidth();
+		double y_axis_vertical = pane.getLayoutY();
+
+		for (Tile tile : currPlayer.getPlayerRack().getRackArray()) {
+			ImageView tileImg = new ImageView(tile.getTileImage());
+
+			if (pane.getOrientation() == Orientation.VERTICAL) {
+				tileImg.setRotate(90);
+
+				if (y_axis_vertical >= pane.getHeight()) {
+					y_axis_vertical = pane.getLayoutY();
+					x_axis_vertical -= 10;
+					tileImg.relocate(x_axis_vertical, y_axis_vertical);
+					pane.getChildren().add(tileImg);
+				} else {
+					tileImg.relocate(x_axis_vertical, y_axis_vertical);
+					pane.getChildren().add(tileImg);
+					y_axis_vertical -= 10;
+				}
+
+			}
+
+			else {
+
+				if (x_axis >= pane.getWidth()) {
+					x_axis = pane.getLayoutX();
+					y_axis -= 10;
+					tileImg.relocate(x_axis, y_axis);
+					pane.getChildren().add(tileImg);
+				} else {
+					tileImg.relocate(x_axis, y_axis);
+					pane.getChildren().add(tileImg);
+					x_axis += 10;
+				}
 			}
 		}
 	}
 
-	public void drawTableText() {
+	public void viewTiles(Table table, FlowPane pane) {
+		pane.getChildren().clear();
+		double x_axis = pane.getLayoutX();
+		double y_axis = pane.getLayoutY();
 
+		for (Meld meld : table.getAllMelds()) {
+			for (Tile tile : meld.getMeld()) {
+				ImageView tileImg = new ImageView(tile.getTileImage());
+				if (x_axis >= pane.getWidth()) {
+					x_axis = pane.getLayoutX();
+					y_axis -= 10;
+					tileImg.relocate(x_axis, y_axis);
+					pane.getChildren().add(tileImg);
+				} else {
+					tileImg.relocate(x_axis, y_axis);
+					pane.getChildren().add(tileImg);
+					x_axis += 10;
+				}
+			}
+			x_axis += 30;
+		}
 	}
 
 	public class RummyGame {
@@ -125,20 +170,21 @@ public class MainScreenController implements Initializable {
 		Player winner;
 		int turnsWithoutMoves = 0;
 		Player currentPlayer;
+		Player previousPlayer;
 		Boolean humanTurn = false;
 
 		// Things to play with when testing
 		boolean waitAferEachTurn = false; // Prompts enter after each turn
-		boolean printRackMeld = true; // Turn it off so that you do not print the computers racks and melds.
+		boolean printRackMeld = Rummy.testingMode; // Turn it off so that you do not print the computers racks and
+													// melds.
 
 		RummyGame(List<Player> players) {
 			this.players = players;
 		}
 
-		public void start() throws IOException {
+		public void start() {
 			// Start game
 			printer.printIntroduction();
-			prompter.promptEnterKey();
 
 			// Print the racks and melds of players, yes or no.
 			for (Player p : players) {
@@ -157,11 +203,8 @@ public class MainScreenController implements Initializable {
 			currentPlayer = table.getNextPlayerTurn();
 		}
 
-		public void takeTurn() throws IOException {
+		public void takeTurn() {
 			printer.printGameTable(table);
-
-			playerView(currentPlayer, playerPanes.get(players.indexOf(currentPlayer)));
-
 			Logger.info(currentPlayer.getName());
 			Logger.info(currentPlayer.isHuman());// log to file
 			Print.print("++++++ It is now " + currentPlayer.getName() + "'s turn: ++++++");
@@ -203,26 +246,21 @@ public class MainScreenController implements Initializable {
 					Print.println("The stock is empty, and no one has played in 4 turns.");
 					gameRunning = false;
 				} else {
+					previousPlayer = currentPlayer;
 					currentPlayer = table.getNextPlayerTurn();
+					if (currentPlayer == null) {
+						Print.print("PLEASE FUCKING KILL ME");
+						Print.print("fuck");
+					}
 				}
 			}
 
 		}
 
-		public void end() throws IOException {
+		public void end() {
 			// Game ending ( we print an ending and maybe who won, also we can reset
 			// variables and game state if needed)
 			printer.printEnding(winner, waitAferEachTurn);
 		}
 	}
-
-	public void playerView(Player currPlayer, FlowPane pane) {
-		for (int i = 0; i < currPlayer.getPlayerRack().getSize(); i++) {
-			ImageView tileImg = new ImageView(currPlayer.getPlayerRack().getRackArray().get(i).getTileImage());
-			tileImg.relocate(50, 50 + (5 * i));
-
-			pane.getChildren().add(tileImg);
-		}
-	}
-
 }

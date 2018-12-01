@@ -32,7 +32,7 @@ class PlayerTest
 	static private StrategyBehaviour s4;
 	
 	@BeforeAll
-	static void setUpClass() throws Exception 
+	static void setUpClass() 
 	{
 		stock = new Stock();
 		
@@ -52,7 +52,7 @@ class PlayerTest
 	}
 
 	@AfterAll
-	static void tearDownClass() throws Exception 
+	static void tearDownClass() 
 	{
 		player1 = null;
 		player2 = null;
@@ -66,14 +66,14 @@ class PlayerTest
 	}
 
 	@BeforeEach
-	protected void setUpMethod() throws Exception 
+	protected void setUpMethod() 
 	{
 		newPlayer = new Player("pTester");
 		myPlayerMock = new PlayerMock("mockPlayer");
 	}
 
 	@AfterEach
-	protected void tearDownMethod() throws Exception 
+	protected void tearDownMethod() 
 	{
 		newPlayer = null;
 		myPlayerMock = null;

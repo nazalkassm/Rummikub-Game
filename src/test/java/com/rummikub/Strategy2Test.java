@@ -23,7 +23,7 @@ class Strategy2Test {
 	private static Table table;
 
 	@BeforeAll
-	static void setUpBeforeClass() throws Exception {
+	static void setUpBeforeClass()  {
 		//Table because strategy 3 needs to observe
 		Stock stock = new Stock();
 		table = new Table(stock);
@@ -61,7 +61,7 @@ class Strategy2Test {
 	}
 
 	@AfterAll
-	static void tearDownAfterClass() throws Exception 
+	static void tearDownAfterClass()  
 	{
 		player1 = null;
 		meld1 = null;
@@ -69,19 +69,19 @@ class Strategy2Test {
 	}
 
 	@BeforeEach
-	void setUp() throws Exception 
+	void setUp()  
 	{
 		
 	}
 
 	@AfterEach
-	void tearDown() throws Exception 
+	void tearDown()  
 	{
 		
 	}
 	
 	@Test
-	void useStrategyTest() throws IOException {
+	void useStrategyTest() {
 		/*p1:		
 		"G", "10"
 		"G", "11"

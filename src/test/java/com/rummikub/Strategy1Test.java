@@ -23,7 +23,7 @@ class Strategy1Test {
 	private static Player player2;
 
 	@BeforeAll
-	static void setUpBeforeClass() throws Exception 
+	static void setUpBeforeClass() 
 	{
 		//player1
 		player1 = new Player("Naz",new Strategy1());
@@ -55,7 +55,7 @@ class Strategy1Test {
 	}
 
 	@AfterAll
-	static void tearDownAfterClass() throws Exception 
+	static void tearDownAfterClass() 
 	{
 		player1 = null;
 		meld1 = null;
@@ -63,19 +63,19 @@ class Strategy1Test {
 	}
 
 	@BeforeEach
-	void setUp() throws Exception 
+	void setUp() 
 	{
 		
 	}
 
 	@AfterEach
-	void tearDown() throws Exception 
+	void tearDown() 
 	{
 		
 	}
 	
 	@Test
-	void useStrategy_removeTiles_Test() throws IOException
+	void useStrategy_removeTiles_Test() 
 	{
 		//Tests getMelds()
 		assertEquals(2,meld1.size());

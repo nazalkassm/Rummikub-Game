@@ -43,13 +43,8 @@ public class ScenarioTest {
 		assertEquals(60, game.stock.getLength());
 		assertEquals(3, FileParser.playerCommands.size());
 		
-		try {
-			game.start();
-			
-			assertEquals("Human", game.winner.getName());
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
+		game.start();
+		assertEquals("p0", game.winner.getName());
 		
 		Prompt.init();
 	}
@@ -65,13 +60,8 @@ public class ScenarioTest {
 		
 		assertEquals(60, game.stock.getLength());
 		
-		try {
-			game.start();
-			
-			assertEquals("p1", game.winner.getName());
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
+		game.start();
+		assertEquals("p1", game.winner.getName());
 		
 		Prompt.init();
 	}
@@ -88,13 +78,8 @@ public class ScenarioTest {
 		
 		assertEquals(60, game.stock.getLength());
 		
-		try {
-			game.start();
-			
-			assertEquals("p2", game.winner.getName());
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
+		game.start();
+		assertEquals("p2", game.winner.getName());
 		
 		Prompt.init();
 	}
@@ -111,13 +96,8 @@ public class ScenarioTest {
 		
 		assertEquals(60, game.stock.getLength());
 		
-		try {
-			game.start();
-			
-			assertEquals("p3", game.winner.getName());
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
+		game.start();
+		assertEquals("p3", game.winner.getName());
 		
 		Prompt.init();
 	}
@@ -134,11 +114,7 @@ public class ScenarioTest {
 		
 		assertEquals(60, game.stock.getLength());
 		
-		try {
-			game.start();
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
+		game.start();
 		
 		Prompt.init();
 	}
@@ -155,11 +131,7 @@ public class ScenarioTest {
 		
 		assertEquals(60, game.stock.getLength());
 		
-		try {
-			game.start();
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
+		game.start();
 		
 		Prompt.init();
 	}
@@ -176,11 +148,7 @@ public class ScenarioTest {
 		
 		assertEquals(60, game.stock.getLength());
 		
-		try {
-			game.start();
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
+		game.start();
 		
 		Prompt.init();
 	}
@@ -197,11 +165,7 @@ public class ScenarioTest {
 		
 		assertEquals(60, game.stock.getLength());
 		
-		try {
-			game.start();
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
+		game.start();
 		
 		Prompt.init();
 	}
@@ -217,11 +181,7 @@ public class ScenarioTest {
 		
 		assertEquals(64, game.stock.getLength());
 		
-		try {
-			game.start();
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
+		game.start();
 		
 		Prompt.init();
 	}
@@ -237,11 +197,7 @@ public class ScenarioTest {
 		
 		assertEquals(60, game.stock.getLength());
 		
-		try {
-			game.start();
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
+		game.start();
 		
 		Prompt.init();
 	}
@@ -257,11 +213,7 @@ public class ScenarioTest {
 		
 		assertEquals(64, game.stock.getLength());
 		
-		try {
-			game.start();
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
+		game.start();
 		
 		Prompt.init();
 	}
@@ -277,11 +229,7 @@ public class ScenarioTest {
 		
 		assertEquals(60, game.stock.getLength());
 		
-		try {
-			game.start();
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
+		game.start();
 		
 		Prompt.init();
 	}
@@ -297,13 +245,9 @@ public class ScenarioTest {
 		
 		assertEquals(60, game.stock.getLength());
 		
-		try {
-			game.start();
-			
-			assertEquals("p2", game.winner.getName());
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
+		game.start();
+		
+		assertEquals("p2", game.winner.getName());
 		
 		Prompt.init();
 	}
@@ -319,13 +263,9 @@ public class ScenarioTest {
 		
 		assertEquals(61, game.stock.getLength());
 		
-		try {
-			game.start();
-			
-			assertEquals("p3", game.winner.getName());
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
+		game.start();
+		
+		assertEquals("p3", game.winner.getName());
 		
 		Prompt.init();
 	}
@@ -341,11 +281,7 @@ public class ScenarioTest {
 		
 		assertEquals(58, game.stock.getLength());
 		
-		try {
-			game.start();
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
+		game.start();
 		
 		Prompt.init();
 	}

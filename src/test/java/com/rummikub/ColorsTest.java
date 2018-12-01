@@ -14,7 +14,7 @@ class ColorsTest {
 	private static Colours color4;
 	
 	@BeforeAll
-	static void setUpAll() throws Exception {
+	static void setUpAll() {
 		Logger.info("setUpAll");
 		color1 = Colours.ORANGE;
 		color2 = Colours.RED;

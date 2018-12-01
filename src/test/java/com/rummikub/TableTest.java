@@ -23,7 +23,7 @@ public class TableTest {
 	private static Player player4 = new Player("p4", new Strategy3()); 
 	
 	@BeforeAll
-	static void setUpClass() throws Exception {
+	static void setUpClass() {
 		
 		//Create the new player
 		table = new Table(new Stock());
