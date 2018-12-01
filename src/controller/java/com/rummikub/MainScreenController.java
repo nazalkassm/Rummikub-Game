@@ -66,21 +66,17 @@ public class MainScreenController implements Initializable {
 
 	@FXML
 	public void handleEndTurnBtn(ActionEvent event) throws IOException {
-		Print.print("********CALLED HANDLEENDTURNBTN()********");
-
 		takeTurn();
 	}
 
 	@FXML
 	public void handleStartGameBtn(ActionEvent event) throws IOException {
-		Print.print("********CALLED HANDLESTARTGAMEBTN()********");
 		startGameButton.setVisible(false);
 
 		takeTurn();
 	}
 
 	public void takeTurn() throws IOException {
-		Print.print("********CALLED TAKETURN()********");
 		Print.print("Current player:" + game.currentPlayer.getName());
 		viewTiles(game.currentPlayer, playerPanes.get(game.currentPlayer.getNumber()));
 
@@ -126,7 +122,7 @@ public class MainScreenController implements Initializable {
 
 		// Things to play with when testing
 		boolean waitAferEachTurn = false; // Prompts enter after each turn
-		boolean printRackMeld = true; // Turn it off so that you do not print the computers racks and melds.
+		boolean printRackMeld = Rummy.testingMode; // Turn it off so that you do not print the computers racks and melds.
 
 		RummyGame(List<Player> players) {
 			this.players = players;
