@@ -10,27 +10,15 @@
 <AnchorPane fx:id="root" prefHeight="725.0" prefWidth="1215.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.rummikub.MainScreenController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="473.0" layoutX="241.0" layoutY="136.0" stroke="BLACK" strokeType="INSIDE" width="763.0" />
-      <Label fx:id="lbl_Player1" layoutX="608.0" layoutY="664.0" prefHeight="32.0" prefWidth="61.0" text="Player 1">
-         <graphic>
-            <FlowPane fx:id="player1_pane" prefHeight="200.0" prefWidth="200.0" />
-         </graphic>
-      </Label>
-      <Label fx:id="lbl_Player2" layoutY="278.0" prefHeight="32.0" prefWidth="61.0" rotate="-90.0" text="Player 2">
-         <graphic>
-            <FlowPane fx:id="player2_pane" prefHeight="200.0" prefWidth="200.0" />
-         </graphic></Label>
-      <Label fx:id="lbl_Player3" layoutX="365.0" layoutY="14.0" text="Player 3">
-         <graphic>
-            <FlowPane fx:id="player3_pane" prefHeight="200.0" prefWidth="200.0" />
-         </graphic></Label>
-      <Label fx:id="lbl_Player4" layoutX="976.0" layoutY="292.0" rotate="90.0" text="Player 4">
-         <graphic>
-            <FlowPane fx:id="player4_pane" prefHeight="200.0" prefWidth="200.0" />
-         </graphic></Label>
-      <Label layoutX="369.0" layoutY="82.0" prefHeight="32.0" prefWidth="45.0" text="Stock">
-         <graphic>
-            <FlowPane prefHeight="200.0" prefWidth="200.0" />
-         </graphic></Label>
-      <Button fx:id="endTurnButton" layoutX="868.0" layoutY="536.0" mnemonicParsing="false" prefHeight="61.0" prefWidth="125.0" text="End Turn" />
+      <Label fx:id="lbl_Player1" layoutX="588.0" layoutY="671.0" prefHeight="25.0" prefWidth="46.0" text="Player 1" />
+      <FlowPane fx:id="player1_pane" layoutX="371.0" layoutY="584.0" prefHeight="137.0" prefWidth="669.0" />
+      <Label fx:id="lbl_Player2" layoutX="6.0" layoutY="351.0" prefHeight="32.0" prefWidth="61.0" rotate="-90.0" text="Player 2" />
+      <FlowPane fx:id="player2_pane" layoutX="58.0" layoutY="172.0" prefHeight="460.0" prefWidth="207.0" />
+      <Label fx:id="lbl_Player3" layoutX="564.0" layoutY="19.0" text="Player 3" />
+      <FlowPane fx:id="player3_pane" layoutX="370.0" layoutY="53.0" prefHeight="91.0" prefWidth="436.0" />
+      <Label fx:id="lbl_Player4" layoutX="1167.0" layoutY="332.0" rotate="90.0" text="Player 4" />
+      <FlowPane fx:id="player4_pane" layoutX="1014.0" layoutY="162.0" prefHeight="394.0" prefWidth="150.0" />
+      <Button fx:id="endTurnButton" layoutX="831.0" layoutY="511.0" mnemonicParsing="false" onAction="#handleEndTurnBtn" prefHeight="61.0" prefWidth="125.0" text="End Turn" />
+      <Button fx:id="startGameButton" layoutX="476.0" layoutY="276.0" mnemonicParsing="false" onAction="#handleStartGameBtn" prefHeight="121.0" prefWidth="215.0" text="Start Game!" />
    </children>
 </AnchorPane>

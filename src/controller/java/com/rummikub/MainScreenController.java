@@ -46,12 +46,14 @@ public class MainScreenController implements Initializable {
 	@FXML
 	private Button startGame;
 
+	@FXML
+	private Button startGameButton;
+	
 	private List<Label> labels = new ArrayList<Label>();
 	private List<FlowPane> playerPanes = new ArrayList<FlowPane>();
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
 		labels.add(lbl_Player1);
 		playerPanes.add(player1_pane);
 		labels.add(lbl_Player2);
@@ -66,48 +68,52 @@ public class MainScreenController implements Initializable {
 				playerPanes.add(player4_pane);
 			}
 		}
-
+		
+		
 		game = new RummyGame(Rummy.players);
-		try {
-			game.start();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		// drawHands();
-		try {
-			game.takeTurn();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+		game.start();
+		
+		drawTable();
 	}
 
 	@FXML
 	public void handleEndTurnBtn(ActionEvent event) throws IOException {
+		Print.print("********CALLED HANDLEENDTURNBTN()********");
+		
+		takeTurn();
+	}
+	
+	@FXML
+	public void handleStartGameBtn(ActionEvent event) throws IOException {
+		Print.print("********CALLED HANDLESTARTGAMEBTN()********");
+		startGameButton.setVisible(false);
+		
+		takeTurn();
+	}
+	
+	public void takeTurn() throws IOException {
+		Print.print("********CALLED TAKETURN()********");
+		playerView(game.currentPlayer, playerPanes.get(game.players.indexOf(game.currentPlayer)));
+		
 		game.takeTurn();
 		drawTable();
-
-		if (!(game.currentPlayer.isHuman() && !game.table.checkNextPlayer().isHuman())) {
-			handleEndTurnBtn(event);
+		
+		if (!game.previousPlayer.isHuman()) {
+			takeTurn();
 		}
 	}
-
+	
 	public void drawTable() {
+		Print.print("********CALLED DRAWTABLE()********");
 		for (Player p : game.players) {
 			if (game.currentPlayer == p) {
-				labels.get(p.getNumber() - 1).setText("CURRENT PLAYER");
+				labels.get(p.getNumber()).setText("CURRENT PLAYER");
 			} else {
-				labels.get(p.getNumber() - 1).setText("Player " + Integer.toString(p.getNumber()));
+				labels.get(p.getNumber()).setText("Player " + Integer.toString(p.getNumber()));
 			}
 		}
 	}
-
-	public void drawTableText() {
-
-	}
-
+	
 	public class RummyGame {
 
 		// Primitive Variables
@@ -125,6 +131,7 @@ public class MainScreenController implements Initializable {
 		Player winner;
 		int turnsWithoutMoves = 0;
 		Player currentPlayer;
+		Player previousPlayer;
 		Boolean humanTurn = false;
 
 		// Things to play with when testing
@@ -135,10 +142,9 @@ public class MainScreenController implements Initializable {
 			this.players = players;
 		}
 
-		public void start() throws IOException {
+		public void start() {
 			// Start game
 			printer.printIntroduction();
-			prompter.promptEnterKey();
 
 			// Print the racks and melds of players, yes or no.
 			for (Player p : players) {
@@ -159,8 +165,6 @@ public class MainScreenController implements Initializable {
 
 		public void takeTurn() throws IOException {
 			printer.printGameTable(table);
-
-			playerView(currentPlayer, playerPanes.get(players.indexOf(currentPlayer)));
 
 			Logger.info(currentPlayer.getName());
 			Logger.info(currentPlayer.isHuman());// log to file
@@ -203,7 +207,9 @@ public class MainScreenController implements Initializable {
 					Print.println("The stock is empty, and no one has played in 4 turns.");
 					gameRunning = false;
 				} else {
+					previousPlayer = currentPlayer;
 					currentPlayer = table.getNextPlayerTurn();
+					
 				}
 			}
 

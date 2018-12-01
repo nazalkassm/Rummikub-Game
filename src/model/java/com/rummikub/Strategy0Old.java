@@ -14,7 +14,7 @@ public class Strategy0Old implements StrategyBehaviour
 
 	// Only Entrance to this class.
 	@Override
-	public List<Meld> useStrategy(Player currPlayer) throws IOException 
+	public List<Meld> useStrategy(Player currPlayer) 
 	{
 		// Gets all the possible melds in rack
 		List<Meld> possibleRackMelds = new ArrayList<>(currPlayer.getPlayerRack().getMelds());
@@ -106,7 +106,7 @@ public class Strategy0Old implements StrategyBehaviour
 
 
 	@Override
-	public void playStrategy(Player currPlayer, List<Meld> possibleMelds, List<Meld> returnMelds) throws IOException 
+	public void playStrategy(Player currPlayer, List<Meld> possibleMelds, List<Meld> returnMelds) 
 	{
 		List<Integer> inputTiles = new ArrayList<>();
 		List<Meld> meldOptions = new ArrayList<>();
@@ -158,7 +158,7 @@ public class Strategy0Old implements StrategyBehaviour
 		}// end of while
 	}
 	
-	public void initialStrategy(Player currPlayer, List<Meld> possibleMelds, List<Meld> returnMelds) throws IOException 
+	public void initialStrategy(Player currPlayer, List<Meld> possibleMelds, List<Meld> returnMelds) 
 	{
 		String inputString = Prompt.promptInput("Enter the melds you want to play (0 to pass or no melds) : ");
 

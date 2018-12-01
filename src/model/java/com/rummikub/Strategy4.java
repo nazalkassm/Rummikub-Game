@@ -20,7 +20,7 @@ public class Strategy4 implements StrategyBehaviour
 	}
 
 	@Override
-	public List<Meld> useStrategy(Player currentPlayer) throws IOException {
+	public List<Meld> useStrategy(Player currentPlayer) {
 		// TODO Auto-generated method stub
 		return null;
 	}
