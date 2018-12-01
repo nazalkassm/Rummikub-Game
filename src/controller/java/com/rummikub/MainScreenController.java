@@ -62,9 +62,9 @@ public class MainScreenController implements Initializable {
 			viewTiles(game.players.get(i), playerPanes.get(i));
 		}
 		
-		ImageView iv1 = new ImageView(new Image("http://icons.iconarchive.com/icons/kidaubis-design/cool-heroes/128/Ironman-icon.png"));
-        iv1.relocate(table_pane.getLayoutX(), table_pane.getLayoutY());
-        table_pane.getChildren().addAll(iv1);
+		//ImageView iv1 = new ImageView(new Image("http://icons.iconarchive.com/icons/kidaubis-design/cool-heroes/128/Ironman-icon.png"));
+        //iv1.relocate(table_pane.getLayoutX(), table_pane.getLayoutY());
+        //table_pane.getChildren().addAll(iv1);
 	}
 	
 
@@ -142,7 +142,8 @@ public class MainScreenController implements Initializable {
 
 		for (Meld meld : table.getAllMelds()) {
 			for (Tile tile : meld.getMeld()) {
-				ImageView tileImg = new ImageView(tile.getTileImage());
+				//ImageView tileImg = new ImageView(tile.getTileImage());
+				ImageView tileImg = new ImageView(new Image("http://icons.iconarchive.com/icons/kidaubis-design/cool-heroes/128/Ironman-icon.png"));
 				if (x_axis >= pane.getWidth()) {
 					x_axis = pane.getLayoutX();
 					y_axis -= 10;
