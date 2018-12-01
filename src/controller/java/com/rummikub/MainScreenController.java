@@ -75,15 +75,14 @@ public class MainScreenController implements Initializable {
 	}
 
 	public void takeTurn() {
-		Print.print("Current player:" + game.currentPlayer.getName());
-		viewTiles(game.currentPlayer, playerPanes.get(game.currentPlayer.getNumber()));
+		if (game.gameRunning) {
+			game.takeTurn();
+			viewTiles(game.previousPlayer, playerPanes.get(game.previousPlayer.getNumber()));
+			viewTiles(game.table, table_pane);
 
-		game.takeTurn();
-		viewTiles(game.previousPlayer, playerPanes.get(game.previousPlayer.getNumber()));
-		viewTiles(game.table, table_pane);
-
-		if (!game.previousPlayer.isHuman()) {
-			takeTurn();
+			if (!game.previousPlayer.isHuman()) {
+				takeTurn();
+			}
 		}
 	}
 
@@ -248,10 +247,6 @@ public class MainScreenController implements Initializable {
 				} else {
 					previousPlayer = currentPlayer;
 					currentPlayer = table.getNextPlayerTurn();
-					if (currentPlayer == null) {
-						Print.print("PLEASE FUCKING KILL ME");
-						Print.print("fuck");
-					}
 				}
 			}
 

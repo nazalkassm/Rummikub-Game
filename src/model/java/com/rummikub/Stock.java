@@ -131,8 +131,8 @@ public class Stock {
 					}
 				}
 			}
-			stockArray.add(new Joker());
-			stockArray.add(new Joker());
+			//stockArray.add(new Joker());
+			//stockArray.add(new Joker());
 			this.shuffle();
 
 		} catch (Exception e) { // TODO: handle exception
