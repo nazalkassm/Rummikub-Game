@@ -31,7 +31,7 @@ public class Game {
 		this.players = players;
 	}
 
-	public void start() throws IOException {
+	public void start() {
 		// Start game
 		printer.printIntroduction();
 		prompter.promptEnterKey();

@@ -23,12 +23,12 @@ class Strategy3Test {
 	private static Stock stock;
 
 	@BeforeAll
-	static void setUpBeforeClass() throws Exception 
+	static void setUpBeforeClass()  
 	{
 	}
 
 	@AfterAll
-	static void tearDownAfterClass() throws Exception 
+	static void tearDownAfterClass()  
 	{
 		player1 = null;
 		player2 = null;
@@ -37,7 +37,7 @@ class Strategy3Test {
 	}
 
 	@BeforeEach
-	void setUp() throws Exception 
+	void setUp()  
 	{
 
 		//Table because strategy 3 needs to observe
@@ -78,13 +78,13 @@ class Strategy3Test {
 	}
 
 	@AfterEach
-	void tearDown() throws Exception 
+	void tearDown()  
 	{
 		
 	}
 	
 	@Test
-	void scenario14AandB() throws IOException
+	void scenario14AandB() 
 	{System.out.println("===========\n 14A followed by 14B test \n ==========");
 	System.out.println("Player should play nothing and pass using 0");
 	/*p1:		
@@ -193,7 +193,7 @@ class Strategy3Test {
 	}
 	
 	@Test
-	void scenario13b() throws IOException
+	void scenario13b() 
 	{
 		System.out.println("===========\n 13B test \n ==========");
 		System.out.println("Player shoud play all melds it can ");/*p1:		
@@ -255,7 +255,7 @@ class Strategy3Test {
 	}
 	
 	@Test
-	void scenario13a() throws IOException
+	void scenario13a() 
 	{System.out.println("===========\n 13A test \n ==========");
 	System.out.println("Player should play all melds it can");
 		/*p1:		
@@ -319,7 +319,7 @@ class Strategy3Test {
 	/*
 	 * accounts for 9a) 9e)
 	 */
-	public void scenario9Testa() throws IOException {
+	public void scenario9Testa()  {
 		Stock stock = new Stock();
 		table = new Table(stock);
 		
@@ -378,7 +378,7 @@ class Strategy3Test {
 	/*
 	 * accounts for 9b) 9f)
 	 */
-	public void scenario9Testb() throws IOException {
+	public void scenario9Testb()  {
 		Stock stock = new Stock();
 		table = new Table(stock);
 		
@@ -433,7 +433,7 @@ class Strategy3Test {
 	/*
 	 * accounts for 9c) 9d)
 	 */
-	public void scenario9Testc() throws IOException {
+	public void scenario9Testc()  {
 		Stock stock = new Stock();
 		table = new Table(stock);
 		
@@ -486,7 +486,7 @@ class Strategy3Test {
 	/*
 	 * accounts for 9g)
 	 */
-	public void scenario9Testd() throws IOException {
+	public void scenario9Testd()  {
 		Stock stock = new Stock();
 		table = new Table(stock);
 		

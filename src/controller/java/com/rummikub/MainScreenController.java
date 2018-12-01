@@ -65,18 +65,18 @@ public class MainScreenController implements Initializable {
 	}
 
 	@FXML
-	public void handleEndTurnBtn(ActionEvent event) throws IOException {
+	public void handleEndTurnBtn(ActionEvent event) {
 		takeTurn();
 	}
 
 	@FXML
-	public void handleStartGameBtn(ActionEvent event) throws IOException {
+	public void handleStartGameBtn(ActionEvent event) {
 		startGameButton.setVisible(false);
 
 		takeTurn();
 	}
 
-	public void takeTurn() throws IOException {
+	public void takeTurn() {
 		Print.print("Current player:" + game.currentPlayer.getName());
 		viewTiles(game.currentPlayer, playerPanes.get(game.currentPlayer.getNumber()));
 
@@ -149,7 +149,7 @@ public class MainScreenController implements Initializable {
 			currentPlayer = table.getNextPlayerTurn();
 		}
 
-		public void takeTurn() throws IOException {
+		public void takeTurn() {
 			printer.printGameTable(table);
 			Logger.info(currentPlayer.getName());
 			Logger.info(currentPlayer.isHuman());// log to file
@@ -203,7 +203,7 @@ public class MainScreenController implements Initializable {
 
 		}
 
-		public void end() throws IOException {
+		public void end() {
 			// Game ending ( we print an ending and maybe who won, also we can reset
 			// variables and game state if needed)
 			printer.printEnding(winner, waitAferEachTurn);

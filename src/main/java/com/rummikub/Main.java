@@ -11,7 +11,7 @@ public class Main
 	*Because we need to declare methods or variables to use in the Class. If we do this in Main they will be global.
 	*Lastly the game would have no entity itself and live in the main function.
 	*/
-	public static void main(String[] args) throws IOException 
+	public static void main(String[] args) 
 	{
 		List<Player>players = new ArrayList<Player>();
 		

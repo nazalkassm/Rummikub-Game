@@ -85,7 +85,7 @@ public class TitleScreenController implements Initializable {
 	}
 
 	@FXML
-	public void handlePlayBtn(ActionEvent event) throws Exception {
+	public void handlePlayBtn(ActionEvent event) throws Exception  {
 		int numPlayers = Integer.parseInt(cb_PlayerCount.getValue());
 		List<Player> players = new ArrayList<Player>();
 		boolean error = false;

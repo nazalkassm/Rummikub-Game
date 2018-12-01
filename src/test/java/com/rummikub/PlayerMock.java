@@ -18,7 +18,7 @@ public class PlayerMock extends Player
 	private boolean useStrategyCalled = false;
 	
 	@Override
-	public List<Meld> play() throws IOException 
+	public List<Meld> play()
 	{
 		this.useStrategyCalled = true;
 		return super.play();

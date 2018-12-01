@@ -20,7 +20,7 @@ class Strategy0Test {
 	private static Table table;
 
 	@BeforeAll
-	static void setUpBeforeClass() throws Exception 
+	static void setUpBeforeClass() 
 	{
 			Stock stock = new Stock();
 			table = new Table(stock);
@@ -54,26 +54,26 @@ class Strategy0Test {
 	}
 
 	@AfterAll
-	static void tearDownAfterClass() throws Exception 
+	static void tearDownAfterClass() 
 	{
 		player1 = null;
 		player2 = null;
 	}
 
 	@BeforeEach
-	void setUp() throws Exception 
+	void setUp() 
 	{
 		
 	}
 
 	@AfterEach
-	void tearDown() throws Exception 
+	void tearDown() 
 	{
 		
 	}
 	
 	@Test
-	void useStrategy_removeTiles_Test() throws IOException
+	void useStrategy_removeTiles_Test() 
 	{
 		/** P1 Turn*/ 
 		//Regardless of what player plays, player 2 will get rid of initial 30 
@@ -94,7 +94,7 @@ class Strategy0Test {
 	}
 	
 	@Test
-	void mockScenarioTest() throws IOException
+	void mockScenarioTest() 
 	{
 		String filePath = "src/main/resources/Strategy0Tests/test2.txt";
 		QuickTesterWithMain.rigGame(filePath);

@@ -17,13 +17,13 @@ public class MeldTest {
 	private static List<Tile> tiles;
 	
 	@BeforeAll
-	static void setUpAll() throws Exception 
+	static void setUpAll() 
 	{
 		tiles = new ArrayList<Tile>();
 	}
 	
 	@AfterAll
-	static void tearDownAfterClass() throws Exception
+	static void tearDownAfterClass() 
 	{
 		tiles = null;
 	}

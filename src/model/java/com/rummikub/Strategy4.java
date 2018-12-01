@@ -50,7 +50,7 @@ public class Strategy4 implements StrategyBehaviour
 	}
 
 	@Override
-	public void playStrategy(Player currentPlayer, List<Meld> possibleMelds, List<Meld> returnMelds) throws Exception 
+	public void playStrategy(Player currentPlayer, List<Meld> possibleMelds, List<Meld> returnMelds)  
 	{
 		
 	}

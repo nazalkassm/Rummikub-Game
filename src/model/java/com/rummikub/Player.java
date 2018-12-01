@@ -77,10 +77,9 @@ public class Player {
 	 * Plays the player's turn on a table
 	 * 
 	 * @param table = The table on which to play
-	 * @return
-	 * @throws IOException
+	 * @return melds = The list of melds played
 	 */
-	public List<Meld> play() throws IOException {
+	public List<Meld> play() {
 		List<Meld> melds = new ArrayList<>(this.behaviour.useStrategy(this));
 
 		for (Meld m : melds) {
