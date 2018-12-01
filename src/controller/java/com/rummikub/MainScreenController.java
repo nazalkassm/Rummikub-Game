@@ -31,14 +31,6 @@ public class MainScreenController implements Initializable {
 	private FlowPane table_pane;
 
 	@FXML
-	private Label lbl_Player1;
-	@FXML
-	private Label lbl_Player2;
-	@FXML
-	private Label lbl_Player3;
-	@FXML
-	private Label lbl_Player4;
-	@FXML
 	private FlowPane player1_pane;
 	@FXML
 	private FlowPane player2_pane;
@@ -47,11 +39,6 @@ public class MainScreenController implements Initializable {
 	@FXML
 	private FlowPane player4_pane;
 	@FXML
-	private Button endTurnButton;
-	@FXML
-	private Button startGame;
-
-	@FXML
 	private Button startGameButton;
 
 	private List<Label> labels = new ArrayList<Label>();
@@ -59,25 +46,21 @@ public class MainScreenController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		labels.add(lbl_Player1);
 		playerPanes.add(player1_pane);
-		labels.add(lbl_Player2);
 		playerPanes.add(player2_pane);
 
-		if (lbl_Player3.isVisible()) {
-			labels.add(lbl_Player3);
+		if (player3_pane.isVisible()) {
 			playerPanes.add(player3_pane);
 
-			if (lbl_Player4.isVisible()) {
-				labels.add(lbl_Player4);
+			if (player4_pane.isVisible()) {
 				playerPanes.add(player4_pane);
 			}
 		}
 
 		game = new RummyGame(Rummy.players);
 		game.start();
-
-		drawTable();
+		
+		//DRAW THE TILES HERE (game.previousPlayer is the player that just went, update their hand.)
 	}
 
 	@FXML
@@ -101,8 +84,8 @@ public class MainScreenController implements Initializable {
 		viewTiles(game.currentPlayer, playerPanes.get(game.currentPlayer.getNumber()));
 
 		game.takeTurn();
-		drawTable();
-
+		//DRAW THE TILES HERE (game.previousPlayer is the player that just went, update their hand.)
+		
 		if (!game.previousPlayer.isHuman()) {
 			takeTurn();
 		}

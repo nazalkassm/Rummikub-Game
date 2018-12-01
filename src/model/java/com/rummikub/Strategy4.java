@@ -27,7 +27,7 @@ public class Strategy4 implements StrategyBehaviour
 	//If the probability is 0, it will use the table.
 	//The strategy plays all melds possible in hand.
 	
-	public List<Meld> useStrategy(Player currentPlayer) throws IOException 
+	public List<Meld> useStrategy(Player currentPlayer)
 	{
 	    // A list to store the tiles we will manipulate
 		List<Tile> tiles = new ArrayList<>(); 
