@@ -29,7 +29,7 @@ public class Strategy0 implements StrategyBehaviour
 	{
 		//Basic Variables Needed 
 		List<Meld> possibleRackMelds = new ArrayList<>(currentPlayer.getPlayerRack().getMelds());
-		List<Meld> tableMelds = new ArrayList<>(tableInfo.getMelds());
+		List<Meld> tableMelds = new ArrayList<>(tableInfo.getMeldsFromTable());
 		List<Meld> returnMelds = new ArrayList<>();
 		//The player Hand we want to save
 		Player.Memento playerMomento1 = currentPlayer.saveToMemento();
@@ -53,7 +53,7 @@ public class Strategy0 implements StrategyBehaviour
 				switch(choiceOfPlayI) 
 				{
 				   case -1 :
-				      returnMelds = tableInfo.getMelds();
+				      returnMelds = tableInfo.getMeldsFromTable();
 				      userIsPlaying = false;
 				      break; 
 				   case 0:
@@ -93,7 +93,7 @@ public class Strategy0 implements StrategyBehaviour
 				}
 				currentPlayer.restoreFromMemento(playerMomento1);
 				tableInfo.restoreFromMemento(tableMomento1);
-				returnMelds = tableInfo.getMelds();
+				returnMelds = tableInfo.getMeldsFromTable();
 			}
 		}
 
@@ -106,10 +106,10 @@ public class Strategy0 implements StrategyBehaviour
 			Print.print("\n" + currentPlayer.getName() + " wants to pass.");
 		}
 
-		if (!(tableInfo.getMelds().isEmpty()) && returnMelds.size() > 0)
+		if (!(tableInfo.getMeldsFromTable().isEmpty()) && returnMelds.size() > 0)
 
 		{
-			returnMelds.addAll(tableInfo.getMelds());
+			returnMelds.addAll(tableInfo.getMeldsFromTable());
 			returnMelds.removeAll(meldsToRemove);
 		}
 		

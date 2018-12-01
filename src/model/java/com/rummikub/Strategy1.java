@@ -46,11 +46,11 @@ public class Strategy1 implements StrategyBehaviour {
 		else {
 			Print.print("Player " + currPlayer.getName() + " tried playing melds but their sum is less than 30.");
 			currPlayer.getPlayerRack().setRack(tempList);
-			returnMelds =  Collections.emptyList(); 
+			returnMelds =  tableInfo.getMeldsFromTable();
 		}
 			
-		if (!tableInfo.getMelds().isEmpty() && returnMelds.size() > 0)
-			returnMelds.addAll(tableInfo.getMelds());
+		if (!tableInfo.getMeldsFromTable().isEmpty() && returnMelds.size() > 0)
+			returnMelds.addAll(tableInfo.getMeldsFromTable());
 		
 		return returnMelds;
 	}

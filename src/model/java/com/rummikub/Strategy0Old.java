@@ -19,7 +19,7 @@ public class Strategy0Old implements StrategyBehaviour
 		// Gets all the possible melds in rack
 		List<Meld> possibleRackMelds = new ArrayList<>(currPlayer.getPlayerRack().getMelds());
 		//Gets all the melds on the table
-		List<Meld> tableMelds = new ArrayList<>(tableInfo.getMelds());
+		List<Meld> tableMelds = new ArrayList<>(tableInfo.getMeldsFromTable());
 		//declare variables
 		int sum = 0;
 		List<Meld> returnMelds = new ArrayList<>();
@@ -53,8 +53,8 @@ public class Strategy0Old implements StrategyBehaviour
 				return Collections.emptyList();
 			}
 			
-			if (!(tableInfo.getMelds().isEmpty()) && returnMelds.size() > 0)
-				returnMelds.addAll(tableInfo.getMelds());
+			if (!(tableInfo.getMeldsFromTable().isEmpty()) && returnMelds.size() > 0)
+				returnMelds.addAll(tableInfo.getMeldsFromTable());
 		}
 		else
 		{
@@ -69,8 +69,8 @@ public class Strategy0Old implements StrategyBehaviour
 			{
 				currPlayer.canPlayOnExistingMelds = true;
 				
-				if (!(tableInfo.getMelds().isEmpty()) && returnMelds.size() > 0)
-					returnMelds.addAll(tableInfo.getMelds());
+				if (!(tableInfo.getMeldsFromTable().isEmpty()) && returnMelds.size() > 0)
+					returnMelds.addAll(tableInfo.getMeldsFromTable());
 			}
 			else 
 			{
