@@ -89,7 +89,6 @@ public class MainScreenController implements Initializable {
 
 	public void viewTiles(Player currPlayer, FlowPane pane) {
 		pane.getChildren().clear();
-		Print.print("********CALLED PLAYERVIEW()********");
 		double x_axis = pane.getLayoutX();
 		double y_axis = pane.getLayoutY();
 
