@@ -93,6 +93,7 @@ public class Table implements Subject {
 		for (Map.Entry<Integer, Player> entry : tempplayers.entrySet()) {
 			if (maxEntry.getValue() == entry.getValue()) {
 				newPlayerTurns.put(0, entry.getValue());
+				System.out.println(entry.getValue().getName() + " goes first since highest tile");
 			} else {
 				newPlayerTurns.put(turnNum, entry.getValue());
 				turnNum++;
