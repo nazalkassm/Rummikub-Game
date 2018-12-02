@@ -1,6 +1,5 @@
 package com.rummikub;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -122,8 +121,6 @@ public class Strategy0 implements StrategyBehaviour
 		List<Tile> mergedTiles = new ArrayList<>(currentPlayer.getPlayerRack().getRackArray());
 		List<Meld> MergedMeld = new ArrayList<>();
 		List<Integer> inputIntegerList = Prompt.promptUserTableMelds("Choose the melds that you are sure you can play on from the table :(Ex: 2 4 5)",tableMelds);
-		
-		boolean playerIsChoosing = true;
 		
 		for(Integer i : inputIntegerList)
 		{

@@ -1,6 +1,5 @@
 package com.rummikub;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +24,7 @@ public class Strategy4 implements StrategyBehaviour
 	//This strategy will always play the initial 30 meld/melds as soon as possible.
 	//The strategy will not play the tiles of a pre-run(two numbers about to be a run) or a pre-set using the table if the probability of drawing a card to create a meld is > 0
 	//The strategy plays all melds possible in hand.
-	public List<Meld> useStrategy(Player currentPlayer) throws Exception 
+	public List<Meld> useStrategy(Player currentPlayer) 
 	{
 	    // A list to store the rack tiles
 		List<Tile> tiles = new ArrayList<>();
@@ -139,7 +138,7 @@ public class Strategy4 implements StrategyBehaviour
 			//Finding the number of outs to create a meld from a pre-run or a pre-set
 			for(Meld m: pre_run_melds)
 			{
-				List<Tile> meld_tiles = new ArrayList<>();
+				List<Tile> meld_tiles = new ArrayList<Tile>();
 				meld_tiles = m.getTiles();
 				
 			}
@@ -153,7 +152,7 @@ public class Strategy4 implements StrategyBehaviour
 	}
 
 	@Override
-	public void playStrategy(Player currentPlayer, List<Meld> possibleMelds, List<Meld> returnMelds) throws Exception 
+	public void playStrategy(Player currentPlayer, List<Meld> possibleMelds, List<Meld> returnMelds)
 	{
 		
 	}

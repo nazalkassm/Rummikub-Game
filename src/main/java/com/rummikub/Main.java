@@ -1,6 +1,5 @@
 package com.rummikub;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,12 +14,20 @@ public class Main
 	{
 		List<Player>players = new ArrayList<Player>();
 		
-		players.add(new Player("p0",new Strategy0()));
+		players.add(new Player("p0",new Strategy3()));
 		players.add(new Player("p1",new Strategy1()));
 		players.add(new Player("p2",new Strategy2()));
 		players.add(new Player("p3",new Strategy3()));
 		
-		Game tileRummy = new Game(players); 
+		Boolean printAllPlayerMelds = false;
+		Boolean pauseBetweenTurns = false;
+		Boolean GUI = false;
+		
+		Game tileRummy = new Game(players, printAllPlayerMelds, pauseBetweenTurns, GUI);
 		tileRummy.start();
+		
+		while (tileRummy.gameRunning) {
+			tileRummy.takeTurn();
+		}
 	}
 }

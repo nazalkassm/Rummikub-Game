@@ -62,6 +62,9 @@ public class Stock {
 		if (view) {
 			this.createStockWithImages();
 		}
+		else {
+			this.createStock();
+		}
 	}
 
 	/**
