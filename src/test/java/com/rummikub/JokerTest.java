@@ -25,7 +25,7 @@ public class JokerTest {
 	@Test
 	//Requirements 9 tests
 	public void setPossibleTilesTest() {
-		Joker joke = new Joker();
+		Joker joke = new Joker("J1");
 		Tile b1 = new Tile("B1", true);
 		Tile o1 = new Tile("O1", true);
 		//Tiles played on table and meld with joker
@@ -49,18 +49,18 @@ public class JokerTest {
 	
 		assertEquals(true, joke.getPossibleTiles().toString().contains("R1"));
 		assertEquals(false, joke.getPossibleTiles().toString().contains("G1"));
-		
-		Meld rowMeld = new Meld(new Tile("B1"), joke, new Tile("B3"), new Tile("B4"));
-		
-		Tile b3 = new Tile("B3", true);
+		Tile b3 = new Tile("B2", true);
 		Tile b4 = new Tile("B4", true);
+		Meld rowMeld = new Meld(b1, joke, b3, b4);
+		
+	
 		tiles = new ArrayList<Tile>( Arrays.asList(
 	  		b1, joke, b3 , b4,
 	  		new Tile("G2"), new Tile("G2"), new Tile("G3"), new Tile("B2"), new Tile("B3"),new Tile("O2"), new Tile("O3")));
 		//Set the tile, it should now be B2 
 		joke.setPossibleTiles(rowMeld, tiles);
 		
-		assertEquals("[ B2 ]", joke.getPossibleTiles().toString());	
+		assertEquals("[B2]", joke.getPossibleTiles().toString());	
 	}
 	
 }
