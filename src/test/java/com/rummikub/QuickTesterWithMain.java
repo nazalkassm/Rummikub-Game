@@ -21,10 +21,11 @@ public class QuickTesterWithMain
 		players.add(new Player("p1",new Strategy1()));
 		players.add(new Player("p2",new Strategy2()));
 		players.add(new Player("p3",new Strategy3()));
+		Boolean printAllPlayerMelds = true;
+		Boolean pauseBetweenTurns = false;
+		Boolean GUI = false;
 		
-		Game game = new Game(players); 
-		game.printRackMeld = true;
-		game.waitAferEachTurn = false;
+		Game game = new Game(players, printAllPlayerMelds, pauseBetweenTurns, GUI); 
 		
 		FileParser.parse(filePath);
 		

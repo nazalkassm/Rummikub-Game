@@ -13,6 +13,9 @@ import org.junit.jupiter.api.Test;
 public class ScenarioTest {
 	private Game game;
 	static private List<Player>players = new ArrayList<Player>();
+	Boolean printAllPlayerMelds = false;
+	Boolean pauseBetweenTurns = false;
+	Boolean GUI = false;
 	
 	@BeforeAll
 	static void setUpClass() {
@@ -24,7 +27,8 @@ public class ScenarioTest {
 	
 	@BeforeEach
 	void setUpTest() {
-		game = new Game(players); 
+		
+		game = new Game(players, printAllPlayerMelds, pauseBetweenTurns, GUI); 
 		game.printRackMeld = true;
 		game.waitAferEachTurn = false;
 		FileParser.reset();
