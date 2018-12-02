@@ -1,11 +1,7 @@
 package com.rummikub;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.pmw.tinylog.Logger;
 
 
 //This class is to test algorithms,data structures and all other ideas to be used in the project quickly so that we can confirm something would work.

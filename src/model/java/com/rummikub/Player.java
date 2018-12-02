@@ -1,6 +1,5 @@
 package com.rummikub;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,7 +79,7 @@ public class Player {
 	 * @return
 	 * @throws Exception 
 	 */
-	public List<Meld> play() throws Exception {
+	public List<Meld> play() {
 		List<Meld> melds = new ArrayList<>(this.behaviour.useStrategy(this));
 
 		for (Meld m : melds) {

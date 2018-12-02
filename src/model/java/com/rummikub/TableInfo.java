@@ -3,8 +3,6 @@ package com.rummikub;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.rummikub.Player.Memento;
-
 public class TableInfo 
 {
 	

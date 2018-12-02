@@ -2,7 +2,6 @@ package com.rummikub;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -15,10 +14,8 @@ import org.junit.jupiter.api.Test;
 
 class Strategy3Test {
 	
-	private static List<Meld> meld1,meld2;
 	private static Player player1;
 	private static Player player2;
-	private static Player player3;
 	private static Table table;
 	private static Stock stock;
 
@@ -32,8 +29,6 @@ class Strategy3Test {
 	{
 		player1 = null;
 		player2 = null;
-		meld1 = null;
-		meld2 = null;
 	}
 
 	@BeforeEach

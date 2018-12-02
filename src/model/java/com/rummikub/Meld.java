@@ -1,11 +1,7 @@
 package com.rummikub;
 
-import static org.junit.jupiter.api.Assumptions.assumingThat;
-
-import java.io.Console;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;

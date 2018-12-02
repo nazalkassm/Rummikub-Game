@@ -53,6 +53,7 @@ public class TitleScreenController implements Initializable {
 		int numPlayers = Integer.parseInt(cb_PlayerCount.getValue());
 
 		for (int i = 0; i < vb_PlayerStrategies.getChildren().size(); i++) {
+			@SuppressWarnings("unchecked")
 			ComboBox<String> currNode = (ComboBox<String>) vb_PlayerStrategies.getChildren().get(i);
 
 			if (i < numPlayers) {
@@ -72,6 +73,7 @@ public class TitleScreenController implements Initializable {
 		boolean check = true;
 		int numPlayers = Integer.parseInt(cb_PlayerCount.getValue());
 		for (int i = 0; i < numPlayers; i++) {
+			@SuppressWarnings("unchecked")
 			ComboBox<String> currNode = (ComboBox<String>) vb_PlayerStrategies.getChildren().get(i);
 			if (currNode.getValue() == "Select")
 				check = false;
@@ -91,6 +93,7 @@ public class TitleScreenController implements Initializable {
 		boolean error = false;
 
 		for (int i = 0; i < numPlayers; i++) {
+			@SuppressWarnings("unchecked")
 			ComboBox<String> currNode = (ComboBox<String>) vb_PlayerStrategies.getChildren().get(i);
 
 			switch (currNode.getValue()) {
