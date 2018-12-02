@@ -7,6 +7,7 @@ import static org.hamcrest.CoreMatchers.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.*;
@@ -36,13 +37,14 @@ public class TableTest {
 	@Test
 	public void initTurnTest() {
 		 //Player 1 get's R13, player 2 get  R1, player 3 get R1 but since someone already has it he get's the next tile so B12. Player 4 gets B4
-		 List<Tile> tiles = Arrays.asList(new Tile ("R10"), new Tile ("R1"), new Tile ("R1"), new Tile ("B12"), new Tile ("B4"));
+		 List<Tile> tiles = Arrays.asList(new Tile ("R10"), new Tile ("R1"), new Tile ("R1"), new Tile ("B9"), new Tile ("B4"));
+		 Collections.reverse(tiles);
 		 for (Tile t: tiles )
-			 s.getStockArray().set(0, t);
+			 s.getStockArray().add(0, t);
 		 //P3 has highest card so should run first
 		 table.initPlayersTurn();
 		//Init turn will return true if the turns are decided by highest tile number
-		assertEquals("P3", table.getCurrentPlayer().getName());
+		assertEquals("p1", table.getCurrentPlayer().getName());
 	}
 	
 	@Test
