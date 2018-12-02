@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class Meld 
@@ -182,7 +183,17 @@ public class Meld
 	}
 	
 	public static List<Meld> getRunMelds(List<Tile> tileList) {
-		int count = 0;
+		List<Tile> tilesToCheck = new ArrayList<Tile>(tileList.stream().filter(p -> !(p instanceof Joker)).collect(Collectors.toList()));
+		List<Joker> jokers = new ArrayList<Joker>(tileList.stream().filter(p -> (p instanceof Joker)).map(p -> (Joker) p).collect(Collectors.toList()));
+    for (Tile t: tilesToCheck) {
+    	 for (Joker j: jokers) {
+       		if (new ArrayList<String>(j.getPossibleTiles().stream().map(p -> p.toString()).collect(Collectors.toList())).contains(t.toString())) {
+       		  j.setPossibleTilesToAll();	
+       		}
+       }
+    }
+    int jokerCount = jokers.size();
+    int count = 0;
 		List<Meld> meldList = new ArrayList<Meld>();
 		//Init array list of 2,all the sorted things in it 
 		List<List<Tile>> collectedTings = new ArrayList<List<Tile>>();
@@ -191,8 +202,8 @@ public class Meld
 		  collectedTings.add(secondLevelArrayList);
 		}
 		
-		for (int i = 0; i < tileList.size() ; i++) {
-			Tile currTile = tileList.get(i); 
+		for (int i = 0; i < tilesToCheck.size() ; i++) {
+			Tile currTile = tilesToCheck.get(i); 
 			boolean containTile = false;
 			//Check if the current tile's color is already in the first list
 			for (Tile tile : collectedTings.get(0)) {
@@ -210,8 +221,8 @@ public class Meld
 		Collections.sort(collectedTings.get(0));
 		Collections.sort(collectedTings.get(1));
 
-		Meld meld = null;
-		
+		/*Meld meld = new Meld();
+		int jokerUsed = 0;
 		boolean isRunOn = false;
 		for (List<Tile> tiles: collectedTings) {
 			for (int i = 1; i <= tiles.size() ; i++) {
@@ -236,8 +247,146 @@ public class Meld
 					}
 				
 			}
+		}*/
+
+		
+		int jokerUsed = 0;
+		int jokerUsedIndex = -1;
+		boolean isRunOn = false;
+		for (List<Tile> tiles: collectedTings) {
+			if (tiles.isEmpty()) 
+					continue;
+			Meld meld = new Meld();
+			meld.addTile(tiles.get(0));
+
+			for (int i = 0; i < tiles.size() -1; i++) {
+				Tile currTile = tiles.get(i);
+				Tile nextTile = tiles.get(i+1);
+				
+				if (i + 1 < tiles.size() && (isRunOn = currTile.isRunOn(nextTile))) {
+					meld.addTile(nextTile);
+				} else {
+					if (jokerUsed < jokerCount && currTile.getColour() == nextTile.getColour()) {
+						int diff = nextTile.getRank().getValue() - currTile.getRank().getValue();
+						//IF diff is 3 and joker count is 2 and jokers are run on each other  
+						if (diff == 3 && jokerCount == 2 && jokers.get(0).isRunOn(jokers.get(1))) {
+							//Can first joker play on current one after
+							boolean firstJokerOnCurrent = (jokers.get(0).getPossibleTiles().isEmpty()) ? true : (currTile.getRank().getValue() == (jokers.get(0).getPossibleTiles().get(0).getRank().getValue() - 1) && currTile.getColour() == (jokers.get(0).getPossibleTiles().get(0).getColour())) ?
+											true : 
+											false;
+							boolean secondJokerOnCurrent =  (jokers.get(1).getPossibleTiles().isEmpty()) ? 	true : (currTile.getRank().getValue() == (jokers.get(1).getPossibleTiles().get(0).getRank().getValue() - 1) && currTile.getColour() == (jokers.get(1).getPossibleTiles().get(0).getColour())) ?
+											true : 
+											false;
+							//IF both can play on first card
+							if (firstJokerOnCurrent && secondJokerOnCurrent) {
+								//Get the one with lowest possible values size 
+								int indexOfLowest =-1;
+								int other =-1;
+								if (jokers.get(0).getPossibleTiles().size() <= jokers.get(1).getPossibleTiles().size()) {
+									indexOfLowest = 0;
+									other= 1;
+								} else {
+									indexOfLowest = 1;
+									other= 0;
+								}
+								if (jokers.get(other).getPossibleTiles().isEmpty() || jokers.get(other).getPossibleTiles().get(0).getValue() + 1 == nextTile.getValue()) {
+									//Set it up 
+									meld.addTile(jokers.get(indexOfLowest));
+									meld.addTile(jokers.get(other));
+									meld.addTile(nextTile);
+									jokerUsed = 2;
+								}
+							} 
+						} else if (diff == 2 && jokerCount > 0) {
+							boolean firstJokerOnCurrent = (jokers.size()== 0) ? false : (jokers.get(0).getPossibleTiles().isEmpty()) ? true : (currTile.getRank().getValue() == (jokers.get(0).getPossibleTiles().get(0).getRank().getValue() - 1) && currTile.getColour() == (jokers.get(0).getPossibleTiles().get(0).getColour()) && jokers.get(0).getValue() + 1 == nextTile.getValue()) ?
+									true : 
+									false;
+							boolean secondJokerOnCurrent =  (jokers.size()== 1) ? false :(jokers.get(1).getPossibleTiles().isEmpty()) ? 	true : (currTile.getRank().getValue() == (jokers.get(1).getPossibleTiles().get(0).getRank().getValue() - 1) && currTile.getColour() == (jokers.get(1).getPossibleTiles().get(0).getColour()) && jokers.get(1).getValue() + 1 == nextTile.getValue() ) ?
+											true : 
+											false;
+							//IF both can play on first card
+							if (firstJokerOnCurrent || secondJokerOnCurrent) {
+								//Get the one with lowest possible values size 
+								int indexOfLowest =-1;
+								if (firstJokerOnCurrent && !secondJokerOnCurrent)
+									indexOfLowest = 0;
+								else if  (!firstJokerOnCurrent && secondJokerOnCurrent)
+									indexOfLowest = 1;
+								else {
+								
+									int other =-1;
+									if (jokers.get(0).getPossibleTiles().size() <= jokers.get(1).getPossibleTiles().size()) {
+										indexOfLowest = 0;
+										other= 1;
+									} else {
+										indexOfLowest = 1;
+										other= 0;
+									
+									}
+									//If we can't play because it's already played switch over to the other one 
+									if (indexOfLowest == jokerUsedIndex) {
+										indexOfLowest = other;
+									}
+								}
+								
+								if (indexOfLowest != jokerUsedIndex) {
+									//Set it up 
+									meld.addTile(jokers.get(indexOfLowest));
+									meld.addTile(nextTile);
+									jokerUsed ++;
+								}
+								}
+							} else {
+								jokerUsed = 0;
+								jokerUsedIndex = -1;
+							}
+						} else {
+							meld = new Meld();
+							meld.addTile(nextTile);
+							continue;
+						}
+					}
+			
+					meldList.add(new Meld(meld.tiles.toArray(new Tile[0])));
+				
+			
+			}
+				
 		}
-		return meldList;
+		List<Meld> meldListToReturn = new ArrayList<Meld>();
+		for (Meld m: meldList) {
+			Tile currTile = m.getTiles().get(0);
+			Tile lastTile = m.getTiles().get(m.getTiles().size() -1);
+			//Loop over all jokers 
+			for (Joker j : jokers) {
+				//If joker is already presnt in meld ignore 
+				if (m.getTiles().contains(j)) {
+					continue;
+				}
+					
+				boolean jokerOnFirst = (jokers.size()== 0) ? false : (j.getPossibleTiles().isEmpty()) ? true : (currTile.getRank().getValue() == (jokers.get(0).getPossibleTiles().get(0).getRank().getValue() + 1) && currTile.getColour() == (jokers.get(0).getPossibleTiles().get(0).getColour()) && currTile.getValue() > 1) ?
+						true : 
+						false;
+				boolean jokerOnLast =  (jokers.size()== 0) ? false :(j.getPossibleTiles().isEmpty()) ? 	true : (lastTile.getRank().getValue() == (jokers.get(1).getPossibleTiles().get(0).getRank().getValue() - 1) && lastTile.getColour() == (jokers.get(1).getPossibleTiles().get(0).getColour()) && lastTile.getValue() != 13) ?
+								true : 
+								false;
+				if (jokerOnFirst && jokerOnLast) {
+					
+					Meld m2 = new Meld(m.tiles.toArray(new Tile[0]));
+					m2.tiles.add(0, j);
+					m.addTile(j);
+					if (m2.tiles.size() >= 3)
+						meldListToReturn.add(m2);
+				} else if (jokerOnFirst) {
+					m.tiles.add(0, j);
+				} else if (jokerOnLast) {
+					m.addTile(j);
+				}
+			}	
+			if (m.getTiles().size() >= 3)
+				meldListToReturn.add(new Meld(m.tiles.toArray(new Tile[0])));
+		}
+		return meldListToReturn;
 	}
 
 	/*
@@ -246,8 +395,18 @@ public class Meld
 	 * then compares them to other colours and returns a list of same values
 	 */
 	public static List<Meld> getSetMelds(List<Tile> tileList) {
+		List<Tile> tilesToCheck = new ArrayList<Tile>(tileList.stream().filter(p -> !(p instanceof Joker)).collect(Collectors.toList()));
+		List<Joker> jokers = new ArrayList<Joker>(tileList.stream().filter(p -> (p instanceof Joker)).map(p -> (Joker) p).collect(Collectors.toList()));
+    for (Tile t: tilesToCheck) {
+    	 for (Joker j: jokers) {
+       		if (new ArrayList<String>(j.getPossibleTiles().stream().map(p -> p.toString()).collect(Collectors.toList())).contains(t.toString())) {
+       		  j.setPossibleTilesToAll();	
+       		}
+       }
+    }
 	  //Initialize array list of 13, with 2 lists each of tiles
 		List<List<List<Tile>>> collectedSets = new ArrayList<List<List<Tile>>>();
+		
 		for (int i = 0; i < 13; ++i ) {
 		  List<List<Tile>> secondLevelArrayList = new ArrayList<List<Tile>>();
 		  collectedSets.add(secondLevelArrayList);
@@ -256,8 +415,8 @@ public class Meld
 		  }
 		}
 		//Loop over all the tiles 
-		for (int i = 0; i < tileList.size(); i++) {
-			Tile currTile = tileList.get(i);
+		for (int i = 0; i < tilesToCheck.size(); i++) {
+			Tile currTile = tilesToCheck.get(i);
 			//We use the value -1 as the respective index in the collectedSets
 			//Ex: If currTile is O4, then we would use collectedSets[3] to store all 4's
 			int index = currTile.getValue() - 1;
@@ -284,7 +443,30 @@ public class Meld
 		//Loop over all the collected sets and add all of size => 3 to setList 
 		for (int i = 0; i < 13; i++) {
 			for (int j = 0; j < 2; j++) {
-				if (collectedSets.get(i).get(j).size() >=3 ) {
+				//Loop over all jokers
+				for (Joker joker: jokers) {
+					List<Tile> possibleTiles = joker.getPossibleTiles();
+					if (collectedSets.get(i).get(j).size() < 4) {
+						//If the joker is empty then add it to current 
+						if (possibleTiles.isEmpty())
+							collectedSets.get(i).get(j).add(joker);
+						else {
+							//Otherwise loop over all possible values and see if they form a set
+							boolean inserted= false;
+							
+							for (Tile tileToCheck: possibleTiles) {
+								List<Tile> tempTiles = new ArrayList<Tile>(collectedSets.get(i).get(j));
+								tempTiles.add(tileToCheck);
+								if (Meld.checkMeldType(tempTiles) == Meld.MeldType.SET && !inserted) {
+									collectedSets.get(i).get(j).add(joker);
+									inserted = true;
+								}
+							}	
+						}
+					}
+				}
+					
+				if (collectedSets.get(i).get(j).size() >=3 && collectedSets.get(i).get(j).size() <= 4) {
 					meld = new Meld();
 					meld.tiles = collectedSets.get(i).get(j);
 					setList.add(meld);
@@ -297,7 +479,8 @@ public class Meld
 	
 	static public MeldType checkMeldType(List<Tile> newTiles) {
 		MeldType newMeldType = MeldType.INVALID;
-		List<Tile> tilesToCheck = new ArrayList<Tile>(newTiles = newTiles.stream().filter(p -> !(p instanceof Joker)).collect(Collectors.toList()));
+		List<Tile> tilesToCheck = new ArrayList<Tile>(newTiles.stream().filter(p -> !(p instanceof Joker)).collect(Collectors.toList()));
+		//
 		if (tilesToCheck.size() == 1) {
 			return MeldType.RUN;
 		} 
@@ -314,7 +497,7 @@ public class Meld
 		 // a meld is a run iff:
 		 // - the tiles are of only one colour
 		 // - the tiles are in a sequence
-		 else if (checkSequence(tilesToCheck)) {
+		 else if (checkSequence(newTiles)) {
 			 newMeldType = MeldType.RUN;
 		 }
 		 
@@ -332,12 +515,20 @@ public class Meld
 	// Tile::isRunOn() returns false if the colour are not equal.
 	static protected boolean checkSequence(List<Tile> tiles) {
 		boolean check = true;
-		Collections.sort(tiles);
-		for (int i = 0; i < tiles.size() - 1; i++) {
-			if (!tiles.get(i).isRunOn(tiles.get(i+1))) {
-				check = false;
-				break;
+		List<Tile> tempTiles = new ArrayList<Tile>(tiles);
+		Collections.sort(tempTiles);
+		int incorrect = 0;
+		for (int i = 0; i < tempTiles.size() - 1; i++) {
+			if (!(tempTiles.get(i+1) instanceof Joker)) {
+				if (!tempTiles.get(i).isRunOn(tempTiles.get(i+1))) {
+					incorrect++;
+				}
 			}
+		}
+		 Predicate<Tile> predicate = s-> s instanceof Joker;
+    
+		if (tempTiles.stream().filter(predicate).count() < incorrect) {
+			check = false;
 		}
 		return check;
 	}

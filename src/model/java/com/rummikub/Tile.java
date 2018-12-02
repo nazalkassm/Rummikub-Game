@@ -9,12 +9,12 @@ import javafx.scene.image.ImageView;
 public class Tile implements Comparable<Tile> {
 
 	/** The rank and colour of the tile */
-	private Ranks rank;
-	private Colours colour;
-	private boolean playedOnTable = false;
-	private boolean isJoker = false;
-	private Image tileImage;
-	private ImageView imageView = new ImageView(tileImage);
+	protected Ranks rank;
+	protected Colours colour;
+	protected boolean playedOnTable = false;
+	protected boolean isJoker = false;
+	protected Image tileImage;
+	protected ImageView imageView = new ImageView(tileImage);
 
 	// Constructor
 	public Tile(Colours colour, Ranks rank) {
