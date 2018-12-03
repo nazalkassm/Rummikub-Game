@@ -38,10 +38,10 @@ public class TitleScreenController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		cb_PlayerCount.getItems().addAll("2", "3", "4");
-		cb_Player1.getItems().addAll("Human", "Strategy 1", "Strategy 2", "Strategy 3");
-		cb_Player2.getItems().addAll("Human", "Strategy 1", "Strategy 2", "Strategy 3");
-		cb_Player3.getItems().addAll("Human", "Strategy 1", "Strategy 2", "Strategy 3");
-		cb_Player4.getItems().addAll("Human", "Strategy 1", "Strategy 2", "Strategy 3");
+		cb_Player1.getItems().addAll("Human", "Strategy 1", "Strategy 2", "Strategy 3", "Strategy 4");
+		cb_Player2.getItems().addAll("Human", "Strategy 1", "Strategy 2", "Strategy 3", "Strategy 4");
+		cb_Player3.getItems().addAll("Human", "Strategy 1", "Strategy 2", "Strategy 3", "Strategy 4");
+		cb_Player4.getItems().addAll("Human", "Strategy 1", "Strategy 2", "Strategy 3", "Strategy 4");
 
 		for (int i = 0; i < vb_PlayerStrategies.getChildren().size(); i++) {
 			vb_PlayerStrategies.getChildren().get(i).setVisible(false);
@@ -109,9 +109,9 @@ public class TitleScreenController implements Initializable {
 			case "Strategy 3":
 				players.add(new Player("p" + i, new Strategy3()));
 				break;
-			// case "Strategy 4":
-			// players.add(new Player("p" + i, new Strategy4()));
-			// break;
+			case "Strategy 4":
+				players.add(new Player("p" + i, new Strategy4()));
+				break;
 			default:
 				error = true;
 			}

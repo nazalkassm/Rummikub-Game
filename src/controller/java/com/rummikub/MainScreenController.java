@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Orientation;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -37,29 +38,47 @@ public class MainScreenController implements Initializable {
 	private FlowPane table_pane;
 
 	@FXML
+	private FlowPane player0_pane;
+	@FXML
 	private FlowPane player1_pane;
 	@FXML
 	private FlowPane player2_pane;
 	@FXML
 	private FlowPane player3_pane;
 	@FXML
-	private FlowPane player4_pane;
+	private Label player0_label;
+	@FXML
+	private Label player1_label;
+	@FXML
+	private Label player2_label;
+	@FXML
+	private Label player3_label;
 	@FXML
 	private Button startGameButton;
 	@FXML 
 	private Button nextTurnButton;
 
 	private List<FlowPane> playerPanes = new ArrayList<FlowPane>();
+	private List<Label> playerLabels = new ArrayList<Label>();
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		playerPanes.add(player0_pane);
 		playerPanes.add(player1_pane);
 		playerPanes.add(player2_pane);
 		playerPanes.add(player3_pane);
-		playerPanes.add(player4_pane);
+		playerLabels.add(player0_label);
+		playerLabels.add(player1_label);
+		playerLabels.add(player2_label);
+		playerLabels.add(player3_label);
 		
-		while (playerPanes.size() > Rummy.players.size()) {
-			playerPanes.remove(Rummy.players.size());
+		
+		int max = Rummy.players.size();
+		while (playerPanes.size() > max) {
+			playerPanes.get(max).setVisible(false);
+			playerPanes.remove(max);
+			playerLabels.get(max).setVisible(false);
+			playerLabels.remove(max);	
 		}
 
 		Boolean waitAfterEachTurn = false;
@@ -148,8 +167,8 @@ public class MainScreenController implements Initializable {
 
 		for (Meld meld : table.getAllMelds()) {
 			for (Tile tile : meld.getMeld()) {
-				//ImageView tileImg = new ImageView(tile.getTileImage());
-				ImageView tileImg = new ImageView(new Image("http://icons.iconarchive.com/icons/kidaubis-design/cool-heroes/128/Ironman-icon.png"));
+				ImageView tileImg = new ImageView(tile.getTileImage());
+				//ImageView tileImg = new ImageView(new Image("http://icons.iconarchive.com/icons/kidaubis-design/cool-heroes/128/Ironman-icon.png"));
 				if (x_axis >= pane.getWidth()) {
 					x_axis = pane.getLayoutX();
 					y_axis -= 10;
