@@ -99,11 +99,6 @@ public class Strategy3 implements StrategyBehaviour {
 	}
 	
 	@Override
-	public void playStrategy(Player currPlayer, List<Meld> possibleMelds, List<Meld> returnMelds) {
-		
-	} //end of function
-	
-	@Override
 	public void update(TableInfo tableInfo) 
 	{
 		this.tableInfo = tableInfo;		

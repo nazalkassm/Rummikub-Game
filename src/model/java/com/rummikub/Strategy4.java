@@ -188,12 +188,6 @@ public class Strategy4 implements StrategyBehaviour
 		
 		return return_melds;
 	}
-
-	@Override
-	public void playStrategy(Player currentPlayer, List<Meld> possibleMelds, List<Meld> returnMelds) 
-	{
-		
-	}
 	
 	private List<Meld> findProbability(List<Meld> melds,double total_tiles_in_stock,List<Tile> table_tiles)
 	{

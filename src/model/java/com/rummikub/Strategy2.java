@@ -96,11 +96,4 @@ public class Strategy2 implements StrategyBehaviour
 	public void setSubject(Subject subject) {
 		subject.registerObserver(this);
 	}
-
-	@Override
-	public void playStrategy(Player currPlayer, List<Meld> possibleMelds, List<Meld> returnMelds) 
-	{
-		// TODO Auto-generated method stub	
-	}
-
 }
