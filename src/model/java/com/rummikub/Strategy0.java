@@ -115,7 +115,7 @@ public class Strategy0 implements StrategyBehaviour
 		return returnMelds;
 	}
 
-	@Override
+
 	public void playStrategy(Player currentPlayer, List<Meld> tableMelds, List<Meld> returnMelds) 
 	{
 		List<Tile> mergedTiles = new ArrayList<>(currentPlayer.getPlayerRack().getRackArray());

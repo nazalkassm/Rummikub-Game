@@ -12,10 +12,17 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Orientation;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class MainScreenController implements Initializable {
@@ -31,29 +38,47 @@ public class MainScreenController implements Initializable {
 	private FlowPane table_pane;
 
 	@FXML
+	private FlowPane player0_pane;
+	@FXML
 	private FlowPane player1_pane;
 	@FXML
 	private FlowPane player2_pane;
 	@FXML
 	private FlowPane player3_pane;
 	@FXML
-	private FlowPane player4_pane;
+	private Label player0_label;
+	@FXML
+	private Label player1_label;
+	@FXML
+	private Label player2_label;
+	@FXML
+	private Label player3_label;
 	@FXML
 	private Button startGameButton;
+	@FXML 
+	private Button nextTurnButton;
 
 	private List<FlowPane> playerPanes = new ArrayList<FlowPane>();
+	private List<Label> playerLabels = new ArrayList<Label>();
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		playerPanes.add(player0_pane);
 		playerPanes.add(player1_pane);
 		playerPanes.add(player2_pane);
-
-		if (player3_pane.isVisible()) {
-			playerPanes.add(player3_pane);
-
-			if (player4_pane.isVisible()) {
-				playerPanes.add(player4_pane);
-			}
+		playerPanes.add(player3_pane);
+		playerLabels.add(player0_label);
+		playerLabels.add(player1_label);
+		playerLabels.add(player2_label);
+		playerLabels.add(player3_label);
+		
+		
+		int max = Rummy.players.size();
+		while (playerPanes.size() > max) {
+			playerPanes.get(max).setVisible(false);
+			playerPanes.remove(max);
+			playerLabels.get(max).setVisible(false);
+			playerLabels.remove(max);	
 		}
 
 		Boolean waitAfterEachTurn = false;
@@ -62,6 +87,8 @@ public class MainScreenController implements Initializable {
 		game.start();
 
 		for (int i = 0; i < playerPanes.size(); i++) {
+			//BorderStroke b = new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT);
+			playerPanes.get(i).setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 			viewTiles(game.players.get(i), playerPanes.get(i));
 		}
 		
@@ -69,29 +96,24 @@ public class MainScreenController implements Initializable {
         //iv1.relocate(table_pane.getLayoutX(), table_pane.getLayoutY());
         //table_pane.getChildren().addAll(iv1);
 	}
-	
 
 	@FXML
-	public void handleEndTurnBtn(ActionEvent event) throws Exception {
-		takeTurn();
-	}
-
-	@FXML
-	public void handleStartGameBtn(ActionEvent event) throws Exception {
-		startGameButton.setVisible(false);
-
+	public void handleNextTurn(ActionEvent event) throws Exception {
+		Print.print("Handle next turn");
+		if (startGameButton.isVisible()) {
+			startGameButton.setVisible(false);
+		}
+		
 		takeTurn();
 	}
 
 	public void takeTurn() throws Exception {
+		nextTurnButton.setDisable(true);
 		if (game.gameRunning) {
 			game.takeTurn();
 			viewTiles(game.previousPlayer, playerPanes.get(game.previousPlayer.getNumber()));
 			viewTiles(game.table, table_pane);
-
-			if (!game.previousPlayer.isHuman()) {
-				takeTurn();
-			}
+			nextTurnButton.setDisable(false);
 		}
 	}
 
@@ -145,8 +167,8 @@ public class MainScreenController implements Initializable {
 
 		for (Meld meld : table.getAllMelds()) {
 			for (Tile tile : meld.getMeld()) {
-				//ImageView tileImg = new ImageView(tile.getTileImage());
-				ImageView tileImg = new ImageView(new Image("http://icons.iconarchive.com/icons/kidaubis-design/cool-heroes/128/Ironman-icon.png"));
+				ImageView tileImg = new ImageView(tile.getTileImage());
+				//ImageView tileImg = new ImageView(new Image("http://icons.iconarchive.com/icons/kidaubis-design/cool-heroes/128/Ironman-icon.png"));
 				if (x_axis >= pane.getWidth()) {
 					x_axis = pane.getLayoutX();
 					y_axis -= 10;

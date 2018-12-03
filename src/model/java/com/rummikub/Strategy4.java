@@ -145,6 +145,7 @@ public class Strategy4 implements StrategyBehaviour
 			//If melds_save is empty we play all the tiles possible with the table
 			if(melds_save.isEmpty())
 			{
+				return_melds.clear();
 				return_melds.addAll(combined_melds);
 			}
 			else //otherwise we keep the melds we don't want to play
@@ -167,6 +168,7 @@ public class Strategy4 implements StrategyBehaviour
 				combined_tiles.addAll(m.getTiles());
 				}
 				
+				
 				combined_melds.addAll(Meld.getMeldsWithTable(combined_tiles));
 				
 				return_melds.addAll(combined_melds);		
@@ -175,16 +177,16 @@ public class Strategy4 implements StrategyBehaviour
 
 		} // end of the most outer if loop
 		
-		//remove the melds the player will play
+		/*
+		 * remove the melds the player will play, we need to store the tiles he played
+		 */
+		
+		// An Array to store the tiles the player played from his hand.
+		
+		
 		currentPlayer.removeTiles(return_melds);
 		
 		return return_melds;
-	}
-
-	@Override
-	public void playStrategy(Player currentPlayer, List<Meld> possibleMelds, List<Meld> returnMelds) 
-	{
-		
 	}
 	
 	private List<Meld> findProbability(List<Meld> melds,double total_tiles_in_stock,List<Tile> table_tiles)
