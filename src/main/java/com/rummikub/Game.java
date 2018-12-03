@@ -8,8 +8,12 @@ import org.pmw.tinylog.Logger;
 public class Game {
 
 	// Primitive Variables
+	int turnsWithoutMoves = 0; // Keeps track of how many turns have been taken without any moves being made.
+	boolean printRackMeld = Rummy.testingMode; // Turn it off so that you do not print the computers racks and melds.
+	boolean waitAferEachTurn = false; // Prompts enter after each turn
+	boolean usingGui = false;
 	boolean gameRunning = true;
-	String pName = "";
+	
 	// Data Structure Variables
 	List<Player> players = new ArrayList<>();
 	List<Meld> meldsPlayed;
@@ -20,19 +24,14 @@ public class Game {
 	Stock stock;
 	Table table;
 	Player winner;
-	int turnsWithoutMoves = 0;
 	Player currentPlayer;
 	Player previousPlayer;
-	Boolean humanTurn = false;
-
-	boolean printRackMeld = Rummy.testingMode; // Turn it off so that you do not print the computers racks and
-											   // melds.
-	boolean waitAferEachTurn = false; // Prompts enter after each turn
 
 	Game(List<Player> players, Boolean printMelds, Boolean waitAfterTurns, Boolean GUI) {
 		this.players = players;
-		printRackMeld = printMelds;
-		waitAferEachTurn = waitAfterTurns;
+		this.printRackMeld = printMelds;
+		this.waitAferEachTurn = waitAfterTurns;
+		this.usingGui = GUI;
 		
 		this.stock = new Stock(GUI);
 		this.table = new Table(stock);
@@ -57,6 +56,10 @@ public class Game {
 		table.initPlayersTurn();
 
 		currentPlayer = table.getCurrentPlayer();
+		
+		if (usingGui) {
+			Print.print("Waiting for user to click the 'Start Game!' button...");
+		}
 	}
 
 	public void takeTurn() {
@@ -104,6 +107,10 @@ public class Game {
 			} else {
 				previousPlayer = currentPlayer;
 				currentPlayer = table.getNextPlayerTurn();
+				
+				if (usingGui) {
+					Print.print("Waiting for user to click the 'next turn' button...");
+				}
 			}
 		}
 
