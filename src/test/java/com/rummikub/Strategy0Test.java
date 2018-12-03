@@ -72,7 +72,7 @@ class Strategy0Test {
 	}
 	
 	@Test
-	void useStrategy_removeTiles_Test() 
+	void useStrategy_removeTiles_Test() throws Exception 
 	{
 		/** P1 Turn*/ 
 		//Regardless of what player plays, player 2 will get rid of initial 30 
@@ -93,7 +93,7 @@ class Strategy0Test {
 	}
 	
 	@Test
-	void mockScenarioTest() 
+	void mockScenarioTest() throws Exception 
 	{
 		String filePath = "src/main/resources/Strategy0Tests/test2.txt";
 		QuickTesterWithMain.rigGame(filePath);

@@ -72,18 +72,18 @@ public class MainScreenController implements Initializable {
 	
 
 	@FXML
-	public void handleEndTurnBtn(ActionEvent event) {
+	public void handleEndTurnBtn(ActionEvent event) throws Exception {
 		takeTurn();
 	}
 
 	@FXML
-	public void handleStartGameBtn(ActionEvent event) {
+	public void handleStartGameBtn(ActionEvent event) throws Exception {
 		startGameButton.setVisible(false);
 
 		takeTurn();
 	}
 
-	public void takeTurn() {
+	public void takeTurn() throws Exception {
 		if (game.gameRunning) {
 			game.takeTurn();
 			viewTiles(game.previousPlayer, playerPanes.get(game.previousPlayer.getNumber()));

@@ -9,12 +9,25 @@ import java.util.List;
 
 public class QuickTesterWithMain 
 {
-	public static void main(String[] args)
+	public static void main(String[] args) throws Exception
 	{		
 		rigGame("src/main/resources/inputFiles/test13.txt");
+		
+		List<String> test_list = new ArrayList<>();
+		test_list.add("O");
+		test_list.add("G");
+		test_list.add("B");
+		test_list.add("R");
+		System.out.println(test_list);
+		
+		test_list.remove("O");
+		System.out.println(test_list);
+		
+		test_list.remove("B");
+		System.out.println(test_list);
 	}
 	
-	public static void rigGame(String filePath)
+	public static void rigGame(String filePath) throws Exception
 	{
 		List<Player>players = new ArrayList<Player>();
 		players.add(new Player("p0",new Strategy0()));

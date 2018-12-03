@@ -16,8 +16,8 @@ public class Strategy1 implements StrategyBehaviour {
 		int sum = 0;
 		List<Meld> returnMelds = new ArrayList<>();
 		List<Meld> possibleMelds = new ArrayList<>(currPlayer.getPlayerRack().getMelds());
-		List<Tile> tempList = new ArrayList<>();
-		tempList.addAll(currPlayer.getPlayerRack().getRackArray());
+		Player.Memento playerState = currPlayer.saveToMemento();
+		TableInfo.Memento tableState = tableInfo.saveToMemento();
 
 		//print rack and possible melds
 		Print.printRacktoUser(currPlayer.getPlayerRack(),currPlayer.isPrint_rack_meld());
@@ -44,11 +44,10 @@ public class Strategy1 implements StrategyBehaviour {
 		//so player's rack gets reset to when the turn started and ends turn
 		else {
 			Print.print("Player " + currPlayer.getName() + " tried playing melds but their sum is less than 30.");
-			currPlayer.getPlayerRack().setRack(tempList);
-			returnMelds =  tableInfo.getMeldsFromTable();
+			currPlayer.restoreFromMemento(playerState);
+			tableInfo.restoreFromMemento(tableState);
 		}
 			
-		if (!tableInfo.getMeldsFromTable().isEmpty())
 			returnMelds.addAll(tableInfo.getMeldsFromTable());
 		
 		return returnMelds;
