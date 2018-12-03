@@ -39,7 +39,7 @@ public class Strategy1 implements StrategyBehaviour
 		Print.printRacktoUser(currentPlayer.getPlayerRack(),currentPlayer.isPrint_rack_meld());		
 		
 		//Calculate the sum of all melds to be played
-		for (Meld m: return_melds) 
+		for (Meld m: melds) 
 		{
 			sum += m.sumMeld();
 		}
