@@ -15,7 +15,13 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class MainScreenController implements Initializable {
@@ -40,6 +46,8 @@ public class MainScreenController implements Initializable {
 	private FlowPane player4_pane;
 	@FXML
 	private Button startGameButton;
+	@FXML 
+	private Button nextTurnButton;
 
 	private List<FlowPane> playerPanes = new ArrayList<FlowPane>();
 
@@ -47,13 +55,11 @@ public class MainScreenController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		playerPanes.add(player1_pane);
 		playerPanes.add(player2_pane);
-
-		if (player3_pane.isVisible()) {
-			playerPanes.add(player3_pane);
-
-			if (player4_pane.isVisible()) {
-				playerPanes.add(player4_pane);
-			}
+		playerPanes.add(player3_pane);
+		playerPanes.add(player4_pane);
+		
+		while (playerPanes.size() > Rummy.players.size()) {
+			playerPanes.remove(Rummy.players.size());
 		}
 
 		Boolean waitAfterEachTurn = false;
@@ -62,6 +68,8 @@ public class MainScreenController implements Initializable {
 		game.start();
 
 		for (int i = 0; i < playerPanes.size(); i++) {
+			//BorderStroke b = new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT);
+			playerPanes.get(i).setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 			viewTiles(game.players.get(i), playerPanes.get(i));
 		}
 		
@@ -69,29 +77,24 @@ public class MainScreenController implements Initializable {
         //iv1.relocate(table_pane.getLayoutX(), table_pane.getLayoutY());
         //table_pane.getChildren().addAll(iv1);
 	}
-	
 
 	@FXML
-	public void handleEndTurnBtn(ActionEvent event) throws Exception {
-		takeTurn();
-	}
-
-	@FXML
-	public void handleStartGameBtn(ActionEvent event) throws Exception {
-		startGameButton.setVisible(false);
-
+	public void handleNextTurn(ActionEvent event) throws Exception {
+		Print.print("Handle next turn");
+		if (startGameButton.isVisible()) {
+			startGameButton.setVisible(false);
+		}
+		
 		takeTurn();
 	}
 
 	public void takeTurn() throws Exception {
+		nextTurnButton.setDisable(true);
 		if (game.gameRunning) {
 			game.takeTurn();
 			viewTiles(game.previousPlayer, playerPanes.get(game.previousPlayer.getNumber()));
 			viewTiles(game.table, table_pane);
-
-			if (!game.previousPlayer.isHuman()) {
-				takeTurn();
-			}
+			nextTurnButton.setDisable(false);
 		}
 	}
 
