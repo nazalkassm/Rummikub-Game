@@ -12,6 +12,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import com.sun.org.apache.bcel.internal.generic.NEW;
+
 class Strategy4Test 
 {
 	private static List<Meld> meld1,meld2;
@@ -83,7 +85,7 @@ class Strategy4Test
 	void scenario1() throws Exception 
 	{
 	String player_name = "empty";
-	System.out.println("===========\n Scenario1 \n==========");
+	System.out.println("===========\n Strategy4 test \n==========");
 	
 		while(true)
 		{
@@ -106,9 +108,10 @@ class Strategy4Test
 		Print.printMeldtoUser(meldsPlayed, changedMelds, true);
 		table.updateMeldsOnTable(meldsPlayed);
 		
-		Print.print("++++++ It is now " + table.getNextPlayerTurn().getName()  + " turn: ++++++");
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		/** P2 Turn*/ 
+		Print.print("++++++ It is now " + table.getNextPlayerTurn().getName()  + " turn: ++++++");
+		Print.print("This player should not play now because the probablity of improving the meld it can play is higher than 0.015");
 		meldsPlayed = new ArrayList<>(table.getCurrentPlayer().play());
  		changedMelds = new ArrayList<>(Table.getDiffMelds(table.getAllMelds(), meldsPlayed));
 		Print.print("\nTable is: ");
@@ -119,6 +122,8 @@ class Strategy4Test
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		/** P1 Turn*/
 		Print.print("++++++ It is now " + table.getNextPlayerTurn().getName() +  " turn: ++++++");
+		player1.getPlayerRack().addTile(new Tile("O","12"));
+		player1.getPlayerRack().addTile(new Tile("O","11"));
 		meldsPlayed = new ArrayList<>(table.getCurrentPlayer().play());
  		changedMelds = new ArrayList<>(Table.getDiffMelds(table.getAllMelds(), meldsPlayed));
 		Print.print("\nTable is: ");
@@ -127,7 +132,7 @@ class Strategy4Test
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		/** P2 Turn*/
 		Print.print("++++++ It is now " + table.getNextPlayerTurn().getName() +  " turn: ++++++");
-		Print.print("This player should not play the meld he has here because the probability of him getting an out is high (to improve his meld)");
+		Print.print("This player should not play now because the probablity of improving the meld it can play is higher than 0.015");
 		player2.getPlayerRack().addTile(new Tile("O", "9"));
 		player2.getPlayerRack().addTile(new Tile("O", "10"));
 		player2.getPlayerRack().addTile(new Tile("O", "11")); 
@@ -151,18 +156,36 @@ class Strategy4Test
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		/** P2 Turn*/
 		Print.print("++++++ It is now " + table.getNextPlayerTurn().getName() +  " turn: ++++++");
-		Print.print("Let's see if he plays it now");
-		player2.getPlayerRack().addTile(new Tile("O", "9"));
-		player2.getPlayerRack().addTile(new Tile("O", "10"));
-		player2.getPlayerRack().addTile(new Tile("O", "11")); 
+		Print.print("This player should not play now because the probablity of improving the meld it can play is higher than 0.015");
 		meldsPlayed = new ArrayList<>(table.getCurrentPlayer().play());
  		changedMelds = new ArrayList<>(Table.getDiffMelds(table.getAllMelds(), meldsPlayed));
 		Print.print("\nTable is: ");
 		Print.printMeldtoUser(meldsPlayed, changedMelds, true);
 		table.updateMeldsOnTable(meldsPlayed);
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		
-
+		/** P1 Turn*/
+		Print.print("++++++ It is now " + table.getNextPlayerTurn().getName() +  " turn: ++++++");
+		Print.print("This player should play this meld to decrease the probability of the other player's outs");
+		player1.getPlayerRack().addTile(new Tile("O","12"));
+		player1.getPlayerRack().addTile(new Tile("G","12"));
+		player1.getPlayerRack().addTile(new Tile("B","12"));
+		meldsPlayed = new ArrayList<>(table.getCurrentPlayer().play());
+ 		changedMelds = new ArrayList<>(Table.getDiffMelds(table.getAllMelds(), meldsPlayed));
+		Print.print("\nTable is: ");
+		Print.printMeldtoUser(meldsPlayed, changedMelds, true);
+		table.updateMeldsOnTable(meldsPlayed);
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		/** P2 Turn*/
+		Print.print("++++++ It is now " + table.getNextPlayerTurn().getName() +  " turn: ++++++");
+		Print.print("Using debugger the probability of getting the outs is (0.0128) which is less than 0.015 so the player will play the meld");
+		meldsPlayed = new ArrayList<>(table.getCurrentPlayer().play());
+		changedMelds = new ArrayList<>(Table.getDiffMelds(table.getAllMelds(), meldsPlayed));
+		Print.print("\nTable is: ");
+		Print.printMeldtoUser(meldsPlayed, changedMelds, true);
+		table.updateMeldsOnTable(meldsPlayed);
+		Print.println("The player's rack after this turn is: ");
+		Print.printRacktoUser(player2.getPlayerRack(), true);
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
