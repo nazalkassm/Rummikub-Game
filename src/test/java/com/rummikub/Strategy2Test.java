@@ -75,7 +75,7 @@ class Strategy2Test {
 	}
 	
 	@Test
-	void useStrategyTest() {
+	void useStrategyTest() throws Exception {
 		/*p1:		
 		"G", "10"
 		"G", "11"
