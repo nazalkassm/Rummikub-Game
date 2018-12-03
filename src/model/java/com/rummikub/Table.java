@@ -101,7 +101,8 @@ public class Table implements Subject {
 		}
 		this.players = newPlayerTurns;
 		tableRound = 1;
-
+		//We update observers
+		this.notifyObservers();
 		// Set current player turn to 1
 		this.currentPlayerTurn = 0;
 		return true;
