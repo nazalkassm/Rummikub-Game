@@ -79,7 +79,7 @@ class Strategy3Test {
 	}
 	
 	@Test
-	void scenario14AandB() 
+	void scenario14AandB() throws Exception 
 	{System.out.println("===========\n 14A followed by 14B test \n ==========");
 	System.out.println("Player should play nothing and pass using 0");
 	/*p1:		
@@ -188,7 +188,7 @@ class Strategy3Test {
 	}
 	
 	@Test
-	void scenario13b() 
+	void scenario13b() throws Exception 
 	{
 		System.out.println("===========\n 13B test \n ==========");
 		System.out.println("Player shoud play all melds it can ");/*p1:		
@@ -250,7 +250,7 @@ class Strategy3Test {
 	}
 	
 	@Test
-	void scenario13a() 
+	void scenario13a() throws Exception 
 	{System.out.println("===========\n 13A test \n ==========");
 	System.out.println("Player should play all melds it can");
 		/*p1:		
@@ -314,7 +314,7 @@ class Strategy3Test {
 	/*
 	 * accounts for 9a) 9e)
 	 */
-	public void scenario9Testa()  {
+	public void scenario9Testa() throws Exception  {
 		Stock stock = new Stock();
 		table = new Table(stock);
 		
@@ -373,7 +373,7 @@ class Strategy3Test {
 	/*
 	 * accounts for 9b) 9f)
 	 */
-	public void scenario9Testb()  {
+	public void scenario9Testb() throws Exception  {
 		Stock stock = new Stock();
 		table = new Table(stock);
 		
@@ -428,7 +428,7 @@ class Strategy3Test {
 	/*
 	 * accounts for 9c) 9d)
 	 */
-	public void scenario9Testc()  {
+	public void scenario9Testc() throws Exception  {
 		Stock stock = new Stock();
 		table = new Table(stock);
 		
@@ -481,7 +481,7 @@ class Strategy3Test {
 	/*
 	 * accounts for 9g)
 	 */
-	public void scenario9Testd()  {
+	public void scenario9Testd() throws Exception  {
 		Stock stock = new Stock();
 		table = new Table(stock);
 		

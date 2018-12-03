@@ -70,7 +70,7 @@ class Strategy1Test {
 	}
 	
 	@Test
-	void useStrategy_removeTiles_Test() 
+	void useStrategy_removeTiles_Test() throws Exception 
 	{
 		//Tests getMelds()
 		assertEquals(2,meld1.size());

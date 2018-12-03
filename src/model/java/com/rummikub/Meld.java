@@ -224,64 +224,6 @@ public class Meld {
 		return meldList;
 	}
 	
-	public static List<Meld> getPreRunMelds(List<Tile> tileList) {
-		int count = 0;
-		List<Meld> meldList = new ArrayList<Meld>();
-		//Init array list of 2,all the sorted things in it 
-		List<List<Tile>> collectedTings = new ArrayList<List<Tile>>();
-		for (int i = 0; i < 2; ++i ) {
-		  List<Tile> secondLevelArrayList = new ArrayList<Tile>();
-		  collectedTings.add(secondLevelArrayList);
-		}
-		
-		for (int i = 0; i < tileList.size() ; i++) {
-			Tile currTile = tileList.get(i); 
-			boolean containTile = false;
-			//Check if the current tile's color is already in the first list
-			for (Tile tile : collectedTings.get(0)) {
-        if (tile.equals(currTile)) {
-        	containTile = true;
-        }
-			}
-			if (containTile) {
-				collectedTings.get(1).add(currTile);
-			} else {
-				collectedTings.get(0).add(currTile);
-			}
-		}
-		
-		Collections.sort(collectedTings.get(0));
-		Collections.sort(collectedTings.get(1));
-
-		Meld meld = null;
-		
-		boolean isRunOn = false;
-		for (List<Tile> tiles: collectedTings) {
-			for (int i = 1; i <= tiles.size() ; i++) {
-				if (i < tiles.size() && (isRunOn = tiles.get(i).isRunOn(tiles.get(i-1)))) {
-					if (count == 0) {
-						count = 2;
-					} else {
-						count++;
-					}
-					if (count == 2) {
-						Meld meld2 = new Meld();
-						meld2.tiles = new ArrayList<Tile>(tiles.subList(i - count + 1, i+1));
-						meldList.add(meld2);	
-					}
-					isRunOn = true;
-					
-				} else {
-					
-						
-						isRunOn = false;
-						count = 0;
-					}
-				
-			}
-		}
-		return meldList;
-	}
 
 	/*
 	 * finding set-type melds in the rack first gets rid of duplicate objects (so if
@@ -338,55 +280,7 @@ public class Meld {
 		return setList;
 	}
 	
-	public static List<Meld> getPreSetMelds(List<Tile> tileList) {
-		  //Initialize array list of 13, with 2 lists each of tiles
-			List<List<List<Tile>>> collectedSets = new ArrayList<List<List<Tile>>>();
-			for (int i = 0; i < 13; ++i ) {
-			  List<List<Tile>> secondLevelArrayList = new ArrayList<List<Tile>>();
-			  collectedSets.add(secondLevelArrayList);
-			  for (int j = 0; j < 2; ++j ) {
-			    secondLevelArrayList.add(new ArrayList<Tile>());
-			  }
-			}
-			//Loop over all the tiles 
-			for (int i = 0; i < tileList.size(); i++) {
-				Tile currTile = tileList.get(i);
-				//We use the value -1 as the respective index in the collectedSets
-				//Ex: If currTile is O4, then we would use collectedSets[3] to store all 4's
-				int index = currTile.getValue() - 1;
-				boolean containColor = false;
-				//Check if the current tile's color is already in the first list
-				for (Tile tile : collectedSets.get(index).get(0)) {
-	        if (tile.isSameColour(currTile)) {
-	        	containColor = true;
-	        }
-				}
-				
-				//If the color is in the first list then add it to the second list 
-				if (containColor) {
-					collectedSets.get(index).get(1).add(currTile);
-				} 
-				//Otherwise we add it to the first list
-				else {
-					collectedSets.get(index).get(0).add(currTile);
-				}
-			}
-			
-			List<Meld> setList = new ArrayList<Meld>();
-			Meld meld = null;
-			//Loop over all the collected sets and add all of size => 3 to setList 
-			for (int i = 0; i < 13; i++) {
-				for (int j = 0; j < 2; j++) {
-					if (collectedSets.get(i).get(j).size() == 2 ) {
-						meld = new Meld();
-						meld.tiles = collectedSets.get(i).get(j);
-						setList.add(meld);
-					}
-				}
-			}
-			
-			return setList;
-	}
+
 	
 	static public MeldType checkMeldType(List<Tile> newTiles) {
 		MeldType newMeldType = MeldType.INVALID;
