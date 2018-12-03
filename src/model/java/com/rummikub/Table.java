@@ -2,8 +2,10 @@ package com.rummikub;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.TreeMap;
 
 public class Table implements Subject {
@@ -62,43 +64,48 @@ public class Table implements Subject {
 
 		// For each player we will get the tile
 		// We will temporarily set the key as the value of the tile
-		HashMap<Integer, Player> tempplayers = new HashMap<Integer, Player>(players);
+		TreeMap<Integer, Player> sortedList = new TreeMap<Integer, Player>();
 		for (int i = 0; i < this.getPlayerCount(); i++) {
-			Player currP = players.remove(i);
+			Player currP = players.get(i);
 			System.out.println(currP.getName() + " got tile " + stock.getStockArray().get(indexOfCardToGet));
 
 			// If joker or someone else already has card get the next card
-			while (stock.getStockArray().get(indexOfCardToGet) instanceof Joker || players.get(stock.getStockArray().get(indexOfCardToGet).getValue()) != null) {
+			while (stock.getStockArray().get(indexOfCardToGet) instanceof Joker || sortedList.get(stock.getStockArray().get(indexOfCardToGet).getValue()) != null) {
 				indexOfCardToGet++;
 				System.out.println("Invalid tile so getting next tile: " + stock.getStockArray().get(indexOfCardToGet));
 			}
 
 			// Put the player back into the players with tile value as key
-			players.put(stock.getStockArray().get(indexOfCardToGet).getValue(), currP);
+			sortedList.put(stock.getStockArray().get(indexOfCardToGet).getValue(), currP);
 			indexOfCardToGet++;
 		}
-
-		// Putting players into tree map will sort by key (lowest to highest)
-		Map<Integer, Player> sortedList = new TreeMap<Integer, Player>(players);
-		Map.Entry<Integer, Player> maxEntry = null;
-
-		for (Map.Entry<Integer, Player> entry : sortedList.entrySet()) {
-			if (maxEntry == null || entry.getKey() > (maxEntry.getKey())) {
-				maxEntry = entry;
-			}
-		}
-
-		int turnNum = 1;
+		
+		int turnNum = 0;
+		int toGetAfter;
 		HashMap<Integer, Player> newPlayerTurns = new HashMap<Integer, Player>();
-		for (Map.Entry<Integer, Player> entry : tempplayers.entrySet()) {
-			if (maxEntry.getValue() == entry.getValue()) {
-				newPlayerTurns.put(0, entry.getValue());
-				System.out.println(entry.getValue().getName() + " goes first since highest tile");
-			} else {
-				newPlayerTurns.put(turnNum, entry.getValue());
+		Player firstPlayer = sortedList.lastEntry().getValue();
+		boolean getNextEntries  = false;
+		Iterator<Entry<Integer, Player>> it = players.entrySet().iterator();
+	 
+	   while (it.hasNext()) {
+  	 	Entry<Integer, Player> curr = it.next();
+			if (curr.getValue() == firstPlayer) {
+					getNextEntries = true;		
+					System.out.println(curr.getValue().getName() + " goes first since highest tile");
+			}
+			
+			if (getNextEntries) {
+				newPlayerTurns.put(turnNum, curr.getValue());
+				it.remove();
 				turnNum++;
 			}
 		}
+		
+		for (Map.Entry<Integer, Player> entry : players.entrySet()) {
+				newPlayerTurns.put(turnNum, entry.getValue());
+				turnNum++;
+			} 
+	
 		this.players = newPlayerTurns;
 		tableRound = 1;
 		//We update observers
