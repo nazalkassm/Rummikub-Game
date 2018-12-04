@@ -1,11 +1,10 @@
 package com.rummikub;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-
-import org.pmw.tinylog.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -28,7 +27,7 @@ import javafx.scene.shape.Rectangle;
 public class MainScreenController implements Initializable {
 
 	Game game;
-	
+
 	@FXML
 	private AnchorPane root;
 
@@ -55,7 +54,7 @@ public class MainScreenController implements Initializable {
 	private Label player3_label;
 	@FXML
 	private Button startGameButton;
-	@FXML 
+	@FXML
 	private Button nextTurnButton;
 
 	private List<FlowPane> playerPanes = new ArrayList<FlowPane>();
@@ -71,14 +70,27 @@ public class MainScreenController implements Initializable {
 		playerLabels.add(player1_label);
 		playerLabels.add(player2_label);
 		playerLabels.add(player3_label);
-		
-		
+
+		File file = new File("src/main/resources/cardsImages/JPEG/B1.jpg");
+		Image image = new Image(file.toURI().toString());
+		ImageView iv = new ImageView(image);
+		player0_pane.getChildren().addAll(iv);
+
+		if (!file.exists()) {
+			Print.print("File does not exist");
+		} else {
+			Print.print("The file exists");
+			Print.print(iv.getLayoutX());
+			Print.print(iv.getLayoutY());
+			Print.print(iv.get);
+		}
+
 		int max = Rummy.players.size();
 		while (playerPanes.size() > max) {
 			playerPanes.get(max).setVisible(false);
 			playerPanes.remove(max);
 			playerLabels.get(max).setVisible(false);
-			playerLabels.remove(max);	
+			playerLabels.remove(max);
 		}
 
 		Boolean waitAfterEachTurn = false;
@@ -87,14 +99,17 @@ public class MainScreenController implements Initializable {
 		game.start();
 
 		for (int i = 0; i < playerPanes.size(); i++) {
-			//BorderStroke b = new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT);
-			playerPanes.get(i).setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+			// BorderStroke b = new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID,
+			// CornerRadii.EMPTY, BorderWidths.DEFAULT);
+			playerPanes.get(i).setBorder(new Border(
+					new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 			viewTiles(game.players.get(i), playerPanes.get(i));
 		}
-		
-		//ImageView iv1 = new ImageView(new Image("http://icons.iconarchive.com/icons/kidaubis-design/cool-heroes/128/Ironman-icon.png"));
-        //iv1.relocate(table_pane.getLayoutX(), table_pane.getLayoutY());
-        //table_pane.getChildren().addAll(iv1);
+
+		// ImageView iv1 = new ImageView(new
+		// Image("http://icons.iconarchive.com/icons/kidaubis-design/cool-heroes/128/Ironman-icon.png"));
+		// iv1.relocate(table_pane.getLayoutX(), table_pane.getLayoutY());
+		// table_pane.getChildren().addAll(iv1);
 	}
 
 	@FXML
@@ -103,7 +118,7 @@ public class MainScreenController implements Initializable {
 		if (startGameButton.isVisible()) {
 			startGameButton.setVisible(false);
 		}
-		
+
 		takeTurn();
 	}
 
@@ -127,6 +142,8 @@ public class MainScreenController implements Initializable {
 
 		for (Tile tile : currPlayer.getPlayerRack().getRackArray()) {
 			ImageView tileImg = new ImageView(tile.getTileImage());
+			// ImageView tileImg = new ImageView(new
+			// Image("http://icons.iconarchive.com/icons/kidaubis-design/cool-heroes/128/Ironman-icon.png"));
 
 			if (pane.getOrientation() == Orientation.VERTICAL) {
 				tileImg.setRotate(90);
@@ -168,7 +185,8 @@ public class MainScreenController implements Initializable {
 		for (Meld meld : table.getAllMelds()) {
 			for (Tile tile : meld.getMeld()) {
 				ImageView tileImg = new ImageView(tile.getTileImage());
-				//ImageView tileImg = new ImageView(new Image("http://icons.iconarchive.com/icons/kidaubis-design/cool-heroes/128/Ironman-icon.png"));
+				// ImageView tileImg = new ImageView(new
+				// Image("http://icons.iconarchive.com/icons/kidaubis-design/cool-heroes/128/Ironman-icon.png"));
 				if (x_axis >= pane.getWidth()) {
 					x_axis = pane.getLayoutX();
 					y_axis -= 10;
