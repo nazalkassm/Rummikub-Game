@@ -27,6 +27,10 @@ public class Print {
 		Print.print(Boolean.toString(bool));
 	}
 
+	public static void print(double bool) {
+		Print.print(Double.toString(bool));
+	}
+
 	/**
 	 * Purpose: Prints as many sentences you enter on different lines.
 	 * 
@@ -86,9 +90,10 @@ public class Print {
 				columnHeaders.add(0, "Tile Number");
 
 				TableList rackTable = new TableList(rackSize + 1, columnHeaders.stream().toArray(String[]::new))
-				    .withUnicode(true);
+						.withUnicode(true);
 
-				List<String> rackStringList = rack.getRackArray().stream().map(Object::toString).collect(Collectors.toList());
+				List<String> rackStringList = rack.getRackArray().stream().map(Object::toString)
+						.collect(Collectors.toList());
 				rackStringList.add(0, "Rack");
 				String[] rackStringArray = rackStringList.stream().toArray(String[]::new);
 
@@ -120,7 +125,7 @@ public class Print {
 						meldStringList.add(meld.toString());
 					}
 				}
-				
+
 				TableList meldTable = new TableList(2, "Meld Number", "Meld").withUnicode(true);
 
 				int meldNumber = 1;
