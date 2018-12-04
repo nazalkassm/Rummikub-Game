@@ -48,7 +48,6 @@ public class Table implements Subject {
 			// By default all players are at 0
 			this.players.put(counter, player);
 			player.playerJoinTable(this);
-			player.fillRack(this.stock);
 			counter++;
 		}
 	}
@@ -105,8 +104,12 @@ public class Table implements Subject {
 				newPlayerTurns.put(turnNum, entry.getValue());
 				turnNum++;
 			} 
-	
+		
 		this.players = newPlayerTurns;
+		for (Player p : players.values()) {
+			p.fillRack(this.stock);
+		}
+		
 		tableRound = 1;
 		//We update observers
 		this.notifyObservers();

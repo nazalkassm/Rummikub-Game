@@ -113,6 +113,10 @@ public class Game {
 				}
 			}
 		}
+		
+		if (!gameRunning) {
+			this.end();
+		}
 
 	}
 
