@@ -61,8 +61,7 @@ public class Stock {
 		this.stockS = sS;
 		if (view) {
 			this.createStockWithImages();
-		}
-		else {
+		} else {
 			this.createStock();
 		}
 	}
@@ -123,25 +122,25 @@ public class Stock {
 	public void createStockWithImages() {
 		// Clear the previous stock if there was one
 
-		try {
-			stockArray.clear();
+		// try {
+		stockArray.clear();
 
-			for (Colours c : Colours.values()) {
-				for (Ranks r : Ranks.values()) {
-					if (!(c.equals(Colours.JOKER) || r.equals(Ranks.JOKER))) {
-						stockArray.add(new Tile(c, r, new Image(Tile.getFilename(c, r))));
-						stockArray.add(new Tile(c, r, new Image(Tile.getFilename(c, r))));
-					}
+		for (Colours c : Colours.values()) {
+			for (Ranks r : Ranks.values()) {
+				if (!(c.equals(Colours.JOKER) || r.equals(Ranks.JOKER))) {
+					stockArray.add(new Tile(c, r, new Image(Tile.getFilename(c, r))));
+					stockArray.add(new Tile(c, r, new Image(Tile.getFilename(c, r))));
 				}
 			}
-			//stockArray.add(new Joker());
-			//stockArray.add(new Joker());
-			this.shuffle();
-
-		} catch (Exception e) { // TODO: handle exception
-			System.out.println(e.getMessage());
 		}
+		// stockArray.add(new Joker());
+		// stockArray.add(new Joker());
+		this.shuffle();
 
+		/*
+		 * } catch (Exception e) { // TODO: handle exception
+		 * System.out.println(e.getMessage()); }
+		 */
 	}
 
 	/**
