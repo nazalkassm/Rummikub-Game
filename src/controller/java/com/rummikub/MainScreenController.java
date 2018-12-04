@@ -8,13 +8,14 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Orientation;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 
 public class MainScreenController implements Initializable {
@@ -25,7 +26,7 @@ public class MainScreenController implements Initializable {
 	private AnchorPane root;
 
 	@FXML
-	private FlowPane table_pane;
+	private Pane table_pane;
 
 	@FXML
 	private FlowPane player0_pane;
@@ -65,6 +66,12 @@ public class MainScreenController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		List<Label> playerLabels = new ArrayList<Label>();
 		List<Rectangle> playerRectangles = new ArrayList<Rectangle>();
+
+		for (FlowPane flowPane : playerPanes) {
+			flowPane.setPadding(new Insets(10, 10, 10, 10));
+			flowPane.setVgap(4);
+			flowPane.setHgap(4);
+		}
 
 		playerPanes.add(player0_pane);
 		playerPanes.add(player1_pane);
@@ -123,11 +130,6 @@ public class MainScreenController implements Initializable {
 
 	public void viewTiles(Player currPlayer, FlowPane pane) {
 		pane.getChildren().clear();
-		double x_axis = pane.getLayoutX();
-		double y_axis = pane.getLayoutY();
-
-		double x_axis_vertical = pane.getWidth();
-		double y_axis_vertical = pane.getLayoutY();
 
 		for (Tile tile : currPlayer.getPlayerRack().getRackArray()) {
 			Image img = tile.getTileImage();
@@ -135,40 +137,11 @@ public class MainScreenController implements Initializable {
 			ImageView tileImg = new ImageView(img);
 			tileImg.setPreserveRatio(true);
 			tileImg.setFitWidth(50);
-
-			if (pane.getOrientation() == Orientation.VERTICAL) {
-				tileImg.setRotate(90);
-
-				if (y_axis_vertical >= pane.getHeight()) {
-					y_axis_vertical = pane.getLayoutY();
-					x_axis_vertical -= 10;
-					tileImg.relocate(x_axis_vertical, y_axis_vertical);
-					pane.getChildren().add(tileImg);
-				} else {
-					tileImg.relocate(x_axis_vertical, y_axis_vertical);
-					pane.getChildren().add(tileImg);
-					y_axis_vertical -= 10;
-				}
-
-			}
-
-			else {
-
-				if (x_axis >= pane.getWidth()) {
-					x_axis = pane.getLayoutX();
-					y_axis -= 10;
-					tileImg.relocate(x_axis, y_axis);
-					pane.getChildren().add(tileImg);
-				} else {
-					tileImg.relocate(x_axis, y_axis);
-					pane.getChildren().add(tileImg);
-					x_axis += 10;
-				}
-			}
+			pane.getChildren().add(tileImg);
 		}
 	}
 
-	public void viewTiles(Table table, FlowPane pane) {
+	public void viewTiles(Table table, Pane pane) {
 		pane.getChildren().clear();
 		double x_axis = pane.getLayoutX();
 		double y_axis = pane.getLayoutY();
