@@ -11,16 +11,9 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Orientation;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderStroke;
-import javafx.scene.layout.BorderStrokeStyle;
-import javafx.scene.layout.BorderWidths;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class MainScreenController implements Initializable {
@@ -30,8 +23,6 @@ public class MainScreenController implements Initializable {
 	@FXML
 	private AnchorPane root;
 
-	@FXML
-	private Rectangle rect_table;
 	@FXML
 	private FlowPane table_pane;
 
@@ -52,15 +43,28 @@ public class MainScreenController implements Initializable {
 	@FXML
 	private Label player3_label;
 	@FXML
+	private Rectangle player0_rectangle;
+	@FXML
+	private Rectangle player1_rectangle;
+	@FXML
+	private Rectangle player2_rectangle;
+	@FXML
+	private Rectangle player3_rectangle;
+	
+	@FXML
+	private Rectangle startGameRectangle;
+	@FXML
 	private Button startGameButton;
 	@FXML
 	private Button nextTurnButton;
 
 	private List<FlowPane> playerPanes = new ArrayList<FlowPane>();
-	private List<Label> playerLabels = new ArrayList<Label>();
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		List<Label> playerLabels = new ArrayList<Label>();
+		List<Rectangle> playerRectangles = new ArrayList<Rectangle>();
+		
 		playerPanes.add(player0_pane);
 		playerPanes.add(player1_pane);
 		playerPanes.add(player2_pane);
@@ -69,6 +73,7 @@ public class MainScreenController implements Initializable {
 		playerLabels.add(player1_label);
 		playerLabels.add(player2_label);
 		playerLabels.add(player3_label);
+<<<<<<< HEAD
 
 		/*
 		 * Image image = new Image("file:src/main/resources/cardsImages/JPEG/G4.jpg");
@@ -77,12 +82,21 @@ public class MainScreenController implements Initializable {
 		 * player1_pane.getHeight() / 2); root.getChildren().add(iv);
 		 */
 
+=======
+		playerRectangles.add(player0_rectangle);
+		playerRectangles.add(player1_rectangle);
+		playerRectangles.add(player2_rectangle);
+		playerRectangles.add(player3_rectangle);
+		
+>>>>>>> 14579e32632c7a548c3e3b06770cdffbf8dae0a1
 		int max = Rummy.players.size();
 		while (playerPanes.size() > max) {
 			playerPanes.get(max).setVisible(false);
 			playerPanes.remove(max);
 			playerLabels.get(max).setVisible(false);
 			playerLabels.remove(max);
+			playerRectangles.get(max).setVisible(false);
+			playerRectangles.remove(max);
 		}
 
 		Boolean waitAfterEachTurn = false;
@@ -91,24 +105,16 @@ public class MainScreenController implements Initializable {
 		game.start();
 
 		for (int i = 0; i < playerPanes.size(); i++) {
-			// BorderStroke b = new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID,
-			// CornerRadii.EMPTY, BorderWidths.DEFAULT);
-			playerPanes.get(i).setBorder(new Border(
-					new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 			viewTiles(game.players.get(i), playerPanes.get(i));
 		}
-
-		// ImageView iv1 = new ImageView(new
-		// Image("http://icons.iconarchive.com/icons/kidaubis-design/cool-heroes/128/Ironman-icon.png"));
-		// iv1.relocate(table_pane.getLayoutX(), table_pane.getLayoutY());
-		// table_pane.getChildren().addAll(iv1);
 	}
 
 	@FXML
 	public void handleNextTurn(ActionEvent event) throws Exception {
-		Print.print("Handle next turn");
 		if (startGameButton.isVisible()) {
 			startGameButton.setVisible(false);
+			startGameRectangle.setVisible(false);
+			nextTurnButton.setDisable(false);
 		}
 
 		takeTurn();
