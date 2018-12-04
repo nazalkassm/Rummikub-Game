@@ -57,6 +57,7 @@ public class Strategy1 implements StrategyBehaviour
 			tableInfo.restoreFromMemento(tableState);
 		}
 		
+		currentPlayer.removeTiles(return_melds);
 		return return_melds;
 	}
 	
