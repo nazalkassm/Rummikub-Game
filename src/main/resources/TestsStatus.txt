@@ -1,0 +1,15 @@
+Junit Tests that work right now:
+-Strategy Test 1
+-Strategy Test 4
+-Stock Test
+-Rack Test
+-Colour Test
+-Meld Test
+-Tile Test
+
+Junit Tests that don't work:
+-Player Test
+-Strategy 0
+-Strategy 2
+-Strategy 3
+-Table Test
