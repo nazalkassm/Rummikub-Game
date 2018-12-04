@@ -39,7 +39,6 @@ public class ScenarioTest {
 		// 4.c)
 		FileParser.parse("src/main/resources/inputFiles/test1.txt");
 		assertFalse(FileParser.inputError);
-		
 		game.stock = FileParser.stock;
 		game.table = new Table(game.stock);
 		
@@ -47,6 +46,9 @@ public class ScenarioTest {
 		assertEquals(3, FileParser.playerCommands.size());
 		
 		game.start();
+		while (game.gameRunning) {
+			game.takeTurn();
+		}
 		assertEquals("p0", game.winner.getName());
 		
 		Prompt.init();
@@ -64,6 +66,9 @@ public class ScenarioTest {
 		assertEquals(60, game.stock.getLength());
 		
 		game.start();
+		while (game.gameRunning) {
+			game.takeTurn();
+		}
 		assertEquals("p1", game.winner.getName());
 		
 		Prompt.init();
@@ -82,6 +87,9 @@ public class ScenarioTest {
 		assertEquals(60, game.stock.getLength());
 		
 		game.start();
+		while (game.gameRunning) {
+			game.takeTurn();
+		}
 		assertEquals("p2", game.winner.getName());
 		
 		Prompt.init();
@@ -100,6 +108,9 @@ public class ScenarioTest {
 		assertEquals(60, game.stock.getLength());
 		
 		game.start();
+		while (game.gameRunning) {
+			game.takeTurn();
+		}
 		assertEquals("p3", game.winner.getName());
 		
 		Prompt.init();
@@ -118,6 +129,9 @@ public class ScenarioTest {
 		assertEquals(60, game.stock.getLength());
 		
 		game.start();
+		while (game.gameRunning) {
+			game.takeTurn();
+		}
 		
 		Prompt.init();
 	}
@@ -135,6 +149,9 @@ public class ScenarioTest {
 		assertEquals(60, game.stock.getLength());
 		
 		game.start();
+		while (game.gameRunning) {
+			game.takeTurn();
+		}
 		
 		Prompt.init();
 	}
@@ -152,6 +169,9 @@ public class ScenarioTest {
 		assertEquals(60, game.stock.getLength());
 		
 		game.start();
+		while (game.gameRunning) {
+			game.takeTurn();
+		}
 		
 		Prompt.init();
 	}
@@ -169,6 +189,9 @@ public class ScenarioTest {
 		assertEquals(60, game.stock.getLength());
 		
 		game.start();
+		while (game.gameRunning) {
+			game.takeTurn();
+		}
 		
 		Prompt.init();
 	}
@@ -185,6 +208,9 @@ public class ScenarioTest {
 		assertEquals(64, game.stock.getLength());
 		
 		game.start();
+		while (game.gameRunning) {
+			game.takeTurn();
+		}
 		
 		Prompt.init();
 	}
@@ -201,6 +227,9 @@ public class ScenarioTest {
 		assertEquals(60, game.stock.getLength());
 		
 		game.start();
+		while (game.gameRunning) {
+			game.takeTurn();
+		}
 		
 		Prompt.init();
 	}
@@ -217,6 +246,9 @@ public class ScenarioTest {
 		assertEquals(64, game.stock.getLength());
 		
 		game.start();
+		while (game.gameRunning) {
+			game.takeTurn();
+		}
 		
 		Prompt.init();
 	}
@@ -233,6 +265,9 @@ public class ScenarioTest {
 		assertEquals(60, game.stock.getLength());
 		
 		game.start();
+		while (game.gameRunning) {
+			game.takeTurn();
+		}
 		
 		Prompt.init();
 	}
@@ -249,6 +284,9 @@ public class ScenarioTest {
 		assertEquals(60, game.stock.getLength());
 		
 		game.start();
+		while (game.gameRunning) {
+			game.takeTurn();
+		}
 		
 		assertEquals("p2", game.winner.getName());
 		
@@ -267,6 +305,9 @@ public class ScenarioTest {
 		assertEquals(61, game.stock.getLength());
 		
 		game.start();
+		while (game.gameRunning) {
+			game.takeTurn();
+		}
 		
 		assertEquals("p3", game.winner.getName());
 		
@@ -285,6 +326,9 @@ public class ScenarioTest {
 		assertEquals(58, game.stock.getLength());
 		
 		game.start();
+		while (game.gameRunning) {
+			game.takeTurn();
+		}
 		
 		Prompt.init();
 	}

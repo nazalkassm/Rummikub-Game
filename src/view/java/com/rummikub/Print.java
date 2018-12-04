@@ -30,6 +30,11 @@ public class Print {
 	public static void print(double bool) {
 		Print.print(Double.toString(bool));
 	}
+	public static void print(List<String> messages) {
+		for (String m : messages) {
+			print(m);
+		}
+	}
 
 	/**
 	 * Purpose: Prints as many sentences you enter on different lines.
