@@ -1,5 +1,6 @@
 package com.rummikub;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,12 +13,15 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class TitleScreenController implements Initializable {
 	@FXML
-	private VBox root;
+	private AnchorPane root;
 	@FXML
 	private ComboBox<String> cb_PlayerCount;
 	@FXML
@@ -46,6 +50,7 @@ public class TitleScreenController implements Initializable {
 		for (int i = 0; i < vb_PlayerStrategies.getChildren().size(); i++) {
 			vb_PlayerStrategies.getChildren().get(i).setVisible(false);
 		}
+
 	}
 
 	@FXML

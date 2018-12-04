@@ -22,7 +22,7 @@ public class Rummy extends Application {
 	public void start(Stage primaryStage) throws Exception {
 
 		primaryStage.setScene(loadScene("TitleScreen.fxml"));
-		// primaryStage.setResizable(false);
+		primaryStage.setResizable(false);
 		primaryStage.show();
 	}
 
