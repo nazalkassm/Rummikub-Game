@@ -41,7 +41,6 @@ public class Prompt
 		initialized = true;
 		
 		StringBuilder sb = new StringBuilder();
-		sb.append("\nHuman\n");
 		for (String s : commands)
 		{
 		    sb.append(s);

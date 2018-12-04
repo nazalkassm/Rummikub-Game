@@ -25,11 +25,11 @@ class Strategy4Test
 	@BeforeAll
 	static void setUpBeforeClass()  
 	{
-		//Table because strategy 3 needs to observe
+
 		stock = new Stock();
 		table = new Table(stock);
 		
-		//player1 has tiles greater than 30 and can play them.
+	
 		player1 = new Player("Strategy1 Player",new Strategy1());
 		player2 = new Player("Strategy4 Player",new Strategy4());
 		

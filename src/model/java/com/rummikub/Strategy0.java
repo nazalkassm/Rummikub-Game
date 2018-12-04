@@ -65,8 +65,9 @@ public class Strategy0 implements StrategyBehaviour
 					  playStrategy(currentPlayer,tableMelds,returnMelds);
 					  break;
 				   default :
-					  Print.print("Wong input, leaving the game");
-					  System.exit(0);
+					  Print.print("Wong input, exiting the turn");
+					  userIsPlaying = false;
+					  break;
 				}
 			}
 		}
