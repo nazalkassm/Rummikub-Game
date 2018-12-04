@@ -133,12 +133,11 @@ public class MainScreenController implements Initializable {
 		double y_axis_vertical = pane.getLayoutY();
 
 		for (Tile tile : currPlayer.getPlayerRack().getRackArray()) {
-			// ImageView tileImg = new ImageView(tile.getTileImage());
-			ImageView tileImg = new ImageView(new Image("file:src/main/resources/cardsImages/JPEG/G4.jpg"));
+			Image img = tile.getTileImage();
+			// Image image = new Image("file:src/main/resources/cardsImages/JPEG/G4.jpg");
+			ImageView tileImg = new ImageView(img);
 			tileImg.setPreserveRatio(true);
 			tileImg.setFitWidth(85);
-			// ImageView tileImg = new ImageView(new
-			// Image("http://icons.iconarchive.com/icons/kidaubis-design/cool-heroes/128/Ironman-icon.png"));
 
 			if (pane.getOrientation() == Orientation.VERTICAL) {
 				tileImg.setRotate(90);
@@ -179,7 +178,11 @@ public class MainScreenController implements Initializable {
 
 		for (Meld meld : table.getAllMelds()) {
 			for (Tile tile : meld.getMeld()) {
-				ImageView tileImg = new ImageView(tile.getTileImage());
+				Image img = tile.getTileImage();
+				// Image image = new Image("file:src/main/resources/cardsImages/JPEG/G4.jpg");
+				ImageView tileImg = new ImageView(img);
+				tileImg.setPreserveRatio(true);
+				tileImg.setFitWidth(85);
 
 				// ImageView tileImg = new ImageView(new
 				// Image("http://icons.iconarchive.com/icons/kidaubis-design/cool-heroes/128/Ironman-icon.png"));

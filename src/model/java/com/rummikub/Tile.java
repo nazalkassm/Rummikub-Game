@@ -4,7 +4,6 @@ import java.util.Collections;
 import java.util.List;
 
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 public class Tile implements Comparable<Tile> {
 
@@ -14,7 +13,6 @@ public class Tile implements Comparable<Tile> {
 	private boolean playedOnTable = false;
 	private boolean isJoker = false;
 	private Image tileImage;
-	private ImageView imageView = new ImageView(tileImage);
 
 	// Constructor
 	public Tile(Colours colour, Ranks rank) {
