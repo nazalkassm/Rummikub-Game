@@ -11,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Orientation;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
@@ -50,7 +51,7 @@ public class MainScreenController implements Initializable {
 	private Rectangle player2_rectangle;
 	@FXML
 	private Rectangle player3_rectangle;
-	
+
 	@FXML
 	private Rectangle startGameRectangle;
 	@FXML
@@ -64,7 +65,7 @@ public class MainScreenController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		List<Label> playerLabels = new ArrayList<Label>();
 		List<Rectangle> playerRectangles = new ArrayList<Rectangle>();
-		
+
 		playerPanes.add(player0_pane);
 		playerPanes.add(player1_pane);
 		playerPanes.add(player2_pane);
@@ -73,22 +74,12 @@ public class MainScreenController implements Initializable {
 		playerLabels.add(player1_label);
 		playerLabels.add(player2_label);
 		playerLabels.add(player3_label);
-<<<<<<< HEAD
 
-		/*
-		 * Image image = new Image("file:src/main/resources/cardsImages/JPEG/G4.jpg");
-		 * ImageView iv = new ImageView(image); iv.setPreserveRatio(true);
-		 * iv.setFitWidth(100); // iv.relocate(player1_pane.getWidth() / 2,
-		 * player1_pane.getHeight() / 2); root.getChildren().add(iv);
-		 */
-
-=======
 		playerRectangles.add(player0_rectangle);
 		playerRectangles.add(player1_rectangle);
 		playerRectangles.add(player2_rectangle);
 		playerRectangles.add(player3_rectangle);
-		
->>>>>>> 14579e32632c7a548c3e3b06770cdffbf8dae0a1
+
 		int max = Rummy.players.size();
 		while (playerPanes.size() > max) {
 			playerPanes.get(max).setVisible(false);
@@ -135,15 +126,15 @@ public class MainScreenController implements Initializable {
 		double x_axis = pane.getLayoutX();
 		double y_axis = pane.getLayoutY();
 
-		double x_axis_vertical = pane.getWidth() + 10;
+		double x_axis_vertical = pane.getWidth();
 		double y_axis_vertical = pane.getLayoutY();
 
 		for (Tile tile : currPlayer.getPlayerRack().getRackArray()) {
 			// Image img = tile.getTileImage();
-			Image img = new Image("file:src/main/resources/cardsImages/JPEG/G4.jpg");
+			Image img = new Image("file:src/main/resources/tiles/G4.png");
 			ImageView tileImg = new ImageView(img);
 			tileImg.setPreserveRatio(true);
-			tileImg.setFitWidth(70);
+			tileImg.setFitWidth(50);
 
 			if (pane.getOrientation() == Orientation.VERTICAL) {
 				tileImg.setRotate(90);

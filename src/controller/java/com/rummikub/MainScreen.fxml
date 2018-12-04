@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.rummikub.MainScreenController">
    <children>
       <Rectangle fx:id="player0_rectangle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="150.0" layoutX="175.0" layoutY="450.0" stroke="BLACK" strokeType="INSIDE" width="450.0" AnchorPane.bottomAnchor="0.0" />
@@ -20,7 +19,10 @@
          </font>
       </Label>
       <Rectangle fx:id="player1_rectangle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="450.0" layoutY="75.0" stroke="BLACK" strokeType="INSIDE" width="150.0" AnchorPane.leftAnchor="0.0" />
-      <FlowPane fx:id="player1_pane" layoutY="75.0" prefHeight="450.0" prefWidth="115.0" />
+      <FlowPane fx:id="player1_pane" layoutY="75.0" orientation="VERTICAL" prefHeight="450.0" prefWidth="115.0">
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding></FlowPane>
       <Label fx:id="player1_label" layoutX="91.0" layoutY="283.0" rotate="90.0" text="Player 1" AnchorPane.leftAnchor="90.0">
          <font>
             <Font size="24.0" />
@@ -34,7 +36,7 @@
          </font>
       </Label>
       <Rectangle fx:id="player3_rectangle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="450.0" layoutX="650.0" layoutY="75.0" stroke="BLACK" strokeType="INSIDE" width="150.0" AnchorPane.rightAnchor="0.0" />
-      <FlowPane fx:id="player3_pane" layoutX="685.0" layoutY="75.0" prefHeight="450.0" prefWidth="115.0" AnchorPane.rightAnchor="0.0" />
+      <FlowPane fx:id="player3_pane" layoutX="685.0" layoutY="75.0" orientation="VERTICAL" prefHeight="450.0" prefWidth="115.0" AnchorPane.rightAnchor="0.0" />
       <Label fx:id="player3_label" layoutX="626.0" layoutY="283.0" rotate="-90.0" text="Player 3" AnchorPane.rightAnchor="90.0">
          <font>
             <Font size="24.0" />
@@ -47,7 +49,7 @@
             <Font size="20.0" />
          </font>
       </Button>
-      <Rectangle fx:id="startGameRectangle" arcHeight="5.0" arcWidth="5.0" fill="#808c97" height="600.0" opacity="0.86" stroke="BLACK" strokeType="INSIDE" width="800.0" />
+      <Rectangle fx:id="startGameRectangle" arcHeight="5.0" arcWidth="5.0" fill="#808c97" height="600.0" opacity="0.86" stroke="BLACK" strokeType="INSIDE" visible="false" width="800.0" />
       <Button fx:id="startGameButton" layoutX="280.0" layoutY="246.0" mnemonicParsing="false" onAction="#handleNextTurn" prefHeight="109.0" prefWidth="240.0" text="Start Game">
          <font>
             <Font size="32.0" />
