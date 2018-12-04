@@ -1,6 +1,5 @@
 package com.rummikub;
 
-import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -71,19 +70,12 @@ public class MainScreenController implements Initializable {
 		playerLabels.add(player2_label);
 		playerLabels.add(player3_label);
 
-		File file = new File("src/main/resources/cardsImages/JPEG/B1.jpg");
-		Image image = new Image(file.toURI().toString());
-		ImageView iv = new ImageView(image);
-		player0_pane.getChildren().addAll(iv);
-
-		if (!file.exists()) {
-			Print.print("File does not exist");
-		} else {
-			Print.print("The file exists");
-			Print.print(iv.getLayoutX());
-			Print.print(iv.getLayoutY());
-			Print.print(iv.get);
-		}
+		/*
+		 * Image image = new Image("file:src/main/resources/cardsImages/JPEG/G4.jpg");
+		 * ImageView iv = new ImageView(image); iv.setPreserveRatio(true);
+		 * iv.setFitWidth(100); // iv.relocate(player1_pane.getWidth() / 2,
+		 * player1_pane.getHeight() / 2); root.getChildren().add(iv);
+		 */
 
 		int max = Rummy.players.size();
 		while (playerPanes.size() > max) {
@@ -141,7 +133,10 @@ public class MainScreenController implements Initializable {
 		double y_axis_vertical = pane.getLayoutY();
 
 		for (Tile tile : currPlayer.getPlayerRack().getRackArray()) {
-			ImageView tileImg = new ImageView(tile.getTileImage());
+			// ImageView tileImg = new ImageView(tile.getTileImage());
+			ImageView tileImg = new ImageView(new Image("file:src/main/resources/cardsImages/JPEG/G4.jpg"));
+			tileImg.setPreserveRatio(true);
+			tileImg.setFitWidth(85);
 			// ImageView tileImg = new ImageView(new
 			// Image("http://icons.iconarchive.com/icons/kidaubis-design/cool-heroes/128/Ironman-icon.png"));
 
@@ -185,6 +180,7 @@ public class MainScreenController implements Initializable {
 		for (Meld meld : table.getAllMelds()) {
 			for (Tile tile : meld.getMeld()) {
 				ImageView tileImg = new ImageView(tile.getTileImage());
+
 				// ImageView tileImg = new ImageView(new
 				// Image("http://icons.iconarchive.com/icons/kidaubis-design/cool-heroes/128/Ironman-icon.png"));
 				if (x_axis >= pane.getWidth()) {
