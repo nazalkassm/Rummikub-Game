@@ -11,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Orientation;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
@@ -73,22 +74,12 @@ public class MainScreenController implements Initializable {
 		playerLabels.add(player1_label);
 		playerLabels.add(player2_label);
 		playerLabels.add(player3_label);
-<<<<<<< HEAD
 
-		/*
-		 * Image image = new Image("file:src/main/resources/cardsImages/JPEG/G4.jpg");
-		 * ImageView iv = new ImageView(image); iv.setPreserveRatio(true);
-		 * iv.setFitWidth(100); // iv.relocate(player1_pane.getWidth() / 2,
-		 * player1_pane.getHeight() / 2); root.getChildren().add(iv);
-		 */
-
-=======
 		playerRectangles.add(player0_rectangle);
 		playerRectangles.add(player1_rectangle);
 		playerRectangles.add(player2_rectangle);
 		playerRectangles.add(player3_rectangle);
-		
->>>>>>> 14579e32632c7a548c3e3b06770cdffbf8dae0a1
+
 		int max = Rummy.players.size();
 		while (playerPanes.size() > max) {
 			playerPanes.get(max).setVisible(false);
