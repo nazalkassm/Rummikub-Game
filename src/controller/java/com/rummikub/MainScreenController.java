@@ -2,10 +2,13 @@ package com.rummikub;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javafx.css.PseudoClass;
 import javafx.event.ActionEvent;
@@ -178,16 +181,33 @@ public class MainScreenController implements Initializable {
 	 */
 	public void viewTiles(Player currPlayer, FlowPane pane) {
 		pane.getChildren().clear();
-
+		
 		for (Tile tile : currPlayer.getPlayerRack().getRackArray()) {
 			Image img = tile.getTileImage();
 			if (!Rummy.game.printRackMeld && !currPlayer.isHuman()) {
 				img = new Image(Constants.BACK_CARD);
 			}
-
+			
 			ImageView tileImg = new ImageView(img);
 			tileImg.setPreserveRatio(true);
 			tileImg.setFitWidth(35);
+			//if (Rummy.game.previousPlayer == currPlayer) {
+				tileImg.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+					@Override
+					public void handle(MouseEvent event) {
+						handleTileSelected(tileImg, tile, Rummy.game.table);
+					}
+				});
+				
+			
+			
+				pane.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+					@Override
+					public void handle(MouseEvent event) {
+						moveTile(null, Rummy.game.table);
+					}
+				});
+			//}
 			pane.getChildren().add(tileImg);
 		}
 	}
@@ -296,8 +316,7 @@ public class MainScreenController implements Initializable {
 	private void handleTileSelected(ImageView tileImg, Tile tile, Table table) {
 		if (table.removing) {
 			System.out.println("CLICKED TILE");
-			for (Tile t : table.getAllTilesOnTable()) {
-
+			for (Tile t : Stream.of(table.getAllTilesOnTable(),table.getCurrentPlayer().getPlayerRack().getRackArray()).flatMap(Collection::stream).collect(Collectors.toList())) {
 				t.selected = false;
 			}
 			table.removing = false;
@@ -316,20 +335,60 @@ public class MainScreenController implements Initializable {
 	private void moveTile(Meld meld, Table table) {
 		Iterator<Meld> itr = table.getAllMelds().iterator();
 		boolean removed = false;
-		System.out.println("CLICKED MELD");
-		while (itr.hasNext()) {
-			Meld currentMeld = itr.next();
-			if (currentMeld != meld) {
-				Iterator<Tile> tileItr = currentMeld.getMeld().iterator();
-				while (tileItr.hasNext()) {
-					Tile compareTile = tileItr.next();
-					if (compareTile.selected) {
-						removed = true;
-						meld.addTile(compareTile);
-						table.removing = true;
+		if (meld != null) {
+			System.out.println("CLICKED MELD");
+			while (itr.hasNext()) {
+				Meld currentMeld = itr.next();
+				if (currentMeld != meld) {
+					Iterator<Tile> tileItr = currentMeld.getMeld().iterator();
+					while (tileItr.hasNext()) {
+						Tile compareTile = tileItr.next();
+						if (compareTile.selected) {
+							removed = true;
+							if (meld == null ) {
+								
+								viewTiles(Rummy.game.previousPlayer, playerPanes.get(Rummy.game.previousPlayer.getNumber()));
+							} else {
+									meld.addTile(compareTile);
+							}
+						
+							table.removing = true;
+	
+							tileItr.remove();
+							compareTile.selected = false;
+						}
+					}
+				}
+			}
+			
+			Iterator<Tile> itrTiles = Rummy.game.currentPlayer.getPlayerRack().getRackArray().iterator();
+	
+			while (itrTiles.hasNext()) {
 
-						tileItr.remove();
-						compareTile.selected = false;
+				Tile compareTile = itrTiles.next();
+				if (compareTile.selected) {
+					removed = true;
+					meld.addTile(compareTile);			
+					table.removing = true;
+					itrTiles.remove();
+					compareTile.selected = false;
+				}
+			}
+					
+		} else {
+			while (itr.hasNext()) {
+				Meld currentMeld = itr.next();
+				if (currentMeld != meld) {
+					Iterator<Tile> tileItr = currentMeld.getMeld().iterator();
+					while (tileItr.hasNext()) {
+						Tile compareTile = tileItr.next();
+						if (compareTile.selected) {
+							removed = true;				
+							Rummy.game.currentPlayer.getPlayerRack().addTile(compareTile);
+							table.removing = true;
+							tileItr.remove();
+							compareTile.selected = false;
+						}
 					}
 				}
 			}
@@ -337,6 +396,7 @@ public class MainScreenController implements Initializable {
 		
 		if (removed) {
 			viewTiles(Rummy.game.table, table_pane);
+			viewTiles(Rummy.game.currentPlayer, playerPanes.get(Rummy.game.currentPlayer.getNumber()));
 		}
 	}
 
