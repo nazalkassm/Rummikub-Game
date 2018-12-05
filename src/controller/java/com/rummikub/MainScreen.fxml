@@ -48,12 +48,12 @@
             <Font size="20.0" />
          </font>
       </Button>
-      <Rectangle fx:id="startGameRectangle" arcHeight="5.0" arcWidth="5.0" fill="#808c97" height="600.0" opacity="0.86" stroke="BLACK" strokeType="INSIDE" visible="false" width="800.0" />
+      <Rectangle fx:id="startGameRectangle" arcHeight="5.0" arcWidth="5.0" fill="#808c97" height="800.0" opacity="0.86" stroke="BLACK" strokeType="INSIDE" width="1200.0" />
+      <Pane fx:id="table_pane" layoutX="242.0" layoutY="208.0" prefHeight="385.0" prefWidth="718.0" />
       <Button fx:id="startGameButton" layoutX="492.0" layoutY="334.0" mnemonicParsing="false" onAction="#handleNextTurn" prefHeight="109.0" prefWidth="240.0" text="Start Game">
          <font>
             <Font size="32.0" />
          </font>
       </Button>
-      <Pane fx:id="table_pane" layoutX="242.0" layoutY="208.0" prefHeight="385.0" prefWidth="718.0" />
    </children>
 </AnchorPane>

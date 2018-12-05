@@ -136,15 +136,16 @@ public class MainScreenController implements Initializable {
 			// Image img = new Image("file:src/main/resources/tiles/G4.png");
 			ImageView tileImg = new ImageView(img);
 			tileImg.setPreserveRatio(true);
-			tileImg.setFitWidth(50);
+			tileImg.setFitWidth(35);
 			pane.getChildren().add(tileImg);
 		}
 	}
 
 	public void viewTiles(Table table, Pane pane) {
 		pane.getChildren().clear();
-		double x_axis = pane.getLayoutX();
-		double y_axis = pane.getLayoutY();
+		double x_axis = 0;
+		double y_axis = 0;
+		double imgWidth = 35;
 
 		for (Meld meld : table.getAllMelds()) {
 			for (Tile tile : meld.getMeld()) {
@@ -152,20 +153,22 @@ public class MainScreenController implements Initializable {
 				// Image img = new Image("file:src/main/resources/cardsImages/JPEG/G4.jpg");
 				ImageView tileImg = new ImageView(img);
 				tileImg.setPreserveRatio(true);
-				tileImg.setFitWidth(85);
+				tileImg.setFitWidth(imgWidth);
 
 				if (x_axis >= pane.getWidth()) {
-					x_axis = pane.getLayoutX();
-					y_axis -= 10;
+					x_axis = 0;
+					y_axis += 50;
 					tileImg.relocate(x_axis, y_axis);
 					pane.getChildren().add(tileImg);
+
 				} else {
 					tileImg.relocate(x_axis, y_axis);
 					pane.getChildren().add(tileImg);
-					x_axis += 10;
+					x_axis += imgWidth;
 				}
+
 			}
-			x_axis += 30;
+			x_axis += (imgWidth + 30);
 		}
 	}
 }
