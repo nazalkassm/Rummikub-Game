@@ -160,10 +160,7 @@ public class TitleScreenController implements Initializable {
 			Boolean useGUI = true;
 			Boolean rigDraw = ckBx_RigDraw.isSelected();
 			Boolean testingMode = ckBx_GameMode.isSelected();
-			Rummy.game = new Game(players, testingMode, rigDraw, waitAfterEachTurn, useGUI);
-
-			Rummy.game.stock = createStock();
-			Rummy.game.table = new Table(Rummy.game.stock);
+			Rummy.game = new Game(players, testingMode, rigDraw, waitAfterEachTurn, useGUI, createStock());
 
 			// Get the event's source stage, and set the scene to be the game.
 			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -188,17 +185,15 @@ public class TitleScreenController implements Initializable {
 			File file = fileChooser.showOpenDialog(stage);
 
 			if (file != null) {
+				FileParser.reset();
+				FileParser.parse(file);
+
 				Boolean waitAfterEachTurn = false;
 				Boolean useGUI = true;
 				Boolean testingMode = ckBx_GameMode.isSelected();
 				Boolean rigDraw = ckBx_RigDraw.isSelected();
-				Rummy.game = new Game(players, testingMode, rigDraw, waitAfterEachTurn, useGUI);
-
-				FileParser.reset();
-				FileParser.parse(file);
-				Rummy.game.stock = FileParser.stock;
-				Rummy.game.table = new Table(Rummy.game.stock);
-
+				Rummy.game = new Game(players, testingMode, rigDraw, waitAfterEachTurn, useGUI, FileParser.stock);
+				
 				if (!FileParser.inputError) {
 					// set the scene to be the main screen.
 					stage.setScene(Rummy.loadScene("MainScreen.fxml"));
@@ -357,9 +352,6 @@ public class TitleScreenController implements Initializable {
 
 		int numPlayers = Integer.parseInt(cb_PlayerCount.getValue());
 		for (int i = 0; i < numPlayers; i++) {
-			for (Tile t : playerTileList.get(i)) {
-				Print.print(t.toString());
-			}
 
 			Print.print(stock.getStockArray().size());
 			if (playerTileList.get(i).size() == 14) {
@@ -371,13 +363,6 @@ public class TitleScreenController implements Initializable {
 			}
 		}
 		riggedStock.getStockArray().addAll(stock.getStockArray());
-
-		Print.print();
-		Print.print();
-
-		for (Tile t : riggedStock.getStockArray()) {
-			Print.print(t.toString());
-		}
 
 		return riggedStock;
 	}

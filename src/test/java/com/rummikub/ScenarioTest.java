@@ -30,8 +30,6 @@ public class ScenarioTest {
 	void setUpTest() {
 		
 		game = new Game(players, printAllPlayerMelds, rigDraw, pauseBetweenTurns, GUI); 
-		game.printRackMeld = true;
-		game.waitAferEachTurn = false;
 		FileParser.reset();
 	}
 	

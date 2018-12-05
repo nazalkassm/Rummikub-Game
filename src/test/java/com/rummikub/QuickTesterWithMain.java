@@ -42,14 +42,11 @@ public class QuickTesterWithMain
 		Boolean rigDraw = false;
 		Boolean GUI = false;
 		
-		Game game = new Game(players, printAllPlayerMelds, rigDraw, pauseBetweenTurns, GUI); 
-		
 		FileParser.parse(filePath);
 		
 		if (!FileParser.inputError) 
 		{
-			game.stock = FileParser.stock;
-			game.table = new Table(game.stock);
+			Game game = new Game(players, printAllPlayerMelds, rigDraw, pauseBetweenTurns, GUI, FileParser.stock);
 			
 			game.start();
 		}

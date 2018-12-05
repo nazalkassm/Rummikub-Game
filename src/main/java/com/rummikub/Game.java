@@ -42,8 +42,14 @@ public class Game {
 		this.rigDraw = rigEachDraw;
 		this.waitAferEachTurn = waitAfterTurns;
 		this.usingGui = GUI;
-
 		this.stock = new Stock(GUI);
+		this.table = new Table(stock);
+	}
+	
+	Game(List<Player> players, Boolean printMelds, Boolean rigEachDraw, Boolean waitAfterTurns, Boolean GUI, Stock riggedStock) {
+		this(players, printMelds, rigEachDraw, waitAfterTurns, GUI);
+		
+		this.stock = riggedStock;
 		this.table = new Table(stock);
 	}
 

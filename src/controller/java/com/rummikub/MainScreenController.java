@@ -119,6 +119,7 @@ public class MainScreenController implements Initializable {
 		playerRectangles.add(player3_rectangle);
 
 		Rummy.game.start();
+		playerLabels.get(Rummy.game.currentPlayer.getNumber()).setStyle("-fx-font-weight: bold");
 		int max = Rummy.game.players.size();
 		while (playerPanes.size() > max) {
 			playerPanes.get(max).setVisible(false);
@@ -155,12 +156,12 @@ public class MainScreenController implements Initializable {
 			});
 		}
 		Rummy.game.manualStart = false;
-		takeTurn();
+		takeTurn();  
 	}
 
 	public void takeTurn() throws Exception {
-
-		Label x = playerLabels.get(Rummy.game.currentPlayer.getNumber());
+		Print.print("Current player: " + Rummy.game.currentPlayer.getName());
+		
 		/*
 		 * x.setText("Player " + Rummy.game.currentPlayer.getNumber() + "(" +
 		 * playerStrategies.get(Rummy.game.currentPlayer.getNumber()) + ")");
@@ -186,10 +187,10 @@ public class MainScreenController implements Initializable {
 		} else {
 			nextTurnButton.setDisable(true);
 			if (Rummy.game.gameRunning) {
-				x.setStyle("-fx-font-weight: bold");
 				Rummy.game.takeTurn();
-				x.setStyle("-fx-font-weight: normal");
-
+				playerLabels.get(Rummy.game.currentPlayer.getNumber()).setStyle("-fx-font-weight: bold");
+				playerLabels.get(Rummy.game.previousPlayer.getNumber()).setStyle("-fx-font-weight: normal");
+				Print.print("Take turn done");
 				if (Rummy.game.rigDraw && Rummy.game.shouldDraw) {
 					nextTurnButton.setText("Draw Tile");
 				}
