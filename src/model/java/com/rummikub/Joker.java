@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javafx.scene.image.Image;
+
 public class Joker extends Tile
 {
 	//Array that holds the possible values this Joker can be played as at a certain time.
@@ -15,7 +17,7 @@ public class Joker extends Tile
 	public String name;
 	
 	public Joker(Colours colour, Ranks rank) {
-		super(colour, rank);
+		super(colour, rank, new Image(Tile.getFilename(colour, rank)));
 	}
 	
 	public Joker(String name) {
@@ -144,10 +146,20 @@ public class Joker extends Tile
 
 		return Integer.compare(this.possibleTiles.get(0).getValue(), tile.getValue());
 	}
-	
+	public int getValue() {
+		if (this.possibleTiles.isEmpty()) {
+			return -1;
+		}
+		
+		return this.possibleTiles.get(0).getValue();
+	}
 	@Override
 	public String toString() {
 		return this.name;
+	}
+
+	public void setPossibleTiles(List<Tile> list) {
+		possibleTiles = list;
 	}
 	
 }
