@@ -1,6 +1,7 @@
 package com.rummikub;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.pmw.tinylog.Logger;
@@ -15,7 +16,11 @@ public class Game {
 	boolean usingGui = false;
 	boolean gameRunning = true;
 	boolean shouldDraw = false;
-	
+	long start = System.nanoTime();
+	long finish = System.nanoTime();
+	boolean manualStart =false;
+	Player.Memento playerMomento1 ;
+	Table.Memento tableMomento1 ;
 	// Data Structure Variables
 	List<Player> players = new ArrayList<>();
 	List<Meld> meldsPlayed;
@@ -59,6 +64,9 @@ public class Game {
 		table.initPlayersTurn();
 
 		currentPlayer = table.getCurrentPlayer();
+		previousPlayer = table.getCurrentPlayer();
+		playerMomento1 = currentPlayer.saveToMemento();
+		tableMomento1 = table.saveToMemento();
 		
 		if (usingGui) {
 			Print.print("Waiting for user to click the 'Start Game!' button...");
@@ -72,15 +80,26 @@ public class Game {
 		Logger.info(currentPlayer.isHuman());// log to file
 		Print.print("++++++ It is now " + currentPlayer.getName() + "'s turn: ++++++");
 		Print.print("++++++ Round: " + table.getTableRound() + " ++++++");
+		//The player Hand we want to save
+		
 		meldsPlayed = currentPlayer.play();
-
+	
+		if (meldsPlayed != null || manualStart || ((float)(finish - start)) / 1_000_000_000.0 > 20) {
+			if (((float)(finish - start)) / 1_000_000_000.0 > 20 || manualStart) {
+				currentPlayer.restoreFromMemento(playerMomento1);
+				table.restoreFromMemento(tableMomento1);
+				meldsPlayed = Collections.emptyList();
+			} else if (currentPlayer.isHuman()) {
+				
+			}
 		if (currentPlayer.getPlayerRack().getSize() == Constants.ZERO_TILES) {
 			gameRunning = false;
 			winner = currentPlayer;
 		} else {
 			// Get list of changed melds
 			List<Meld> changedMelds = new ArrayList<>(Table.getDiffMelds(table.getAllMelds(), meldsPlayed));
-
+			start = System.nanoTime();
+			
 			// If the changed melds is not empty, then add we're updating things
 			if (!(changedMelds.isEmpty())) {
 				Print.print("\nTable is: ");
@@ -114,12 +133,20 @@ public class Game {
 			} else {
 				previousPlayer = currentPlayer;
 				currentPlayer = table.getNextPlayerTurn();
-				
+				//The player Hand we want to save
+				Player.Memento playerMomento1 = currentPlayer.saveToMemento();
+				Table.Memento tableMomento1 = table.saveToMemento();
 				if (usingGui) {
 					Print.print("Waiting for user to click the 'next turn' button...");
 				}
 			}
 		}
+		} else {
+			if (Rummy.game.currentPlayer.isHuman()) {
+				System.out.println("HUMAN PLEASE PLAY");
+					finish = System.nanoTime();
+				}
+			}
 		
 		if (!gameRunning) {
 			this.end();

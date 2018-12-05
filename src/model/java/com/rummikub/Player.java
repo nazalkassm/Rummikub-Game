@@ -81,6 +81,8 @@ public class Player {
 	 */
 	public List<Meld> play() {
 		List<Meld> melds = new ArrayList<>(this.behaviour.useStrategy(this));
+		if (melds.isEmpty())
+			return null;
 		ArrayList<Tile> meldsList = new ArrayList<Tile>();
 		for (Meld m : melds ) {
 			meldsList.addAll(m.getTiles());

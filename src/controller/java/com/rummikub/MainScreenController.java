@@ -77,6 +77,10 @@ public class MainScreenController implements Initializable {
 	@FXML
 	private Button startGameButton;
 	@FXML
+	private Button endTurnButton;
+	@FXML
+	private Button createMeldButton;
+	@FXML
 	private Button nextTurnButton;
 	@FXML
 	private Rectangle background;
@@ -138,8 +142,22 @@ public class MainScreenController implements Initializable {
 			startGameButton.setVisible(false);
 			startGameRectangle.setVisible(false);
 			nextTurnButton.setDisable(false);
-		}
+			endTurnButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+				@Override
+				public void handle(MouseEvent event) {
+					Rummy.game.manualStart = true;
+					try {
+						takeTurn();
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
 
+			
+			});
+		}
+		Rummy.game.manualStart = false;
 		takeTurn();
 	}
 
@@ -173,6 +191,16 @@ public class MainScreenController implements Initializable {
 		}
 		viewTiles(Rummy.game.previousPlayer, playerPanes.get(Rummy.game.previousPlayer.getNumber()));
 		viewTiles(Rummy.game.table, table_pane);
+		//Rummy.game.manualStart = false;
+
+		createMeldButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				createMeld(Rummy.game.table);
+			}
+
+		
+		});
 		nextTurnButton.setDisable(false);
 	}
 
@@ -191,7 +219,7 @@ public class MainScreenController implements Initializable {
 			ImageView tileImg = new ImageView(img);
 			tileImg.setPreserveRatio(true);
 			tileImg.setFitWidth(35);
-			//if (Rummy.game.previousPlayer == currPlayer) {
+			if (currPlayer.isHuman()) {
 				tileImg.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 					@Override
 					public void handle(MouseEvent event) {
@@ -207,7 +235,7 @@ public class MainScreenController implements Initializable {
 						moveTile(null, Rummy.game.table);
 					}
 				});
-			//}
+			}
 			pane.getChildren().add(tileImg);
 		}
 	}
@@ -398,6 +426,47 @@ public class MainScreenController implements Initializable {
 			viewTiles(Rummy.game.table, table_pane);
 			viewTiles(Rummy.game.currentPlayer, playerPanes.get(Rummy.game.currentPlayer.getNumber()));
 		}
+	}
+	
+	private void createMeld(Table table) {
+		Meld m = new Meld();
+		Iterator<Meld> itr = table.getAllMelds().iterator();
+		boolean removed = false;
+			System.out.println("CLICKED MELD");
+			while (itr.hasNext()) {
+				Meld currentMeld = itr.next();
+					Iterator<Tile> tileItr = currentMeld.getMeld().iterator();
+					while (tileItr.hasNext()) {
+						Tile compareTile = tileItr.next();
+						if (compareTile.selected) {
+								removed = true;
+								m.addTile(compareTile);
+							}
+							tileItr.remove();
+							compareTile.selected = false;
+						}
+					}
+				
+			
+			
+			Iterator<Tile> itrTiles = Rummy.game.previousPlayer.getPlayerRack().getRackArray().iterator();
+	
+			while (itrTiles.hasNext()) {
+
+				Tile tile = itrTiles.next();
+				if (tile.selected) {
+					removed = true;
+					m.addTile(tile);			
+					table.removing = true;
+					itrTiles.remove();
+					tile.selected = false;
+				}
+			}
+			table.getAllMelds().add(m);
+			table.notifyObservers();
+
+			viewTiles(Rummy.game.table, table_pane);
+			viewTiles(Rummy.game.previousPlayer, playerPanes.get(Rummy.game.previousPlayer.getNumber()));
 	}
 
 }

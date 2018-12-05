@@ -13,6 +13,8 @@
    <children>
       <Rectangle fx:id="background" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="800.0" stroke="BLACK" strokeType="INSIDE" width="1200.0" />
       <Rectangle fx:id="player0_rectangle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="150.0" layoutX="200.0" layoutY="650.0" stroke="BLACK" strokeType="INSIDE" width="800.0" AnchorPane.bottomAnchor="0.0" />
+      <Button fx:id="endTurnButton" layoutX="188.0" layoutY="620.0" mnemonicParsing="false" text="End Turn" />
+      <Button fx:id="createMeldButton" layoutX="25.0" layoutY="712.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="132.0" text="Create Meld" />
       <FlowPane fx:id="player0_pane" layoutX="211.0" layoutY="658.0" prefHeight="134.0" prefWidth="783.0" />
       <Label fx:id="player0_label" layoutX="570.0" layoutY="615.0" text="Player 0" AnchorPane.bottomAnchor="150.0">
          <font>
