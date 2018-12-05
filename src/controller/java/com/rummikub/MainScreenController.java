@@ -21,12 +21,15 @@ import javafx.scene.shape.Rectangle;
 
 public class MainScreenController implements Initializable {
 
+	/*
+	 * main Pane
+	 */
 	@FXML
 	private AnchorPane root;
 
-	@FXML
-	private Pane table_pane;
-
+	/*
+	 * player variables
+	 */
 	@FXML
 	private FlowPane player0_pane;
 	@FXML
@@ -52,6 +55,11 @@ public class MainScreenController implements Initializable {
 	@FXML
 	private Rectangle player3_rectangle;
 
+	/*
+	 * board variables
+	 */
+	@FXML
+	private Pane table_pane;
 	@FXML
 	private Rectangle startGameRectangle;
 	@FXML
@@ -62,6 +70,10 @@ public class MainScreenController implements Initializable {
 	private Rectangle background;
 	@FXML
 	private Rectangle table_rect;
+	@FXML
+	private Rectangle stock_rect;
+	@FXML
+	private FlowPane stock_pane;
 
 	private List<FlowPane> playerPanes = new ArrayList<FlowPane>();
 
@@ -128,6 +140,9 @@ public class MainScreenController implements Initializable {
 		}
 	}
 
+	/*
+	 * tile images for player rack
+	 */
 	public void viewTiles(Player currPlayer, FlowPane pane) {
 		pane.getChildren().clear();
 
@@ -144,6 +159,9 @@ public class MainScreenController implements Initializable {
 		}
 	}
 
+	/*
+	 * tile/meld images for table
+	 */
 	public void viewTiles(Table table, Pane pane) {
 		pane.getChildren().clear();
 		double x_axis = 0;
@@ -151,8 +169,8 @@ public class MainScreenController implements Initializable {
 		double imgWidth = 35;
 
 		for (Meld meld : table.getAllMelds()) {
-			if (x_axis + meld.getTiles().size()*imgWidth >= pane.getWidth()) {
-				y_axis+= 50;
+			if (x_axis + meld.getTiles().size() * imgWidth >= pane.getWidth()) {
+				y_axis += 50;
 				x_axis = 0;
 			}
 			for (Tile tile : meld.getMeld()) {
@@ -162,14 +180,27 @@ public class MainScreenController implements Initializable {
 				tileImg.setPreserveRatio(true);
 				tileImg.setFitWidth(imgWidth);
 
-				
-					tileImg.relocate(x_axis, y_axis);
-					pane.getChildren().add(tileImg);
-					x_axis += imgWidth;
-				
+				tileImg.relocate(x_axis, y_axis);
+				pane.getChildren().add(tileImg);
+				x_axis += imgWidth;
 
 			}
 			x_axis += (imgWidth + 5);
+		}
+	}
+
+	/*
+	 * tile images of stock
+	 */
+	public void viewTiles(FlowPane pane) {
+		pane.getChildren().clear();
+
+		for (Tile tile : Rummy.game.stock.getStockArray()) {
+			Image img = tile.getTileImage();
+			ImageView tileImg = new ImageView(img);
+			tileImg.setPreserveRatio(true);
+			tileImg.setFitWidth(35);
+			pane.getChildren().add(tileImg);
 		}
 	}
 
