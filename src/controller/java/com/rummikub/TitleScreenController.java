@@ -337,8 +337,6 @@ public class TitleScreenController implements Initializable {
 			default:
 				return new ArrayList<Player>();
 			}
-
-			strategies.add(currNode.getValue());
 		}
 		return players;
 	}

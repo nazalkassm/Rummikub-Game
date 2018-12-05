@@ -2,6 +2,13 @@ both console and GUI is supported
 to start a console game: run Game.java in the main folder
 to start a GUI game: run Rummy.java
 
+known bugs with the game:
+These are not errors with GUI but the backend
+    - there are instances where there are more jokers than allotted amount (greater than 2)
+    - instances where melds get added to the table, and when next player's turn comes up, the table gets emptied out
+    - joker gets added to an invalid meld sometimes (cards are not proper, or there are less than 3 cards)
+
+
 title screen: select the amount of players from the drop down menu
 - select with strategies to use for each player selected
 - you have the option of game rigging by clicking the button beside strategy option and selecting its initial 14 cards

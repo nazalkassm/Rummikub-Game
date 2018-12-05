@@ -39,11 +39,10 @@ public class Game {
 		this.stock = new Stock(GUI);
 		this.table = new Table(stock);
 	}
-
-	Game(List<Player> players, Boolean printMelds, Boolean rigEachDraw, Boolean waitAfterTurns, Boolean GUI,
-			Stock riggedStock) {
+	
+	Game(List<Player> players, Boolean printMelds, Boolean rigEachDraw, Boolean waitAfterTurns, Boolean GUI, Stock riggedStock) {
 		this(players, printMelds, rigEachDraw, waitAfterTurns, GUI);
-
+		
 		this.stock = riggedStock;
 		this.table = new Table(stock);
 	}
