@@ -45,6 +45,10 @@ public class Player {
 		this.name = name;
 	}
 
+	public String getStrategyName() {
+		return this.behaviour.toString();
+	}
+
 	/**
 	 * Adds the player to the table
 	 * 
@@ -77,14 +81,14 @@ public class Player {
 	 * 
 	 * @param table = The table on which to play
 	 * @return
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	public List<Meld> play() {
 		List<Meld> melds = new ArrayList<>(this.behaviour.useStrategy(this));
 		if (melds.isEmpty())
 			return null;
 		ArrayList<Tile> meldsList = new ArrayList<Tile>();
-		for (Meld m : melds ) {
+		for (Meld m : melds) {
 			meldsList.addAll(m.getTiles());
 		}
 		for (Meld m : melds) {
@@ -157,7 +161,7 @@ public class Player {
 	public String getName() {
 		return name;
 	}
-	
+
 	public int getNumber() {
 		return Integer.parseInt(this.getName().substring(1));
 	}

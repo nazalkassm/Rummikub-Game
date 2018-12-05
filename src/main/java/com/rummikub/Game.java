@@ -16,11 +16,13 @@ public class Game {
 	boolean usingGui = false;
 	boolean gameRunning = true;
 	boolean shouldDraw = false;
+
 	long start = System.nanoTime();
 	long finish = System.nanoTime();
-	boolean manualStart =false;
-	Player.Memento playerMomento1 ;
-	Table.Memento tableMomento1 ;
+	boolean manualStart = false;
+	Player.Memento playerMomento1;
+	Table.Memento tableMomento1;
+
 	// Data Structure Variables
 	List<Player> players = new ArrayList<>();
 	List<Meld> meldsPlayed;
@@ -40,12 +42,12 @@ public class Game {
 		this.rigDraw = rigEachDraw;
 		this.waitAferEachTurn = waitAfterTurns;
 		this.usingGui = GUI;
-		
+
 		this.stock = new Stock(GUI);
 		this.table = new Table(stock);
 	}
 
-	public void start() {			
+	public void start() {
 		// Start game
 		printer.printIntroduction();
 
@@ -67,7 +69,7 @@ public class Game {
 		previousPlayer = table.getCurrentPlayer();
 		playerMomento1 = currentPlayer.saveToMemento();
 		tableMomento1 = table.saveToMemento();
-		
+
 		if (usingGui) {
 			Print.print("Waiting for user to click the 'Start Game!' button...");
 		}
@@ -80,74 +82,77 @@ public class Game {
 		Logger.info(currentPlayer.isHuman());// log to file
 		Print.print("++++++ It is now " + currentPlayer.getName() + "'s turn: ++++++");
 		Print.print("++++++ Round: " + table.getTableRound() + " ++++++");
-		//The player Hand we want to save
-		
+		// The player Hand we want to save
+
 		meldsPlayed = currentPlayer.play();
-	
-		if (meldsPlayed != null || manualStart || ((float)(finish - start)) / 1_000_000_000.0 > 20) {
-			if (((float)(finish - start)) / 1_000_000_000.0 > 20 || manualStart) {
+
+		if (meldsPlayed != null || manualStart || ((float) (finish - start)) / 1_000_000_000.0 > 20) {
+			if (((float) (finish - start)) / 1_000_000_000.0 > 20 || manualStart) {
 				currentPlayer.restoreFromMemento(playerMomento1);
 				table.restoreFromMemento(tableMomento1);
 				meldsPlayed = Collections.emptyList();
 			} else if (currentPlayer.isHuman()) {
-				
+
 			}
-		if (currentPlayer.getPlayerRack().getSize() == Constants.ZERO_TILES) {
-			gameRunning = false;
-			winner = currentPlayer;
-		} else {
-			// Get list of changed melds
-			List<Meld> changedMelds = new ArrayList<>(Table.getDiffMelds(table.getAllMelds(), meldsPlayed));
-			start = System.nanoTime();
-			
-			// If the changed melds is not empty, then add we're updating things
-			if (!(changedMelds.isEmpty())) {
-				Print.print("\nTable is: ");
-				Print.printMeldtoUser(meldsPlayed, changedMelds, true);
-
-				turnsWithoutMoves = 0;
-
-				table.updateMeldsOnTable(meldsPlayed);
-
-				table.notifyObservers();
-			} else {
-				shouldDraw = true;
-				if (stock.getLength() == 0) {
-					turnsWithoutMoves++;
-				} else if (!rigDraw) {
-					Print.println(currentPlayer.getName() + " draws a tile from the stock: "
-							+ currentPlayer.getPlayerRack().takeTile(stock).toString());
-				}
-			}
-			if (!rigDraw) {
-				Print.println(currentPlayer.getName() + " rack size is " + currentPlayer.getPlayerRack().getSize());
-				// print rack and possible melds
-				System.out.println(currentPlayer.getName() + " players new hand is");
-				Print.printRacktoUser(currentPlayer.getPlayerRack(), currentPlayer.isPrint_rack_meld());
-				prompter.promptEnterKey(waitAferEachTurn);
-			}
-
-			if (turnsWithoutMoves >= 4) {
-				Print.println("The stock is empty, and no one has played in 4 turns.");
+			if (currentPlayer.getPlayerRack().getSize() == Constants.ZERO_TILES) {
 				gameRunning = false;
+				winner = currentPlayer;
 			} else {
-				previousPlayer = currentPlayer;
-				currentPlayer = table.getNextPlayerTurn();
-				//The player Hand we want to save
-				Player.Memento playerMomento1 = currentPlayer.saveToMemento();
-				Table.Memento tableMomento1 = table.saveToMemento();
-				if (usingGui) {
-					Print.print("Waiting for user to click the 'next turn' button...");
+				// Get list of changed melds
+				List<Meld> changedMelds = new ArrayList<>(Table.getDiffMelds(table.getAllMelds(), meldsPlayed));
+				start = System.nanoTime();
+
+				// If the changed melds is not empty, then add we're updating things
+				if (!(changedMelds.isEmpty())) {
+					Print.print("\nTable is: ");
+					Print.printMeldtoUser(meldsPlayed, changedMelds, true);
+
+					turnsWithoutMoves = 0;
+
+					table.updateMeldsOnTable(meldsPlayed);
+
+					table.notifyObservers();
+				} else {
+					shouldDraw = true;
+					if (stock.getLength() == 0) {
+						turnsWithoutMoves++;
+					} else if (!rigDraw) {
+						Print.println(currentPlayer.getName() + " draws a tile from the stock: "
+								+ currentPlayer.getPlayerRack().takeTile(stock).toString());
+					}
+				}
+				if (!rigDraw) {
+					Print.println(currentPlayer.getName() + " rack size is " + currentPlayer.getPlayerRack().getSize());
+					// print rack and possible melds
+					System.out.println(currentPlayer.getName() + " players new hand is");
+					Print.printRacktoUser(currentPlayer.getPlayerRack(), currentPlayer.isPrint_rack_meld());
+					prompter.promptEnterKey(waitAferEachTurn);
+				}
+
+				if (turnsWithoutMoves >= 4) {
+					Print.println("The stock is empty, and no one has played in 4 turns.");
+					gameRunning = false;
+				} else {
+					previousPlayer = currentPlayer;
+					currentPlayer = table.getNextPlayerTurn();
+
+					// The player Hand we want to save
+					Player.Memento playerMomento1 = currentPlayer.saveToMemento();
+					Table.Memento tableMomento1 = table.saveToMemento();
+
+					if (usingGui) {
+						Print.print("Waiting for user to click the 'next turn' button...");
+					}
 				}
 			}
-		}
+
 		} else {
 			if (Rummy.game.currentPlayer.isHuman()) {
 				System.out.println("HUMAN PLEASE PLAY");
-					finish = System.nanoTime();
-				}
+				finish = System.nanoTime();
 			}
-		
+		}
+
 		if (!gameRunning) {
 			this.end();
 		}
