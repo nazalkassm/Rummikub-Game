@@ -113,8 +113,8 @@ public class TitleScreenController implements Initializable {
 		if (players.size() >= 2) {
 
 			Boolean waitAfterEachTurn = false;
-			Boolean rigDraw = false;
 			Boolean useGUI = true;
+			Boolean rigDraw = ckBx_RigDraw.isSelected();
 			Boolean testingMode = ckBx_GameMode.isSelected();
 			Rummy.game = new Game(players, testingMode, rigDraw, waitAfterEachTurn, useGUI);
 

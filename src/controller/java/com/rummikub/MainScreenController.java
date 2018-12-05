@@ -7,6 +7,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -17,8 +18,10 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
@@ -83,18 +86,10 @@ public class MainScreenController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		if (Rummy.game.rigDraw) {
-			nextTurnButton.setText("Draw Tile/\nEnd Turn");
-		}
-
 		init_background_images();
 
 		List<Label> playerLabels = new ArrayList<Label>();
 		List<Rectangle> playerRectangles = new ArrayList<Rectangle>();
-
-		stock_rect.setVisible(true);
-		stock_pane.setVisible(true);
-		viewTiles(stock_pane);
 
 		for (FlowPane flowPane : playerPanes) {
 			flowPane.setPadding(new Insets(10, 10, 10, 10));
@@ -143,45 +138,37 @@ public class MainScreenController implements Initializable {
 		takeTurn();
 	}
 
-	@FXML
-	public void handleChoseTile(ActionEvent event) {
-		// Object nodeClickedOn = event.getSource();
-		// Tile tileClickedOn = [GET TILE FROM nodeClickedOn SOMEHOW]
-		// if (Rummy.game.stock.getStockArray().remove(tileClickedOn)) {
-		// Rummy.game.previousPlayer.getPlayerRack().addTile(tileClickedOn);
-		// Print.println(Rummy.game.previousPlayer.getName() + " draws a tile from the
-		// stock: "
-		// + tileClickedOn.toString());
-		// }
-		// else {
-		Print.println(Rummy.game.previousPlayer.getName() + " draws a tile from the stock: "
-				+ Rummy.game.previousPlayer.getPlayerRack().takeTile(Rummy.game.stock).toString());
-		// }
-	}
-
 	public void takeTurn() throws Exception {
-		if (Rummy.game.rigDraw) {
+		if (Rummy.game.rigDraw && Rummy.game.shouldDraw) {
 			Alert alert = new Alert(AlertType.CONFIRMATION);
 			alert.setTitle("Choose a tile");
 			alert.setContentText("Would you like to choose a tile from the stock to draw?");
 
 			Optional<ButtonType> result = alert.showAndWait();
 			if (result.get() == ButtonType.OK) {
-				Print.print("PRINT TILES TO THE SCREEN");
-				// To each view, add the onclick event handleChoseTile()
+				stock_rect.setVisible(true);
+				stock_pane.setVisible(true);
+				viewTiles(stock_pane);
+
 			} else {
 				Print.println(Rummy.game.previousPlayer.getName() + " draws a tile from the stock: "
 						+ Rummy.game.previousPlayer.getPlayerRack().takeTile(Rummy.game.stock).toString());
+				Rummy.game.shouldDraw = false;
+				nextTurnButton.setText("Next Turn");
+			}
+		} else {
+			nextTurnButton.setDisable(true);
+			if (Rummy.game.gameRunning) {
+				Rummy.game.takeTurn();
+
+				if (Rummy.game.rigDraw && Rummy.game.shouldDraw) {
+					nextTurnButton.setText("Draw Tile");
+				}
 			}
 		}
-
-		nextTurnButton.setDisable(true);
-		if (Rummy.game.gameRunning) {
-			Rummy.game.takeTurn();
-			viewTiles(Rummy.game.previousPlayer, playerPanes.get(Rummy.game.previousPlayer.getNumber()));
-			viewTiles(Rummy.game.table, table_pane);
-			nextTurnButton.setDisable(false);
-		}
+		viewTiles(Rummy.game.previousPlayer, playerPanes.get(Rummy.game.previousPlayer.getNumber()));
+		viewTiles(Rummy.game.table, table_pane);
+		nextTurnButton.setDisable(false);
 	}
 
 	/*
@@ -195,7 +182,7 @@ public class MainScreenController implements Initializable {
 			if (!Rummy.game.printRackMeld && !currPlayer.isHuman()) {
 				img = new Image(Constants.BACK_CARD);
 			}
-			// Image img = new Image("file:src/main/resources/tiles/G4.png");
+
 			ImageView tileImg = new ImageView(img);
 			tileImg.setPreserveRatio(true);
 			tileImg.setFitWidth(35);
@@ -219,7 +206,6 @@ public class MainScreenController implements Initializable {
 			}
 			for (Tile tile : meld.getMeld()) {
 				Image img = tile.getTileImage();
-				// Image img = new Image("file:src/main/resources/cardsImages/JPEG/G4.jpg");
 				ImageView tileImg = new ImageView(img);
 				tileImg.setPreserveRatio(true);
 				tileImg.setFitWidth(imgWidth);
@@ -239,12 +225,36 @@ public class MainScreenController implements Initializable {
 	public void viewTiles(FlowPane pane) {
 		pane.getChildren().clear();
 
+		int i = 0;
 		for (Tile tile : Rummy.game.stock.getStockArray()) {
 			Image img = tile.getTileImage();
 			ImageView tileImg = new ImageView(img);
+
 			tileImg.setPreserveRatio(true);
 			tileImg.setFitWidth(35);
+			tileImg.setId(Integer.toString(i));
+			tileImg.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+				@Override
+				public void handle(MouseEvent event) {
+					Rummy.game.stock.getStockArray().remove(tile);
+
+					Rummy.game.previousPlayer.getPlayerRack().addTile(tile);
+					Print.println(
+							Rummy.game.previousPlayer.getName() + " draws a tile from the stock: " + tile.toString());
+
+					stock_pane.getChildren().clear();
+					stock_pane.setVisible(false);
+					stock_rect.setVisible(false);
+
+					nextTurnButton.setText("Next Turn");
+					Rummy.game.shouldDraw = false;
+					viewTiles(Rummy.game.previousPlayer, playerPanes.get(Rummy.game.previousPlayer.getNumber()));
+					viewTiles(Rummy.game.table, table_pane);
+
+				}
+			});
 			pane.getChildren().add(tileImg);
+			i++;
 		}
 	}
 

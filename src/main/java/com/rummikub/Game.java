@@ -14,6 +14,7 @@ public class Game {
 	boolean waitAferEachTurn = false; // Prompts enter after each turn
 	boolean usingGui = false;
 	boolean gameRunning = true;
+	boolean shouldDraw = false;
 	
 	// Data Structure Variables
 	List<Player> players = new ArrayList<>();
@@ -65,6 +66,7 @@ public class Game {
 	}
 
 	public void takeTurn() {
+		shouldDraw = false;
 		printer.printGameTable(table);
 		Logger.info(currentPlayer.getName());
 		Logger.info(currentPlayer.isHuman());// log to file
@@ -90,9 +92,10 @@ public class Game {
 
 				table.notifyObservers();
 			} else {
-				if (stock.getLength() == 0 || rigDraw) {
+				shouldDraw = true;
+				if (stock.getLength() == 0) {
 					turnsWithoutMoves++;
-				} else {
+				} else if (!rigDraw) {
 					Print.println(currentPlayer.getName() + " draws a tile from the stock: "
 							+ currentPlayer.getPlayerRack().takeTile(stock).toString());
 				}
