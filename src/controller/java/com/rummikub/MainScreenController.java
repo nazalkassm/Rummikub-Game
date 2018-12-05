@@ -86,11 +86,15 @@ public class MainScreenController implements Initializable {
 		if (Rummy.game.rigDraw) {
 			nextTurnButton.setText("Draw Tile/\nEnd Turn");
 		}
-		
+
 		init_background_images();
 
 		List<Label> playerLabels = new ArrayList<Label>();
 		List<Rectangle> playerRectangles = new ArrayList<Rectangle>();
+
+		stock_rect.setVisible(true);
+		stock_pane.setVisible(true);
+		viewTiles(stock_pane);
 
 		for (FlowPane flowPane : playerPanes) {
 			flowPane.setPadding(new Insets(10, 10, 10, 10));
@@ -138,20 +142,21 @@ public class MainScreenController implements Initializable {
 
 		takeTurn();
 	}
-	
+
 	@FXML
 	public void handleChoseTile(ActionEvent event) {
-		//Object nodeClickedOn = event.getSource();
-		//Tile tileClickedOn = [GET TILE FROM nodeClickedOn SOMEHOW]
-		//if (Rummy.game.stock.getStockArray().remove(tileClickedOn)) {
-		//	 Rummy.game.previousPlayer.getPlayerRack().addTile(tileClickedOn);
-		//	 Print.println(Rummy.game.previousPlayer.getName() + " draws a tile from the stock: "
-		//				+ tileClickedOn.toString());
-		//}
-	    //else {
+		// Object nodeClickedOn = event.getSource();
+		// Tile tileClickedOn = [GET TILE FROM nodeClickedOn SOMEHOW]
+		// if (Rummy.game.stock.getStockArray().remove(tileClickedOn)) {
+		// Rummy.game.previousPlayer.getPlayerRack().addTile(tileClickedOn);
+		// Print.println(Rummy.game.previousPlayer.getName() + " draws a tile from the
+		// stock: "
+		// + tileClickedOn.toString());
+		// }
+		// else {
 		Print.println(Rummy.game.previousPlayer.getName() + " draws a tile from the stock: "
 				+ Rummy.game.previousPlayer.getPlayerRack().takeTile(Rummy.game.stock).toString());
-		//}
+		// }
 	}
 
 	public void takeTurn() throws Exception {
@@ -159,17 +164,17 @@ public class MainScreenController implements Initializable {
 			Alert alert = new Alert(AlertType.CONFIRMATION);
 			alert.setTitle("Choose a tile");
 			alert.setContentText("Would you like to choose a tile from the stock to draw?");
-			
+
 			Optional<ButtonType> result = alert.showAndWait();
-			if (result.get() == ButtonType.OK){
-			    Print.print("PRINT TILES TO THE SCREEN");
-			    // To each view, add the onclick event handleChoseTile()
+			if (result.get() == ButtonType.OK) {
+				Print.print("PRINT TILES TO THE SCREEN");
+				// To each view, add the onclick event handleChoseTile()
 			} else {
 				Print.println(Rummy.game.previousPlayer.getName() + " draws a tile from the stock: "
 						+ Rummy.game.previousPlayer.getPlayerRack().takeTile(Rummy.game.stock).toString());
 			}
 		}
-		
+
 		nextTurnButton.setDisable(true);
 		if (Rummy.game.gameRunning) {
 			Rummy.game.takeTurn();
