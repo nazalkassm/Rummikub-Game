@@ -85,6 +85,7 @@ public class Game {
 		if (currentPlayer.getPlayerRack().getSize() == Constants.ZERO_TILES) {
 			gameRunning = false;
 			winner = currentPlayer;
+			previousPlayer = currentPlayer;
 		} else {
 			// Get list of changed melds
 			List<Meld> changedMelds = new ArrayList<>(Table.getDiffMelds(table.getAllMelds(), meldsPlayed));
