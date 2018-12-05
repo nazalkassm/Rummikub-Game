@@ -3,7 +3,7 @@ to start a console game: run Game.java in the main folder
 to start a GUI game: run Rummy.java
 
 known bugs with the game:
-These are not errors with GUI but the backend
+  The following are not errors with GUI but the backend (it shows up on the console as well):
     - there are instances where there are more jokers than allotted amount (greater than 2)
     - instances where melds get added to the table, and when next player's turn comes up, the table gets emptied out
     - joker gets added to an invalid meld sometimes (cards are not proper, or there are less than 3 cards)
