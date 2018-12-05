@@ -32,7 +32,7 @@ class StockTest {
 	@BeforeEach
 	void setUp() 
 	{
-		stock1 = new Stock();
+		stock1 = new Stock(104);
 		stock2 = new Stock(stock1);
 	}
 
