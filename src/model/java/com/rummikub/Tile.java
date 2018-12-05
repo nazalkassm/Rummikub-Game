@@ -8,11 +8,10 @@ import javafx.scene.image.Image;
 public class Tile implements Comparable<Tile> {
 
 	/** The rank and colour of the tile */
-	private Ranks rank;
-	private Colours colour;
-	private boolean playedOnTable = false;
-	private boolean isJoker = false;
-	private Image tileImage;
+	protected Ranks rank;
+	protected Colours colour;
+	protected boolean playedOnTable = false;
+	protected Image tileImage;
 
 	// Constructor
 	public Tile(Colours colour, Ranks rank) {
@@ -134,11 +133,4 @@ public class Tile implements Comparable<Tile> {
 		return Collections.emptyList();
 	}
 
-	public boolean isJoker() {
-		return isJoker;
-	}
-
-	public void setJoker(boolean isJoker) {
-		this.isJoker = isJoker;
-	}
 }

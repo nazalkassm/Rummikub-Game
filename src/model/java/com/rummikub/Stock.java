@@ -114,8 +114,8 @@ public class Stock {
 				}
 			}
 		}
-//		stockArray.add(new Joker());
-//		stockArray.add(new Joker());
+		stockArray.add(new Joker());
+		stockArray.add(new Joker());
 		this.shuffle();
 	}
 
@@ -133,8 +133,8 @@ public class Stock {
 				}
 			}
 		}
-		// stockArray.add(new Joker());
-		// stockArray.add(new Joker());
+		stockArray.add(new Joker());
+		stockArray.add(new Joker());
 		this.shuffle();
 
 		/*

@@ -8,15 +8,15 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="root" maxHeight="-1.0" maxWidth="-1.0" minHeight="381.0" minWidth="548.0" prefHeight="381.0" prefWidth="548.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.rummikub.TitleScreenController">
+<AnchorPane fx:id="root" maxHeight="-1.0" maxWidth="-1.0" minHeight="381.0" minWidth="548.0" prefHeight="448.0" prefWidth="548.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.rummikub.TitleScreenController">
    <children>
-      <Label alignment="CENTER" layoutX="132.0" layoutY="14.0" minWidth="284.0" style="&#10;" text="Please select the number of players." textAlignment="CENTER" textFill="#9f9f9f" wrapText="false" AnchorPane.leftAnchor="132.0" AnchorPane.rightAnchor="132.0" AnchorPane.topAnchor="14.0">
+      <Label alignment="CENTER" layoutX="132.0" layoutY="7.0" minWidth="284.0" style="&#10;" text="Please select the number of players." textAlignment="CENTER" textFill="#9f9f9f" wrapText="false" AnchorPane.leftAnchor="132.0" AnchorPane.rightAnchor="132.0" AnchorPane.topAnchor="7.0">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
       <ComboBox fx:id="cb_PlayerCount" layoutX="199.0" layoutY="41.0" onAction="#handlePlayerCountCB" prefWidth="150.0" value="Select" AnchorPane.leftAnchor="199.0" AnchorPane.rightAnchor="199.0" AnchorPane.topAnchor="41.0" />
-      <Button fx:id="btn_Play" disable="true" layoutX="229.0" layoutY="304.0" mnemonicParsing="false" onAction="#handlePlayBtn" prefHeight="39.0" prefWidth="90.0" text="Play!" AnchorPane.bottomAnchor="38.0" AnchorPane.leftAnchor="229.0" AnchorPane.rightAnchor="229.0" />
+      <Button fx:id="btn_Play" disable="true" layoutX="229.0" layoutY="311.0" mnemonicParsing="false" onAction="#handlePlayBtn" prefHeight="39.0" prefWidth="90.0" text="Play!" AnchorPane.bottomAnchor="98.0" AnchorPane.leftAnchor="229.0" AnchorPane.rightAnchor="229.0" AnchorPane.topAnchor="311.0" />
       <VBox fx:id="vb_PlayerStrategies" layoutX="199.0" layoutY="91.0" prefHeight="117.0" prefWidth="150.0" spacing="10.0" AnchorPane.leftAnchor="199.0" AnchorPane.rightAnchor="199.0" AnchorPane.topAnchor="91.0">
          <children>
             <ComboBox fx:id="cb_Player1" onAction="#handleStrategyCB" prefWidth="150.0" value="Select" />
@@ -32,6 +32,8 @@
             <Insets />
          </opaqueInsets>
       </VBox>
-      <CheckBox fx:id="ckBx_GameMode" alignment="CENTER" layoutX="205.0" layoutY="248.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="138.0" text="Testing mode" textAlignment="CENTER" />
+      <CheckBox fx:id="ckBx_GameMode" alignment="CENTER" layoutX="214.0" layoutY="266.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="121.0" text="Testing mode" textAlignment="CENTER" AnchorPane.bottomAnchor="158.0" AnchorPane.leftAnchor="214.0" AnchorPane.rightAnchor="213.0" AnchorPane.topAnchor="266.0" />
+      <Button fx:id="btn_chooseFile" disable="true" layoutX="229.0" layoutY="330.0" mnemonicParsing="false" onAction="#handleFileBtn" prefHeight="39.0" prefWidth="90.0" text="Choose file" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="229.0" AnchorPane.rightAnchor="229.0" AnchorPane.topAnchor="397.0" />
+      <Label alignment="CENTER" layoutX="261.0" layoutY="363.0" prefHeight="25.0" prefWidth="27.0" text="or..." AnchorPane.bottomAnchor="63.0" AnchorPane.leftAnchor="261.0" AnchorPane.rightAnchor="260.0" AnchorPane.topAnchor="363.0" />
    </children>
 </AnchorPane>

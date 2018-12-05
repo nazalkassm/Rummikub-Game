@@ -8,24 +8,23 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Orientation;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 
 public class MainScreenController implements Initializable {
-
-	Game game;
 
 	@FXML
 	private AnchorPane root;
 
 	@FXML
-	private FlowPane table_pane;
+	private Pane table_pane;
 
 	@FXML
 	private FlowPane player0_pane;
@@ -66,6 +65,12 @@ public class MainScreenController implements Initializable {
 		List<Label> playerLabels = new ArrayList<Label>();
 		List<Rectangle> playerRectangles = new ArrayList<Rectangle>();
 
+		for (FlowPane flowPane : playerPanes) {
+			flowPane.setPadding(new Insets(10, 10, 10, 10));
+			flowPane.setVgap(4);
+			flowPane.setHgap(4);
+		}
+
 		playerPanes.add(player0_pane);
 		playerPanes.add(player1_pane);
 		playerPanes.add(player2_pane);
@@ -80,7 +85,8 @@ public class MainScreenController implements Initializable {
 		playerRectangles.add(player2_rectangle);
 		playerRectangles.add(player3_rectangle);
 
-		int max = Rummy.players.size();
+		Rummy.game.start();
+		int max = Rummy.game.players.size();
 		while (playerPanes.size() > max) {
 			playerPanes.get(max).setVisible(false);
 			playerPanes.remove(max);
@@ -90,13 +96,8 @@ public class MainScreenController implements Initializable {
 			playerRectangles.remove(max);
 		}
 
-		Boolean waitAfterEachTurn = false;
-		Boolean useGUI = true;
-		game = new Game(Rummy.players, Rummy.testingMode, waitAfterEachTurn, useGUI);
-		game.start();
-
 		for (int i = 0; i < playerPanes.size(); i++) {
-			viewTiles(game.players.get(i), playerPanes.get(i));
+			viewTiles(Rummy.game.players.get(i), playerPanes.get(i));
 		}
 	}
 
@@ -113,65 +114,35 @@ public class MainScreenController implements Initializable {
 
 	public void takeTurn() throws Exception {
 		nextTurnButton.setDisable(true);
-		if (game.gameRunning) {
-			game.takeTurn();
-			viewTiles(game.previousPlayer, playerPanes.get(game.previousPlayer.getNumber()));
-			viewTiles(game.table, table_pane);
+		if (Rummy.game.gameRunning) {
+			Rummy.game.takeTurn();
+			viewTiles(Rummy.game.previousPlayer, playerPanes.get(Rummy.game.previousPlayer.getNumber()));
+			viewTiles(Rummy.game.table, table_pane);
 			nextTurnButton.setDisable(false);
 		}
 	}
 
 	public void viewTiles(Player currPlayer, FlowPane pane) {
 		pane.getChildren().clear();
-		double x_axis = pane.getLayoutX();
-		double y_axis = pane.getLayoutY();
-
-		double x_axis_vertical = pane.getWidth();
-		double y_axis_vertical = pane.getLayoutY();
 
 		for (Tile tile : currPlayer.getPlayerRack().getRackArray()) {
 			Image img = tile.getTileImage();
+			if (!Rummy.game.printRackMeld && !currPlayer.isHuman()) {
+				img = new Image(Constants.BACK_CARD);
+			}
 			// Image img = new Image("file:src/main/resources/tiles/G4.png");
 			ImageView tileImg = new ImageView(img);
 			tileImg.setPreserveRatio(true);
-			tileImg.setFitWidth(50);
-
-			if (pane.getOrientation() == Orientation.VERTICAL) {
-				tileImg.setRotate(90);
-
-				if (y_axis_vertical >= pane.getHeight()) {
-					y_axis_vertical = pane.getLayoutY();
-					x_axis_vertical -= 10;
-					tileImg.relocate(x_axis_vertical, y_axis_vertical);
-					pane.getChildren().add(tileImg);
-				} else {
-					tileImg.relocate(x_axis_vertical, y_axis_vertical);
-					pane.getChildren().add(tileImg);
-					y_axis_vertical -= 10;
-				}
-
-			}
-
-			else {
-
-				if (x_axis >= pane.getWidth()) {
-					x_axis = pane.getLayoutX();
-					y_axis -= 10;
-					tileImg.relocate(x_axis, y_axis);
-					pane.getChildren().add(tileImg);
-				} else {
-					tileImg.relocate(x_axis, y_axis);
-					pane.getChildren().add(tileImg);
-					x_axis += 10;
-				}
-			}
+			tileImg.setFitWidth(35);
+			pane.getChildren().add(tileImg);
 		}
 	}
 
-	public void viewTiles(Table table, FlowPane pane) {
+	public void viewTiles(Table table, Pane pane) {
 		pane.getChildren().clear();
-		double x_axis = pane.getLayoutX();
-		double y_axis = pane.getLayoutY();
+		double x_axis = 0;
+		double y_axis = 0;
+		double imgWidth = 35;
 
 		for (Meld meld : table.getAllMelds()) {
 			for (Tile tile : meld.getMeld()) {
@@ -179,20 +150,22 @@ public class MainScreenController implements Initializable {
 				// Image img = new Image("file:src/main/resources/cardsImages/JPEG/G4.jpg");
 				ImageView tileImg = new ImageView(img);
 				tileImg.setPreserveRatio(true);
-				tileImg.setFitWidth(85);
+				tileImg.setFitWidth(imgWidth);
 
 				if (x_axis >= pane.getWidth()) {
-					x_axis = pane.getLayoutX();
-					y_axis -= 10;
+					x_axis = 0;
+					y_axis += 50;
 					tileImg.relocate(x_axis, y_axis);
 					pane.getChildren().add(tileImg);
+
 				} else {
 					tileImg.relocate(x_axis, y_axis);
 					pane.getChildren().add(tileImg);
-					x_axis += 10;
+					x_axis += imgWidth;
 				}
+
 			}
-			x_axis += 30;
+			x_axis += (imgWidth + 5);
 		}
 	}
 }

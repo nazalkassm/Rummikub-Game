@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -86,6 +87,21 @@ public class MeldTest {
 		tiles.add(new Tile("O", "13"));
 		assertEquals(Meld.MeldType.RUN, Meld.checkMeldType(tiles));
 		
+		// testing run melds with joker, by default 1 tile and 2 jokers will be runs
+		tiles.clear();
+		tiles.add(new Tile("R", "6"));
+		tiles.add(new Joker("J1"));
+		tiles.add(new Joker("J2"));
+		assertEquals(Meld.MeldType.RUN, Meld.checkMeldType(tiles));
+		
+		// Set with 2 jokers
+		tiles.clear();
+		tiles.add(new Tile("R", "6"));
+		tiles.add(new Joker("J1"));
+		tiles.add(new Joker("J2"));
+		tiles.add(new Tile("B", "6"));
+		assertEquals(Meld.MeldType.SET, Meld.checkMeldType(tiles));
+		
 	}
 	
 	@Test
@@ -157,6 +173,48 @@ public class MeldTest {
 		Meld m1 = new Meld(new Tile("B","2"),new Tile("B", "3"),new Tile("B", "4"));    
 		assertEquals(9, m1.sumMeld());
 	}
+
+	@Test
+	public void setTest() {
+
+		// Set with 2 jokers
+		tiles.clear();
+		tiles.add(new Tile("R", "2"));
+		Joker joker = new Joker("J0");
+		Joker joker2 = new Joker("J1");
+		tiles.add(joker);
+		tiles.add(joker2);
+		tiles.add(new Tile("B", "2"));
+		joker.setPossibleTiles(new Meld(tiles.toArray(new Tile[0])), new ArrayList<>());
+
+		tiles.add(new Tile("R", "3"));
+		tiles.add(new Tile("G", "2"));
+		tiles.add(new Tile("B", "3"));
+		assertEquals("[R2 B2 G2 J0 , R3 B3 J0 J1 ]", Meld.getSetMelds(tiles).toString());
+		
+	}
+	
+	@Test
+	public void runTest() {
+
+		// Set with 2 jokers
+		tiles.clear();
+		tiles.add(new Tile("R", "1"));
+		Joker joker = new Joker("J0");
+		Joker joker2 = new Joker("J1");
+		tiles.add(joker);
+		tiles.add(joker2);
+		//tiles.add(new Tile("R", "3"));
+		tiles.add(new Tile("R", "4"));
+		//joker.setPossibleTiles(new Meld(tiles.toArray(new Tile[0])), new ArrayList<>());
+    
+		/*tiles.add(new Tile("R", "3"));
+		tiles.add(new Tile("G", "2"));
+		tiles.add(new Tile("B", "3"));*/
+		//assertEquals(Meld.MeldType.SET, Meld.checkMeldType(tiles));
+		assertEquals("[R1 J0 J1 R4 ]", Meld.getRunMelds(tiles).toString());
+		
+	}
 	
 	@Test
 	public void getMaxIndexTest() {
@@ -174,14 +232,17 @@ public class MeldTest {
 	
 		List<Tile> tiles = Arrays.asList(
 				//Tiles played on table
-				new Tile("R1", true), new Tile("B1", true), new Tile("O1", true),
+				new Joker("J1", true), new Tile("B1", true), new Tile("O1", true),
 				new Tile("R6", true), new Tile("R7", true), new Tile("R8", true),
 				//Hand
-				new Tile("R9", false), new Tile("R5", false), new Tile("R2", false), new Tile("R3", false), new Tile("B2", false), new Tile("B3", false),new Tile("O2", false), new Tile("O3", false));
-	
+				new Tile("R9", false), new Tile("R5", false), 
+				new Tile("R2", false), new Tile("R3", false), 
+				new Tile("B2", false), new Tile("B3", false),
+				new Tile("O2", false), new Tile("O3", false));
+		
 		//This is the case where a meld is played by rearranging multiple melds.
 		//The R1 to R4 is played and R4 to R6 is played by splitting R1 to R6 on the table
-		assertEquals("[B1 B2 B3 , R5 R6 R7 R8 R9 , O1 O2 O3 , R1 R2 R3 ]", 
+		assertEquals("[J1 R2 R3 , R5 R6 R7 R8 R9 , B1 B2 B3 , O1 O2 O3 ]", 
 				Meld.getMeldsWithTable(tiles).toString());
 
 		

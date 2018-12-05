@@ -81,9 +81,15 @@ public class Player {
 	 */
 	public List<Meld> play() {
 		List<Meld> melds = new ArrayList<>(this.behaviour.useStrategy(this));
-
+		ArrayList<Tile> meldsList = new ArrayList<Tile>();
+		for (Meld m : melds ) {
+			meldsList.addAll(m.getTiles());
+		}
 		for (Meld m : melds) {
 			for (Tile t : m.getTiles()) {
+				if (t instanceof Joker) {
+					((Joker) t).setPossibleTiles(m, meldsList);
+				}
 				if (!t.getPlayedOnTable()) {
 					t.setPlayedOnTable(true);
 				}

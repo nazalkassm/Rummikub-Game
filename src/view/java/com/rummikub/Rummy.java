@@ -11,8 +11,7 @@ import javafx.stage.Stage;
 
 public class Rummy extends Application {
 
-	public static List<Player> players;
-	public static boolean testingMode;
+	public static Game game;
 
 	public static void main(String[] args) {
 		Application.launch(args);
