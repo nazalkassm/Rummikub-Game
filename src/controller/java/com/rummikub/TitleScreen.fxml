@@ -11,8 +11,8 @@
 
 <AnchorPane fx:id="root" maxHeight="-1.0" maxWidth="-1.0" minHeight="381.0" minWidth="548.0" prefHeight="503.0" prefWidth="670.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.rummikub.TitleScreenController">
    <children>
-      <Rectangle fx:id="background" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="523.0" layoutX="-8.0" layoutY="-7.0" stroke="BLACK" strokeType="INSIDE" width="695.0" />
-      <Rectangle fx:id="title" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="123.0" layoutX="104.0" layoutY="33.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="463.0" />
+      <Rectangle fx:id="rect_background" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="523.0" layoutX="-8.0" layoutY="-7.0" stroke="BLACK" strokeType="INSIDE" width="695.0" />
+      <Rectangle fx:id="rect_title" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="123.0" layoutX="104.0" layoutY="33.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="463.0" />
       <Label alignment="CENTER" layoutX="132.0" layoutY="166.0" minWidth="284.0" style="&#10;" text="Please select the number of players." textAlignment="CENTER" textFill="#9f9f9f" wrapText="false" AnchorPane.leftAnchor="132.0" AnchorPane.rightAnchor="132.0" AnchorPane.topAnchor="166.0">
          <font>
             <Font size="18.0" />
@@ -22,21 +22,36 @@
       <Button fx:id="btn_Play" disable="true" layoutX="252.0" layoutY="433.0" mnemonicParsing="false" onAction="#handlePlayBtn" prefHeight="62.0" prefWidth="166.0" text="Play!" />
       <VBox fx:id="vb_PlayerStrategies" layoutX="261.0" layoutY="259.0" prefHeight="148.0" prefWidth="150.0" spacing="10.0" AnchorPane.leftAnchor="261.0" AnchorPane.rightAnchor="259.0" AnchorPane.topAnchor="259.0">
          <children>
-            <ComboBox fx:id="cb_Player1" onAction="#handleStrategyCB" prefWidth="150.0" value="Select" />
-            <ComboBox fx:id="cb_Player2" onAction="#handleStrategyCB" prefWidth="150.0" value="Select">
+            <ComboBox fx:id="cb_Player0" onAction="#handleStrategyCB" prefWidth="150.0" value="Select" />
+            <ComboBox fx:id="cb_Player1" onAction="#handleStrategyCB" prefWidth="150.0" value="Select">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
             </ComboBox>
+            <ComboBox fx:id="cb_Player2" onAction="#handleStrategyCB" prefWidth="150.0" value="Select" />
             <ComboBox fx:id="cb_Player3" onAction="#handleStrategyCB" prefWidth="150.0" value="Select" />
-            <ComboBox fx:id="cb_Player4" onAction="#handleStrategyCB" prefWidth="150.0" value="Select" />
          </children>
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
       </VBox>
+      <VBox fx:id="vb_PlayerTileSelection" layoutX="102.0" layoutY="259.0" prefHeight="148.0" prefWidth="150.0" spacing="10.0">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <children>
+            <Button id="0" fx:id="btn_Player0Tiles" mnemonicParsing="false" onAction="#handleTileSelectionButton" prefHeight="25.0" prefWidth="156.0" text="Select Initial Tiles" />
+            <Button id="1" fx:id="btn_Player1Tiles" mnemonicParsing="false" onAction="#handleTileSelectionButton" prefHeight="25.0" prefWidth="186.0" text="Select Initial Tiles" />
+            <Button id="2" fx:id="btn_Player2Tiles" mnemonicParsing="false" onAction="#handleTileSelectionButton" prefHeight="25.0" prefWidth="200.0" text="Select Initial Tiles" />
+            <Button id="3" fx:id="btn_Player3Tiles" mnemonicParsing="false" onAction="#handleTileSelectionButton" prefHeight="25.0" prefWidth="222.0" text="Select Initial Tiles" />
+         </children>
+      </VBox>
       <CheckBox fx:id="ckBx_GameMode" alignment="CENTER" layoutX="461.0" layoutY="443.0" mnemonicParsing="false" prefHeight="79.0" prefWidth="226.0" text="Testing mode (view all tiles)" textAlignment="CENTER" />
       <Button fx:id="btn_chooseFile" disable="true" layoutX="14.0" layoutY="450.0" mnemonicParsing="false" onAction="#handleFileBtn" prefHeight="39.0" prefWidth="90.0" text="Choose file" />
       <CheckBox fx:id="ckBx_RigDraw" alignment="CENTER" layoutX="461.0" layoutY="437.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="166.0" text="Rig each draw" textAlignment="CENTER" />
+      <Rectangle fx:id="rect_tileSelection" arcHeight="5.0" arcWidth="5.0" fill="#8fafcd" height="523.0" layoutX="-8.0" layoutY="-5.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="695.0" />
+      <FlowPane fx:id="flw_tileSelection" layoutX="-6.0" layoutY="-5.0" prefHeight="517.0" prefWidth="695.0" visible="false" />
+      <Button fx:id="btn_confirmTiles" layoutX="125.0" layoutY="456.0" mnemonicParsing="false" onAction="#handleTileConfirmationButton" prefHeight="39.0" prefWidth="127.0" text="Confirm Tiles" visible="false" />
+      <Button fx:id="btn_cancelTiles" layoutX="418.0" layoutY="456.0" mnemonicParsing="false" onAction="#handleTileCancelButton" prefHeight="39.0" prefWidth="127.0" text="Cancel" visible="false" />
    </children>
 </AnchorPane>
