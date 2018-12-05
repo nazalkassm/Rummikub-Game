@@ -166,6 +166,7 @@ public class TitleScreenController implements Initializable {
 			Rummy.game = new Game(players, testingMode, rigDraw, waitAfterEachTurn, useGUI);
 			
 			Rummy.game.stock = createStock();
+			Rummy.game.table = new Table(Rummy.game.stock);
 
 			// Get the event's source stage, and set the scene to be the game.
 			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -371,6 +372,13 @@ public class TitleScreenController implements Initializable {
 			}
 		}
 		riggedStock.getStockArray().addAll(stock.getStockArray());
+		
+		Print.print();
+		Print.print();
+		
+		for (Tile t : riggedStock.getStockArray()) {
+			Print.print(t.toString());
+		}
 		
 		return riggedStock;
 	}
