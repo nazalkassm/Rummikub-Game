@@ -20,8 +20,6 @@ import javafx.scene.shape.Rectangle;
 
 public class MainScreenController implements Initializable {
 
-	Game game;
-
 	@FXML
 	private AnchorPane root;
 
@@ -87,7 +85,8 @@ public class MainScreenController implements Initializable {
 		playerRectangles.add(player2_rectangle);
 		playerRectangles.add(player3_rectangle);
 
-		int max = Rummy.players.size();
+		Rummy.game.start();
+		int max = Rummy.game.players.size();
 		while (playerPanes.size() > max) {
 			playerPanes.get(max).setVisible(false);
 			playerPanes.remove(max);
@@ -97,13 +96,8 @@ public class MainScreenController implements Initializable {
 			playerRectangles.remove(max);
 		}
 
-		Boolean waitAfterEachTurn = false;
-		Boolean useGUI = true;
-		game = new Game(Rummy.players, Rummy.testingMode, waitAfterEachTurn, useGUI);
-		game.start();
-
 		for (int i = 0; i < playerPanes.size(); i++) {
-			viewTiles(game.players.get(i), playerPanes.get(i));
+			viewTiles(Rummy.game.players.get(i), playerPanes.get(i));
 		}
 	}
 
@@ -120,10 +114,10 @@ public class MainScreenController implements Initializable {
 
 	public void takeTurn() throws Exception {
 		nextTurnButton.setDisable(true);
-		if (game.gameRunning) {
-			game.takeTurn();
-			viewTiles(game.previousPlayer, playerPanes.get(game.previousPlayer.getNumber()));
-			viewTiles(game.table, table_pane);
+		if (Rummy.game.gameRunning) {
+			Rummy.game.takeTurn();
+			viewTiles(Rummy.game.previousPlayer, playerPanes.get(Rummy.game.previousPlayer.getNumber()));
+			viewTiles(Rummy.game.table, table_pane);
 			nextTurnButton.setDisable(false);
 		}
 	}

@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javax.swing.JFileChooser;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,6 +19,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class TitleScreenController implements Initializable {
@@ -38,6 +41,8 @@ public class TitleScreenController implements Initializable {
 	private VBox vb_PlayerStrategies;
 	@FXML
 	private Button btn_Play;
+	@FXML
+	private Button btn_chooseFile;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -71,6 +76,7 @@ public class TitleScreenController implements Initializable {
 		}
 
 		btn_Play.setDisable(true);
+		btn_chooseFile.setDisable(true);
 	}
 
 	@FXML
@@ -86,16 +92,74 @@ public class TitleScreenController implements Initializable {
 
 		if (check) {
 			btn_Play.setDisable(false);
+			btn_chooseFile.setDisable(false);
 		} else {
 			btn_Play.setDisable(true);
+			btn_chooseFile.setDisable(true);
 		}
 	}
 
 	@FXML
-	public void handlePlayBtn(ActionEvent event) throws Exception  {
+	public void handlePlayBtn(ActionEvent event) throws Exception {
+		List<Player> players = getPlayers();
+
+		if (players.size() >= 2) {
+
+			Boolean waitAfterEachTurn = false;
+			Boolean useGUI = true;
+			Boolean testingMode = ckBx_GameMode.isSelected();
+			Rummy.game = new Game(players, testingMode, waitAfterEachTurn, useGUI);
+
+			// Get the event's source stage, and set the scene to be the game.
+			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			stage.setScene(Rummy.loadScene("MainScreen.fxml"));
+		} else {
+			Print.print("Unknown strategy selected.");
+		}
+
+	}
+
+	@FXML
+	public void handleFileBtn(ActionEvent event) throws Exception {
+		
+		List<Player> players = getPlayers();
+		if (players.size() >= 2) {
+
+			// Get the event's source stage
+			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			FileChooser fileChooser = new FileChooser();
+			fileChooser.setTitle("Open Rigged File");
+			File file = fileChooser.showOpenDialog(stage);
+			
+			if (file != null) {
+				Boolean waitAfterEachTurn = false;
+				Boolean useGUI = true;
+				Boolean testingMode = ckBx_GameMode.isSelected();
+				Rummy.game = new Game(players, testingMode, waitAfterEachTurn, useGUI);
+				
+				FileParser.reset();
+				FileParser.parse(file);
+				Rummy.game.stock = FileParser.stock;
+				Rummy.game.table = new Table(Rummy.game.stock);
+
+				
+				if (!FileParser.inputError) {
+					// set the scene to be the main screen.
+					stage.setScene(Rummy.loadScene("MainScreen.fxml"));
+				}
+				else {
+					Print.print("Input error of some sort!");
+				}
+			}
+		} else {
+			Print.print("Unknown strategy selected.");
+		}
+
+	}
+
+	private List<Player> getPlayers() {
 		int numPlayers = Integer.parseInt(cb_PlayerCount.getValue());
 		List<Player> players = new ArrayList<Player>();
-		boolean error = false;
 
 		for (int i = 0; i < numPlayers; i++) {
 			@SuppressWarnings("unchecked")
@@ -118,20 +182,11 @@ public class TitleScreenController implements Initializable {
 				players.add(new Player("p" + i, new Strategy4()));
 				break;
 			default:
-				error = true;
+				return new ArrayList<Player>();
 			}
 		}
 
-		if (!error) {
-			Rummy.players = players;
-			Rummy.testingMode = ckBx_GameMode.isSelected();
-			// Get the event's source stage, and set the scene to be the game.
-			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-			stage.setScene(Rummy.loadScene("MainScreen.fxml"));
-		} else {
-			Print.print("Unknown strategy selected.");
-		}
-
+		return players;
 	}
 
 }

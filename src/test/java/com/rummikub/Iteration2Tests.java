@@ -112,15 +112,13 @@ class Iteration2Tests
 	@Test
 	void scenarios() throws Exception 
 	{
-	String player_name = "empty";
-	System.out.println("===========\n Tests from Iteration 1 \n==========");
+		String player_name = "empty";
+		System.out.println("===========\n Tests from Iteration 1 \n==========");
 	
-		while(true)
+		while (!player_name.equals("Strategy0 Player1"))
 		{
 			System.out.println("Finding the correct player to start");
 			player_name = table.getNextPlayerTurn().getName();
-			if(player_name.equals("Strategy0 Player1"))
-				break;
 		}
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		/** P1 Turn*/ 

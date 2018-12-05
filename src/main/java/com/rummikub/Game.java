@@ -9,7 +9,7 @@ public class Game {
 
 	// Primitive Variables
 	int turnsWithoutMoves = 0; // Keeps track of how many turns have been taken without any moves being made.
-	boolean printRackMeld = Rummy.testingMode; // Turn it off so that you do not print the computers racks and melds.
+	boolean printRackMeld = false; // Turn it off so that you do not print the computers racks and melds.
 	boolean waitAferEachTurn = false; // Prompts enter after each turn
 	boolean usingGui = false;
 	boolean gameRunning = true;
