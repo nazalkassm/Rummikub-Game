@@ -197,7 +197,11 @@ public class MainScreenController implements Initializable {
 				}
 			}
 		}
-		viewTiles(Rummy.game.previousPlayer, playerPanes.get(Rummy.game.previousPlayer.getNumber()));
+		if (Rummy.game.previousPlayer.isHuman()) {
+			viewTiles(Rummy.game.currentPlayer, playerPanes.get(Rummy.game.currentPlayer.getNumber()));
+		} else {
+			viewTiles(Rummy.game.previousPlayer, playerPanes.get(Rummy.game.previousPlayer.getNumber()));
+		}
 		viewTiles(Rummy.game.table, table_pane);
 		//Rummy.game.manualStart = false;
 		

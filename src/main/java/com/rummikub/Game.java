@@ -110,8 +110,25 @@ public class Game {
 							valid = false;
 					}
 				}
-			
-			}
+				if (!currentPlayer.canPlayOnExistingMelds) {
+					int sum = 0;
+					for (Meld m: table.getAllMelds()) {
+						for (Tile t: m.getTiles()) {
+							if (!t.getPlayedOnTable()) {
+								if (t instanceof Joker) {
+									((Joker) t).setPossibleTiles(m, (ArrayList<Tile>) table.getAllTilesOnTable());
+								}
+								sum+= t.getValue();	
+							}
+						}
+					}
+					if (sum >= 30) {
+							currentPlayer.canPlayOnExistingMelds = true;
+							
+					} else {
+						valid = false;
+					}
+				}
 			 if (!valid) {
 			currentPlayer.restoreFromMemento(playerMomento1);
 			table.restoreFromMemento(tableMomento1);
@@ -119,12 +136,15 @@ public class Game {
 			 } else {
 					for (Meld m: table.getAllMelds()) {
 						for (Tile t: m.getTiles()) {
+							if (t instanceof Joker) {
+								((Joker) t).setPossibleTiles(m, (ArrayList<Tile>) table.getAllTilesOnTable());
+							}
 							t.setPlayedOnTable(true);
 						}
 						
 						}
 					}
-			 
+			 }
 		if (currentPlayer.getPlayerRack().getSize() == Constants.ZERO_TILES) {
 			gameRunning = false;
 			winner = currentPlayer;
@@ -144,6 +164,7 @@ public class Game {
 
 				table.notifyObservers();
 			} else {
+				table.notifyObservers();
 				shouldDraw = true;
 				if (stock.getLength() == 0) {
 					turnsWithoutMoves++;
