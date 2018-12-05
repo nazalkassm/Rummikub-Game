@@ -1,208 +1,174 @@
 package com.rummikub;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import org.pmw.tinylog.Logger;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.shape.Rectangle;
 
 public class MainScreenController implements Initializable {
 
-	RummyGame game;
+	Game game;
+
 	@FXML
 	private AnchorPane root;
+
 	@FXML
-	private Label lbl_Player1;
+	private Pane table_pane;
+
 	@FXML
-	private Label lbl_Player2;
+	private FlowPane player0_pane;
 	@FXML
-	private Label lbl_Player3;
+	private FlowPane player1_pane;
 	@FXML
-	private Label lbl_Player4;
+	private FlowPane player2_pane;
 	@FXML
-	private Button endTurnButton;
+	private FlowPane player3_pane;
 	@FXML
-	private Button startGame;
-	
-	private List<Label> labels = new ArrayList<Label>();
+	private Label player0_label;
+	@FXML
+	private Label player1_label;
+	@FXML
+	private Label player2_label;
+	@FXML
+	private Label player3_label;
+	@FXML
+	private Rectangle player0_rectangle;
+	@FXML
+	private Rectangle player1_rectangle;
+	@FXML
+	private Rectangle player2_rectangle;
+	@FXML
+	private Rectangle player3_rectangle;
+
+	@FXML
+	private Rectangle startGameRectangle;
+	@FXML
+	private Button startGameButton;
+	@FXML
+	private Button nextTurnButton;
+
+	private List<FlowPane> playerPanes = new ArrayList<FlowPane>();
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		List<Label> playerLabels = new ArrayList<Label>();
+		List<Rectangle> playerRectangles = new ArrayList<Rectangle>();
 
-		game = new RummyGame(Rummy.players);
-		try {
-			game.start();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		// drawHands();
-		try {
-			game.takeTurn();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		for (FlowPane flowPane : playerPanes) {
+			flowPane.setPadding(new Insets(10, 10, 10, 10));
+			flowPane.setVgap(4);
+			flowPane.setHgap(4);
 		}
 
-		labels.add(lbl_Player1);
-		labels.add(lbl_Player2);
+		playerPanes.add(player0_pane);
+		playerPanes.add(player1_pane);
+		playerPanes.add(player2_pane);
+		playerPanes.add(player3_pane);
+		playerLabels.add(player0_label);
+		playerLabels.add(player1_label);
+		playerLabels.add(player2_label);
+		playerLabels.add(player3_label);
 
-		if (lbl_Player3.isVisible()) {
-			labels.add(lbl_Player3);
+		playerRectangles.add(player0_rectangle);
+		playerRectangles.add(player1_rectangle);
+		playerRectangles.add(player2_rectangle);
+		playerRectangles.add(player3_rectangle);
 
-			if (lbl_Player4.isVisible()) {
-				labels.add(lbl_Player4);
-			}
+		int max = Rummy.players.size();
+		while (playerPanes.size() > max) {
+			playerPanes.get(max).setVisible(false);
+			playerPanes.remove(max);
+			playerLabels.get(max).setVisible(false);
+			playerLabels.remove(max);
+			playerRectangles.get(max).setVisible(false);
+			playerRectangles.remove(max);
 		}
 
+		Boolean waitAfterEachTurn = false;
+		Boolean useGUI = true;
+		game = new Game(Rummy.players, Rummy.testingMode, waitAfterEachTurn, useGUI);
+		game.start();
+
+		for (int i = 0; i < playerPanes.size(); i++) {
+			viewTiles(game.players.get(i), playerPanes.get(i));
+		}
 	}
 
 	@FXML
-	public void handleEndTurnBtn(ActionEvent event) throws IOException {
-		game.takeTurn();
-		drawTable();
+	public void handleNextTurn(ActionEvent event) throws Exception {
+		if (startGameButton.isVisible()) {
+			startGameButton.setVisible(false);
+			startGameRectangle.setVisible(false);
+			nextTurnButton.setDisable(false);
+		}
 
-		if (!(game.currentPlayer.isHuman() && !game.table.checkNextPlayer().isHuman())) {
-			handleEndTurnBtn(event);
+		takeTurn();
+	}
+
+	public void takeTurn() throws Exception {
+		nextTurnButton.setDisable(true);
+		if (game.gameRunning) {
+			game.takeTurn();
+			viewTiles(game.previousPlayer, playerPanes.get(game.previousPlayer.getNumber()));
+			viewTiles(game.table, table_pane);
+			nextTurnButton.setDisable(false);
 		}
 	}
 
-	public void drawTable() {
-		for (Player p : game.players) {
-			if (game.currentPlayer == p) {
-				labels.get(p.getNumber() - 1).setText("CURRENT PLAYER");
-			} else {
-				labels.get(p.getNumber() - 1).setText("Player " + Integer.toString(p.getNumber()));
-			}
+	public void viewTiles(Player currPlayer, FlowPane pane) {
+		pane.getChildren().clear();
+
+		for (Tile tile : currPlayer.getPlayerRack().getRackArray()) {
+			Image img = tile.getTileImage();
+			// Image img = new Image("file:src/main/resources/tiles/G4.png");
+			ImageView tileImg = new ImageView(img);
+			tileImg.setPreserveRatio(true);
+			tileImg.setFitWidth(35);
+			pane.getChildren().add(tileImg);
 		}
 	}
-	
-	public void drawTableText() {
-		
-	}
-	
-	public class RummyGame {
 
-		// Primitive Variables
-		boolean gameRunning = true;
-		String pName = "";
-		// Data Structure Variables
-		List<Player> players = new ArrayList<>();
-		List<Meld> meldsPlayed;
+	public void viewTiles(Table table, Pane pane) {
+		pane.getChildren().clear();
+		double x_axis = 0;
+		double y_axis = 0;
+		double imgWidth = 35;
 
-		// My data Variables
-		Print printer = new Print();
-		Prompt prompter = new Prompt();
-		Stock stock = new Stock(true);
-		Table table = new Table(stock);
-		Player winner;
-		int turnsWithoutMoves = 0;
-		Player currentPlayer;
-		Boolean humanTurn = false;
+		for (Meld meld : table.getAllMelds()) {
+			for (Tile tile : meld.getMeld()) {
+				Image img = tile.getTileImage();
+				// Image img = new Image("file:src/main/resources/cardsImages/JPEG/G4.jpg");
+				ImageView tileImg = new ImageView(img);
+				tileImg.setPreserveRatio(true);
+				tileImg.setFitWidth(imgWidth);
 
-		// Things to play with when testing
-		boolean waitAferEachTurn = false; // Prompts enter after each turn
-		boolean printRackMeld = true; // Turn it off so that you do not print the computers racks and melds.
+				if (x_axis >= pane.getWidth()) {
+					x_axis = 0;
+					y_axis += 50;
+					tileImg.relocate(x_axis, y_axis);
+					pane.getChildren().add(tileImg);
 
-		RummyGame(List<Player> players) {
-			this.players = players;
-		}
-
-		public void start() throws IOException {
-			// Start game
-			printer.printIntroduction();
-			prompter.promptEnterKey();
-
-			// Print the racks and melds of players, yes or no.
-			for (Player p : players) {
-				p.setPrint_rack_meld(printRackMeld);
-			}
-
-			// Add players to the table
-			for (Player player : players) {
-				table.addPlayers(player);
-			}
-
-			// Initializes which player is starting and keeps track of player's turn
-			table.initPlayersTurn();
-
-			currentPlayer = table.getNextPlayerTurn();
-		}
-
-		public void takeTurn() throws IOException {
-			printer.printGameTable(table);
-
-			Logger.info(currentPlayer.getName());
-			Logger.info(currentPlayer.isHuman());// log to file
-			Print.print("++++++ It is now " + currentPlayer.getName() + "'s turn: ++++++");
-			Print.print("++++++ Round: " + table.getTableRound() + " ++++++");
-			meldsPlayed = currentPlayer.play();
-
-			if (currentPlayer.getPlayerRack().getSize() == Constants.ZERO_TILES) {
-				gameRunning = false;
-				winner = currentPlayer;
-			} else {
-				// Get list of changed melds
-				List<Meld> changedMelds = new ArrayList<>(Table.getDiffMelds(table.getAllMelds(), meldsPlayed));
-
-				// If the changed melds is not empty, then add we're updating things
-				if (!(changedMelds.isEmpty())) {
-					Print.print("\nTable is: ");
-					Print.printMeldtoUser(meldsPlayed, changedMelds, true);
-
-					turnsWithoutMoves = 0;
-
-					table.updateMeldsOnTable(meldsPlayed);
-
-					table.notifyObservers();
 				} else {
-					if (stock.getLength() == 0) {
-						turnsWithoutMoves++;
-					} else {
-						Print.println(currentPlayer.getName() + " draws a tile from the stock: "
-								+ currentPlayer.getPlayerRack().takeTile(stock).toString());
-					}
+					tileImg.relocate(x_axis, y_axis);
+					pane.getChildren().add(tileImg);
+					x_axis += imgWidth;
 				}
-				Print.println(currentPlayer.getName() + " rack size is " + currentPlayer.getPlayerRack().getSize());
-				// print rack and possible melds
-				System.out.println(currentPlayer.getName() + " players new hand is");
-				Print.printRacktoUser(currentPlayer.getPlayerRack(), currentPlayer.isPrint_rack_meld());
-				prompter.promptEnterKey(waitAferEachTurn);
 
-				if (turnsWithoutMoves >= 4) {
-					Print.println("The stock is empty, and no one has played in 4 turns.");
-					gameRunning = false;
-				} else {
-					currentPlayer = table.getNextPlayerTurn();
-				}
 			}
-
-		}
-
-		public void end() throws IOException {
-			// Game ending ( we print an ending and maybe who won, also we can reset
-			// variables and game state if needed)
-			printer.printEnding(winner, waitAferEachTurn);
+			x_axis += (imgWidth + 30);
 		}
 	}
-
-	public void playerView() {
-		for (int i = 0; i < game.currentPlayer.getPlayerRack().getSize(); i++) {
-			ImageView view = new ImageView(game.currentPlayer.getPlayerRack().getRackArray().get(i).getTileImage());
-			view.relocate(50, 50 + (5 * i));
-
-			root.getChildren().add(view);
-		}
-	}
-
 }

@@ -41,7 +41,6 @@ public class Prompt
 		initialized = true;
 		
 		StringBuilder sb = new StringBuilder();
-		sb.append("\nHuman\n");
 		for (String s : commands)
 		{
 		    sb.append(s);
@@ -53,19 +52,21 @@ public class Prompt
 		bi = new BufferedReader(new StringReader(commandsString));
 	}
 	
-	/**
-	 * @throws IOException 
-	 */
-	public void close() throws IOException 
+	public void close() 
 	{
-		bi.close();
+		try {
+			bi.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
 	 * We are never going to prompt for an input without printing a message first.
 	 * @throws IOException 
 	 */
-	public static String promptInput(String... message) throws IOException 
+	public static String promptInput(String... message) 
 	{
 		String input = null;
 		if (!initialized) 
@@ -74,10 +75,20 @@ public class Prompt
 		}
 		Print.println(message);
 		
-		input = bi.readLine();
+		try {
+			input = bi.readLine();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if (input == null) {
 			init();
-			input = bi.readLine();
+			try {
+				input = bi.readLine();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		return input;

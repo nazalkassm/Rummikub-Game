@@ -1,6 +1,5 @@
 package com.rummikub;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,9 +77,9 @@ public class Player {
 	 * 
 	 * @param table = The table on which to play
 	 * @return
-	 * @throws IOException
+	 * @throws Exception 
 	 */
-	public List<Meld> play() throws IOException {
+	public List<Meld> play() {
 		List<Meld> melds = new ArrayList<>(this.behaviour.useStrategy(this));
 		ArrayList<Tile> meldsList = new ArrayList<Tile>();
 		for (Meld m : melds ) {
@@ -179,7 +178,6 @@ public class Player {
 	}
 
 	public Memento saveToMemento() {
-		System.out.println("Saving time to Memento");
 		return new Memento(this.rack);
 	}
 

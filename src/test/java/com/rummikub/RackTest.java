@@ -2,9 +2,6 @@ package com.rummikub;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.jupiter.api.*;
 
 public class RackTest {
@@ -38,7 +35,7 @@ public class RackTest {
 	
 	
 	@AfterAll
-	static void tearDownAfterClass() throws Exception 
+	static void tearDownAfterClass() 
 	{
 		hand = null;
 		hand2 = null;
@@ -47,14 +44,14 @@ public class RackTest {
 	}
 
 	@BeforeEach
-	void setUp() throws Exception 
+	void setUp() 
 	{
 		stock = new Stock();
 		handTest = new Rack();
 	}
 
 	@AfterEach
-	void tearDown() throws Exception 
+	void tearDown() 
 	{
 		handTest = null;
 	}

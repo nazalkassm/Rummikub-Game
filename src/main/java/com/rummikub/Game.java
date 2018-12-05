@@ -1,6 +1,5 @@
 package com.rummikub;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,8 +8,12 @@ import org.pmw.tinylog.Logger;
 public class Game {
 
 	// Primitive Variables
+	int turnsWithoutMoves = 0; // Keeps track of how many turns have been taken without any moves being made.
+	boolean printRackMeld = Rummy.testingMode; // Turn it off so that you do not print the computers racks and melds.
+	boolean waitAferEachTurn = false; // Prompts enter after each turn
+	boolean usingGui = false;
 	boolean gameRunning = true;
-	String pName = "";
+	
 	// Data Structure Variables
 	List<Player> players = new ArrayList<>();
 	List<Meld> meldsPlayed;
@@ -18,35 +21,30 @@ public class Game {
 	// My data Variables
 	Print printer = new Print();
 	Prompt prompter = new Prompt();
-	Stock stock = new Stock();
-	Table table = new Table(stock);
+	Stock stock;
+	Table table;
 	Player winner;
-	int turnsWithoutMoves = 0;
+	Player currentPlayer;
+	Player previousPlayer;
 
-	// Things to play with when testing
-	boolean waitAferEachTurn = true; // Prompts enter after each turn
-	boolean printRackMeld = true; // Turn it off so that you do not print the computers racks and melds.
-
-	Game(List<Player> players) {
+	Game(List<Player> players, Boolean printMelds, Boolean waitAfterTurns, Boolean GUI) {
 		this.players = players;
+		this.printRackMeld = printMelds;
+		this.waitAferEachTurn = waitAfterTurns;
+		this.usingGui = GUI;
+		
+		this.stock = new Stock(GUI);
+		this.table = new Table(stock);
 	}
 
-	public void start() throws IOException {
+	public void start() {			
 		// Start game
 		printer.printIntroduction();
-		prompter.promptEnterKey();
-		// pName = Prompt.promptInput("Enter your name: ");
-
-		// Adding players to the game
-		/*
-		 * players.add(new Player("p1", new Strategy0())); players.add(new Player("p1",
-		 * new Strategy1())); players.add(new Player("p2", new Strategy2()));
-		 * players.add(new Player("p3", new Strategy3()));
-		 */
 
 		// Print the racks and melds of players, yes or no.
 		for (Player p : players) {
 			p.setPrint_rack_meld(printRackMeld);
+
 		}
 
 		// Add players to the table
@@ -57,22 +55,25 @@ public class Game {
 		// Initializes which player is starting and keeps track of player's turn
 		table.initPlayersTurn();
 
-		// Game loop the game runs here until it ends.
-		do {
-			printer.printGameTable(table);
+		currentPlayer = table.getCurrentPlayer();
+		
+		if (usingGui) {
+			Print.print("Waiting for user to click the 'Start Game!' button...");
+		}
+	}
 
-			Player currentPlayer = table.getNextPlayerTurn();
-			Logger.info(currentPlayer.getName());
-			Logger.info(currentPlayer.isHuman());// log to file
-			Print.print("++++++ It is now " + currentPlayer.getName() + "'s turn: ++++++");
-			Print.print("++++++ Round: " + table.getTableRound() + " ++++++");
-			meldsPlayed = currentPlayer.play();
+	public void takeTurn() {
+		printer.printGameTable(table);
+		Logger.info(currentPlayer.getName());
+		Logger.info(currentPlayer.isHuman());// log to file
+		Print.print("++++++ It is now " + currentPlayer.getName() + "'s turn: ++++++");
+		Print.print("++++++ Round: " + table.getTableRound() + " ++++++");
+		meldsPlayed = currentPlayer.play();
 
-			if (currentPlayer.getPlayerRack().getSize() == Constants.ZERO_TILES) {
-				gameRunning = false;
-				winner = currentPlayer;
-				break;
-			}
+		if (currentPlayer.getPlayerRack().getSize() == Constants.ZERO_TILES) {
+			gameRunning = false;
+			winner = currentPlayer;
+		} else {
 			// Get list of changed melds
 			List<Meld> changedMelds = new ArrayList<>(Table.getDiffMelds(table.getAllMelds(), meldsPlayed));
 
@@ -103,13 +104,25 @@ public class Game {
 			if (turnsWithoutMoves >= 4) {
 				Print.println("The stock is empty, and no one has played in 4 turns.");
 				gameRunning = false;
+			} else {
+				previousPlayer = currentPlayer;
+				currentPlayer = table.getNextPlayerTurn();
+				
+				if (usingGui) {
+					Print.print("Waiting for user to click the 'next turn' button...");
+				}
 			}
+		}
+		
+		if (!gameRunning) {
+			this.end();
+		}
 
-		} while (gameRunning);
+	}
 
+	public void end() {
 		// Game ending ( we print an ending and maybe who won, also we can reset
 		// variables and game state if needed)
 		printer.printEnding(winner, waitAferEachTurn);
-
 	}
 }

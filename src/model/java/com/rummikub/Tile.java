@@ -4,7 +4,6 @@ import java.util.Collections;
 import java.util.List;
 
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 public class Tile implements Comparable<Tile> {
 
@@ -12,9 +11,7 @@ public class Tile implements Comparable<Tile> {
 	protected Ranks rank;
 	protected Colours colour;
 	protected boolean playedOnTable = false;
-	protected boolean isJoker = false;
 	protected Image tileImage;
-	protected ImageView imageView = new ImageView(tileImage);
 
 	// Constructor
 	public Tile(Colours colour, Ranks rank) {
@@ -39,7 +36,8 @@ public class Tile implements Comparable<Tile> {
 	}
 
 	public static String getFilename(Colours colour, Ranks rank) {
-		return "file:resources/cardsImages/JEPG/" + colour.getSymbol() + rank.getSymbol() + ".jpg";
+		String str = "file:src/main/resources/tiles/" + colour.getSymbol() + rank.getSymbol() + ".png";
+		return str;
 	}
 
 	public Tile(String tileString) {
@@ -135,11 +133,4 @@ public class Tile implements Comparable<Tile> {
 		return Collections.emptyList();
 	}
 
-	public boolean isJoker() {
-		return isJoker;
-	}
-
-	public void setJoker(boolean isJoker) {
-		this.isJoker = isJoker;
-	}
 }

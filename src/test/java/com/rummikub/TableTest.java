@@ -7,6 +7,7 @@ import static org.hamcrest.CoreMatchers.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.*;
@@ -14,6 +15,7 @@ import org.junit.jupiter.api.*;
 public class TableTest {
 	
 	private static Table table;
+	private static Stock s = new Stock();
 	private static Meld m1 = new Meld(new Tile("B","2"),new Tile("B", "3"),new Tile("B", "4"));
 	private static Meld m2 = new Meld(new Tile("G", "6"),new Tile("G", "5"),new Tile("G", "4"));
 	private static Meld m3 = new Meld(new Tile("G", "10"),new Tile("R", "10"),new Tile("O", "10"));
@@ -23,10 +25,10 @@ public class TableTest {
 	private static Player player4 = new Player("p4", new Strategy3()); 
 	
 	@BeforeAll
-	static void setUpClass() throws Exception {
+	static void setUpClass() {
 		
 		//Create the new player
-		table = new Table(new Stock());
+		table = new Table(s);
 		table.addPlayers(player1, player2, player3, player4);
 		List<Meld> melds = Arrays.asList(m1,m2,m3);
 		table.updateMeldsOnTable(melds);
@@ -34,8 +36,15 @@ public class TableTest {
 	
 	@Test
 	public void initTurnTest() {
+		 //Player 1 get's R13, player 2 get  R1, player 3 get R1 but since someone already has it he get's the next tile so B12. Player 4 gets B4
+		 List<Tile> tiles = Arrays.asList(new Tile ("R10"), new Tile ("R1"), new Tile ("R1"), new Tile ("B9"), new Tile ("B4"));
+		 Collections.reverse(tiles);
+		 for (Tile t: tiles )
+			 s.getStockArray().add(0, t);
+		 //P3 has highest card so should run first
+		 table.initPlayersTurn();
 		//Init turn will return true if the turns are decided by highest tile number
-		assertEquals(true, table.initPlayersTurn());
+		assertEquals("p1", table.getCurrentPlayer().getName());
 	}
 	
 	@Test
@@ -84,10 +93,10 @@ public class TableTest {
 	@Test
 	public void getLowestHandCountTest() {
 		//We have 14 tiles for each player
-		assertEquals(14, table.lowestTableHandCount());
+		assertEquals(14, table.getPlayersRackCount());
 		player1.getPlayerRack().setRack(Arrays.asList(new Tile("B","4")));
 		//Set the player's rack to 1 so now the lowest table hand count will be 1
-		assertEquals(1, table.lowestTableHandCount());
+		assertEquals(1, table.getPlayersRackCount());
 	}
 	
 	@Test

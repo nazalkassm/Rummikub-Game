@@ -1,11 +1,7 @@
 package com.rummikub;
 
-import static org.junit.jupiter.api.Assumptions.assumingThat;
-
-import java.io.Console;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -216,6 +212,7 @@ public class Meld {
 		Collections.sort(collectedTings.get(0));
 		Collections.sort(collectedTings.get(1));
 
+
 		int jokerUsed = 0;
 		int jokerUsedIndex = -1;
 		boolean isRunOn = false;
@@ -321,7 +318,6 @@ public class Meld {
 				}
 
 				meldList.add(new Meld(meld.tiles.toArray(new Tile[0])));
-
 			}
 
 		}
@@ -367,6 +363,7 @@ public class Meld {
 		}
 		return meldListToReturn;
 	}
+	
 
 	/*
 	 * finding set-type melds in the rack first gets rid of duplicate objects (so if
@@ -374,6 +371,7 @@ public class Meld {
 	 * same values
 	 */
 	public static List<Meld> getSetMelds(List<Tile> tileList) {
+
 		List<Tile> tilesToCheck = new ArrayList<Tile>(
 		    tileList.stream().filter(p -> !(p instanceof Joker)).collect(Collectors.toList()));
 		List<Tile> playerTiles = new ArrayList<Tile>(
@@ -398,6 +396,7 @@ public class Meld {
 		// Initialize array list of 13, with 2 lists each of tiles
 		List<List<List<Tile>>> collectedSets = new ArrayList<List<List<Tile>>>();
 
+
 		for (int i = 0; i < 13; ++i) {
 			List<List<Tile>> secondLevelArrayList = new ArrayList<List<Tile>>();
 			collectedSets.add(secondLevelArrayList);
@@ -406,8 +405,10 @@ public class Meld {
 			}
 		}
 		// Loop over all the tiles
+
 		for (int i = 0; i < tilesToCheck.size(); i++) {
 			Tile currTile = tilesToCheck.get(i);
+
 			// We use the value -1 as the respective index in the collectedSets
 			// Ex: If currTile is O4, then we would use collectedSets[3] to store all 4's
 			int index = currTile.getValue() - 1;
@@ -434,6 +435,7 @@ public class Meld {
 		// Loop over all the collected sets and add all of size => 3 to setList
 		for (int i = 0; i < 13; i++) {
 			for (int j = 0; j < 2; j++) {
+
 				// Loop over all jokers
 				for (Joker joker : jokers) {
 					List<Tile> possibleTilesOfJoker = joker.getPossibleTiles();
@@ -465,6 +467,7 @@ public class Meld {
 			}
 		}
 
+
 		for (int i = 0; i < jokers.size(); ++i) {
 			jokers.get(i).setPossibleTiles(possibleTiles.get(0));
 		}
@@ -484,6 +487,7 @@ public class Meld {
 		// a meld is a set iff:
 		// - There is only one tile per colour
 		// - Each tile of each colour is equal
+
 		if (tilesByColour.keySet().size() == tilesToCheck.size() && checkEqualRanks(tilesToCheck)) {
 			newMeldType = MeldType.SET;
 		}
@@ -507,6 +511,7 @@ public class Meld {
 	// Tile::isRunOn() returns false if the colour are not equal.
 	static protected boolean checkSequence(List<Tile> tiles) {
 		boolean check = true;
+
 		List<Tile> tempTiles = new ArrayList<Tile>(tiles);
 		Collections.sort(tempTiles);
 		int incorrect = 0;

@@ -2,9 +2,7 @@ package com.rummikub;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -16,14 +14,12 @@ import org.junit.jupiter.api.Test;
 
 class Strategy2Test {
 	
-	private static List<Meld> meld1,meld2;
 	private static Player player1;
 	private static Player player2;
-	private static Player player3;
 	private static Table table;
 
 	@BeforeAll
-	static void setUpBeforeClass() throws Exception {
+	static void setUpBeforeClass()  {
 		//Table because strategy 3 needs to observe
 		Stock stock = new Stock();
 		table = new Table(stock);
@@ -61,27 +57,25 @@ class Strategy2Test {
 	}
 
 	@AfterAll
-	static void tearDownAfterClass() throws Exception 
+	static void tearDownAfterClass()  
 	{
 		player1 = null;
-		meld1 = null;
-		meld2 = null;
 	}
 
 	@BeforeEach
-	void setUp() throws Exception 
+	void setUp()  
 	{
 		
 	}
 
 	@AfterEach
-	void tearDown() throws Exception 
+	void tearDown()  
 	{
 		
 	}
 	
 	@Test
-	void useStrategyTest() throws IOException {
+	void useStrategyTest() throws Exception {
 		/*p1:		
 		"G", "10"
 		"G", "11"

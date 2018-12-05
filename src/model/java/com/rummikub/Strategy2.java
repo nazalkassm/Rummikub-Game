@@ -1,16 +1,15 @@
 package com.rummikub;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.ListIterator;
 
-public class Strategy2 implements StrategyBehaviour {
+public class Strategy2 implements StrategyBehaviour 
+{
 	private TableInfo tableInfo; 
 	
-	Strategy2() {
-		//subject.registerObserver(this);
+	Strategy2() 
+	{
 	}
 	
 	@Override
@@ -21,11 +20,11 @@ public class Strategy2 implements StrategyBehaviour {
 		//print rack and possible melds
 		Print.printRacktoUser(currPlayer.getPlayerRack(),currPlayer.isPrint_rack_meld());
 		//If no other player has played on the table
-		if (tableInfo.getMelds().isEmpty()) {
+		if (tableInfo.getMeldsFromTable().isEmpty()) {
 			//Can't play so passes
 			currPlayer.restoreFromMemento(playerState);
 			tableInfo.restoreFromMemento(tableState);
-			return tableInfo.getMelds();
+			return tableInfo.getMeldsFromTable();
 		}
 	
 		//Add current player to tiles
@@ -33,7 +32,7 @@ public class Strategy2 implements StrategyBehaviour {
 		
 		//If the player can play on existing melds 
 		if (currPlayer.canPlayOnExistingMelds) {	
-			for (Meld m: tableInfo.getMelds()) {
+			for (Meld m: tableInfo.getMeldsFromTable()) {
 				tiles.addAll(m.getTiles());
 			}
 		}
@@ -53,12 +52,12 @@ public class Strategy2 implements StrategyBehaviour {
 	
 			if (sum >= 30) {
 				currPlayer.canPlayOnExistingMelds = true;
-				melds.addAll(tableInfo.getMelds());
+				melds.addAll(tableInfo.getMeldsFromTable());
 			} else {
 				Print.print("Player " + currPlayer.getName() + " tried playing melds but their sum is less than 30.");
 				currPlayer.restoreFromMemento(playerState);
 				tableInfo.restoreFromMemento(tableState);
-				return tableInfo.getMelds();
+				return tableInfo.getMeldsFromTable();
 			}
 		} else {
 		
@@ -88,7 +87,8 @@ public class Strategy2 implements StrategyBehaviour {
 	}
 
 	@Override
-	public void update(TableInfo tableInfo) {
+	public void update(TableInfo tableInfo) 
+	{
 		this.tableInfo = tableInfo;		
 	}
 
@@ -96,11 +96,4 @@ public class Strategy2 implements StrategyBehaviour {
 	public void setSubject(Subject subject) {
 		subject.registerObserver(this);
 	}
-
-	@Override
-	public void playStrategy(Player currPlayer, List<Meld> possibleMelds, List<Meld> returnMelds) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

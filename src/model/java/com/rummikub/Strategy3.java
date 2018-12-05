@@ -1,7 +1,6 @@
 package com.rummikub;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -24,7 +23,7 @@ public class Strategy3 implements StrategyBehaviour {
 		
 		//If the player can play on existing melds 
 		if (currPlayer.canPlayOnExistingMelds) {	
-			for (Meld m: tableInfo.getMelds()) {
+			for (Meld m: tableInfo.getMeldsFromTable()) {
 				tiles.addAll(m.getTiles());
 			}
 		}
@@ -44,12 +43,12 @@ public class Strategy3 implements StrategyBehaviour {
 	
 			if (sum >= 30) {
 				currPlayer.canPlayOnExistingMelds = true;
-				melds.addAll(tableInfo.getMelds());
+				melds.addAll(tableInfo.getMeldsFromTable());
 			} else {
 				Print.print("Player " + currPlayer.getName() + " tried playing melds but their sum is less than 30.");
 				currPlayer.restoreFromMemento(playerState);
 				tableInfo.restoreFromMemento(tableState);
-				return tableInfo.getMelds(); 
+				return tableInfo.getMeldsFromTable(); 
 			}
 		} else {
 		
@@ -60,7 +59,20 @@ public class Strategy3 implements StrategyBehaviour {
 			//Otherwise we can't get rid of all the tiles so we need to ...
 			else {
 				//IF no another player less than 3 cards, play all 
-				if(!(tableInfo.getLowestHandCount() <= currPlayer.getPlayerRack().getSize() - 3)) {
+				
+				int lowest_count = Constants.STOCK_SIZE;
+				
+				int[] players_count = tableInfo.getPlayersRackCount();
+				
+				for (int i=0 ; i < players_count.length; i++)
+				{
+					if (players_count[i] < lowest_count)
+					{
+						lowest_count = players_count[i];
+					}
+				}
+				
+				if(!(lowest_count <= currPlayer.getPlayerRack().getSize() - 3)) {
 					ListIterator<Meld> iter = melds.listIterator();
 					while (iter.hasNext()){
 						boolean poop = false;
@@ -72,7 +84,7 @@ public class Strategy3 implements StrategyBehaviour {
 					}
 				}
 				//If the player could play but had no tiles...
-				if (Table.getDiffMelds(tableInfo.getMelds(), melds).isEmpty()) {
+				if (Table.getDiffMelds(tableInfo.getMeldsFromTable(), melds).isEmpty()) {
 					Print.print("Player " + currPlayer.getName() + " could play but has no tile to play.");
 				}
 			}
@@ -85,11 +97,6 @@ public class Strategy3 implements StrategyBehaviour {
 		return melds;
 		
 	}
-	
-	@Override
-	public void playStrategy(Player currPlayer, List<Meld> possibleMelds, List<Meld> returnMelds) {
-		
-	} //end of function
 	
 	@Override
 	public void update(TableInfo tableInfo) 

@@ -2,11 +2,7 @@ package com.rummikub;
 
 import com.rummikub.Player;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-
-import com.rummikub.StrategyBehaviour;
 
 public class PlayerMock extends Player
 {
@@ -18,7 +14,7 @@ public class PlayerMock extends Player
 	private boolean useStrategyCalled = false;
 	
 	@Override
-	public List<Meld> play() throws IOException 
+	public List<Meld> play()
 	{
 		this.useStrategyCalled = true;
 		return super.play();

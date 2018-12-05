@@ -2,7 +2,6 @@ package com.rummikub;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -23,7 +22,7 @@ class TileTest {
 	private static Tile tile4;
 	
 	@BeforeAll
-	static void setUpAll() throws Exception 
+	static void setUpAll() 
 	{
 		Logger.info("setUpAll");
 		tile1 = new Tile("R", "1");

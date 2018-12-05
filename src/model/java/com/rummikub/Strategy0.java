@@ -1,6 +1,5 @@
 package com.rummikub;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -25,11 +24,11 @@ public class Strategy0 implements StrategyBehaviour
 	}
 
 	@Override
-	public List<Meld> useStrategy(Player currentPlayer) throws IOException 
+	public List<Meld> useStrategy(Player currentPlayer) 
 	{
 		//Basic Variables Needed 
 		List<Meld> possibleRackMelds = new ArrayList<>(currentPlayer.getPlayerRack().getMelds());
-		List<Meld> tableMelds = new ArrayList<>(tableInfo.getMelds());
+		List<Meld> tableMelds = new ArrayList<>(tableInfo.getMeldsFromTable());
 		List<Meld> returnMelds = new ArrayList<>();
 		//The player Hand we want to save
 		Player.Memento playerMomento1 = currentPlayer.saveToMemento();
@@ -53,7 +52,7 @@ public class Strategy0 implements StrategyBehaviour
 				switch(choiceOfPlayI) 
 				{
 				   case -1 :
-				      returnMelds = tableInfo.getMelds();
+				      returnMelds = tableInfo.getMeldsFromTable();
 				      userIsPlaying = false;
 				      break; 
 				   case 0:
@@ -66,8 +65,9 @@ public class Strategy0 implements StrategyBehaviour
 					  playStrategy(currentPlayer,tableMelds,returnMelds);
 					  break;
 				   default :
-					  Print.print("Wong input, leaving the game");
-					  System.exit(0);
+					  Print.print("Wong input, exiting the turn");
+					  userIsPlaying = false;
+					  break;
 				}
 			}
 		}
@@ -93,7 +93,7 @@ public class Strategy0 implements StrategyBehaviour
 				}
 				currentPlayer.restoreFromMemento(playerMomento1);
 				tableInfo.restoreFromMemento(tableMomento1);
-				returnMelds = tableInfo.getMelds();
+				returnMelds = tableInfo.getMeldsFromTable();
 			}
 		}
 
@@ -106,24 +106,22 @@ public class Strategy0 implements StrategyBehaviour
 			Print.print("\n" + currentPlayer.getName() + " wants to pass.");
 		}
 
-		if (!(tableInfo.getMelds().isEmpty()) && returnMelds.size() > 0)
+		if (!(tableInfo.getMeldsFromTable().isEmpty()) && returnMelds.size() > 0)
 
 		{
-			returnMelds.addAll(tableInfo.getMelds());
+			returnMelds.addAll(tableInfo.getMeldsFromTable());
 			returnMelds.removeAll(meldsToRemove);
 		}
 		
 		return returnMelds;
 	}
 
-	@Override
-	public void playStrategy(Player currentPlayer, List<Meld> tableMelds, List<Meld> returnMelds) throws IOException 
+
+	public void playStrategy(Player currentPlayer, List<Meld> tableMelds, List<Meld> returnMelds) 
 	{
 		List<Tile> mergedTiles = new ArrayList<>(currentPlayer.getPlayerRack().getRackArray());
 		List<Meld> MergedMeld = new ArrayList<>();
 		List<Integer> inputIntegerList = Prompt.promptUserTableMelds("Choose the melds that you are sure you can play on from the table :(Ex: 2 4 5)",tableMelds);
-		
-		boolean playerIsChoosing = true;
 		
 		for(Integer i : inputIntegerList)
 		{
@@ -145,7 +143,7 @@ public class Strategy0 implements StrategyBehaviour
 		
 	}
 	
-	public void initialStrategy(Player currentPlayer, List<Meld> possibleMelds, List<Meld> returnMelds) throws IOException 
+	public void initialStrategy(Player currentPlayer, List<Meld> possibleMelds, List<Meld> returnMelds) 
 	{
 		boolean playerIsChoosing = true;
 		
@@ -177,7 +175,7 @@ public class Strategy0 implements StrategyBehaviour
 		return sum;
 	}
 	
-	public void initialStrategy2(Player currentPlayer, List<Meld> possibleMelds, List<Meld> returnMelds, List<Tile> toPlayWithRack) throws IOException 
+	public void initialStrategy2(Player currentPlayer, List<Meld> possibleMelds, List<Meld> returnMelds, List<Tile> toPlayWithRack)  
 	{
 		boolean playerIsChoosing = true;
 		

@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 public class Rummy extends Application {
 
 	public static List<Player> players;
+	public static boolean testingMode;
 
 	public static void main(String[] args) {
 		Application.launch(args);
@@ -21,7 +22,7 @@ public class Rummy extends Application {
 	public void start(Stage primaryStage) throws Exception {
 
 		primaryStage.setScene(loadScene("TitleScreen.fxml"));
-		// primaryStage.setResizable(false);
+		primaryStage.setResizable(false);
 		primaryStage.show();
 	}
 
