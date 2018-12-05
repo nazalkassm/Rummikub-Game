@@ -36,9 +36,10 @@ public class QuickTesterWithMain
 		players.add(new Player("p3",new Strategy3()));
 		Boolean printAllPlayerMelds = true;
 		Boolean pauseBetweenTurns = false;
+		Boolean rigDraw = false;
 		Boolean GUI = false;
 		
-		Game game = new Game(players, printAllPlayerMelds, pauseBetweenTurns, GUI); 
+		Game game = new Game(players, printAllPlayerMelds, rigDraw, pauseBetweenTurns, GUI); 
 		
 		FileParser.parse(filePath);
 		

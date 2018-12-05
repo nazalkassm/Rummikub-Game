@@ -10,9 +10,11 @@ public class Game {
 	// Primitive Variables
 	int turnsWithoutMoves = 0; // Keeps track of how many turns have been taken without any moves being made.
 	boolean printRackMeld = false; // Turn it off so that you do not print the computers racks and melds.
+	boolean rigDraw = false;
 	boolean waitAferEachTurn = false; // Prompts enter after each turn
 	boolean usingGui = false;
 	boolean gameRunning = true;
+	boolean shouldDraw = false;
 	
 	// Data Structure Variables
 	List<Player> players = new ArrayList<>();
@@ -27,9 +29,10 @@ public class Game {
 	Player currentPlayer;
 	Player previousPlayer;
 
-	Game(List<Player> players, Boolean printMelds, Boolean waitAfterTurns, Boolean GUI) {
+	Game(List<Player> players, Boolean printMelds, Boolean rigEachDraw, Boolean waitAfterTurns, Boolean GUI) {
 		this.players = players;
 		this.printRackMeld = printMelds;
+		this.rigDraw = rigEachDraw;
 		this.waitAferEachTurn = waitAfterTurns;
 		this.usingGui = GUI;
 		
@@ -63,6 +66,7 @@ public class Game {
 	}
 
 	public void takeTurn() {
+		shouldDraw = false;
 		printer.printGameTable(table);
 		Logger.info(currentPlayer.getName());
 		Logger.info(currentPlayer.isHuman());// log to file
@@ -88,18 +92,21 @@ public class Game {
 
 				table.notifyObservers();
 			} else {
+				shouldDraw = true;
 				if (stock.getLength() == 0) {
 					turnsWithoutMoves++;
-				} else {
+				} else if (!rigDraw) {
 					Print.println(currentPlayer.getName() + " draws a tile from the stock: "
 							+ currentPlayer.getPlayerRack().takeTile(stock).toString());
 				}
 			}
-			Print.println(currentPlayer.getName() + " rack size is " + currentPlayer.getPlayerRack().getSize());
-			// print rack and possible melds
-			System.out.println(currentPlayer.getName() + " players new hand is");
-			Print.printRacktoUser(currentPlayer.getPlayerRack(), currentPlayer.isPrint_rack_meld());
-			prompter.promptEnterKey(waitAferEachTurn);
+			if (!rigDraw) {
+				Print.println(currentPlayer.getName() + " rack size is " + currentPlayer.getPlayerRack().getSize());
+				// print rack and possible melds
+				System.out.println(currentPlayer.getName() + " players new hand is");
+				Print.printRacktoUser(currentPlayer.getPlayerRack(), currentPlayer.isPrint_rack_meld());
+				prompter.promptEnterKey(waitAferEachTurn);
+			}
 
 			if (turnsWithoutMoves >= 4) {
 				Print.println("The stock is empty, and no one has played in 4 turns.");

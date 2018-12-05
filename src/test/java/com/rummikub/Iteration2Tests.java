@@ -1,7 +1,5 @@
 package com.rummikub;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -12,12 +10,9 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.sun.org.apache.bcel.internal.generic.NEW;
-
 class Iteration2Tests
 {
 	
-	private static List<Meld> meld1,meld2;
 	private static Player player1;
 	private static Player player2;
 	private static Player player3;
@@ -89,8 +84,6 @@ class Iteration2Tests
 	{
 		player1 = null;
 		player2 = null;
-		meld1 = null;
-		meld2 = null;
 		table = null;
 	}
 

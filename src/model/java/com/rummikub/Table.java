@@ -81,7 +81,6 @@ public class Table implements Subject {
 		}
 		
 		int turnNum = 0;
-		int toGetAfter;
 		HashMap<Integer, Player> newPlayerTurns = new HashMap<Integer, Player>();
 		Player firstPlayer = sortedList.lastEntry().getValue();
 		boolean getNextEntries  = false;

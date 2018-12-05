@@ -44,7 +44,7 @@
          </font>
       </Label>
       <Rectangle fx:id="table_rect" arcHeight="5.0" arcWidth="5.0" fill="#accceb" height="400.0" layoutX="235.0" layoutY="200.0" stroke="BLACK" strokeType="INSIDE" width="731.0" />
-      <Button fx:id="nextTurnButton" layoutX="1059.0" layoutY="733.0" mnemonicParsing="false" onAction="#handleNextTurn" prefHeight="51.0" prefWidth="132.0" text="Next Turn">
+      <Button fx:id="nextTurnButton" disable="true" layoutX="1059.0" layoutY="733.0" mnemonicParsing="false" onAction="#handleNextTurn" prefHeight="51.0" prefWidth="132.0" text="Next Turn">
          <font>
             <Font size="20.0" />
          </font>
@@ -56,5 +56,7 @@
             <Font size="32.0" />
          </font>
       </Button>
+      <Rectangle fx:id="stock_rect" arcHeight="5.0" arcWidth="5.0" fill="#3da64b" height="742.0" layoutX="40.0" layoutY="29.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="1105.0" />
+      <FlowPane fx:id="stock_pane" layoutX="53.0" layoutY="46.0" prefHeight="707.0" prefWidth="1078.0" visible="false" />
    </children>
 </AnchorPane>

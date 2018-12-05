@@ -85,8 +85,7 @@ public class Meld {
 	}
 
 	public static List<Meld> getMeldsWithTable(List<Tile> tileList) {
-		// ??
-		List<Meld> meldList = new ArrayList<Meld>();
+		new ArrayList<Meld>();
 		// To hold all the tiles that were on the table
 		List<Tile> tilesOnTable = new ArrayList<Tile>();
 		// For each of the tiles in tile list, add only those with the played on table
@@ -184,7 +183,6 @@ public class Meld {
 			}
 		}
 		int jokerCount = jokers.size();
-		int count = 0;
 		List<Meld> meldList = new ArrayList<Meld>();
 		// Init array list of 2,all the sorted things in it
 		List<List<Tile>> collectedTings = new ArrayList<List<Tile>>();
@@ -215,7 +213,6 @@ public class Meld {
 
 		int jokerUsed = 0;
 		int jokerUsedIndex = -1;
-		boolean isRunOn = false;
 		for (List<Tile> tiles : collectedTings) {
 			if (tiles.isEmpty())
 				continue;
@@ -226,7 +223,7 @@ public class Meld {
 				Tile currTile = tiles.get(i);
 				Tile nextTile = tiles.get(i + 1);
 
-				if (i + 1 < tiles.size() && (isRunOn = currTile.isRunOn(nextTile))) {
+				if (i + 1 < tiles.size() && (currTile.isRunOn(nextTile))) {
 					meld.addTile(nextTile);
 				} else {
 					if (jokerUsed < jokerCount && currTile.getColour() == nextTile.getColour()) {

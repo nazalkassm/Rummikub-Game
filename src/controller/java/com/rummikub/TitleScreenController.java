@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import javax.swing.JFileChooser;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,9 +14,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -38,14 +37,22 @@ public class TitleScreenController implements Initializable {
 	@FXML
 	private CheckBox ckBx_GameMode;
 	@FXML
+	private CheckBox ckBx_RigDraw;
+	@FXML
 	private VBox vb_PlayerStrategies;
 	@FXML
 	private Button btn_Play;
 	@FXML
 	private Button btn_chooseFile;
+	@FXML
+	private Rectangle background;
+	@FXML
+	private Rectangle title;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		init_background_images();
+
 		cb_PlayerCount.getItems().addAll("2", "3", "4");
 		cb_Player1.getItems().addAll("Human", "Strategy 1", "Strategy 2", "Strategy 3", "Strategy 4");
 		cb_Player2.getItems().addAll("Human", "Strategy 1", "Strategy 2", "Strategy 3", "Strategy 4");
@@ -107,8 +114,9 @@ public class TitleScreenController implements Initializable {
 
 			Boolean waitAfterEachTurn = false;
 			Boolean useGUI = true;
+			Boolean rigDraw = ckBx_RigDraw.isSelected();
 			Boolean testingMode = ckBx_GameMode.isSelected();
-			Rummy.game = new Game(players, testingMode, waitAfterEachTurn, useGUI);
+			Rummy.game = new Game(players, testingMode, rigDraw, waitAfterEachTurn, useGUI);
 
 			// Get the event's source stage, and set the scene to be the game.
 			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -121,7 +129,7 @@ public class TitleScreenController implements Initializable {
 
 	@FXML
 	public void handleFileBtn(ActionEvent event) throws Exception {
-		
+
 		List<Player> players = getPlayers();
 		if (players.size() >= 2) {
 
@@ -131,24 +139,23 @@ public class TitleScreenController implements Initializable {
 			fileChooser.setTitle("Open Rigged File");
 			fileChooser.setInitialDirectory(new File(Constants.INPUT_FILE_DIRECTORY));
 			File file = fileChooser.showOpenDialog(stage);
-			
+
 			if (file != null) {
 				Boolean waitAfterEachTurn = false;
 				Boolean useGUI = true;
 				Boolean testingMode = ckBx_GameMode.isSelected();
-				Rummy.game = new Game(players, testingMode, waitAfterEachTurn, useGUI);
-				
+				Boolean rigDraw = ckBx_RigDraw.isSelected();
+				Rummy.game = new Game(players, testingMode, rigDraw, waitAfterEachTurn, useGUI);
+
 				FileParser.reset();
 				FileParser.parse(file);
 				Rummy.game.stock = FileParser.stock;
 				Rummy.game.table = new Table(Rummy.game.stock);
 
-				
 				if (!FileParser.inputError) {
 					// set the scene to be the main screen.
 					stage.setScene(Rummy.loadScene("MainScreen.fxml"));
-				}
-				else {
+				} else {
 					Print.print("Input error of some sort!");
 				}
 			}
@@ -188,6 +195,11 @@ public class TitleScreenController implements Initializable {
 		}
 
 		return players;
+	}
+
+	public void init_background_images() {
+		background.setFill(new ImagePattern(new Image(Constants.TITLE_BG_IMG)));
+		title.setFill(new ImagePattern(new Image(Constants.TITLE_IMG)));
 	}
 
 }

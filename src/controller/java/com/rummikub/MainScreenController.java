@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import javafx.css.PseudoClass;
@@ -12,25 +13,32 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
 public class MainScreenController implements Initializable {
 
+	/*
+	 * main Pane
+	 */
 	@FXML
 	private AnchorPane root;
 
-	@FXML
-	private Pane table_pane;
-
+	/*
+	 * player variables
+	 */
 	@FXML
 	private FlowPane player0_pane;
 	@FXML
@@ -56,6 +64,11 @@ public class MainScreenController implements Initializable {
 	@FXML
 	private Rectangle player3_rectangle;
 
+	/*
+	 * board variables
+	 */
+	@FXML
+	private Pane table_pane;
 	@FXML
 	private Rectangle startGameRectangle;
 	@FXML
@@ -66,12 +79,17 @@ public class MainScreenController implements Initializable {
 	private Rectangle background;
 	@FXML
 	private Rectangle table_rect;
+	@FXML
+	private Rectangle stock_rect;
+	@FXML
+	private FlowPane stock_pane;
 
 	private List<FlowPane> playerPanes = new ArrayList<FlowPane>();
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		init_background_images();
+
 		List<Label> playerLabels = new ArrayList<Label>();
 		List<Rectangle> playerRectangles = new ArrayList<Rectangle>();
 
@@ -123,15 +141,41 @@ public class MainScreenController implements Initializable {
 	}
 
 	public void takeTurn() throws Exception {
-		nextTurnButton.setDisable(true);
-		if (Rummy.game.gameRunning) {
-			Rummy.game.takeTurn();
-			viewTiles(Rummy.game.previousPlayer, playerPanes.get(Rummy.game.previousPlayer.getNumber()));
-			viewTiles(Rummy.game.table, table_pane);
-			nextTurnButton.setDisable(false);
+		if (Rummy.game.rigDraw && Rummy.game.shouldDraw) {
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.setTitle("Choose a tile");
+			alert.setContentText("Would you like to choose a tile from the stock to draw?");
+
+			Optional<ButtonType> result = alert.showAndWait();
+			if (result.get() == ButtonType.OK) {
+				stock_rect.setVisible(true);
+				stock_pane.setVisible(true);
+				viewTiles(stock_pane);
+
+			} else {
+				Print.println(Rummy.game.previousPlayer.getName() + " draws a tile from the stock: "
+						+ Rummy.game.previousPlayer.getPlayerRack().takeTile(Rummy.game.stock).toString());
+				Rummy.game.shouldDraw = false;
+				nextTurnButton.setText("Next Turn");
+			}
+		} else {
+			nextTurnButton.setDisable(true);
+			if (Rummy.game.gameRunning) {
+				Rummy.game.takeTurn();
+
+				if (Rummy.game.rigDraw && Rummy.game.shouldDraw) {
+					nextTurnButton.setText("Draw Tile");
+				}
+			}
 		}
+		viewTiles(Rummy.game.previousPlayer, playerPanes.get(Rummy.game.previousPlayer.getNumber()));
+		viewTiles(Rummy.game.table, table_pane);
+		nextTurnButton.setDisable(false);
 	}
 
+	/*
+	 * tile images for player rack
+	 */
 	public void viewTiles(Player currPlayer, FlowPane pane) {
 		pane.getChildren().clear();
 
@@ -140,7 +184,7 @@ public class MainScreenController implements Initializable {
 			if (!Rummy.game.printRackMeld && !currPlayer.isHuman()) {
 				img = new Image(Constants.BACK_CARD);
 			}
-			// Image img = new Image("file:src/main/resources/tiles/G4.png");
+
 			ImageView tileImg = new ImageView(img);
 			tileImg.setPreserveRatio(true);
 			tileImg.setFitWidth(35);
@@ -148,6 +192,9 @@ public class MainScreenController implements Initializable {
 		}
 	}
 
+	/*
+	 * tile/meld images for table
+	 */
 	public void viewTiles(Table table, Pane pane) {
 		pane.getChildren().clear();
 		double x_axisOfMeld = 0;
@@ -160,13 +207,12 @@ public class MainScreenController implements Initializable {
 			if (x_axisOfMeld + meld.getTiles().size() * imgWidth >= pane.getWidth()) {
 				y_axisOfMeld += 50;
 				x_axisOfMeld = 0;
-				x_axis = 0;
 			}
+			
 			Pane meldPane = new Pane();
 			int k = 0;
 			for (Tile tile : meld.getMeld()) {
 				Image img = tile.getTileImage();
-				// Image img = new Image("file:src/main/resources/cardsImages/JPEG/G4.jpg");
 				ImageView tileImg = new ImageView(img);
 				tileImg.setPreserveRatio(true);
 				tileImg.setFitWidth(imgWidth);
@@ -178,12 +224,12 @@ public class MainScreenController implements Initializable {
 				});
 
 				tileImg.relocate(x_axis, y_axis);
+
 				meldPane.getChildren().add(tileImg);
 				if (k == 0)
 					meldPane.relocate(x_axisOfMeld, y_axisOfMeld);
 				x_axis += imgWidth;
 				k++;
-
 			}
 			x_axisOfMeld += meld.getTiles().size() * imgWidth + 30;
 			meldPane.setPrefWidth(meld.getTiles().size() * imgWidth);
@@ -196,6 +242,45 @@ public class MainScreenController implements Initializable {
 			});
 			pane.getChildren().add(meldPane);
 			x_axis += (imgWidth + 5);
+		}
+	}
+
+	/*
+	 * tile images of stock
+	 */
+	public void viewTiles(FlowPane pane) {
+		pane.getChildren().clear();
+
+		int i = 0;
+		for (Tile tile : Rummy.game.stock.getStockArray()) {
+			Image img = tile.getTileImage();
+			ImageView tileImg = new ImageView(img);
+
+			tileImg.setPreserveRatio(true);
+			tileImg.setFitWidth(35);
+			tileImg.setId(Integer.toString(i));
+			tileImg.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+				@Override
+				public void handle(MouseEvent event) {
+					Rummy.game.stock.getStockArray().remove(tile);
+
+					Rummy.game.previousPlayer.getPlayerRack().addTile(tile);
+					Print.println(
+							Rummy.game.previousPlayer.getName() + " draws a tile from the stock: " + tile.toString());
+
+					stock_pane.getChildren().clear();
+					stock_pane.setVisible(false);
+					stock_rect.setVisible(false);
+
+					nextTurnButton.setText("Next Turn");
+					Rummy.game.shouldDraw = false;
+					viewTiles(Rummy.game.previousPlayer, playerPanes.get(Rummy.game.previousPlayer.getNumber()));
+					viewTiles(Rummy.game.table, table_pane);
+
+				}
+			});
+			pane.getChildren().add(tileImg);
+			i++;
 		}
 	}
 
