@@ -8,7 +8,7 @@ import javax.swing.plaf.metal.MetalDesktopIconUI;
 
 import org.junit.jupiter.params.shadow.com.univocity.parsers.common.processor.BeanWriterProcessor;
 
-public class RackFactoryTester 
+public class RackBuilderTester 
 {
 	public static void main(String[] args) throws Exception
 	{
@@ -36,7 +36,7 @@ public class RackFactoryTester
 	Rack two_meld_rack = new Rack();
 	
 	
-	RackFactory factory = new RackFactory();
+	RackBuilder factory = new RackBuilder();
 	factory.runAlgorithm(table, players);
 	no_meld_rack = factory.createHand("no melds");
 	one_meld_rack = factory.createHand("one melds");

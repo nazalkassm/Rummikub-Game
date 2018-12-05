@@ -23,9 +23,9 @@ import java.util.Set;
  * @see Random
  * @version 1.00, 4 Dec 2018
  */
-public class RackFactory
+public class RackBuilder
 {
-	public RackFactory(){}
+	public RackBuilder(){}
 	
 
 	Rack no_meld_rack = new Rack();
