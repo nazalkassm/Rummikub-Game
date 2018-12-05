@@ -10,7 +10,6 @@ import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import javafx.css.PseudoClass;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -26,7 +25,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
@@ -66,7 +64,6 @@ public class MainScreenController implements Initializable {
 	private Rectangle player2_rectangle;
 	@FXML
 	private Rectangle player3_rectangle;
-
 	/*
 	 * board variables
 	 */
@@ -92,12 +89,13 @@ public class MainScreenController implements Initializable {
 	private FlowPane stock_pane;
 
 	private List<FlowPane> playerPanes = new ArrayList<FlowPane>();
+	private List<Label> playerLabels = new ArrayList<Label>();
+	public static List<String> playerStrategies = new ArrayList<String>();
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		init_background_images();
 
-		List<Label> playerLabels = new ArrayList<Label>();
 		List<Rectangle> playerRectangles = new ArrayList<Rectangle>();
 
 		for (FlowPane flowPane : playerPanes) {
@@ -121,6 +119,7 @@ public class MainScreenController implements Initializable {
 		playerRectangles.add(player3_rectangle);
 
 		Rummy.game.start();
+		playerLabels.get(Rummy.game.currentPlayer.getNumber()).setStyle("-fx-font-weight: bold");
 		int max = Rummy.game.players.size();
 		while (playerPanes.size() > max) {
 			playerPanes.get(max).setVisible(false);
@@ -162,14 +161,20 @@ public class MainScreenController implements Initializable {
 					}
 				}
 
-			
 			});
 		}
 		Rummy.game.manualStart = false;
-		takeTurn();
+		takeTurn();  
 	}
 
 	public void takeTurn() throws Exception {
+		Print.print("Current player: " + Rummy.game.currentPlayer.getName());
+		
+		/*
+		 * x.setText("Player " + Rummy.game.currentPlayer.getNumber() + "(" +
+		 * playerStrategies.get(Rummy.game.currentPlayer.getNumber()) + ")");
+		 */
+
 		if (Rummy.game.rigDraw && Rummy.game.shouldDraw) {
 			Alert alert = new Alert(AlertType.CONFIRMATION);
 			alert.setTitle("Choose a tile");
@@ -191,21 +196,20 @@ public class MainScreenController implements Initializable {
 			nextTurnButton.setDisable(true);
 			if (Rummy.game.gameRunning) {
 				Rummy.game.takeTurn();
-
+				playerLabels.get(Rummy.game.currentPlayer.getNumber()).setStyle("-fx-font-weight: bold");
+				playerLabels.get(Rummy.game.previousPlayer.getNumber()).setStyle("-fx-font-weight: normal");
+				Print.print("Take turn done");
 				if (Rummy.game.rigDraw && Rummy.game.shouldDraw) {
 					nextTurnButton.setText("Draw Tile");
 				}
 			}
 		}
-		if (Rummy.game.previousPlayer.isHuman()) {
+		if (!Rummy.game.changedPeople) {
 			viewTiles(Rummy.game.currentPlayer, playerPanes.get(Rummy.game.currentPlayer.getNumber()));
 		} else {
 			viewTiles(Rummy.game.previousPlayer, playerPanes.get(Rummy.game.previousPlayer.getNumber()));
 		}
 		viewTiles(Rummy.game.table, table_pane);
-		//Rummy.game.manualStart = false;
-		
-		
 		nextTurnButton.setDisable(false);
 	}
 
@@ -214,13 +218,13 @@ public class MainScreenController implements Initializable {
 	 */
 	public void viewTiles(Player currPlayer, FlowPane pane) {
 		pane.getChildren().clear();
-		
+
 		for (Tile tile : currPlayer.getPlayerRack().getRackArray()) {
 			Image img = tile.getTileImage();
 			if (!Rummy.game.printRackMeld && !currPlayer.isHuman()) {
 				img = new Image(Constants.BACK_CARD);
 			}
-			
+
 			ImageView tileImg = new ImageView(img);
 			tileImg.setPreserveRatio(true);
 			tileImg.setFitWidth(35);
@@ -231,7 +235,7 @@ public class MainScreenController implements Initializable {
 						handleTileSelected(tileImg, tile, Rummy.game.table);
 					}
 				});
-				
+
 				pane.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 					@Override
 					public void handle(MouseEvent event) {
@@ -259,7 +263,7 @@ public class MainScreenController implements Initializable {
 				y_axisOfMeld += 50;
 				x_axisOfMeld = 0;
 			}
-			
+
 			Pane meldPane = new Pane();
 			int k = 0;
 			for (Tile tile : meld.getMeld()) {
@@ -347,7 +351,8 @@ public class MainScreenController implements Initializable {
 	private void handleTileSelected(ImageView tileImg, Tile tile, Table table) {
 		if (table.removing) {
 			System.out.println("CLICKED TILE");
-			for (Tile t : Stream.of(table.getAllTilesOnTable(),table.getCurrentPlayer().getPlayerRack().getRackArray()).flatMap(Collection::stream).collect(Collectors.toList())) {
+			for (Tile t : Stream.of(table.getAllTilesOnTable(), table.getCurrentPlayer().getPlayerRack().getRackArray())
+					.flatMap(Collection::stream).collect(Collectors.toList())) {
 				t.selected = false;
 			}
 			table.removing = false;
@@ -376,36 +381,37 @@ public class MainScreenController implements Initializable {
 						Tile compareTile = tileItr.next();
 						if (compareTile.selected) {
 							removed = true;
-							if (meld == null ) {
-								
-								viewTiles(Rummy.game.previousPlayer, playerPanes.get(Rummy.game.previousPlayer.getNumber()));
+							if (meld == null) {
+
+								viewTiles(Rummy.game.previousPlayer,
+										playerPanes.get(Rummy.game.previousPlayer.getNumber()));
 							} else {
-									meld.addTile(compareTile);
+								meld.addTile(compareTile);
 							}
-						
+
 							table.removing = true;
-	
+
 							tileItr.remove();
 							compareTile.selected = false;
 						}
 					}
 				}
 			}
-			
+
 			Iterator<Tile> itrTiles = Rummy.game.currentPlayer.getPlayerRack().getRackArray().iterator();
-	
+
 			while (itrTiles.hasNext()) {
 
 				Tile compareTile = itrTiles.next();
 				if (compareTile.selected) {
 					removed = true;
-					meld.addTile(compareTile);			
+					meld.addTile(compareTile);
 					table.removing = true;
 					itrTiles.remove();
 					compareTile.selected = false;
 				}
 			}
-					
+
 		} else {
 			while (itr.hasNext()) {
 				Meld currentMeld = itr.next();
@@ -414,7 +420,7 @@ public class MainScreenController implements Initializable {
 					while (tileItr.hasNext()) {
 						Tile compareTile = tileItr.next();
 						if (compareTile.selected) {
-							removed = true;				
+							removed = true;
 							Rummy.game.currentPlayer.getPlayerRack().addTile(compareTile);
 							table.removing = true;
 							tileItr.remove();
@@ -424,7 +430,7 @@ public class MainScreenController implements Initializable {
 				}
 			}
 		}
-		
+
 		if (removed) {
 			viewTiles(Rummy.game.table, table_pane);
 			viewTiles(Rummy.game.currentPlayer, playerPanes.get(Rummy.game.currentPlayer.getNumber()));
@@ -432,6 +438,7 @@ public class MainScreenController implements Initializable {
 	}
 	
 	private void createMeld(Table table, Player player) {
+
 		Meld m = new Meld();
 		System.out.println("Creating MELD");
 		Iterator<Meld> itr = table.getAllMelds().iterator();
@@ -465,8 +472,12 @@ public class MainScreenController implements Initializable {
 					table.removing = true;
 					playerRackToRemove.add(tile);
 					tile.selected = false;
+
 				}
+			
+				tile.selected = false;
 			}
+
 			player.getPlayerRack().getRackArray().removeAll(playerRackToRemove);
 			table.getAllMelds().add(m);
 			table.notifyObservers();

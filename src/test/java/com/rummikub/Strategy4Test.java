@@ -180,12 +180,12 @@ class Strategy4Test
 		Print.print("Using debugger the probability of getting the outs is (0.0128) which is less than 0.015 so the player will play the meld");
 		meldsPlayed = new ArrayList<>(table.getCurrentPlayer().play());
 		changedMelds = new ArrayList<>(Table.getDiffMelds(table.getAllMelds(), meldsPlayed));
+		table.updateMeldsOnTable(meldsPlayed);
 		Print.print("\nTable is: ");
 		Print.printMeldtoUser(meldsPlayed, changedMelds, true);
 		Print.println("The player's rack after this turn is: ");
 		Print.printRacktoUser(player2.getPlayerRack(), true);
 		assertFalse(player2.getPlayerRack().toString().contains("O9 O10 O11"));
-		table.updateMeldsOnTable(meldsPlayed);
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	} //end of test
 

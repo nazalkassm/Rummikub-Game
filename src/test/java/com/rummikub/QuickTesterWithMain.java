@@ -3,8 +3,6 @@ package com.rummikub;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.jupiter.params.shadow.com.univocity.parsers.common.processor.BeanWriterProcessor;
-
 
 //This class is to test algorithms,data structures and all other ideas to be used in the project quickly so that we can confirm something would work.
 //We might extend this class to become a SuiteClass of Junit which would run first display some important information about testing and then run all Junit tests.
@@ -14,7 +12,6 @@ public class QuickTesterWithMain
 	public static void main(String[] args) throws Exception
 	{		
 		rigGame("src/main/resources/inputFiles/test13.txt");
-
 		
 		List<String> test_list = new ArrayList<>();
 		test_list.add("O");
@@ -42,14 +39,11 @@ public class QuickTesterWithMain
 		Boolean rigDraw = false;
 		Boolean GUI = false;
 		
-		Game game = new Game(players, printAllPlayerMelds, rigDraw, pauseBetweenTurns, GUI); 
-		
 		FileParser.parse(filePath);
 		
 		if (!FileParser.inputError) 
 		{
-			game.stock = FileParser.stock;
-			game.table = new Table(game.stock);
+			Game game = new Game(players, printAllPlayerMelds, rigDraw, pauseBetweenTurns, GUI, FileParser.stock);
 			
 			game.start();
 		}

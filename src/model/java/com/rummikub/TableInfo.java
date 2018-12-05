@@ -9,8 +9,8 @@ public class TableInfo
 	private int[] players_rack_count;
 	private List<Meld> melds = new ArrayList<Meld>();
 	
-	public TableInfo(int[] player_rack_count, List<Meld> melds) {
-		this.players_rack_count = player_rack_count;
+	public TableInfo(int[] lowestHandCount, List<Meld> melds) {
+		this.players_rack_count = lowestHandCount;
 		this.melds = melds;
 	}
 	

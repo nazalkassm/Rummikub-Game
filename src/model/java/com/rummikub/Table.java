@@ -334,7 +334,7 @@ public class Table implements Subject {
 		}
 
 		// accessible by outer class only
-    private List<Meld> getSavedMelds() {
+    public List<Meld> getSavedMelds() {
         return savedMelds;
     }
 	}

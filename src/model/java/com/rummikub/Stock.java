@@ -32,12 +32,7 @@ public class Stock {
 	 * STOCK_SIZE by default.
 	 */
 	public Stock() {
-		this(Constants.STOCK_SIZE,"false");
-	}
-	
-	public Stock(String joker)
-	{
-		this(Constants.STOCK_SIZE,joker);
+		this(Constants.STOCK_SIZE);
 	}
 
 	public Stock(Boolean view) {
@@ -74,17 +69,9 @@ public class Stock {
 	 * 
 	 * @param sS given stock size
 	 */
-	public Stock(int sS,String joker) {
+	public Stock(int sS) {
 		this.stockS = sS;
-		if(joker.equals("true"))
-		{
 		this.createStock();
-		}
-		else
-		{
-		this.createStockWithoutJoker();
-		}
-		
 	}
 
 	public Stock(int sS, boolean view) {
@@ -146,21 +133,6 @@ public class Stock {
 		}
 		stockArray.add(new Joker());
 		stockArray.add(new Joker());
-		this.shuffle();
-	}
-	
-	public void createStockWithoutJoker() {
-		// Clear the previous stock if there was one
-		stockArray.clear();
-
-		for (Colours c : Colours.values()) {
-			for (Ranks r : Ranks.values()) {
-				if (!(c.equals(Colours.JOKER) || r.equals(Ranks.JOKER))) {
-					stockArray.add(new Tile(c, r));
-					stockArray.add(new Tile(c, r));
-				}
-			}
-		}
 		this.shuffle();
 	}
 

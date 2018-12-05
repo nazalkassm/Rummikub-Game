@@ -3,11 +3,8 @@ package com.rummikub;
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -75,7 +72,7 @@ public class TitleScreenController implements Initializable {
 	private Rectangle rect_tileSelection;
 	@FXML
 	private FlowPane flw_tileSelection;
-	
+
 	List<List<Tile>> playerTileList = new ArrayList<List<Tile>>();
 	Stock stock = new Stock(true);
 	int currentID = -1;
@@ -124,7 +121,7 @@ public class TitleScreenController implements Initializable {
 			strategyNode.setValue("Select");
 
 		}
-		
+
 		for (List<Tile> list : playerTileList) {
 			list.clear();
 		}
@@ -163,10 +160,7 @@ public class TitleScreenController implements Initializable {
 			Boolean useGUI = true;
 			Boolean rigDraw = ckBx_RigDraw.isSelected();
 			Boolean testingMode = ckBx_GameMode.isSelected();
-			Rummy.game = new Game(players, testingMode, rigDraw, waitAfterEachTurn, useGUI);
-			
-			Rummy.game.stock = createStock();
-			Rummy.game.table = new Table(Rummy.game.stock);
+			Rummy.game = new Game(players, testingMode, rigDraw, waitAfterEachTurn, useGUI, createStock());
 
 			// Get the event's source stage, and set the scene to be the game.
 			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -191,17 +185,15 @@ public class TitleScreenController implements Initializable {
 			File file = fileChooser.showOpenDialog(stage);
 
 			if (file != null) {
+				FileParser.reset();
+				FileParser.parse(file);
+
 				Boolean waitAfterEachTurn = false;
 				Boolean useGUI = true;
 				Boolean testingMode = ckBx_GameMode.isSelected();
 				Boolean rigDraw = ckBx_RigDraw.isSelected();
-				Rummy.game = new Game(players, testingMode, rigDraw, waitAfterEachTurn, useGUI);
-
-				FileParser.reset();
-				FileParser.parse(file);
-				Rummy.game.stock = FileParser.stock;
-				Rummy.game.table = new Table(Rummy.game.stock);
-
+				Rummy.game = new Game(players, testingMode, rigDraw, waitAfterEachTurn, useGUI, FileParser.stock);
+				
 				if (!FileParser.inputError) {
 					// set the scene to be the main screen.
 					stage.setScene(Rummy.loadScene("MainScreen.fxml"));
@@ -214,18 +206,18 @@ public class TitleScreenController implements Initializable {
 		}
 
 	}
-	
+
 	@FXML
-	public void handleTileSelectionButton(ActionEvent event) {		
+	public void handleTileSelectionButton(ActionEvent event) {
 		rect_tileSelection.setVisible(true);
 		flw_tileSelection.setVisible(true);
 		btn_confirmTiles.setVisible(true);
 		btn_cancelTiles.setVisible(true);
-		btn_confirmTiles.setId(((Node)event.getSource()).getId());
-		
+		btn_confirmTiles.setId(((Node) event.getSource()).getId());
+
 		viewTiles(flw_tileSelection);
 	}
-	
+
 	@FXML
 	public void handleTileConfirmationButton(ActionEvent event) {
 		int playerListIndex = Integer.parseInt(btn_confirmTiles.getId());
@@ -237,52 +229,51 @@ public class TitleScreenController implements Initializable {
 				playerTileList.get(playerListIndex).add(tile);
 			}
 		}
-		
+
 		if (count == 14) {
 			stock.getStockArray().removeAll(playerTileList.get(playerListIndex));
-			
+
 			rect_tileSelection.setVisible(false);
 			flw_tileSelection.setVisible(false);
 			btn_confirmTiles.setVisible(false);
 			btn_cancelTiles.setVisible(false);
 			btn_confirmTiles.setId("");
-		}
-		else {
+		} else {
 			Alert alert = new Alert(AlertType.INFORMATION);
 			alert.setTitle("Warning!");
 			alert.setContentText("You must select 14 tiles to rid the player's rack!");
-			
+
 			alert.showAndWait();
 		}
 	}
-	
+
 	@FXML
 	public void handleTileCancelButton(ActionEvent event) {
 		int playerListIndex = Integer.parseInt(btn_confirmTiles.getId());
 		playerTileList.get(playerListIndex).clear();
-		
+
 		for (Tile tile : stock.getStockArray()) {
 			tile.selected = false;
 		}
-		
+
 		rect_tileSelection.setVisible(false);
 		flw_tileSelection.setVisible(false);
 		btn_confirmTiles.setVisible(false);
 		btn_cancelTiles.setVisible(false);
 		btn_confirmTiles.setId("");
 	}
-	
+
 	/*
 	 * tile images of stock
 	 */
 	public void viewTiles(FlowPane pane) {
 		pane.getChildren().clear();
-		
+
 		stock.getStockArray().addAll(playerTileList.get(Integer.parseInt(btn_confirmTiles.getId())));
 
 		int i = 0;
 		for (Tile tile : stock.getStockArray()) {
-			Image img = tile.getTileImage();			
+			Image img = tile.getTileImage();
 			ImageView tileImg = new ImageView(img);
 
 			tileImg.setPreserveRatio(true);
@@ -293,7 +284,7 @@ public class TitleScreenController implements Initializable {
 				tileImg.setFitWidth(tileImg.getFitWidth() - 10);
 				tileImg.relocate(tileImg.getLayoutX() + 5, tileImg.getLayoutY());
 			}
-			
+
 			tileImg.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 				@Override
 				public void handle(MouseEvent event) {
@@ -305,10 +296,10 @@ public class TitleScreenController implements Initializable {
 			i++;
 		}
 	}
-	
+
 	private void handleTileSelected(ImageView tileImg, Tile tile) {
 		tile.selected = !tile.selected;
-		
+
 		if (tile.selected) {
 			tileImg.setFitWidth(tileImg.getFitWidth() - 10);
 			tileImg.relocate(tileImg.getLayoutX() + 5, tileImg.getLayoutY());
@@ -322,6 +313,7 @@ public class TitleScreenController implements Initializable {
 	private List<Player> getPlayers() {
 		int numPlayers = Integer.parseInt(cb_PlayerCount.getValue());
 		List<Player> players = new ArrayList<Player>();
+		List<String> strategies = new ArrayList<String>();
 
 		for (int i = 0; i < numPlayers; i++) {
 			@SuppressWarnings("unchecked")
@@ -346,40 +338,32 @@ public class TitleScreenController implements Initializable {
 			default:
 				return new ArrayList<Player>();
 			}
+
+			strategies.add(currNode.getValue());
 		}
 
+		MainScreenController.playerStrategies = strategies;
 		return players;
 	}
-	
-	private Stock createStock() {		
+
+	private Stock createStock() {
 		Stock riggedStock = new Stock(true);
 		riggedStock.getStockArray().clear();
-		
+
 		int numPlayers = Integer.parseInt(cb_PlayerCount.getValue());
 		for (int i = 0; i < numPlayers; i++) {
-			for (Tile t : playerTileList.get(i)) {
-				Print.print(t.toString());
-			}
-			
+
 			Print.print(stock.getStockArray().size());
 			if (playerTileList.get(i).size() == 14) {
 				riggedStock.getStockArray().addAll(playerTileList.get(i));
-			}
-			else {
+			} else {
 				for (int j = 0; j < 14; j++) {
 					riggedStock.getStockArray().add(stock.getStockArray().remove(0));
 				}
 			}
 		}
 		riggedStock.getStockArray().addAll(stock.getStockArray());
-		
-		Print.print();
-		Print.print();
-		
-		for (Tile t : riggedStock.getStockArray()) {
-			Print.print(t.toString());
-		}
-		
+
 		return riggedStock;
 	}
 
