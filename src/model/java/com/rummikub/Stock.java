@@ -6,7 +6,7 @@ import java.util.List;
 
 import com.sun.org.apache.xpath.internal.operations.Bool;
 
-import apple.laf.JRSUIState.TitleBarHeightState;
+//import apple.laf.JRSUIState.TitleBarHeightState;
 import javafx.scene.image.Image;
 
 /**
