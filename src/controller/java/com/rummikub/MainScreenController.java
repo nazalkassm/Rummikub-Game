@@ -16,6 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
 public class MainScreenController implements Initializable {
@@ -57,11 +58,16 @@ public class MainScreenController implements Initializable {
 	private Button startGameButton;
 	@FXML
 	private Button nextTurnButton;
+	@FXML
+	private Rectangle background;
+	@FXML
+	private Rectangle table_rect;
 
 	private List<FlowPane> playerPanes = new ArrayList<FlowPane>();
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		init_background_images();
 		List<Label> playerLabels = new ArrayList<Label>();
 		List<Rectangle> playerRectangles = new ArrayList<Rectangle>();
 
@@ -168,4 +174,14 @@ public class MainScreenController implements Initializable {
 			x_axis += (imgWidth + 5);
 		}
 	}
+
+	public void init_background_images() {
+		background.setFill(new ImagePattern(new Image(Constants.BACKGROUND_IMG)));
+		player0_rectangle.setFill(new ImagePattern(new Image(Constants.PLAYER_TABLE_IMG)));
+		player2_rectangle.setFill(new ImagePattern(new Image(Constants.PLAYER_TABLE_IMG)));
+		player1_rectangle.setFill(new ImagePattern(new Image(Constants.PLAYER_TABLE_IMG)));
+		player3_rectangle.setFill(new ImagePattern(new Image(Constants.PLAYER_TABLE_IMG)));
+		table_rect.setFill(new ImagePattern(new Image(Constants.TABLE_IMG)));
+	}
+
 }
