@@ -1,19 +1,13 @@
 package com.rummikub;
-
-import java.util.ArrayList;
+ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import javax.swing.plaf.metal.MetalDesktopIconUI;
-
-import org.junit.jupiter.params.shadow.com.univocity.parsers.common.processor.BeanWriterProcessor;
-
-public class RackBuilderTester 
+ public class RackBuilderTester 
 {
 	public static void main(String[] args) throws Exception
 	{
 	
-	Stock stock = new Stock("false");
+	Stock stock = new Stock(104,"false");
 	Table table = new Table(stock);
 	List<Player> players = new ArrayList<>();
 	players.add(new Player("p0",new Strategy1()));
@@ -53,8 +47,7 @@ public class RackBuilderTester
 	Print.printMeldtoUser(Meld.getMeldsWithTable(no_meld_rack.getRackArray()), Collections.emptyList(), true);
 	Print.printMeldtoUser(Meld.getMeldsWithTable(one_meld_rack.getRackArray()), Collections.emptyList(), true);
 	Print.printMeldtoUser(Meld.getMeldsWithTable(two_meld_rack.getRackArray()), Collections.emptyList(), true);
-
-	////---------------------------------------------------------------------------------------------------------------------------------------------//////////////
+ 	////---------------------------------------------------------------------------------------------------------------------------------------------//////////////
 	
 	Print.print("Second Test Scenario where the table has tiles and a player has cards");
 	
@@ -65,8 +58,7 @@ public class RackBuilderTester
 	table.initPlayersTurn();
 	
 	List<Tile> rack_tiles = new ArrayList<>();
-
-	rack_tiles = players.get(0).getPlayerRack().getRackArray();
+ 	rack_tiles = players.get(0).getPlayerRack().getRackArray();
 	
 	stock.getStockArray().addAll(rack_tiles);
 	
@@ -76,7 +68,7 @@ public class RackBuilderTester
 	
 	List<Meld> melds_played = new ArrayList<>();
 	
-	melds_played = table.getNextPlayerTurn().play();
+	melds_played = Meld.getMeldsWithTable(one_meld_rack.getRackArray());
 	
 	changed_melds = new ArrayList<>(Table.getDiffMelds(table.getAllMelds(), melds_played));
 	Print.print("\nTable is: ");
@@ -86,7 +78,7 @@ public class RackBuilderTester
 	table.updateMeldsOnTable(melds_played);
 	
 	
-	///// Using the factory again, but this time with tiles in one of the player's rack and on the table. Proves it takes into account the table and players' racks.
+	///// Using the builder again, but this time with tiles in one of the player's rack and on the table. Proves it takes into account the table and players' racks.
 	
 	factory.runAlgorithm(table, players);
 	
@@ -106,6 +98,5 @@ public class RackBuilderTester
 	Print.printMeldtoUser(Meld.getMeldsWithTable(no_meld_rack.getRackArray()), Collections.emptyList(), true);
 	Print.printMeldtoUser(Meld.getMeldsWithTable(one_meld_rack.getRackArray()), Collections.emptyList(), true);
 	Print.printMeldtoUser(Meld.getMeldsWithTable(two_meld_rack.getRackArray()), Collections.emptyList(), true);
-
-	}
+ 	}
 }

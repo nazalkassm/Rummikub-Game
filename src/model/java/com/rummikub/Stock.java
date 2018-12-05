@@ -32,14 +32,9 @@ public class Stock {
 	 * STOCK_SIZE by default.
 	 */
 	public Stock() {
-		this(Constants.STOCK_SIZE,"false");
+		this(Constants.STOCK_SIZE,"true");
 	}
 	
-	public Stock(String joker)
-	{
-		this(Constants.STOCK_SIZE,joker);
-	}
-
 	public Stock(Boolean view) {
 		this(Constants.STOCK_SIZE, view);
 	}
