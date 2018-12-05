@@ -23,7 +23,7 @@ class Strategy4Test
 	static void setUpBeforeClass()  
 	{
 
-		stock = new Stock();
+		stock = new Stock(104,"false");
 		table = new Table(stock);
 		
 	

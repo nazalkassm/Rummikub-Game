@@ -21,7 +21,7 @@ class Strategy0Test {
 	@BeforeAll
 	static void setUpBeforeClass() 
 	{
-			Stock stock = new Stock();
+			Stock stock = new Stock(104,"stock");
 			table = new Table(stock);
 			
 			player1 = new Player("Naz",new Strategy0());
