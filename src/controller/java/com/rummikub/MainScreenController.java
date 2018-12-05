@@ -2,10 +2,13 @@ package com.rummikub;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javafx.css.PseudoClass;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -13,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
@@ -146,29 +150,51 @@ public class MainScreenController implements Initializable {
 
 	public void viewTiles(Table table, Pane pane) {
 		pane.getChildren().clear();
-		double x_axis = 0;
-		double y_axis = 0;
+		double x_axisOfMeld = 0;
+		double y_axisOfMeld = 0;
 		double imgWidth = 35;
 
 		for (Meld meld : table.getAllMelds()) {
-			if (x_axis + meld.getTiles().size()*imgWidth >= pane.getWidth()) {
-				y_axis+= 50;
+			double x_axis = 0;
+			double y_axis = 0;
+			if (x_axisOfMeld + meld.getTiles().size() * imgWidth >= pane.getWidth()) {
+				y_axisOfMeld += 50;
+				x_axisOfMeld = 0;
 				x_axis = 0;
 			}
+			Pane meldPane = new Pane();
+			int k = 0;
 			for (Tile tile : meld.getMeld()) {
 				Image img = tile.getTileImage();
 				// Image img = new Image("file:src/main/resources/cardsImages/JPEG/G4.jpg");
 				ImageView tileImg = new ImageView(img);
 				tileImg.setPreserveRatio(true);
 				tileImg.setFitWidth(imgWidth);
+				tileImg.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+					@Override
+					public void handle(MouseEvent event) {
+						handleTileSelected(tileImg, tile, table);
+					}
+				});
 
-				
-					tileImg.relocate(x_axis, y_axis);
-					pane.getChildren().add(tileImg);
-					x_axis += imgWidth;
-				
+				tileImg.relocate(x_axis, y_axis);
+				meldPane.getChildren().add(tileImg);
+				if (k == 0)
+					meldPane.relocate(x_axisOfMeld, y_axisOfMeld);
+				x_axis += imgWidth;
+				k++;
 
 			}
+			x_axisOfMeld += meld.getTiles().size() * imgWidth + 30;
+			meldPane.setPrefWidth(meld.getTiles().size() * imgWidth);
+			meldPane.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+				@Override
+				public void handle(MouseEvent event) {
+					moveTile(meld, table);
+
+				}
+			});
+			pane.getChildren().add(meldPane);
 			x_axis += (imgWidth + 5);
 		}
 	}
@@ -180,6 +206,53 @@ public class MainScreenController implements Initializable {
 		player1_rectangle.setFill(new ImagePattern(new Image(Constants.PLAYER_TABLE_IMG)));
 		player3_rectangle.setFill(new ImagePattern(new Image(Constants.PLAYER_TABLE_IMG)));
 		table_rect.setFill(new ImagePattern(new Image(Constants.TABLE_IMG)));
+	}
+
+	private void handleTileSelected(ImageView tileImg, Tile tile, Table table) {
+		if (table.removing) {
+			System.out.println("CLICKED TILE");
+			for (Tile t : table.getAllTilesOnTable()) {
+
+				t.selected = false;
+			}
+			table.removing = false;
+		}
+		tile.selected = !tile.selected;
+		if (tile.selected) {
+			tileImg.setFitWidth(tileImg.getFitWidth() - 10);
+			tileImg.relocate(tileImg.getLayoutX() + 5, tileImg.getLayoutY());
+
+		} else {
+			tileImg.setFitWidth(tileImg.getFitWidth() + 10);
+			tileImg.relocate(tileImg.getLayoutX() - 5, tileImg.getLayoutY());
+		}
+	}
+
+	private void moveTile(Meld meld, Table table) {
+		Iterator<Meld> itr = table.getAllMelds().iterator();
+		boolean removed = false;
+		System.out.println("CLICKED MELD");
+		while (itr.hasNext()) {
+			Meld currentMeld = itr.next();
+			if (currentMeld != meld) {
+				Iterator<Tile> tileItr = currentMeld.getMeld().iterator();
+				while (tileItr.hasNext()) {
+					Tile compareTile = tileItr.next();
+					if (compareTile.selected) {
+						removed = true;
+						meld.addTile(compareTile);
+						table.removing = true;
+
+						tileItr.remove();
+						compareTile.selected = false;
+					}
+				}
+			}
+		}
+		
+		if (removed) {
+			viewTiles(Rummy.game.table, table_pane);
+		}
 	}
 
 }

@@ -12,6 +12,7 @@ public class Tile implements Comparable<Tile> {
 	protected Colours colour;
 	protected boolean playedOnTable = false;
 	protected Image tileImage;
+	public boolean selected = false;
 
 	// Constructor
 	public Tile(Colours colour, Ranks rank) {

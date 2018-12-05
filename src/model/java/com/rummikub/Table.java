@@ -21,6 +21,7 @@ public class Table implements Subject {
 	private Stock stock;
 	private int currentPlayerTurn = -1;
 	private int tableRound = 0;
+	boolean removing = false;
 
 	/**
 	 * Construct the table with just a stock so that the players can be added later
