@@ -2,11 +2,6 @@ package com.rummikub;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.Collections;
-import java.util.List;
-
-import javax.swing.plaf.metal.MetalDesktopIconUI;
-
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -15,7 +10,6 @@ import org.junit.jupiter.api.Test;
 
 class Strategy1TestOld {
 	
-	private static List<Meld> meld1,meld2;
 	private static Player player1;
 	private static Player player2;
 
@@ -53,8 +47,6 @@ class Strategy1TestOld {
 	static void tearDownAfterClass() 
 	{
 		player1 = null;
-		meld1 = null;
-		meld2 = null;
 	}
 
 	@BeforeEach

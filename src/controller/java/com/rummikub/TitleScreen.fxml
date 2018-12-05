@@ -32,8 +32,9 @@
             <Insets />
          </opaqueInsets>
       </VBox>
-      <CheckBox fx:id="ckBx_GameMode" alignment="CENTER" layoutX="214.0" layoutY="266.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="121.0" text="Testing mode" textAlignment="CENTER" AnchorPane.bottomAnchor="158.0" AnchorPane.leftAnchor="214.0" AnchorPane.rightAnchor="213.0" AnchorPane.topAnchor="266.0" />
+      <CheckBox fx:id="ckBx_GameMode" alignment="CENTER" layoutX="173.0" layoutY="245.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="202.0" text="Testing mode (view all tiles)" textAlignment="CENTER" AnchorPane.bottomAnchor="179.0" AnchorPane.leftAnchor="173.0" AnchorPane.rightAnchor="173.0" AnchorPane.topAnchor="245.0" />
       <Button fx:id="btn_chooseFile" disable="true" layoutX="229.0" layoutY="330.0" mnemonicParsing="false" onAction="#handleFileBtn" prefHeight="39.0" prefWidth="90.0" text="Choose file" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="229.0" AnchorPane.rightAnchor="229.0" AnchorPane.topAnchor="397.0" />
       <Label alignment="CENTER" layoutX="261.0" layoutY="363.0" prefHeight="25.0" prefWidth="27.0" text="or..." AnchorPane.bottomAnchor="63.0" AnchorPane.leftAnchor="261.0" AnchorPane.rightAnchor="260.0" AnchorPane.topAnchor="363.0" />
+      <CheckBox fx:id="ckBx_RigDraw" alignment="CENTER" layoutX="214.0" layoutY="277.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="121.0" text="Rig each draw" textAlignment="CENTER" />
    </children>
 </AnchorPane>

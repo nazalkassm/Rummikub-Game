@@ -12,11 +12,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.sun.org.apache.bcel.internal.generic.NEW;
-
 class Strategy4Test 
 {
-	private static List<Meld> meld1,meld2;
 	private static Player player1;
 	private static Player player2;
 	private static Table table;
@@ -64,8 +61,6 @@ class Strategy4Test
 	{
 		player1 = null;
 		player2 = null;
-		meld1 = null;
-		meld2 = null;
 		table = null;
 	}
 
