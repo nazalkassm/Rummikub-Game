@@ -309,6 +309,10 @@ public class Strategy4 implements StrategyBehaviour
 			{
 				// An array of strings, each string represents a colour symbol
 				List<String> colour_symbols = new ArrayList<>();
+				colour_symbols.add("O");
+				colour_symbols.add("G");
+				colour_symbols.add("B");
+				colour_symbols.add("R");
 				
 				// An integer object to store the value of a tile
 				Integer value_of_tile = new Integer(meld_tiles.get(0).getValue());

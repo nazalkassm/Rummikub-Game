@@ -16,4 +16,6 @@ public final class Constants {
 	public static final String BACKGROUND_IMG = "file:src/main/resources/pictures/background.png";
 	public static final String PLAYER_TABLE_IMG = "file:src/main/resources/pictures/table.jpg";
 	public static final String TABLE_IMG = "file:src/main/resources/pictures/table2.jpg";
+	public static final String INPUT_FILE_DIRECTORY = "src/main/resources/inputFiles/";
+
 }

@@ -17,6 +17,7 @@ public class Joker extends Tile {
 
 	public Joker(Colours colour, Ranks rank) {
 		super(colour, rank, new Image(Tile.getFilename(colour, rank)));
+		name = colour.getSymbol()+""+rank.getSymbol();
 	}
 
 	public Joker(String name) {
@@ -112,7 +113,7 @@ public class Joker extends Tile {
 
 		} else {
 			System.out.println("You done fucked up");
-			System.exit(0);
+			throw new NullPointerException("Joker was not a part of a valid meld"); 
 		}
 	}
 

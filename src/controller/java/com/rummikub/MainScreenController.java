@@ -151,6 +151,10 @@ public class MainScreenController implements Initializable {
 		double imgWidth = 35;
 
 		for (Meld meld : table.getAllMelds()) {
+			if (x_axis + meld.getTiles().size()*imgWidth >= pane.getWidth()) {
+				y_axis+= 50;
+				x_axis = 0;
+			}
 			for (Tile tile : meld.getMeld()) {
 				Image img = tile.getTileImage();
 				// Image img = new Image("file:src/main/resources/cardsImages/JPEG/G4.jpg");
@@ -158,17 +162,11 @@ public class MainScreenController implements Initializable {
 				tileImg.setPreserveRatio(true);
 				tileImg.setFitWidth(imgWidth);
 
-				if (x_axis >= pane.getWidth()) {
-					x_axis = 0;
-					y_axis += 50;
-					tileImg.relocate(x_axis, y_axis);
-					pane.getChildren().add(tileImg);
-
-				} else {
+				
 					tileImg.relocate(x_axis, y_axis);
 					pane.getChildren().add(tileImg);
 					x_axis += imgWidth;
-				}
+				
 
 			}
 			x_axis += (imgWidth + 5);
