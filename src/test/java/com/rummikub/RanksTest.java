@@ -13,7 +13,7 @@ class RanksTest {
 	private static Ranks rank3;
 	
 	@BeforeAll
-	static void setUpAll() throws Exception 
+	static void setUpAll() 
 	{
 		Logger.info("setUpAll");
 		rank1 = Ranks.ONE;

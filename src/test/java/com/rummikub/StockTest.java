@@ -18,26 +18,26 @@ class StockTest {
 	private static Player player1;
 
 	@BeforeAll
-	static void setUpBeforeClass() throws Exception 
+	static void setUpBeforeClass() 
 	{
 		player1 = new Player("Naz");
 	}
 
 	@AfterAll
-	static void tearDownAfterClass() throws Exception 
+	static void tearDownAfterClass() 
 	{
 		player1 = null;
 	}
 
 	@BeforeEach
-	void setUp() throws Exception 
+	void setUp() 
 	{
 		stock1 = new Stock(104);
 		stock2 = new Stock(stock1);
 	}
 
 	@AfterEach
-	void tearDown() throws Exception 
+	void tearDown() 
 	{
 		stock1 = null;
 		stock2 = null;

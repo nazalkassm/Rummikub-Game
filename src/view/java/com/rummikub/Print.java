@@ -1,6 +1,5 @@
 package com.rummikub;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,6 +27,15 @@ public class Print {
 		Print.print(Boolean.toString(bool));
 	}
 
+	public static void print(double bool) {
+		Print.print(Double.toString(bool));
+	}
+	public static void print(List<String> messages) {
+		for (String m : messages) {
+			print(m);
+		}
+	}
+
 	/**
 	 * Purpose: Prints as many sentences you enter on different lines.
 	 * 
@@ -52,7 +60,7 @@ public class Print {
 		println("Hello", "Welcome to TileRummy");
 	}
 
-	public void printEnding(Player winner, boolean wait) throws IOException {
+	public void printEnding(Player winner, boolean wait) {
 		int counter = 0;
 		System.out.print("Game ending\nThe winner is:");
 		if (wait) {
@@ -87,9 +95,10 @@ public class Print {
 				columnHeaders.add(0, "Tile Number");
 
 				TableList rackTable = new TableList(rackSize + 1, columnHeaders.stream().toArray(String[]::new))
-				    .withUnicode(true);
+						.withUnicode(true);
 
-				List<String> rackStringList = rack.getRackArray().stream().map(Object::toString).collect(Collectors.toList());
+				List<String> rackStringList = rack.getRackArray().stream().map(Object::toString)
+						.collect(Collectors.toList());
 				rackStringList.add(0, "Rack");
 				String[] rackStringArray = rackStringList.stream().toArray(String[]::new);
 
@@ -121,7 +130,7 @@ public class Print {
 						meldStringList.add(meld.toString());
 					}
 				}
-				
+
 				TableList meldTable = new TableList(2, "Meld Number", "Meld").withUnicode(true);
 
 				int meldNumber = 1;

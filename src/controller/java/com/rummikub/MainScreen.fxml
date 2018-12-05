@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.rummikub.MainScreenController">
+   <children>
+      <Rectangle fx:id="background" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="800.0" stroke="BLACK" strokeType="INSIDE" width="1200.0" />
+      <Rectangle fx:id="player0_rectangle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="150.0" layoutX="200.0" layoutY="650.0" stroke="BLACK" strokeType="INSIDE" width="800.0" AnchorPane.bottomAnchor="0.0" />
+      <FlowPane fx:id="player0_pane" layoutX="211.0" layoutY="658.0" prefHeight="134.0" prefWidth="783.0" />
+      <Label fx:id="player0_label" layoutX="570.0" layoutY="615.0" text="Player 0" AnchorPane.bottomAnchor="150.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Rectangle fx:id="player1_rectangle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="600.0" layoutY="100.0" stroke="BLACK" strokeType="INSIDE" width="170.0" AnchorPane.leftAnchor="0.0" />
+      <FlowPane fx:id="player1_pane" layoutX="6.0" layoutY="108.0" orientation="VERTICAL" prefHeight="585.0" prefWidth="158.0">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets></FlowPane>
+      <Label fx:id="player1_label" layoutX="146.0" layoutY="372.0" rotate="90.0" text="Player 1" AnchorPane.leftAnchor="146.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Rectangle fx:id="player2_rectangle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="150.0" layoutX="200.0" stroke="BLACK" strokeType="INSIDE" width="800.0" AnchorPane.topAnchor="0.0" />
+      <FlowPane fx:id="player2_pane" layoutX="209.0" layoutY="12.0" prefHeight="134.0" prefWidth="783.0" AnchorPane.topAnchor="12.0" />
+      <Label fx:id="player2_label" layoutX="570.0" layoutY="150.0" text="Player 2" AnchorPane.topAnchor="150.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Rectangle fx:id="player3_rectangle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="600.0" layoutX="1050.0" layoutY="89.0" stroke="BLACK" strokeType="INSIDE" width="170.0" AnchorPane.rightAnchor="0.0" />
+      <FlowPane fx:id="player3_pane" layoutX="1036.0" layoutY="96.0" orientation="VERTICAL" prefHeight="585.0" prefWidth="158.0" AnchorPane.rightAnchor="6.0" />
+      <Label fx:id="player3_label" layoutX="968.0" layoutY="372.0" rotate="-90.0" text="Player 3" AnchorPane.rightAnchor="148.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Rectangle fx:id="table_rect" arcHeight="5.0" arcWidth="5.0" fill="#accceb" height="400.0" layoutX="235.0" layoutY="200.0" stroke="BLACK" strokeType="INSIDE" width="731.0" />
+      <Button fx:id="nextTurnButton" disable="true" layoutX="1059.0" layoutY="733.0" mnemonicParsing="false" onAction="#handleNextTurn" prefHeight="51.0" prefWidth="132.0" text="Next Turn">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Rectangle fx:id="startGameRectangle" arcHeight="5.0" arcWidth="5.0" fill="#808c97" height="800.0" opacity="0.86" stroke="BLACK" strokeType="INSIDE" visible="false" width="1200.0" />
+      <Pane fx:id="table_pane" layoutX="242.0" layoutY="208.0" prefHeight="385.0" prefWidth="718.0" />
+      <Button fx:id="startGameButton" layoutX="492.0" layoutY="334.0" mnemonicParsing="false" onAction="#handleNextTurn" prefHeight="109.0" prefWidth="240.0" text="Start Game">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Button>
+      <Rectangle fx:id="stock_rect" arcHeight="5.0" arcWidth="5.0" fill="#3da64b" height="742.0" layoutX="40.0" layoutY="29.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="1105.0" />
+      <FlowPane fx:id="stock_pane" layoutX="53.0" layoutY="46.0" prefHeight="707.0" prefWidth="1078.0" visible="false" />
+   </children>
+</AnchorPane>
