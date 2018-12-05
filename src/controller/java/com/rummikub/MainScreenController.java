@@ -171,7 +171,7 @@ public class MainScreenController implements Initializable {
 				}
 
 			}
-			x_axis += (imgWidth + 10);
+			x_axis += (imgWidth + 5);
 		}
 	}
 }
