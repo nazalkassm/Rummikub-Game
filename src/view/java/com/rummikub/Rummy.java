@@ -1,8 +1,6 @@
 package com.rummikub;
 
 import java.net.URL;
-import java.util.List;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

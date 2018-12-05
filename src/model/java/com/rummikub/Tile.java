@@ -12,6 +12,7 @@ public class Tile implements Comparable<Tile> {
 	protected Colours colour;
 	protected boolean playedOnTable = false;
 	protected Image tileImage;
+	public boolean selected = false;
 
 	// Constructor
 	public Tile(Colours colour, Ranks rank) {
@@ -36,7 +37,7 @@ public class Tile implements Comparable<Tile> {
 	}
 
 	public static String getFilename(Colours colour, Ranks rank) {
-		String str = "file:src/main/resources/tiles/" + colour.getSymbol() + rank.getSymbol() + ".png";
+		String str = "file:src/main/resources/Tiles/" + colour.getSymbol() + rank.getSymbol() + ".png";
 		return str;
 	}
 

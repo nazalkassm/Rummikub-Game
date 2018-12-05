@@ -21,10 +21,11 @@ public class Main
 		players.add(new Player("p3",new Strategy3()));
 		
 		Boolean printAllPlayerMelds = false;
+		Boolean rigDraw = false;
 		Boolean pauseBetweenTurns = false;
 		Boolean GUI = false;
 		
-		Game tileRummy = new Game(players, printAllPlayerMelds, pauseBetweenTurns, GUI);
+		Game tileRummy = new Game(players, printAllPlayerMelds, rigDraw, pauseBetweenTurns, GUI);
 		tileRummy.start();
 		
 		while (tileRummy.gameRunning) {

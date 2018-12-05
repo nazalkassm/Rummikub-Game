@@ -54,6 +54,20 @@ public class Stock {
 		stockS = tiles.size();
 	}
 
+	public Stock(List<Tile> tiles, boolean view) {
+		if (view) {
+			stockArray.clear();
+			for (Tile t : tiles) {
+				t = new Tile(t.getColour(), t.getRank(), new Image(Tile.getFilename(t.getColour(), t.getRank())));
+				stockArray.add(t);
+			}
+			stockS = tiles.size();
+		} else {
+			stockArray = tiles;
+			stockS = tiles.size();
+		}
+	}
+
 	/**
 	 * Main Constructor to create a stock you need to give a size. When a stock is
 	 * created we add two 52 distinct tiles. Then, they are shuffled.
