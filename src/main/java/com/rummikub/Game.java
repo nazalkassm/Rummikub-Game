@@ -6,6 +6,9 @@ import java.util.List;
 
 import org.pmw.tinylog.Logger;
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+
 public class Game {
 
 	// Primitive Variables
@@ -84,14 +87,44 @@ public class Game {
 		
 		meldsPlayed = currentPlayer.play();
 	
-		if (meldsPlayed != null || manualStart || ((float)(finish - start)) / 1_000_000_000.0 > 20) {
-			if (((float)(finish - start)) / 1_000_000_000.0 > 20 || manualStart) {
-				currentPlayer.restoreFromMemento(playerMomento1);
-				table.restoreFromMemento(tableMomento1);
-				meldsPlayed = Collections.emptyList();
-			} else if (currentPlayer.isHuman()) {
+		if (meldsPlayed != null || manualStart || ((float)(finish - start)) / 1_000_000_000.0 > 60) {
+			boolean valid = true;
+			if (((float)(finish - start)) / 1_000_000_000.0 > 60) {
+				valid = false;
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Warning!");
+				alert.setContentText("Time is over 60 seconds. Resetting table ");      
+				alert.showAndWait();
+			} 
+			 if (currentPlayer.isHuman()) {
+				List<Tile> tilesOnTable = new ArrayList<Tile>();
 				
+				//If player has things that were played 
+				for (Tile t : currentPlayer.getPlayerRack().getRackArray()) {
+					if (t.getPlayedOnTable()) {
+						valid = false;
+					}
+				}
+				for (Meld m: table.getAllMelds()) {
+					if (Meld.checkMeldType(m.getTiles()) == Meld.MeldType.INVALID) {
+							valid = false;
+					}
+				}
+			
 			}
+			 if (!valid) {
+			currentPlayer.restoreFromMemento(playerMomento1);
+			table.restoreFromMemento(tableMomento1);
+			meldsPlayed = Collections.emptyList();
+			 } else {
+					for (Meld m: table.getAllMelds()) {
+						for (Tile t: m.getTiles()) {
+							t.setPlayedOnTable(true);
+						}
+						
+						}
+					}
+			 
 		if (currentPlayer.getPlayerRack().getSize() == Constants.ZERO_TILES) {
 			gameRunning = false;
 			winner = currentPlayer;

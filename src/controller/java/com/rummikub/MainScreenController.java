@@ -130,6 +130,14 @@ public class MainScreenController implements Initializable {
 			playerRectangles.get(max).setVisible(false);
 			playerRectangles.remove(max);
 		}
+		createMeldButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				createMeld(Rummy.game.table, Rummy.game.previousPlayer);
+			}
+
+		
+		});
 
 		for (int i = 0; i < playerPanes.size(); i++) {
 			viewTiles(Rummy.game.players.get(i), playerPanes.get(i));
@@ -192,15 +200,8 @@ public class MainScreenController implements Initializable {
 		viewTiles(Rummy.game.previousPlayer, playerPanes.get(Rummy.game.previousPlayer.getNumber()));
 		viewTiles(Rummy.game.table, table_pane);
 		//Rummy.game.manualStart = false;
-
-		createMeldButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				createMeld(Rummy.game.table);
-			}
-
 		
-		});
+		
 		nextTurnButton.setDisable(false);
 	}
 
@@ -219,7 +220,7 @@ public class MainScreenController implements Initializable {
 			ImageView tileImg = new ImageView(img);
 			tileImg.setPreserveRatio(true);
 			tileImg.setFitWidth(35);
-			if (currPlayer.isHuman()) {
+			if (currPlayer.isHuman() && currPlayer == Rummy.game.currentPlayer) {
 				tileImg.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 					@Override
 					public void handle(MouseEvent event) {
@@ -227,8 +228,6 @@ public class MainScreenController implements Initializable {
 					}
 				});
 				
-			
-			
 				pane.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 					@Override
 					public void handle(MouseEvent event) {
@@ -428,11 +427,12 @@ public class MainScreenController implements Initializable {
 		}
 	}
 	
-	private void createMeld(Table table) {
+	private void createMeld(Table table, Player player) {
 		Meld m = new Meld();
+		System.out.println("Creating MELD");
 		Iterator<Meld> itr = table.getAllMelds().iterator();
 		boolean removed = false;
-			System.out.println("CLICKED MELD");
+			
 			while (itr.hasNext()) {
 				Meld currentMeld = itr.next();
 					Iterator<Tile> tileItr = currentMeld.getMeld().iterator();
@@ -441,32 +441,35 @@ public class MainScreenController implements Initializable {
 						if (compareTile.selected) {
 								removed = true;
 								m.addTile(compareTile);
-							}
+							
 							tileItr.remove();
 							compareTile.selected = false;
+						}
 						}
 					}
 				
 			
-			
-			Iterator<Tile> itrTiles = Rummy.game.previousPlayer.getPlayerRack().getRackArray().iterator();
+			List<Tile> playerRackToRemove =  new ArrayList<>();
+			//Iterator<Tile> itrTiles = playerRack.iterator();
 	
-			while (itrTiles.hasNext()) {
-
-				Tile tile = itrTiles.next();
+			for (Tile tile: player.getPlayerRack().getRackArray()) {
+				
 				if (tile.selected) {
 					removed = true;
-					m.addTile(tile);			
+					m.addTile(tile);	
+					removed = true;
 					table.removing = true;
-					itrTiles.remove();
+					playerRackToRemove.add(tile);
 					tile.selected = false;
 				}
 			}
+			player.getPlayerRack().getRackArray().removeAll(playerRackToRemove);
 			table.getAllMelds().add(m);
 			table.notifyObservers();
-
+			if (removed ) {
 			viewTiles(Rummy.game.table, table_pane);
 			viewTiles(Rummy.game.previousPlayer, playerPanes.get(Rummy.game.previousPlayer.getNumber()));
+			}
 	}
 
 }
