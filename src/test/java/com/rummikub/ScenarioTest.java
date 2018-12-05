@@ -14,6 +14,7 @@ public class ScenarioTest {
 	private Game game;
 	static private List<Player>players = new ArrayList<Player>();
 	Boolean printAllPlayerMelds = false;
+	Boolean rigDraw = false;
 	Boolean pauseBetweenTurns = false;
 	Boolean GUI = false;
 	
@@ -28,7 +29,7 @@ public class ScenarioTest {
 	@BeforeEach
 	void setUpTest() {
 		
-		game = new Game(players, printAllPlayerMelds, pauseBetweenTurns, GUI); 
+		game = new Game(players, printAllPlayerMelds, rigDraw, pauseBetweenTurns, GUI); 
 		game.printRackMeld = true;
 		game.waitAferEachTurn = false;
 		FileParser.reset();

@@ -4,22 +4,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 public class JokerTest {
 
-	private static List<Tile> tiles;
-	
 	@BeforeAll
 	static void setUpAll() throws Exception 
 	{
-		tiles = new ArrayList<Tile>();
+		new ArrayList<Tile>();
 	}
 	
 	@Test

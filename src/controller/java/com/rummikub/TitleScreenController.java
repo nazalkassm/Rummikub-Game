@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import javax.swing.JFileChooser;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,8 +13,6 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
@@ -37,6 +33,8 @@ public class TitleScreenController implements Initializable {
 	private ComboBox<String> cb_Player4;
 	@FXML
 	private CheckBox ckBx_GameMode;
+	@FXML
+	private CheckBox ckBx_RigDraw;
 	@FXML
 	private VBox vb_PlayerStrategies;
 	@FXML
@@ -106,9 +104,10 @@ public class TitleScreenController implements Initializable {
 		if (players.size() >= 2) {
 
 			Boolean waitAfterEachTurn = false;
+			Boolean rigDraw = false;
 			Boolean useGUI = true;
 			Boolean testingMode = ckBx_GameMode.isSelected();
-			Rummy.game = new Game(players, testingMode, waitAfterEachTurn, useGUI);
+			Rummy.game = new Game(players, testingMode, rigDraw, waitAfterEachTurn, useGUI);
 
 			// Get the event's source stage, and set the scene to be the game.
 			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -136,7 +135,8 @@ public class TitleScreenController implements Initializable {
 				Boolean waitAfterEachTurn = false;
 				Boolean useGUI = true;
 				Boolean testingMode = ckBx_GameMode.isSelected();
-				Rummy.game = new Game(players, testingMode, waitAfterEachTurn, useGUI);
+				Boolean rigDraw = ckBx_RigDraw.isSelected();
+				Rummy.game = new Game(players, testingMode, rigDraw, waitAfterEachTurn, useGUI);
 				
 				FileParser.reset();
 				FileParser.parse(file);
