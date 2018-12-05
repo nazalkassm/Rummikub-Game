@@ -31,8 +31,8 @@ public class RackBuilder
 	Rack no_meld_rack = new Rack();
 	Rack one_meld_rack = new Rack();
 	Rack two_meld_rack = new Rack();
-	Rack one_incomplete_meld_rack = new Rack();
-	Rack two_incomplete_meld_rack = new Rack();
+	Rack one_incomplete_meld = new Rack();
+	Rack two_incomplete_meld = new Rack();
 	  
 		/**
 		 * This method is responsible for knowing which hand you want to create and writes the hand to a file.
@@ -55,13 +55,13 @@ public class RackBuilder
 	      {
 	    	  return two_meld_rack;
 	      } 
-	      else if(handType.equalsIgnoreCase("One Incomplete Melds"))
+	      else if(handType.equalsIgnoreCase("1 Incomplete Meld"))
 	      {
-	    	  return one_incomplete_meld_rack;
+	    	  
 	      }
-	      else if(handType.equalsIgnoreCase("Two Incomplete Melds"))
+	      else if(handType.equalsIgnoreCase("2 Incomplete Meld"))
 	      {
-	    	  return two_incomplete_meld_rack;
+	    	 
 	      }
 	      
 		return null;
@@ -84,25 +84,25 @@ public class RackBuilder
 		public void runAlgorithm(Table table, List<Player> players)
 		{
 			  // A List that will store the tiles that can't be removed from the stock.
-			  List<Tile> not_in_stock = new ArrayList<>();
+			  List<Tile> already_played = new ArrayList<>();
 			  
 			  // Add the tiles on the table
 			  for(Meld meld_on_table : table.getAllMelds())
 			  {
-				  not_in_stock.addAll(meld_on_table.getTiles());
+				  already_played.addAll(meld_on_table.getTiles());
 			  }
 			  
 			  // Add the tiles in players' hand
 			  for(Player player : players)
 			  {
-				  not_in_stock.addAll(player.getPlayerRack().getRackArray());
+				  already_played.addAll(player.getPlayerRack().getRackArray());
 			  }
 			  
-			  // A list that will store tiles that can't be used because both tiles are either used in the table or are in a player's rack.
-			  List<Tile> cannot_use = new ArrayList<>();
+			  // A list that will store tiles that can't be played
+			  List<Tile> cannot_played = new ArrayList<>();
 			  
 			  // Finding the tiles that can't be played ( duplicates ) in the list
-			  cannot_use.addAll(findDuplicates(not_in_stock));
+			  cannot_played.addAll(findDuplicates(already_played));
 		      
 			  // An rack that will store the playerHand.  
 			  Rack dummy_rack = new Rack();
@@ -110,19 +110,15 @@ public class RackBuilder
 			  boolean no_meld_created = false;
 			  boolean one_meld_created = false;
 			  boolean two_meld_created = false;
-			  boolean one_incomplete_meld_rack_created = false;
-			  boolean two_incomplete_meld_rack_created = false;
-			  
-			  
 			  
 			  while(true)
 		      {
 				  dummy_rack.getRackArray().clear();
-				  Stock dummy_stock = new Stock("false");
+				  Stock dummy_stock = new Stock();
 				  
 				  for (int i = 0 ; i < dummy_stock.getStockArray().size(); i++)
 				  {
-					  for(Tile tile_to_remove : cannot_use)
+					  for(Tile tile_to_remove : cannot_played)
 					  {
 						  if(tile_to_remove.equals(dummy_stock.getStockArray().get(i)))
 						  {
