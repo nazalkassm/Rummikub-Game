@@ -47,7 +47,7 @@
          </children>
       </VBox>
       <CheckBox fx:id="ckBx_GameMode" alignment="CENTER" layoutX="461.0" layoutY="443.0" mnemonicParsing="false" prefHeight="79.0" prefWidth="226.0" text="Testing mode (view all tiles)" textAlignment="CENTER" />
-      <Button fx:id="btn_chooseFile" disable="true" layoutX="14.0" layoutY="450.0" mnemonicParsing="false" onAction="#handleFileBtn" prefHeight="39.0" prefWidth="90.0" text="Choose file" />
+      <Button fx:id="btn_chooseFile" disable="true" layoutX="14.0" layoutY="450.0" mnemonicParsing="false" onAction="#handleFileBtn" prefHeight="39.0" prefWidth="127.0" text="Choose file" />
       <CheckBox fx:id="ckBx_RigDraw" alignment="CENTER" layoutX="461.0" layoutY="437.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="166.0" text="Rig each draw" textAlignment="CENTER" />
       <Rectangle fx:id="rect_tileSelection" arcHeight="5.0" arcWidth="5.0" fill="#8fafcd" height="523.0" layoutX="-8.0" layoutY="-5.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="695.0" />
       <FlowPane fx:id="flw_tileSelection" layoutX="-6.0" layoutY="-5.0" prefHeight="517.0" prefWidth="695.0" visible="false" />

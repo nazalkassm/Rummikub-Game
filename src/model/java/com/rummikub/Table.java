@@ -6,9 +6,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import com.rummikub.TableInfo.Memento;
-
 import java.util.TreeMap;
 
 public class Table implements Subject {
@@ -73,7 +70,8 @@ public class Table implements Subject {
 			System.out.println(currP.getName() + " got tile " + stock.getStockArray().get(indexOfCardToGet));
 
 			// If joker or someone else already has card get the next card
-			while (stock.getStockArray().get(indexOfCardToGet) instanceof Joker || sortedList.get(stock.getStockArray().get(indexOfCardToGet).getValue()) != null) {
+			while (stock.getStockArray().get(indexOfCardToGet) instanceof Joker
+					|| sortedList.get(stock.getStockArray().get(indexOfCardToGet).getValue()) != null) {
 				indexOfCardToGet++;
 				System.out.println("Invalid tile so getting next tile: " + stock.getStockArray().get(indexOfCardToGet));
 			}
@@ -82,39 +80,39 @@ public class Table implements Subject {
 			sortedList.put(stock.getStockArray().get(indexOfCardToGet).getValue(), currP);
 			indexOfCardToGet++;
 		}
-		
+
 		int turnNum = 0;
 		HashMap<Integer, Player> newPlayerTurns = new HashMap<Integer, Player>();
 		Player firstPlayer = sortedList.lastEntry().getValue();
-		boolean getNextEntries  = false;
+		boolean getNextEntries = false;
 		Iterator<Entry<Integer, Player>> it = players.entrySet().iterator();
-	 
-	   while (it.hasNext()) {
-  	 	Entry<Integer, Player> curr = it.next();
+
+		while (it.hasNext()) {
+			Entry<Integer, Player> curr = it.next();
 			if (curr.getValue() == firstPlayer) {
-					getNextEntries = true;		
-					System.out.println(curr.getValue().getName() + " goes first since highest tile");
+				getNextEntries = true;
+				System.out.println(curr.getValue().getName() + " goes first since highest tile");
 			}
-			
+
 			if (getNextEntries) {
 				newPlayerTurns.put(turnNum, curr.getValue());
 				it.remove();
 				turnNum++;
 			}
 		}
-		
+
 		for (Map.Entry<Integer, Player> entry : players.entrySet()) {
-				newPlayerTurns.put(turnNum, entry.getValue());
-				turnNum++;
-			} 
-		
+			newPlayerTurns.put(turnNum, entry.getValue());
+			turnNum++;
+		}
+
 		this.players = newPlayerTurns;
 		for (Player p : players.values()) {
 			p.fillRack(this.stock);
 		}
-		
+
 		tableRound = 1;
-		//We update observers
+		// We update observers
 		this.notifyObservers();
 		// Set current player turn to 1
 		this.currentPlayerTurn = 0;
@@ -311,6 +309,7 @@ public class Table implements Subject {
 	public int getTableRound() {
 		return this.tableRound;
 	}
+
 	public Memento saveToMemento() {
 		return new Memento(this.melds);
 	}
@@ -323,20 +322,20 @@ public class Table implements Subject {
 		private final List<Meld> savedMelds;
 
 		public Memento(List<Meld> meldsToSave) {
-			//Melds to save is a new list of melds 
+			// Melds to save is a new list of melds
 			this.savedMelds = new ArrayList<Meld>();
-			
+
 			for (Meld meld : meldsToSave) {
 				List<Tile> tiles = new ArrayList<Tile>(meld.getTiles());
-	
+
 				this.savedMelds.add(new Meld(tiles.toArray(new Tile[tiles.size()])));
 			}
 		}
 
 		// accessible by outer class only
-    private List<Meld> getSavedMelds() {
-        return savedMelds;
-    }
+		public List<Meld> getSavedMelds() {
+			return savedMelds;
+		}
 	}
 
 }
