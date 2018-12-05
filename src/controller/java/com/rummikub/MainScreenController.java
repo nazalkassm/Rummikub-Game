@@ -127,7 +127,7 @@ public class MainScreenController implements Initializable {
 
 		for (Tile tile : currPlayer.getPlayerRack().getRackArray()) {
 			Image img = tile.getTileImage();
-			if (!game.printRackMeld && !currPlayer.isHuman()) {
+			if (!Rummy.game.printRackMeld && !currPlayer.isHuman()) {
 				img = new Image("file:src/main/resources/tiles/back.png");
 			}
 			// Image img = new Image("file:src/main/resources/tiles/G4.png");
