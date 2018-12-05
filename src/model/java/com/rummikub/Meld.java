@@ -339,8 +339,8 @@ public class Meld {
 				            && currTile.getValue() > 1) ? true : false;
 				boolean jokerOnLast = (jokers.size() == 0) ? false
 				    : (j.getPossibleTiles().isEmpty()) ? true
-				        : (lastTile.getRank().getValue() == (jokers.get(1).getPossibleTiles().get(0).getRank().getValue() - 1)
-				            && lastTile.getColour() == (jokers.get(1).getPossibleTiles().get(0).getColour())
+				        : (lastTile.getRank().getValue() == (jokers.get(0).getPossibleTiles().get(0).getRank().getValue() - 1)
+				            && lastTile.getColour() == (jokers.get(0).getPossibleTiles().get(0).getColour())
 				            && lastTile.getValue() != 13) ? true : false;
 				if (jokerOnFirst && jokerOnLast) {
 
