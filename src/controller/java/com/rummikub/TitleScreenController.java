@@ -129,6 +129,7 @@ public class TitleScreenController implements Initializable {
 			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			FileChooser fileChooser = new FileChooser();
 			fileChooser.setTitle("Open Rigged File");
+			fileChooser.setInitialDirectory(new File(Constants.INPUT_FILE_DIRECTORY));
 			File file = fileChooser.showOpenDialog(stage);
 			
 			if (file != null) {
