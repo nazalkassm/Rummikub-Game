@@ -68,6 +68,8 @@ import java.util.List;
 	
 	List<Meld> melds_played = new ArrayList<>();
 	
+	//We force the player to play here not really playing just to show the functionality.
+	
 	melds_played = Meld.getMeldsWithTable(one_meld_rack.getRackArray());
 	
 	changed_melds = new ArrayList<>(Table.getDiffMelds(table.getAllMelds(), melds_played));
