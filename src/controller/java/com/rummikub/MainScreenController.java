@@ -133,6 +133,9 @@ public class MainScreenController implements Initializable {
 
 		for (Tile tile : currPlayer.getPlayerRack().getRackArray()) {
 			Image img = tile.getTileImage();
+			if (!game.printRackMeld && !currPlayer.isHuman()) {
+				img = new Image("file:src/main/resources/tiles/back.png");
+			}
 			// Image img = new Image("file:src/main/resources/tiles/G4.png");
 			ImageView tileImg = new ImageView(img);
 			tileImg.setPreserveRatio(true);
@@ -168,7 +171,7 @@ public class MainScreenController implements Initializable {
 				}
 
 			}
-			x_axis += (imgWidth + 30);
+			x_axis += (imgWidth + 10);
 		}
 	}
 }
