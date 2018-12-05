@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
 <?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -8,16 +9,18 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="root" maxHeight="-1.0" maxWidth="-1.0" minHeight="381.0" minWidth="548.0" prefHeight="448.0" prefWidth="548.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.rummikub.TitleScreenController">
+<AnchorPane fx:id="root" maxHeight="-1.0" maxWidth="-1.0" minHeight="381.0" minWidth="548.0" prefHeight="503.0" prefWidth="670.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.rummikub.TitleScreenController">
    <children>
-      <Label alignment="CENTER" layoutX="132.0" layoutY="7.0" minWidth="284.0" style="&#10;" text="Please select the number of players." textAlignment="CENTER" textFill="#9f9f9f" wrapText="false" AnchorPane.leftAnchor="132.0" AnchorPane.rightAnchor="132.0" AnchorPane.topAnchor="7.0">
+      <Rectangle fx:id="background" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="523.0" layoutX="-8.0" layoutY="-7.0" stroke="BLACK" strokeType="INSIDE" width="695.0" />
+      <Rectangle fx:id="title" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="123.0" layoutX="104.0" layoutY="33.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="463.0" />
+      <Label alignment="CENTER" layoutX="132.0" layoutY="166.0" minWidth="284.0" style="&#10;" text="Please select the number of players." textAlignment="CENTER" textFill="#9f9f9f" wrapText="false" AnchorPane.leftAnchor="132.0" AnchorPane.rightAnchor="132.0" AnchorPane.topAnchor="166.0">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <ComboBox fx:id="cb_PlayerCount" layoutX="199.0" layoutY="41.0" onAction="#handlePlayerCountCB" prefWidth="150.0" value="Select" AnchorPane.leftAnchor="199.0" AnchorPane.rightAnchor="199.0" AnchorPane.topAnchor="41.0" />
-      <Button fx:id="btn_Play" disable="true" layoutX="229.0" layoutY="311.0" mnemonicParsing="false" onAction="#handlePlayBtn" prefHeight="39.0" prefWidth="90.0" text="Play!" AnchorPane.bottomAnchor="98.0" AnchorPane.leftAnchor="229.0" AnchorPane.rightAnchor="229.0" AnchorPane.topAnchor="311.0" />
-      <VBox fx:id="vb_PlayerStrategies" layoutX="199.0" layoutY="91.0" prefHeight="117.0" prefWidth="150.0" spacing="10.0" AnchorPane.leftAnchor="199.0" AnchorPane.rightAnchor="199.0" AnchorPane.topAnchor="91.0">
+      <ComboBox fx:id="cb_PlayerCount" layoutX="261.0" layoutY="205.0" onAction="#handlePlayerCountCB" prefWidth="150.0" value="Select" AnchorPane.topAnchor="205.0" />
+      <Button fx:id="btn_Play" disable="true" layoutX="252.0" layoutY="433.0" mnemonicParsing="false" onAction="#handlePlayBtn" prefHeight="62.0" prefWidth="166.0" text="Play!" />
+      <VBox fx:id="vb_PlayerStrategies" layoutX="261.0" layoutY="259.0" prefHeight="148.0" prefWidth="150.0" spacing="10.0" AnchorPane.leftAnchor="261.0" AnchorPane.rightAnchor="259.0" AnchorPane.topAnchor="259.0">
          <children>
             <ComboBox fx:id="cb_Player1" onAction="#handleStrategyCB" prefWidth="150.0" value="Select" />
             <ComboBox fx:id="cb_Player2" onAction="#handleStrategyCB" prefWidth="150.0" value="Select">
@@ -32,9 +35,8 @@
             <Insets />
          </opaqueInsets>
       </VBox>
-      <CheckBox fx:id="ckBx_GameMode" alignment="CENTER" layoutX="173.0" layoutY="245.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="202.0" text="Testing mode (view all tiles)" textAlignment="CENTER" AnchorPane.bottomAnchor="179.0" AnchorPane.leftAnchor="173.0" AnchorPane.rightAnchor="173.0" AnchorPane.topAnchor="245.0" />
-      <Button fx:id="btn_chooseFile" disable="true" layoutX="229.0" layoutY="330.0" mnemonicParsing="false" onAction="#handleFileBtn" prefHeight="39.0" prefWidth="90.0" text="Choose file" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="229.0" AnchorPane.rightAnchor="229.0" AnchorPane.topAnchor="397.0" />
-      <Label alignment="CENTER" layoutX="261.0" layoutY="363.0" prefHeight="25.0" prefWidth="27.0" text="or..." AnchorPane.bottomAnchor="63.0" AnchorPane.leftAnchor="261.0" AnchorPane.rightAnchor="260.0" AnchorPane.topAnchor="363.0" />
-      <CheckBox fx:id="ckBx_RigDraw" alignment="CENTER" layoutX="214.0" layoutY="277.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="121.0" text="Rig each draw" textAlignment="CENTER" />
+      <CheckBox fx:id="ckBx_GameMode" alignment="CENTER" layoutX="461.0" layoutY="443.0" mnemonicParsing="false" prefHeight="79.0" prefWidth="226.0" text="Testing mode (view all tiles)" textAlignment="CENTER" textFill="#9f9f9f" />
+      <Button fx:id="btn_chooseFile" disable="true" layoutX="14.0" layoutY="450.0" mnemonicParsing="false" onAction="#handleFileBtn" prefHeight="39.0" prefWidth="90.0" text="Choose file" />
+      <CheckBox fx:id="ckBx_RigDraw" alignment="CENTER" layoutX="461.0" layoutY="437.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="166.0" text="Rig each draw" textAlignment="CENTER" textFill="#9f9f9f" />
    </children>
 </AnchorPane>
