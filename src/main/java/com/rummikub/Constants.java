@@ -13,4 +13,5 @@ public final class Constants {
 	public static final int ZERO_TILES = 0;
 	public static final double PROBABILITY_TO_PLAY = 0.015;
 	public static final String BACK_CARD = "file:src/main/resources/tiles/back.png";
+	public static final String INPUT_FILE_DIRECTORY = "src/main/resources/inputFiles/";
 }
