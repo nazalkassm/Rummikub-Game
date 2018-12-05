@@ -25,8 +25,8 @@ public class Strategy0 implements StrategyBehaviour
 
 	@Override
 	public List<Meld> useStrategy(Player currentPlayer) 
-	{
-		//Basic Variables Needed 
+	{	return Collections.emptyList();
+		/*//Basic Variables Needed 
 		List<Meld> possibleRackMelds = new ArrayList<>(currentPlayer.getPlayerRack().getMelds());
 		List<Meld> tableMelds = new ArrayList<>(tableInfo.getMeldsFromTable());
 		List<Meld> returnMelds = new ArrayList<>();
@@ -113,7 +113,7 @@ public class Strategy0 implements StrategyBehaviour
 			returnMelds.removeAll(meldsToRemove);
 		}
 		
-		return returnMelds;
+		return returnMelds;*/
 	}
 
 

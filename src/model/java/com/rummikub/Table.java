@@ -6,6 +6,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import com.rummikub.TableInfo.Memento;
+
 import java.util.TreeMap;
 
 public class Table implements Subject {
@@ -307,6 +310,33 @@ public class Table implements Subject {
 
 	public int getTableRound() {
 		return this.tableRound;
+	}
+	public Memento saveToMemento() {
+		return new Memento(this.melds);
+	}
+
+	public void restoreFromMemento(Memento memento) {
+		this.melds = memento.getSavedMelds();
+	}
+
+	public static class Memento {
+		private final List<Meld> savedMelds;
+
+		public Memento(List<Meld> meldsToSave) {
+			//Melds to save is a new list of melds 
+			this.savedMelds = new ArrayList<Meld>();
+			
+			for (Meld meld : meldsToSave) {
+				List<Tile> tiles = new ArrayList<Tile>(meld.getTiles());
+	
+				this.savedMelds.add(new Meld(tiles.toArray(new Tile[tiles.size()])));
+			}
+		}
+
+		// accessible by outer class only
+    private List<Meld> getSavedMelds() {
+        return savedMelds;
+    }
 	}
 
 }
