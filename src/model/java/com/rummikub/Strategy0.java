@@ -103,7 +103,7 @@ public class Strategy0 implements StrategyBehaviour {
 	}
 
 	public void playStrategy(Player currentPlayer, List<Meld> tableMelds, List<Meld> returnMelds) {
-		List<Tile> mergedTiles = new ArrayList<>(currentPlayer.getPlayerRack().getRackArray());
+		List<Tile> mergedTiles = new ArrayList<>(/*currentPlayer.getPlayerRack().getRackArray()*/);
 		List<Meld> MergedMeld = new ArrayList<>();
 		List<Integer> inputIntegerList = Prompt.promptUserTableMelds(
 				"Choose the melds that you are sure you can play on from the table :(Ex: 2 4 5)", tableMelds);
