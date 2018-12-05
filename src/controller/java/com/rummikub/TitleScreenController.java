@@ -193,7 +193,7 @@ public class TitleScreenController implements Initializable {
 				Boolean testingMode = ckBx_GameMode.isSelected();
 				Boolean rigDraw = ckBx_RigDraw.isSelected();
 				Rummy.game = new Game(players, testingMode, rigDraw, waitAfterEachTurn, useGUI, FileParser.stock);
-				
+
 				if (!FileParser.inputError) {
 					// set the scene to be the main screen.
 					stage.setScene(Rummy.loadScene("MainScreen.fxml"));
@@ -313,7 +313,6 @@ public class TitleScreenController implements Initializable {
 	private List<Player> getPlayers() {
 		int numPlayers = Integer.parseInt(cb_PlayerCount.getValue());
 		List<Player> players = new ArrayList<Player>();
-		List<String> strategies = new ArrayList<String>();
 
 		for (int i = 0; i < numPlayers; i++) {
 			@SuppressWarnings("unchecked")
@@ -341,8 +340,6 @@ public class TitleScreenController implements Initializable {
 
 			strategies.add(currNode.getValue());
 		}
-
-		MainScreenController.playerStrategies = strategies;
 		return players;
 	}
 
