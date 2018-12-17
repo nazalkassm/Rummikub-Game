@@ -306,6 +306,10 @@ public class Meld {
 						} else {
 							jokerUsed = 0;
 							jokerUsedIndex = -1;
+							meld = new Meld();
+							meld.addTile(nextTile);
+							continue;
+							
 						}
 					} else {
 						meld = new Meld();
@@ -430,8 +434,8 @@ public class Meld {
 		List<Meld> setList = new ArrayList<Meld>();
 		Meld meld = null;
 		// Loop over all the collected sets and add all of size => 3 to setList
-		for (int i = 0; i < 13; i++) {
-			for (int j = 0; j < 2; j++) {
+		for (int i = 0; i < 13; ++i) {
+			for (int j = 0; j < 2; ++j) {
 
 				// Loop over all jokers
 				for (Joker joker : jokers) {

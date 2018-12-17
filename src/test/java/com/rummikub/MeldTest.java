@@ -195,16 +195,17 @@ public class MeldTest {
 	
 	@Test
 	public void runTest() {
-
+		//new Tile("B7"))), new Tile("B8"), new Tile("B9")
 		// Set with 2 jokers
 		tiles.clear();
-		tiles.add(new Tile("R", "1"));
+		tiles.add(new Tile("G", "2"));
 		Joker joker = new Joker("J0");
-		Joker joker2 = new Joker("J1");
+		//Joker joker2 = new Joker("J1");
 		tiles.add(joker);
-		tiles.add(joker2);
+		//tiles.add(joker2);
 		//tiles.add(new Tile("R", "3"));
-		tiles.add(new Tile("R", "4"));
+		tiles.add(new Tile("G", "6"));
+		tiles.add(new Tile("G", "7"));
 		//joker.setPossibleTiles(new Meld(tiles.toArray(new Tile[0])), new ArrayList<>());
     
 		/*tiles.add(new Tile("R", "3"));

@@ -1,6 +1,7 @@
 package com.rummikub;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.pmw.tinylog.Logger;
@@ -31,6 +32,7 @@ public class Game {
 
 	Game(List<Player> players, Boolean printMelds, Boolean rigEachDraw, Boolean waitAfterTurns, Boolean GUI) {
 		this.players = players;
+		//this.players.add(new Player("P0",new Strategy0()));
 		this.printRackMeld = printMelds;
 		this.rigDraw = rigEachDraw;
 		this.waitAferEachTurn = waitAfterTurns;
@@ -66,7 +68,6 @@ public class Game {
 		table.initPlayersTurn();
 
 		currentPlayer = table.getCurrentPlayer();
-
 		if (usingGui) {
 			Print.print("Waiting for user to click the 'Start Game!' button...");
 		}

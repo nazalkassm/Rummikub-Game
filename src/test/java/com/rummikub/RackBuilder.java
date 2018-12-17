@@ -84,25 +84,25 @@ public class RackBuilder
 		public void runAlgorithm(Table table, List<Player> players)
 		{
 			  // A List that will store the tiles that can't be removed from the stock.
-			  List<Tile> already_played = new ArrayList<>();
+			  List<Tile> not_in_stock = new ArrayList<>();
 			  
 			  // Add the tiles on the table
 			  for(Meld meld_on_table : table.getAllMelds())
 			  {
-				  already_played.addAll(meld_on_table.getTiles());
+				  not_in_stock.addAll(meld_on_table.getTiles());
 			  }
 			  
 			  // Add the tiles in players' hand
 			  for(Player player : players)
 			  {
-				  already_played.addAll(player.getPlayerRack().getRackArray());
+				  not_in_stock.addAll(player.getPlayerRack().getRackArray());
 			  }
 			  
 			  // A list that will store tiles that can't be played
-			  List<Tile> cannot_played = new ArrayList<>();
+			  List<Tile> cannot_play = new ArrayList<>();
 			  
 			  // Finding the tiles that can't be played ( duplicates ) in the list
-			  cannot_played.addAll(findDuplicates(already_played));
+			  cannot_play.addAll(findDuplicates(not_in_stock));
 		      
 			  // An rack that will store the playerHand.  
 			  Rack dummy_rack = new Rack();
@@ -114,18 +114,19 @@ public class RackBuilder
 			  while(true)
 		      {
 				  dummy_rack.getRackArray().clear();
-				  Stock dummy_stock = new Stock();
+				  Stock dummy_stock = new Stock(104,"false");
 				  
-				  for (int i = 0 ; i < dummy_stock.getStockArray().size(); i++)
-				  {
-					  for(Tile tile_to_remove : cannot_played)
+				  
+					  for(Tile tile_to_remove : cannot_play)
 					  {
-						  if(tile_to_remove.equals(dummy_stock.getStockArray().get(i)))
+						  for (int i = 0 ; i < dummy_stock.getStockArray().size(); i++)
 						  {
-							  dummy_stock.getStockArray().remove(i);
+							  if(tile_to_remove.equals(dummy_stock.getStockArray().get(i)))
+							  {
+								  dummy_stock.getStockArray().remove(i);
+							  }
 						  }
 					  }
-				  }
 				  
 				  dummy_rack.setRack(dummy_stock.deal14Tiles());
 				  

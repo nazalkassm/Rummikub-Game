@@ -26,8 +26,8 @@ public class Strategy4 implements StrategyBehaviour
 	//This strategy will always play the initial 30 meld/melds as soon as possible.
 	//Next, If it played it's initial 30. This strategy will:
 	//1.)Find all it's rack melds
-	//2.)Check if the probability of improving the meld is greater than 0 (because does not want to give other players the chance to play on it)
-	//3.)If > 0, the strategy will hold that meld. It will play all other tiles with the table.
+	//2.)Check if the probability of improving the meld is greater than 0.15 (because does not want to give other players the chance to play on it)
+	//3.)If > 0.15, the strategy will hold that meld. It will play all other tiles with the table.
 	//4.)Otherwise, the strategy will just play all the tiles combined with the table.
 	
 	public List<Meld> useStrategy(Player currentPlayer)
